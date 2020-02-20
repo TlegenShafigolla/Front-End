@@ -10,30 +10,33 @@
     <script src="js/babel.min.js"></script>
   </head>
   <body>
-    <header></header>
-    <div id="login"></div>
-    <script type="text/babel">
-      // alert("Sanzhik");
-      const app = document.getElementById("login");
-      class Login extends React.Component {
-        render() {
-          return (
-            <div class="SignIn">
-              <input type="text" class="email" placeholder="Email" name="email" id="email" />
-             
-              <input
-                type="password"
-                placeholder="password"
-                name="password"
-                id="password"
+    
+
+      <header>Logo</header>
+      
+      <article>
+
+        <div id="SignIn">
+          <input
+              type="text"
+              class="email"
+              placeholder="Email"
+              name="email"
+              id="email"
               />
-             <button className="btn login">Login</button>
+              <br/>
+              <input
+              type="password"
+              placeholder="password"
+              name="password"
+              id="password"
+              />
+              <br/>
+              <button className="btn login">CONTINUE</button>
             </div>
-          );
-        }
-      }
-      ReactDOM.render(<Login />, app);
-    </script>
-    <footer></footer>
+          </article>
+          
+            <footer>Контакты</footer>
   </body>
-</html>
+  </html>
+  
