@@ -1,8 +1,6 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
-* {
-  margin: 0;
-  pading: 0;
-}
+@import url("https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono&display=swap");
+
+
 header,
 footer {
   width: 100%;
@@ -13,9 +11,9 @@ body {
   width: 100%;
   height: 100%;
   background-color: white;
-  color: #f7f7f7;
+  color: #333333;
   font-size: 1em;
-  font-family: "", sans-serif;
+  font-family: "Roboto", sans-serif;
   line-height: 135%;
 }
 header {
@@ -23,6 +21,7 @@ header {
   border-bottom: 1px solid silver;
   background: linear-gradient(to top left, Fuchsia, MidnightBlue);
 }
+/* background: linear-gradient(45deg, Aquamarine, GreenYellow); */
 
 #SignIn {
   width: 450px;
@@ -33,29 +32,32 @@ header {
 }
 input {
   height: 25px;
-  padding-left: 25px;
+ 
   width: 250px;
   border: 0px solid black;
   border-bottom: 1px solid black;
   background: rgba(255, 255, 255, 0);
   outline: none;
   font-size: 1em;
-  margin-left: 100px;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 200px;
 }
-
+.email:checked {
+  background: rgba(255, 255, 255, 0);
+}
 input::placeholder {
   font-family: "Roboto", sans-serif;
 }
 footer {
   border-top: 1px solid silver;
-  background-color: rgb(66, 60, 60);
+  background-color: #333333;
+  color: #f7f7f7;
 }
 
 .email {
-  background-image: url(/Front-End/css/post.jpg);
-  background-repeat: no-repeat;
-  background-size: 25px 25px;
+  
+  font-family: "Roboto Mono", monospace;
 }
 
 button {
@@ -68,7 +70,8 @@ button {
   outline: none;
   font-size: 1.5em;
   border: 0;
-  margin-left: 115px;
+  margin-left: auto;
+  margin-right: auto;
   font-family: "Roboto", sans-serif;
 }
 button:active {
@@ -82,7 +85,6 @@ button:active {
 }
 #password {
   margin-top: 5px;
-  background-image: url(/Front-End/css/pass.png);
-  background-repeat: no-repeat;
-  background-size: 25px 25px;
+ 
+
 }
