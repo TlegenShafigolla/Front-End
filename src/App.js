@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 
 import './App.css';
-import SignIn from './components/SignIn';
+
 import Header from './containers/Header';
 import Footer from './containers/Footer';
-
+import Login from './components/Login'
 
 
 
@@ -13,7 +13,7 @@ render(){
   return(
     <div>
       <Header/>
-    <SignIn/>
+   <Login/>
     <Footer/>
     </div>
   );
