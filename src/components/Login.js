@@ -36,14 +36,14 @@ class Login extends React.Component {
     }).then(res => {
             return res.json();        
     })
-    // .then(json=>console.log(JSON.parse(SuccessLogin)[acces_token]))
     
     .then(data=>{console.log(data);
         if(data['type']==='admin')
     localStorage.setItem('admin',data['access_token']);
-    else
+    else if(data['type']==='user')
     localStorage.setItem('user',data['access_token']);
-
+        else 
+        alert('email is not correct');
     })
 
     .catch(error=>console.log(error))
@@ -62,8 +62,7 @@ class Login extends React.Component {
             name = "email"
             id = "email"
             value={this.state.email}  onChange={this.onChangeEmail}
-            // value={this.state.email} 
-            // onChange={this.handleUserInput}
+         
             / >
                 <br/>
             <input type = "password"
