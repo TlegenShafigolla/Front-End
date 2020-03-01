@@ -1,4 +1,5 @@
 import React from 'react';
+import {login} from '../services/serverlog'
 
 class Login extends React.Component {
     constructor(props) {
@@ -20,38 +21,12 @@ class Login extends React.Component {
         this.setState({email: event.target.value});
        
       }
-  
-    Login=async(e)=>{
-        e.preventDefault();
-        return fetch('http://35.228.95.87:7000/login', {
-        method: 'Post',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          "email": this.state.email,
-          "password": this.state.password,
-        })
-    }).then(res => {
-            return res.json();        
-    })
     
-    .then(data=>{console.log(data);
-        if(data['type']==='admin')
-    localStorage.setItem('admin',data['access_token']);
-    else if(data['type']==='user')
-    localStorage.setItem('user',data['access_token']);
-        else 
-        alert('email is not correct');
-    })
 
-    .catch(error=>console.log(error))
-    }
     
         render() {
             
-        return ( <form onSubmit={this.Login} >
+        return ( <form onSubmit={async(e)=>{login(e.preventDefault())}} >
 
             
             <div className = "SignIn" >
@@ -62,7 +37,8 @@ class Login extends React.Component {
             name = "email"
             id = "email"
             value={this.state.email}  onChange={this.onChangeEmail}
-         
+            // value={this.state.email} 
+            // onChange={this.handleUserInput}
             / >
                 <br/>
             <input type = "password"
