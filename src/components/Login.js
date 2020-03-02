@@ -1,6 +1,5 @@
 import React from "react";
 import { login } from "../services/serverlog";
-
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -19,14 +18,15 @@ class Login extends React.Component {
   }
 
   render() {
-    const emaill = this.state.email;
-    const passwordd = this.state.password;
+    const email = this.state.email;
+    const password = this.state.password;
 
     return (
       <form
         onSubmit={e => {
-          login(emaill, passwordd, e.preventDefault());
-        }}
+          login(email, password, e.preventDefault())
+        }
+        }
       >
         <div className="SignIn">
           <input
@@ -46,13 +46,16 @@ class Login extends React.Component {
             id="password"
             value={this.state.password}
             onChange={this.onChangePassword}
-          />{" "}
+          />
           <br />
-          <button className="btn login" type="submit">
-            {" "}
-            CONTINUE{" "}
+        
+
+            <button className="btn login" type="submit">
+              CONTINUE
           </button>
-        </div>{" "}
+        
+          
+        </div>
       </form>
     );
   }
