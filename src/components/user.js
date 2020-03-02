@@ -8,4 +8,4 @@ return(
     </form>
 );
 }
-}
+}export default USERS;

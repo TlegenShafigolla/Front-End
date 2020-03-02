@@ -19,13 +19,13 @@ class Login extends React.Component {
   }
 
   render() {
-    const emaill=this.state.email;
-    const passwordd=this.state.password;
+    const emaill = this.state.email;
+    const passwordd = this.state.password;
 
     return (
       <form
-        onSubmit={(e) => {
-          login(emaill,passwordd,e.preventDefault());
+        onSubmit={e => {
+          login(emaill, passwordd, e.preventDefault());
         }}
       >
         <div className="SignIn">
@@ -37,8 +37,6 @@ class Login extends React.Component {
             id="email"
             value={this.state.email}
             onChange={this.onChangeEmail}
-            // value={this.state.email}
-            // onChange={this.handleUserInput}
           />
           <br />
           <input

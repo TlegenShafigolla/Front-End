@@ -2,7 +2,7 @@ export async function login(email,password) {
   return await fetch("http://35.228.95.87:7000/login", {
     method: "POST",
     headers: {
-      // 'Accept': 'application/json',
+      'Accept': 'application/json',
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
@@ -17,9 +17,11 @@ export async function login(email,password) {
       console.log(data);
       if (data["type"] === "admin")
         localStorage.setItem("admin", data["access_token"]);
+      
       if (data["type"] === "user")
         localStorage.setItem("user", data["access_token"]);
     })
 
     .catch(error => console.log(error));
+
 }

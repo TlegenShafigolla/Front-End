@@ -1,6 +1,6 @@
 import React from 'react'
 
-class Admin extends React.Component{
+class admin extends React.Component{
 render(){
 return(
     <form>
@@ -8,4 +8,4 @@ return(
     </form>
 );
 }
-}
+}export default admin;
