@@ -1,5 +1,7 @@
 import React from "react";
 import { login } from "../services/serverlog";
+import Footer from "../containers/Footer";
+import Header from "../containers/Header";
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -24,10 +26,10 @@ class Login extends React.Component {
     return (
       <form
         onSubmit={e => {
-          login(email, password, e.preventDefault())
-        }
-        }
+          login(email, password, e.preventDefault());
+        }}
       >
+        <Header/>
         <div className="SignIn">
           <input
             type="email"
@@ -48,14 +50,13 @@ class Login extends React.Component {
             onChange={this.onChangePassword}
           />
           <br />
-        
 
-            <button className="btn login" type="submit">
-              CONTINUE
+          <button className="btn login" type="submit">
+            CONTINUE
           </button>
-        
-          
+
         </div>
+          <Footer />
       </form>
     );
   }

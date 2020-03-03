@@ -1,11 +1,10 @@
-import React from "react";
+import React,  {Component}from "react";
 import "./App.css";
-
-import routes from "./routes";
+import Routes from "./routes";
 
 class App extends React.Component {
   render() {
-    return <routes />;
+    return (<Routes/>);
   }
 }
 export default App;
