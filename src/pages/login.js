@@ -27,6 +27,7 @@ class Login extends React.Component {
       <form
         onSubmit={e => {
           login(email, password, e.preventDefault());
+          
         }}
       >
         <Header/>
