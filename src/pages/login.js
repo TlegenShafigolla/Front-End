@@ -2,10 +2,11 @@ import React from "react";
 import { login } from "../services/serverlog";
 import Footer from "../containers/Footer";
 import Header from "../containers/Header";
+import { Redirect } from "react-router-dom";
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { email: "", password: "" };
+    this.state = { email: "", password: "",loggedIn:false };
 
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
@@ -18,12 +19,20 @@ class Login extends React.Component {
   onChangeEmail(event) {
     this.setState({ email: event.target.value });
   }
-
+getSession(){}
   render() {
     const email = this.state.email;
     const password = this.state.password;
-
+    const status=window.localStorage.getItem('status');
+        if (status === 'admin') {
+      return <Redirect to="/admin" />;
+      }
+      if (status === 'user') {
+      return <Redirect to="/user" />;
+      }
+      
     return (
+
       <form
         onSubmit={e => {
           login(email, password, e.preventDefault());

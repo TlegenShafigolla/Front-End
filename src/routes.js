@@ -4,7 +4,8 @@ import users from "./pages/user";
 import Login from "./pages/login";
 import home from "./pages/home";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
-import { PrivateRoute } from "./function/PrivateRoute";
+import { PrivateAdminRoute } from "./function/PrivateRoute";
+import { checklogin } from "./services/checkLogin";
 class routes extends React.Component {
   render() {
     return (
@@ -12,8 +13,8 @@ class routes extends React.Component {
         <Switch>
           <Route exact path="/" component={home} />
           <Route path="/login" component={Login} />
-          <PrivateRoute exact path="/admin" component={admin} />
-          <PrivateRoute exact path="/user" component={users} />
+          <Route exact path="/admin" component={admin}onEnter={checklogin} />
+          <Route exact path="/user" component={users} />
         </Switch>
       </BrowserRouter>
     );
