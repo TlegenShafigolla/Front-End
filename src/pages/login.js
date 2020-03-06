@@ -6,7 +6,11 @@ import { Redirect } from "react-router-dom";
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { email: "", password: "",loggedIn:false };
+    this.state = { 
+      email: "", 
+    password: "",
+    loggedIn: false 
+  };
 
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
@@ -23,8 +27,10 @@ getSession(){}
   render() {
     const email = this.state.email;
     const password = this.state.password;
-    const status=window.localStorage.getItem('status');
-        if (status === 'admin') {
+    const status = window.localStorage.getItem('status');
+   
+
+      if (status === 'admin' ) {
       return <Redirect to="/admin" />;
       }
       if (status === 'user') {
@@ -34,9 +40,9 @@ getSession(){}
     return (
 
       <form
-        onSubmit={e => {
-          login(email, password, e.preventDefault());
-          
+        onSubmit={async(e) => {
+          await login(email, password, e.preventDefault());
+          this.setState({loggedIn: true});    
         }}
       >
         <Header/>

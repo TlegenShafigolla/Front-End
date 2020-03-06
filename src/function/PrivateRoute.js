@@ -1,11 +1,11 @@
- import React from "react";
+import React from "react";
 import { Redirect, Route } from "react-router-dom";
 
 export const PrivateAdminRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      localStorage.getItem("stat us") ? (
+      localStorage.getItem('admin') ? (
         <Component {...props} />
       ) : (
         <Redirect
@@ -19,7 +19,7 @@ export const PrivateUserRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      localStorage.getItem("token") ? (
+      localStorage.getItem('user') ? (
         <Component {...props} />
       ) : (
         <Redirect
