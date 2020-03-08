@@ -19,11 +19,11 @@ export async function login(email, password) {
       console.log(data);
       if (data["type"] === "admin") {
         localStorage.setItem("admin", data["access_token"]);
-        localStorage.setItem("status", data["type"]);
+       
       }
       if (data["type"] === "user") {
         localStorage.setItem("user", data["access_token"]);
-        localStorage.setItem("status", data["type"]);
+       
 
       }
     })

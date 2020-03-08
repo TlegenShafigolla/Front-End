@@ -14,8 +14,8 @@ export const PrivateAdminRoute = ({ component: Component, ...rest }) => (
       )
     }
   />
-);
-export const PrivateUserRoute = ({ component: Component, ...rest }) => (
+  );
+    export const PrivateUserRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
