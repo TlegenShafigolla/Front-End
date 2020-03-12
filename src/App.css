@@ -6,6 +6,7 @@ footer {
   width: 100%;
   min-height: 50px;
 }
+
 body {
   background-color: white;
   width: 100%;
@@ -16,11 +17,13 @@ body {
   font-family: "Roboto", sans-serif;
   line-height: 135%;
 }
+
 header {
   background-color: #333333;
   border-bottom: 1px solid silver;
   background: linear-gradient(to top left, Fuchsia, MidnightBlue);
 }
+
 /* background: linear-gradient(45deg, Aquamarine, GreenYellow); */
 
 .SignIn {
@@ -30,9 +33,10 @@ header {
   margin-left: auto;
   margin-right: auto;
 }
+
 input {
   height: 25px;
- 
+
   width: 250px;
   border: 0px solid black;
   border-bottom: 1px solid black;
@@ -43,12 +47,15 @@ input {
   margin-right: auto;
   margin-top: 200px;
 }
+
 .email:checked {
   background: rgba(255, 255, 255, 0);
 }
+
 input::placeholder {
   font-family: "Roboto", sans-serif;
 }
+
 footer {
   border-top: 1px solid silver;
   background-color: #333333;
@@ -56,7 +63,7 @@ footer {
 }
 
 .email {
-  
+
   font-family: "Roboto Mono", monospace;
 }
 
@@ -74,17 +81,36 @@ button {
   margin-right: auto;
   font-family: "Roboto", sans-serif;
 }
+
 button:active {
   background: rgb(215, 24, 207);
-  background: linear-gradient(
-    270deg,
-    rgba(215, 24, 207, 1) 28%,
-    rgba(0, 48, 255, 0.9752275910364145) 100%
-  );
+  background: linear-gradient(270deg,
+      rgba(215, 24, 207, 1) 28%,
+      rgba(0, 48, 255, 0.9752275910364145) 100%);
   background-color: rgb(19, 19, 19);
 }
+
 #password {
   margin-top: 5px;
- 
+}
 
+.AdminPage {
+  display: grid;
+  grid-template-areas: "d h"
+  "d c";
+  grid-template-rows: 1fr 100fr ;
+  grid-template-columns: 2fr 10fr;
+}
+.header{
+  grid-area:h;
+}
+.content{
+  grid-area:c;
+background-color: crimson;
+
+}
+.dashbord{
+  grid-area:d;
+background-color: coral;
+height: 100%;
 }

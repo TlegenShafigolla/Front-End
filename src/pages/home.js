@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "../containers/Header";
-import Footer from "../containers/Footer";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import { NavLink } from "react-router-dom";
 class home extends React.Component {
   render() {

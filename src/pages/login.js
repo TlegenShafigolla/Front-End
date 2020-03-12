@@ -1,7 +1,7 @@
 import React from "react";
 import { login } from "../services/serverlog";
-import Footer from "../containers/Footer";
-import Header from "../containers/Header";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 import { Redirect } from "react-router-dom";
 class Login extends React.Component {
   constructor(props) {
