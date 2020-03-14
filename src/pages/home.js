@@ -7,7 +7,9 @@ class home extends React.Component {
     return (
       <div>
         <Header />
-        <NavLink to="/login"><button>SignIn</button></NavLink>
+        <div>
+          <img src='https://klike.net/uploads/posts/2019-06/1561182204_1.jpg'/>
+        </div>
         <Footer />
       </div>
     );

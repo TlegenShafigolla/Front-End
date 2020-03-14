@@ -1,0 +1,20 @@
+.header {
+    grid-area: h;
+      width: 100%;
+      min-height: 50px;
+      background-color: #333333;
+      border-bottom: 1px solid silver;
+      background: #f3f3f3;
+    }
+    .header button{
+      margin: 10px;
+      height: 40px;
+      width: 40px;
+      border: 2px solid rgb(235, 72, 250);
+      border-radius: 10px;
+      background-color: rgba(7, 109, 112, 0);
+      outline: none;
+    }
+    .header button:active{
+      border-color:rgb(61, 6, 83) ;
+    }

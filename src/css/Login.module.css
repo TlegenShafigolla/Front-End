@@ -9,7 +9,6 @@
   
   input {
     height: 25px;
-  
     width: 250px;
     border: 0px solid black;
     border-bottom: 1px solid black;
@@ -20,7 +19,11 @@
     margin-right: auto;
     margin-top: 200px;
   }
-  
+  input:-webkit-autofill {
+    -webkit-box-shadow: inset 0 0 0 50px rgb(255, 255, 255) !important; 
+    -webkit-text-fill-color: rgb(20, 18, 18) !important; 
+    color: rgb(22, 19, 19) !important;
+}
   .email:checked {
     background: rgba(255, 255, 255, 0);
   }
