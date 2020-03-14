@@ -1,0 +1,8 @@
+.header {
+  grid-area: h;
+    width: 100%;
+    min-height: 50px;
+    background-color: #333333;
+    border-bottom: 1px solid silver;
+    background: linear-gradient(to top left, Fuchsia, MidnightBlue);
+  }

@@ -1,0 +1,67 @@
+
+.SignIn {
+    width: 450px;
+    min-height: 550px;
+    border: 0px solid black;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  input {
+    height: 25px;
+  
+    width: 250px;
+    border: 0px solid black;
+    border-bottom: 1px solid black;
+    background: rgba(255, 255, 255, 0);
+    outline: none;
+    font-size: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 200px;
+  }
+  
+  .email:checked {
+    background: rgba(255, 255, 255, 0);
+  }
+  
+  input::placeholder {
+    font-family: "Roboto", sans-serif;
+  }
+   
+  
+  .email {
+    font-family: "Roboto Mono", monospace;
+  }
+  
+  .button {
+    margin-top: 10px;
+    color: white;
+    background: linear-gradient(to top left, Fuchsia, MidnightBlue);
+    height: 50px;
+    width: 250px;
+    border-radius: 10px;
+    outline: none;
+    font-size: 1.5em;
+    border: 0;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: "Roboto", sans-serif;
+  }
+  
+  .button:active {
+    background: rgb(215, 24, 207);
+    background: linear-gradient(
+      270deg,
+      rgba(215, 24, 207, 1) 28%,
+      rgba(0, 48, 255, 0.9752275910364145) 100%
+    );
+    background-color: rgb(19, 19, 19);
+  }
+  
+  .password {
+    margin-top: 5px;
+  }
+  
+  
+  

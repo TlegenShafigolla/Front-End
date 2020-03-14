@@ -1,0 +1,15 @@
+.dashbord {
+    grid-area: d;
+    height: 100%;
+    border-right: 2px solid silver;
+    background: rgb(33, 64, 222);
+    background: linear-gradient(
+      128deg,
+      rgba(33, 64, 222, 0.8995973389355743) 27%,
+      rgba(86, 10, 144, 0.8575805322128851) 63%,
+      rgba(107, 8, 116, 1) 79%,
+      rgba(63, 7, 106, 1) 91%,
+      rgba(44, 1, 54, 1) 99%
+    );
+  }
+  

@@ -1,8 +1,9 @@
 import React from "react";
 import { login } from "../services/serverlog";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+import Footer from "../components/Footer/Footer";
+import Header from "../components/Header/Header";
 import { Redirect } from "react-router-dom";
+import s from '../css/Login.module.css'
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -46,13 +47,12 @@ getSession(){}
         }}
       >
         <Header/>
-        <div className="SignIn">
+        <div className={s.SignIn}>
           <input
             type="email"
-            className="email"
+            className={s.email}
             placeholder="Email"
             name="email"
-            id="email"
             value={this.state.email}
             onChange={this.onChangeEmail}
           />
@@ -61,13 +61,13 @@ getSession(){}
             type="password"
             placeholder="password"
             name="password"
-            id="password"
+            className={s.password}
             value={this.state.password}
             onChange={this.onChangePassword}
           />
           <br />
 
-          <button className="btn login" type="submit">
+          <button className={s.button}type="submit">
             CONTINUE
           </button>
 
