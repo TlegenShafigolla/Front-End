@@ -46,7 +46,7 @@ getSession(){}
           this.setState({loggedIn: true});    
         }}
       >
-        <Header/>
+        <Header page='login'/>
         <div className={s.SignIn}>
           <input
             type="email"

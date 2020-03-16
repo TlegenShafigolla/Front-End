@@ -1,8 +1,20 @@
 .header {
-  
     width: 100%;
     min-height: 50px;
     background-color: #333333;
     border-bottom: 1px solid silver;
     background: linear-gradient(to top left, Fuchsia, MidnightBlue);
+  }
+  .header button{
+    float: right;
+    margin: 10px;
+    width: 80px;
+    height: 30px;
+    border: 1px solid rgb(148, 11, 136);
+    border-radius: 5px;
+    background-color: rgba(18, 81, 197, 0.219);
+    outline: none;
+  }
+  .header button:active{
+    background-color: rgba(138, 22, 148, 0.63);
   }

@@ -2,7 +2,9 @@ import React from 'react'
 const Content=()=>{
     
         return(
-            <div className="content">ADMIN</div>
+            <div>
+                content
+            </div>    
         );
     
 }

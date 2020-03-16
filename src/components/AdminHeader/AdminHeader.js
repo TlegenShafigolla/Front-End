@@ -1,9 +1,10 @@
 import React from "react";
 import s from "./AdminHeader.module.css";
 const AdminHeader = () => {
+  
   return (
     <header className={s.header}>
-      <button>ok</button>
+      <button></button>
       Logo1
     </header>
   );

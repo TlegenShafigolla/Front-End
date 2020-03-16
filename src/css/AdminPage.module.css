@@ -1,8 +1,0 @@
-.AdminPage {
-    display: grid;
-    grid-template-areas:
-      "d h"
-      "d c";
-    grid-template-rows: 1fr 14fr;
-    grid-template-columns: 2fr 10fr;
-  }
