@@ -1,18 +1,34 @@
 .AdminPage {
     display: grid;
     grid-template-areas:
-      "d h"
-      "d c";
-    grid-template-rows: 1fr 14fr;
-    grid-template-columns: 2fr 10fr;
+      " h " "c";
+      grid-template-rows: 1fr 9fr;
+      position: relative;
+      overflow-x: hidden;
+      
+    }
+    .Content{
+      transition: 0.5s;
+      position: relative;
+      z-index: 0;
+    }
+.Content_active{
+  transform: translateX(20%);
+
+}
+
+  .dashbord {
+   width: 19.8%;
+   height: 100vh;
+    border-right: 2px solid silver;
+    background-color: rgb(34, 30, 29);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    transition: 0.5s;
+    transform: translateX(-100%);
   }
-  .AdminPage Content{
-    grid-area: c;
-    background-color: white;
+  .dashbord_active{
+    transform: translateX(0%);
   }
-
-
-
-
-
-
