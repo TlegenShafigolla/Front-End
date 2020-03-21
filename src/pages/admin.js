@@ -2,7 +2,7 @@ import React from "react";
 import AdminHeader from "../components/AdminHeader/AdminHeader";
 import SideBar from "../components/SideBar/SideBar";
 import "../App.css";
-import SideBarRoutes from "../components/SideBar/Routes";
+import SideBarPages from "../components/SideBar/Routes";
 import s from '../css/AdminPage.module.css'
 class admin extends React.Component {
 
@@ -17,8 +17,9 @@ class admin extends React.Component {
         <div className='Content'>
 
         <AdminHeader />
-        <div className={s.Content}>
-          <SideBarRoutes />
+        <div >
+          <SideBarPages />
+
         </div>
         </div>
         </div>

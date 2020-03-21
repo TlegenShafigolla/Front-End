@@ -1,34 +1,41 @@
 .AdminPage {
-    display: grid;
-    grid-template-areas:
-      " h " "c";
-      grid-template-rows: 1fr 9fr;
-      position: relative;
-      overflow-x: hidden;
-      
-    }
-    .Content{
-      transition: 0.5s;
-      position: relative;
-      z-index: 0;
-    }
-.Content_active{
-  transform: translateX(20%);
+  orientation: horizontal;
+  display: grid;
+  grid-template-areas: " h " "c";
+  grid-template-rows: 1fr 9fr;
+  position: relative;
+  overflow-x: hidden;
+}
+.Content {
+  margin: 0px;
+  position: relative;
+  z-index: 0;
+  transition: 0.5s;
+  width: 100%;
+  /* right: 0px;  */
+}
+.Content_active {
+  /* right: 0px; */
 
+  width: 80%;
+  transition: 0.5s;
+  transform: translateX(25%);
 }
 
-  .dashbord {
-   width: 19.8%;
-   height: 100vh;
-    border-right: 2px solid silver;
-    background-color: rgb(34, 30, 29);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: fixed;
-    transition: 0.5s;
-    transform: translateX(-100%);
-  }
-  .dashbord_active{
-    transform: translateX(0%);
-  }
+.dashbord {
+  width: 19.8%;
+  height: 100vh;
+  border-right: 2px solid silver;
+  background-color: rgb(34, 30, 29);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  transition: 0.5s;
+  transform: translateX(-100%);
+  float: left;
+}
+.dashbord_active {
+  transform: translateX(0%);
+  transition: 0.5s;
+}
