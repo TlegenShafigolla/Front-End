@@ -34,13 +34,12 @@
    
   
   .email {
-    font-family: "Roboto Mono", monospace;
+    font-family: "Roboto", sans-serif;
   }
   
-  .button {
+  .SignIn Button {
     margin-top: 10px;
     color: white;
-    background: linear-gradient(to top left, Fuchsia, MidnightBlue);
     height: 50px;
     width: 250px;
     border-radius: 10px;
@@ -49,7 +48,6 @@
     border: 0;
     margin-left: auto;
     margin-right: auto;
-    font-family: "Roboto", sans-serif;
   }
   
   .button:active {

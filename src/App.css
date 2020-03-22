@@ -1,8 +1,6 @@
 .AdminPage {
-  orientation: horizontal;
-  display: grid;
-  grid-template-areas: " h " "c";
-  grid-template-rows: 1fr 9fr;
+  display: flex;
+  flex-direction: column;
   position: relative;
   overflow-x: hidden;
 }
@@ -12,20 +10,17 @@
   z-index: 0;
   transition: 0.5s;
   width: 100%;
-  /* right: 0px;  */
 }
 .Content_active {
-  /* right: 0px; */
-
   width: 80%;
   transition: 0.5s;
   transform: translateX(25%);
+  float: right;
 }
 
 .dashbord {
-  width: 19.8%;
+  width: 20%;
   height: 100vh;
-  border-right: 2px solid silver;
   background-color: rgb(34, 30, 29);
   display: flex;
   flex-direction: column;
@@ -34,6 +29,7 @@
   transition: 0.5s;
   transform: translateX(-100%);
   float: left;
+  z-index: 10000;
 }
 .dashbord_active {
   transform: translateX(0%);

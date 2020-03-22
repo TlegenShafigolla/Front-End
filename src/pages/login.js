@@ -4,6 +4,7 @@ import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 import { Redirect } from "react-router-dom";
 import s from '../css/Login.module.css'
+import { Button } from "@material-ui/core";
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -67,9 +68,7 @@ getSession(){}
           />
           <br />
 
-          <button className={s.button}type="submit">
-            CONTINUE
-          </button>
+          <Button variant='contained' color='primary'>Continue</Button>
 
         </div>
           <Footer />

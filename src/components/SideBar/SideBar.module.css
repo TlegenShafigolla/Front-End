@@ -1,10 +1,13 @@
-
-    
- 
-.btngroup {
-   border-radius: 5px;
-   
+.SideBar{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* border: 5px solid seagreen; */
+}
+.SideBar Button{
+    margin: 5px;
+    width: 300px;
   }
-  
 
   

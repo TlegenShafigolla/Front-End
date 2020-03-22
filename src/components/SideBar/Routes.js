@@ -11,7 +11,7 @@ class SideBarRoutes extends React.Component {
 
           <Route path="/admin/menu" component={Menu} />
           <Route path="/admin/menu1" component={Menu1} />
-         <Redirect from='/admin' to='/admin/menu'/>
+         <Redirect  from='/admin' to='/admin/menu'/>
         </div>
      
     );
