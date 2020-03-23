@@ -2,20 +2,20 @@
 import { Route, Redirect } from "react-router-dom";
 import Menu from '../Menu/Menu';
 import Menu1 from '../Menu1/Menu1';
-
-class SideBarRoutes extends React.Component {
-    render(){
+import s from '../../css/Content.module.css'
+export const Routes=()=> {
+   
         return (
     
-        <div>
+        <div className={s.content}>
 
-          <Route path="/admin/menu" component={Menu} />
-          <Route path="/admin/menu1" component={Menu1} />
-         <Redirect  from='/admin' to='/admin/menu'/>
+          <Route exact path="/admin/menu" component={Menu} />
+          <Route exact path="/admin/menu1" component={Menu1} />
+         <Redirect exact from='/admin' to='/admin/menu'/>
         </div>
      
     );
-  }
+  
 }
 
-export default SideBarRoutes;
+

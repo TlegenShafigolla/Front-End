@@ -18,7 +18,7 @@
   float: right;
 }
 
-.dashbord {
+.SideBar {
   width: 20%;
   height: 100vh;
   background-color: rgb(34, 30, 29);
@@ -33,5 +33,5 @@
 }
 .dashbord_active {
   transform: translateX(0%);
-  transition: 0.5s;
+  /* transition: 0.5s; */
 }

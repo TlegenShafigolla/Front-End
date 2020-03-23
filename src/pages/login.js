@@ -1,10 +1,10 @@
-import React from "react";
-import { login } from "../services/serverlog";
-import Footer from "../components/Footer/Footer";
-import Header from "../components/Header/Header";
-import { Redirect } from "react-router-dom";
+import React from "react"
+import { login } from "../services/serverlog"
+import Footer from "../components/Footer/Footer"
+import Header from "../components/Header/Header"
+import { Redirect } from "react-router-dom"
 import s from '../css/Login.module.css'
-import { Button } from "@material-ui/core";
+import  Button  from "@material-ui/core/Button"
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -76,5 +76,5 @@ getSession(){}
     );
   }
 }
-
 export default Login;
+
