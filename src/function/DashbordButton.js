@@ -1,5 +1,5 @@
 import $ from "jquery";
-import'../App.css';
+import '../css/App.css';
 export function SideBarCall(e){
     e.preventDefault();
     $('.SideBar').toggleClass('dashbord_active');

@@ -17,16 +17,10 @@ export async function login(email, password) {
     })
     .then(data => {
       console.log(data);
-      localStorage.setItem('refresh',data['refresh_token'])
-      if (data["type"] === "admin") {
-        localStorage.setItem("admin", data["access_token"]);
-        localStorage.setItem("status", data["type"]);
-      }
-      if (data["type"] === "user") {
-        localStorage.setItem("user", data["access_token"]);
-        localStorage.setItem("status", data["type"]);
-
-      }
+      localStorage.setItem('refresh_token',data['refresh_token'])
+      localStorage.setItem("access_token", data["access_token"]);
+      localStorage.setItem("status", data["type"]);
+      localStorage.setItem('access_time', Date())
     })
 
     .catch(error => console.log(error));

@@ -27,9 +27,6 @@ class Login extends React.Component {
         this.setState({email: event.target.value});
     }
 
-
-
-
     render() {
         const email = this.state.email;
         const password = this.state.password;
@@ -47,7 +44,6 @@ class Login extends React.Component {
                 onSubmit={async (e) => {
                     await login(email, password, e.preventDefault());
                     this.setState({loggedIn: true});
-                    localStorage.setItem('access_time',Date())
                 }}
             >
                 <Header page='login'/>
