@@ -17,6 +17,7 @@ export async function login(email, password) {
     })
     .then(data => {
       console.log(data);
+      localStorage.setItem('refresh',data['refresh_token'])
       if (data["type"] === "admin") {
         localStorage.setItem("admin", data["access_token"]);
         localStorage.setItem("status", data["type"]);

@@ -1,17 +1,36 @@
-import React from "react";
+import React, {Component} from "react";
 import AdminHeader from "../components/AdminHeader/AdminHeader";
 import SideBar from "../components/SideBar/SideBar";
 import "../App.css";
-import SideBarPages, {Routes} from "../components/SideBar/Routes";
-import s from "../css/AdminPage.module.css";
+import {Routes} from "../components/SideBar/Routes";
+import {Redirect} from "react-router-dom";
 
-class admin extends React.Component {
+class admin extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            isSideBarOpen: false,
+            isLoggedIn: true
+        }
+    }
+
+    LogOut = () => {
+        localStorage.clear();
+        this.setState({isLoggedIn:false})
+    }
+
     render() {
+        if (!this.state.isLoggedIn) {
+            return <Redirect to="/login"/>;
+        }
+
         return (
             <div className="AdminPage">
-                <SideBar/>
+                <SideBar open={this.state.isSideBarOpen}/>
                 <div className="Content">
-                    <AdminHeader/>
+
+                    <AdminHeader OpenButton={() => this.setState({isSideBarOpen: true})} Logout={this.LogOut}/>
                     <div>
                         <Routes/>
                     </div>
