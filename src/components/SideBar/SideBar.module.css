@@ -1,0 +1,12 @@
+.SideBar{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.SideBar Button{
+    margin: 5px;
+    width: 300px;
+  }
+
+  

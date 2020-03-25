@@ -1,0 +1,37 @@
+.AdminPage {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+.Content {
+  margin: 0px;
+  position: relative;
+  z-index: 0;
+  transition: 0.5s;
+  width: 100%;
+}
+.Content_active {
+  width: 80%;
+  transition: 0.5s;
+  transform: translateX(25%);
+  float: right;
+}
+
+.SideBar {
+  width: 20%;
+  height: 100vh;
+  background-color: rgb(34, 30, 29);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  transition: 0.5s;
+  transform: translateX(-100%);
+  float: left;
+  z-index: 10000;
+}
+.dashbord_active {
+  transform: translateX(0%);
+  /* transition: 0.5s; */
+}
