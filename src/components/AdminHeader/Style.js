@@ -8,6 +8,7 @@ export const useStyles = makeStyles(theme => ({
         marginRight: theme.spacing(2),
     },
     title: {
+        margin:'auto',
         display: 'none',
         [theme.breakpoints.up('sm')]: {
             display: 'block',

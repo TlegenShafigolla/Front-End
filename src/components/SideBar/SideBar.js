@@ -1,17 +1,14 @@
 import React from "react";
-import {NavLink} from "react-router-dom";
-import "../../css/App.css";
 import Button from "@material-ui/core/Button";
 import {Drawer, Typography} from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
 import {useStyle} from "./Style";
+import {NavLink} from "react-router-dom";
+import PermIdentityOutlinedIcon from '@material-ui/icons/PermIdentityOutlined';
 
 const SideBar = (props) => {
+    const infoColor = ["#00acc1", "#26c6da", "#00acc1", "#00d3ee"];
     const classes = useStyle();
-    const [setAnchorEl] = React.useState(null);
-    const handleClose = () => {
-        setAnchorEl(null)
-    }
     return (
         <Drawer
             open={props.open}
@@ -21,33 +18,23 @@ const SideBar = (props) => {
             classes={{
                 paper: classes.drawerPaper
             }}
-            onClose={handleClose}
-
+            ModalProps={{
+                keepMounted: true // Better open performance on mobile.
+            }}
         >
 
-            <div>
-                <Button onClick={props.open}>open</Button>
-                <MenuItem>menu</MenuItem>
-                <NavLink to="/admin/menu">
-                    <Button
-                        variant="contained"
-                        size="large"
-                        color="primary"
-                    >
-                        menu1
-                    </Button>
+            <div className={classes.button}>
+                <NavLink to="/admin/profile">
+                    <Button color='primary'
+                            startIcon={<PermIdentityOutlinedIcon/>}
+                            disabled={false}
+                    >Profile</Button>
                 </NavLink>
                 <br/>
                 <NavLink to="/admin/menu1">
-                    <Button
-                        variant="contained"
-                        size="large"
-                        color="primary"
-                    >
-                        <Typography variant="h6" noWrap>
-                            Menu
-                        </Typography>
-                    </Button>
+                    <MenuItem>
+                        Menu
+                    </MenuItem>
                 </NavLink>
             </div>
 

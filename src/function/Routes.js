@@ -1,13 +1,16 @@
 import React from 'react'
 import {Route, Redirect} from "react-router-dom";
-import Menu from '../components/Menu/Menu';
+import Profile from '../components/Profile/Profile';
 import Menu1 from '../components/Menu1/Menu1';
 import clsx from "clsx";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const drawerWidth = 240;
 const styles = makeStyles(theme => ({
-
+    grow: {
+        width: '100wh',
+        height: '100vh'
+    },
     content: {
         flexGrow: 1,
         padding: theme.spacing(2),
@@ -43,9 +46,9 @@ export const Routes = (props) => {
                 [classes.contentShift]: props.open,
             })}>
                 <div className={classes.drawerHeader}/>
-                <Route exact path="/admin/menu" component={Menu}/>
+                <Route exact path="/admin/profile" component={Profile}/>
                 <Route exact path="/admin/menu1" component={Menu1}/>
-                <Redirect exact from='/admin' to='/admin/menu'/>
+                <Redirect exact from='/admin' to='/admin/profile'/>
             </main>
         </div>
     );

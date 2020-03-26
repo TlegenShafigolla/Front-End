@@ -7,7 +7,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle'
 import Toolbar from '@material-ui/core/Toolbar';
 import Menu from "@material-ui/core/Menu";
 import clsx from "clsx";
-
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import Button from "@material-ui/core/Button";
+import PermIdentityOutlinedIcon from "@material-ui/icons/PermIdentityOutlined";
 const AdminHeader = (props) => {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -35,6 +37,9 @@ const AdminHeader = (props) => {
                     </Typography>
                     <div className={classes.grow}/>
                     <div className={classes.sectionDesktop}>
+                        <Typography  className={classes.title} noWrap color="primary">
+                            {props.DisplayName}
+                        </Typography>
                         <IconButton
                             aria-label="account of current user"
                             aria-controls="menu-appbar"
@@ -59,7 +64,9 @@ const AdminHeader = (props) => {
                             open={open}
                             onClose={handleClose}
                         >
-                            <MenuItem onClick={props.Logout}>LogOut</MenuItem>
+                            <Button startIcon={<ExitToAppIcon/>}
+                                      onClick={props.Logout}>LogOut
+                            </Button>
                         </Menu>
                     </div>
                 </Toolbar>

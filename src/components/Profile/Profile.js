@@ -1,6 +1,6 @@
 import React from "react";
 
-const Menu = () => {
+const Profile = () => {
     return <div>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aspernatur ipsam minima ratione velit. A
         accusantium at, autem illum impedit incidunt necessitatibus nesciunt nobis odit, qui, tempore tenetur unde
@@ -18,4 +18,4 @@ const Menu = () => {
         Ex inventore libero maiores quibusdam tenetur vel, veniam!
     </div>;
 };
-export default Menu;
+export default Profile;
