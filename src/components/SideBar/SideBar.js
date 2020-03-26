@@ -27,11 +27,11 @@ const SideBar = (props) => {
                             startIcon={<PermIdentityOutlinedIcon/>}
                     >Profile</Button>
                 </NavLink>
-                <NavLink to="/admin/menu1">
+                <NavLink to="/admin/tests">
                     <Button color='primary'
                             startIcon={<PermIdentityOutlinedIcon/>}
                     >
-                        Menu
+                        My Tests
                     </Button>
                 </NavLink>
             </div>
