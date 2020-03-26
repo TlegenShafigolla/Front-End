@@ -10,8 +10,6 @@ export const useStyle = makeStyles(theme => ({
         width: 240,
         background:'#272827',
     },
-    button:{
-        color: infoColor
-    }
+
 }))
 

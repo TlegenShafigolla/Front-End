@@ -1,10 +1,10 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import {Drawer, Typography} from "@material-ui/core";
-import MenuItem from "@material-ui/core/MenuItem";
 import {useStyle} from "./Style";
 import {NavLink} from "react-router-dom";
 import PermIdentityOutlinedIcon from '@material-ui/icons/PermIdentityOutlined';
+import s from './SideBar.module.css'
 
 const SideBar = (props) => {
     const infoColor = ["#00acc1", "#26c6da", "#00acc1", "#00d3ee"];
@@ -18,23 +18,21 @@ const SideBar = (props) => {
             classes={{
                 paper: classes.drawerPaper
             }}
-            ModalProps={{
-                keepMounted: true // Better open performance on mobile.
-            }}
+
         >
 
-            <div className={classes.button}>
+            <div className={s.buttongroup}>
                 <NavLink to="/admin/profile">
                     <Button color='primary'
                             startIcon={<PermIdentityOutlinedIcon/>}
-                            disabled={false}
                     >Profile</Button>
                 </NavLink>
-                <br/>
                 <NavLink to="/admin/menu1">
-                    <MenuItem>
+                    <Button color='primary'
+                            startIcon={<PermIdentityOutlinedIcon/>}
+                    >
                         Menu
-                    </MenuItem>
+                    </Button>
                 </NavLink>
             </div>
 
