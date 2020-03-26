@@ -10,7 +10,7 @@ export default function getProfile() {
     const api = 'http://35.228.95.87:7000';
     const json = fetch(`${api}/profile`, requestOptions).then(res => {
         return res.json();
-        console.log('request')
+
     });
     return json;
 }
