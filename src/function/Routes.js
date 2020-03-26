@@ -1,7 +1,7 @@
 import React from 'react'
 import {Route, Redirect} from "react-router-dom";
 import Profile from '../components/Profile/Profile';
-import MyTests from '../components/MyTests/MyTests';
+import MyQuizzes from '../components/MyQuizzes/MyQuizzes';
 import clsx from "clsx";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
@@ -48,7 +48,7 @@ export const Routes = (props) => {
             })}>
                 <div className={classes.drawerHeader}/>
                 <Route exact path="/admin/profile" component={Profile}/>
-                <Route exact path="/admin/tests" component={MyTests}/>
+                <Route exact path="/admin/tests" component={MyQuizzes}/>
                 <Redirect exact from='/admin' to='/admin/profile'/>
             </main>
         </div>

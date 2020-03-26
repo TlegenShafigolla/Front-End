@@ -8,9 +8,8 @@ export default function getTests() {
     };
 
     const api = 'http://35.228.95.87:7000';
-    const json = fetch(`${api}/profile`, requestOptions).then(res => {
+    const json = fetch(`${api}/quiz`, requestOptions).then(res => {
         return res.json();
-        console.log('request')
     });
     return json;
 }

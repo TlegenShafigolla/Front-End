@@ -31,7 +31,7 @@ const SideBar = (props) => {
                     <Button color='primary'
                             startIcon={<PermIdentityOutlinedIcon/>}
                     >
-                        My Tests
+                        My Quizzes
                     </Button>
                 </NavLink>
             </div>
