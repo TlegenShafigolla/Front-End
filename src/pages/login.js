@@ -67,7 +67,7 @@ class Login extends React.Component {
                     />
                     <br/>
 
-                    <Button variant='contained' color='primary' type={onsubmit}>Continue</Button>
+                    <Button variant='contained' color='primary'  type={onsubmit}>Continue</Button>
 
                 </div>
                 <Footer/>

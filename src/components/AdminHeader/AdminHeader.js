@@ -3,23 +3,12 @@ import AppBar from "@material-ui/core/AppBar";
 import {Typography, IconButton, MenuItem} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import {useStyles} from "./Style";
-import AccountCircle from '@material-ui/icons/AccountCircle'
 import Toolbar from '@material-ui/core/Toolbar';
-import Menu from "@material-ui/core/Menu";
 import clsx from "clsx";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import Button from "@material-ui/core/Button";
-import PermIdentityOutlinedIcon from "@material-ui/icons/PermIdentityOutlined";
+
 const AdminHeader = (props) => {
     const classes = useStyles();
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl)
-    const handleMenu = event => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-        setAnchorEl(null)
-    }
     return (
         <div className={classes.grow}>
 
@@ -37,7 +26,7 @@ const AdminHeader = (props) => {
                     </Typography>
                     <div className={classes.grow}/>
                     <div className={classes.sectionDesktop}>
-                        <Typography  className={classes.title} noWrap color="primary">
+                        <Typography className={classes.title} noWrap color="primary">
                             {props.DisplayName}
                         </Typography>
                         <IconButton
@@ -45,29 +34,11 @@ const AdminHeader = (props) => {
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
                             color="primary"
-                            onClick={handleMenu}
+                            onClick={props.Logout}
                         >
-                            <AccountCircle/>
+                            <ExitToAppIcon/>
                         </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorEl}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={open}
-                            onClose={handleClose}
-                        >
-                            <Button startIcon={<ExitToAppIcon/>}
-                                      onClick={props.Logout}>LogOut
-                            </Button>
-                        </Menu>
+
                     </div>
                 </Toolbar>
 
