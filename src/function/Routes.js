@@ -1,7 +1,7 @@
 import React from 'react'
 import {Route, Redirect} from "react-router-dom";
 import Profile from '../components/Profile/Profile';
-import Menu1 from '../components/Menu1/Menu1';
+import MyTests from '../components/MyTests/MyTests';
 import clsx from "clsx";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
@@ -38,8 +38,9 @@ const styles = makeStyles(theme => ({
     },
 
 }))
+
 export const Routes = (props) => {
-    const classes = styles()
+    const classes = styles();
     return (
         <div className={classes.grow}>
             <main className={clsx(classes.content, {
@@ -47,12 +48,12 @@ export const Routes = (props) => {
             })}>
                 <div className={classes.drawerHeader}/>
                 <Route exact path="/admin/profile" component={Profile}/>
-                <Route exact path="/admin/menu1" component={Menu1}/>
+                <Route exact path="/admin/tests" component={MyTests}/>
                 <Redirect exact from='/admin' to='/admin/profile'/>
             </main>
         </div>
     );
 
-}
+};
 
 
