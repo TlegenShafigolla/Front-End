@@ -4,7 +4,7 @@ class QuizPreview extends React.Component{
 
     render() {
         return (
-            <div> {this.props.value.description} </div>
+            <div> {this.props.value.description.toString()} </div>
         );
     }
 }
