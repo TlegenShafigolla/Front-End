@@ -33,9 +33,10 @@ class admin extends Component {
                          OpenSideBar={this.state.isSideBarOpen}
             DisplayName={this.state.displayName}/>
                 <SideBar open={this.state.isSideBarOpen}/>
-            <div onClick={()=>this.setState({isSideBarOpen: false})} >
-                <Routes open={this.state.isSideBarOpen}/>
+                <div onClick={()=>this.setState({isSideBarOpen: false})} >
+                    <Routes open={this.state.isSideBarOpen}/>
             </div>
+
             </div>
         );
     }

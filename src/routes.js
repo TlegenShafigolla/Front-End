@@ -11,7 +11,7 @@ const Routes = () => {
         <Switch>
             <Route exact path="/" component={home}/>
             <Route path="/login" component={Login}/>
-            <PrivateAdminRoute path="/admin" component={admin}/>
+            <PrivateAdminRoute  path="/admin/" component={admin}/>
             <PrivateUserRoute path="/user" component={users}/>
         </Switch>
     );

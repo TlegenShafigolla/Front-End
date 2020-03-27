@@ -2,7 +2,6 @@
 color: #f3f3f3;
     width: 210px;
     margin: 5px;
-    text-decoration: none;
 
 }
 .buttongroup {
@@ -18,3 +17,6 @@ color: #f3f3f3;
      background: #00d3ee;
      box-shadow: 0px 0px 10px #00d3ee;
  }
+.buttongroup a{
+    text-decoration: none;
+}

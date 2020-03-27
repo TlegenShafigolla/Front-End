@@ -4,6 +4,7 @@ import Profile from '../components/Profile/Profile';
 import MyQuizzes from '../components/MyQuizzes/MyQuizzes';
 import clsx from "clsx";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import {Switch} from "@material-ui/core";
 
 const drawerWidth = 240;
 const styles = makeStyles(theme => ({
@@ -42,16 +43,17 @@ const styles = makeStyles(theme => ({
 export const Routes = (props) => {
     const classes = styles();
     return (
+
         <div className={classes.grow}>
             <main className={clsx(classes.content, {
                 [classes.contentShift]: props.open,
             })}>
                 <div className={classes.drawerHeader}/>
-                <Route exact path="/admin/profile" component={Profile}/>
-                <Route exact path="/admin/tests" component={MyQuizzes}/>
-                <Redirect exact from='/admin' to='/admin/profile'/>
+                <Route  path="/admin/profile" component={Profile}/>
+                <Route  path="/admin/tests" component={MyQuizzes}/>
             </main>
         </div>
+
     );
 
 };

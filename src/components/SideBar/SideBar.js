@@ -5,9 +5,9 @@ import {useStyle} from "./Style";
 import {NavLink} from "react-router-dom";
 import PermIdentityOutlinedIcon from '@material-ui/icons/PermIdentityOutlined';
 import s from './SideBar.module.css'
-
+import $ from 'jquery'
 const SideBar = (props) => {
-    const infoColor = ["#00acc1", "#26c6da", "#00acc1", "#00d3ee"];
+
     const classes = useStyle();
     return (
         <Drawer
@@ -22,7 +22,8 @@ const SideBar = (props) => {
         >
 
             <div className={s.buttongroup}>
-                <NavLink to="/admin/profile">
+                <NavLink to="/admin/profile"
+                >
                     <Button color='primary'
                             startIcon={<PermIdentityOutlinedIcon/>}
                     >Profile</Button>

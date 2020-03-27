@@ -33,7 +33,7 @@ class Login extends React.Component {
         const status = window.localStorage.getItem('status');
 
         if (status === 'admin') {
-            return <Redirect to="/admin"/>;
+            return <Redirect to='/admin/profile'/>;
         }
         if (status === 'user') {
             return <Redirect to="/user"/>;
