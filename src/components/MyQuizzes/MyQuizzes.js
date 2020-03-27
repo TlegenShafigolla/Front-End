@@ -15,7 +15,7 @@ class MyQuizzes extends React.Component{
     render() {
         return (
             <Container maxWidth="xl">
-                <div> Aaaaaaaaaaaaaa</div>
+                {this.state.quizzes === null ? "NULL": this.state.quizzes.map(value => <QuizPreview key={value.id} value={value}/>)}
             </Container>
         );
     }
