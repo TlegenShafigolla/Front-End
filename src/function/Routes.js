@@ -1,15 +1,16 @@
 import React from 'react'
 import {Route} from "react-router-dom";
 import Profile from '../components/Profile/Profile';
-import MyQuizzes from '../components/MyQuizzes/MyQuizzes';
+import ListQuizPreview from '../components/MyQuizzes/Existing/listQuizPreview';
 import clsx from "clsx";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import MyQuizRoute from "../components/MyQuizzes/MyQuizRoute";
 
 const drawerWidth = 240;
 const styles = makeStyles(theme => ({
     grow: {
         width: '100wh',
-        height: '100vh'
+        height: '100vh',
     },
     content: {
         flexGrow: 1,
@@ -49,7 +50,7 @@ export const Routes = (props) => {
             })}>
                 <div className={classes.drawerHeader}/>
                 <Route  path="/admin/profile" component={Profile}/>
-                <Route  path="/admin/tests" component={MyQuizzes}/>
+                <Route  path="/admin/quizzes" component={MyQuizRoute}/>
             </main>
         </div>
 

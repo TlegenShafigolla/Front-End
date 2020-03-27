@@ -1,12 +1,12 @@
 import React from "react";
 import Container from '@material-ui/core/Container';
-import getTests from "../../services/api/myquizzes";
-import QuizPreview from "./Existing/existingQuizPreview";
-import s from './MyQuizzes.module.css'
+import getTests from "../../../services/api/myquizzes";
+import QuizPreview from "./quizPreview";
+import s from '../listQuizPreview.module.css'
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from '@material-ui/icons/Add';
-import editQuiz from "./Existing/editQuiz";
-class MyQuizzes extends React.Component {
+import editQuiz from "../Editing/editQuiz";
+class ListQuizPreview extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,9 +16,9 @@ class MyQuizzes extends React.Component {
 
     render() {
         return (
-            <Container maxWidth="xl">
-                <div className={s.Container}>
-                    <div className={s.description}>
+            <Container  className={s.Container}>
+                <div className={s.Box}>
+                    <div className={s.Quizz}>
 
                         {this.state.quizzes !== null ? this.state.quizzes.map(val => <QuizPreview key={val.id}
                                                                                                   value={val}/>) : ' '}
@@ -40,4 +40,4 @@ class MyQuizzes extends React.Component {
     }
 }
 
-export default MyQuizzes;
+export default ListQuizPreview;

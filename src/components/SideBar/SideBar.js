@@ -13,7 +13,7 @@ const SideBar = (props) => {
             open={props.open}
             variant='persistent'
             className={classes.drawer}
-            anchor="left"
+            anchor='left'
             classes={{
                 paper: classes.drawerPaper
             }}
@@ -27,7 +27,7 @@ const SideBar = (props) => {
                             startIcon={<PermIdentityOutlinedIcon/>}
                     >Profile</Button>
                 </NavLink>
-                <NavLink to="/admin/tests">
+                <NavLink to='/admin/quizzes'>
                     <Button color='primary'
                             startIcon={<PermIdentityOutlinedIcon/>}
                     >
