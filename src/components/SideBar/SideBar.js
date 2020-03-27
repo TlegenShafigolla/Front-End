@@ -1,11 +1,10 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import {Drawer, Typography} from "@material-ui/core";
+import {Drawer} from "@material-ui/core";
 import {useStyle} from "./Style";
 import {NavLink} from "react-router-dom";
 import PermIdentityOutlinedIcon from '@material-ui/icons/PermIdentityOutlined';
 import s from './SideBar.module.css'
-import $ from 'jquery'
 const SideBar = (props) => {
 
     const classes = useStyle();

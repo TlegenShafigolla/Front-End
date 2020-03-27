@@ -1,10 +1,9 @@
 import React from 'react'
-import {Route, Redirect} from "react-router-dom";
+import {Route} from "react-router-dom";
 import Profile from '../components/Profile/Profile';
 import MyQuizzes from '../components/MyQuizzes/MyQuizzes';
 import clsx from "clsx";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import {Switch} from "@material-ui/core";
 
 const drawerWidth = 240;
 const styles = makeStyles(theme => ({

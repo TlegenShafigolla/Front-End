@@ -1,6 +1,5 @@
 import React from "react";
 import s from './Profile.module.css'
-import Footer from "../Footer/Footer";
 import getProfile from "../../services/api/profile";
 import MenuItem from "@material-ui/core/MenuItem";
 import CssBaseline from "@material-ui/core/CssBaseline";
