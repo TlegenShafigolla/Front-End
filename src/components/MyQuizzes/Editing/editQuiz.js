@@ -6,6 +6,8 @@ import getQuizzes from "../../../services/api/myquizzes";
 import getQuestions from "../../../services/api/questions";
 import QuizPreview from "../Existing/quizPreview";
 import EditQuestion from "./editQuestion";
+import IconButton from "@material-ui/core/IconButton";
+import AddIcon from "@material-ui/icons/Add";
 
 class editQuiz extends React.Component {
     constructor(props){
@@ -26,12 +28,15 @@ class editQuiz extends React.Component {
                           <div className={s.settings}>
                               settings
                           </div>
-                          <div>
+                          <div className={s.question}>
                               {this.state.questions !== null ? this.state.questions.map(val => <EditQuestion key={val.id}
                                                                                                         value={val}/>) : ' '}
                           </div>
+                        <IconButton color='primary' size='large' className={s.addbutton}>
+                            <AddIcon fontSize='large'/>
+                        </IconButton>
                     </div>
-                    <div className={s.questions}>
+                    <div className={s.questionsbord}>
                         questions
                     </div>
                 </div>

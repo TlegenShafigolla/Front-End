@@ -10,6 +10,7 @@ class EditQuestion extends React.Component {
                 <div>{this.props.value.order_id}</div>
                 <div>{this.props.value.question}</div>
                 <div>{this.props.value.type}</div>
+
             </div>
         );
     }
