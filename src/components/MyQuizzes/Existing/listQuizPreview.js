@@ -1,12 +1,11 @@
 import React from "react";
 import Container from '@material-ui/core/Container';
-import getTests from "../../../services/api/myquizzes";
+import getQuizzes from "../../../services/api/myquizzes";
 import QuizPreview from "./quizPreview";
 import s from '../listQuizPreview.module.css'
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from '@material-ui/icons/Add';
-import editQuiz from "../Editing/editQuiz";
-import {Drawer} from "@material-ui/core";
+
 class ListQuizPreview extends React.Component {
     constructor(props) {
         super(props);
@@ -34,9 +33,8 @@ class ListQuizPreview extends React.Component {
     }
 
     componentDidMount() {
-        getTests().then(json => {
+        getQuizzes().then(json => {
             this.setState({quizzes: json.quizzes})
-
         });
     }
 }
