@@ -3,72 +3,80 @@ import s from './editQuestion.module.css'
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import EditAnswer from "./editAnswer";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
 
 class EditQuestion extends React.Component {
     constructor(props){
         super(props);
-        const mc = (this.props.value.type === 'MULTIPLE CHOICE');
-        const ftb = (this.props.value.type === 'FILL THE BLANK');
         this.state = {
+            editMode: false,
+            id: this.props.value.id,
             order: this.props.value.order_id,
             question: this.props.value.question,
-            multiple_choice: mc,
-            fill_the_blank: ftb,
+            type: this.props.value.type,
         };
     }
 
-    multipleChoiceChecked = () => {
-        this.setState({multiple_choice: true});
-        this.setState({fill_the_blank: false});
+    changeType = (newType) => {
+        this.setState({type: newType});
+    };
+
+    editOnClick = () => {
+        this.setState({editMode: true});
+    };
+
+    saveOnClick = () => {
+        this.setState({editMode: false});
     };
 
     render() {
+        if(this.state.editMode){
+            return (
+                <div className={s.question}>
+                    <div className={s.questionOrder}>{this.state.order}</div>
+                    <div className={s.questionField}>
+                        <TextField
+                            id="standard-full-width"
+                            style={{ margin: 8 }}
+                            placeholder="Placeholder"
+                            label="Question"
+                            margin="normal"
+                            multiline={true}
+                            rows={2}
+                            rowsMax={3}
+                            fullWidth
+                            defaultValue={this.state.question}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                    </div>
+                    <div className={s.answerType}>
+                        <EditAnswer editMode={this.state.editMode} type={this.props.value.type} id={this.props.value.id} changeType={this.changeType}/>
+                    </div>
+                    <Button variant="contained" color="primary" onClick={this.saveOnClick}>
+                        Save
+                    </Button>
+                </div>
+            );
+        }
         return (
             <div className={s.question}>
                 <div className={s.questionOrder}>{this.state.order}</div>
                 <div className={s.questionField}>
-                <TextField
-                    id="standard-full-width"
-                    style={{ margin: 8 }}
-                    placeholder="Placeholder"
-                    label="Question"
-                    margin="normal"
-                    multiline={true}
-                    rows={2}
-                    rowsMax={3}
-                    fullWidth
-                    defaultValue={this.state.question}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                />
+                    <Typography variant="body1" gutterBottom>
+                        {this.state.question}
+                    </Typography>
                 </div>
                 <div className={s.answerType}>
-                    <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={this.state.multiple_choice}
-                            onChange={this.multipleChoiceChecked}
-                            name="checkedB"
-                            color="primary"
-                        />
-                    }
-                    label="Multiple Choice"
-                />
-                    <FormControlLabel
-                        control={
-                            <Checkbox
-                                checked={this.state.fill_the_blank}
-                                onChange={this.multipleChoiceChecked}
-                                name="checkedB"
-                                color="primary"
-                            />
-                        }
-                        label="Fill the blank"
-                    />
+                    <EditAnswer editMode={this.state.editMode} type={this.props.value.type} id={this.props.value.id} changeType={this.changeType}/>
                 </div>
-
+                <Button variant="contained" color="primary" onClick={this.editOnClick}>
+                    Edit
+                </Button>
             </div>
         );
     }
