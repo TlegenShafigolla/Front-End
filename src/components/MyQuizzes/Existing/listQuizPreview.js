@@ -6,6 +6,7 @@ import s from '../listQuizPreview.module.css'
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from '@material-ui/icons/Add';
 import editQuiz from "../Editing/editQuiz";
+import {Drawer} from "@material-ui/core";
 class ListQuizPreview extends React.Component {
     constructor(props) {
         super(props);

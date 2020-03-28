@@ -6,10 +6,11 @@ import CardActions from "@material-ui/core/CardActions";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import DeleteIcon from '@material-ui/icons/Delete';
-import {NavLink} from "react-router-dom";
-
+import '../../../App.css'
+import {Link, NavLink} from "react-router-dom";
 class QuizPreview extends React.Component {
 //quiz_name, questions_count, description, last_edited_date
+
     render() {
         return (
             <div className={s.root}>
@@ -23,17 +24,16 @@ class QuizPreview extends React.Component {
                                 component="p"> {this.props.value.last_edited_date.toString()} </Typography>
                 </CardContent>
                 <CardActions className={s.CardActions}>
-                    <NavLink to={'/admin/quizzes/edit/'+this.props.value.id.toString()}>
-                    <IconButton color="primary" className={s.ArrowButton} >
+                    <Link to={'/admin/quizzes/edit/'+this.props.value.id.toString()}>
+                    <IconButton color="primary" className={s.ArrowButton}  onClick={this.handleClick}>
                         <ArrowForwardIosIcon fontSize='large'/>
                     </IconButton>
-                    </NavLink>
+                    </Link>
                     {/*<IconButton size='small'className={s.DeleteButton} >*/}
                     {/*    <DeleteIcon fontSize='small'/>*/}
                     {/*</IconButton>*/}
 
                 </CardActions>
-
             </div>
         );
     }

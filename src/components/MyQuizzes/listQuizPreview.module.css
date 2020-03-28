@@ -4,6 +4,7 @@
 
 .Container{
     height: 91vh;
+    width: 100%;
 
 }
 
@@ -25,6 +26,7 @@
     padding: 5px;
     display: flex;
 }
+
 .bullet {
     display: inline-block;
     margin: 0 2px;
@@ -44,7 +46,35 @@
     margin: 5px;
     flex: 1;
 }
-/*editQuizz css*/
-.time{
-    height: 70px;
+/*MyQuizRoute*/
+.fade{
+    transition: 0.5s;
+}
+.fadeEnter {
+    opacity: 0.01;
+    transition: 0.5s;
+    transform: translateX(100%)
+}
+.fadeEnter.fadeEnterActive {
+    opacity: 1;
+    transition: 0.5s;
+    transform: translateX(0%)
+
+}
+.fadeExit {
+    transition: 0.5s;
+    transform: translateX(-100%)
+}
+.fadeExit.fadeExitActive {
+    opacity: 1;
+    transition: 1s ;
+}
+div.transitiongroup {
+    position: relative;
+}
+section.routesection {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
 }
