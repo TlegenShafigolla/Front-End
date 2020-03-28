@@ -8,7 +8,7 @@ import QuizPreview from "../Existing/quizPreview";
 import EditQuestion from "./editQuestion";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
-
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 class editQuiz extends React.Component {
     constructor(props){
         super(props);
@@ -21,6 +21,11 @@ class editQuiz extends React.Component {
     render() {
         return (
                 <div className={s.body}>
+                    <div className={s.ArrowButton}>
+                    <IconButton className={s.ArrowBackIosIcon} color="primary">
+                        <ArrowBackIosIcon/>
+                    </IconButton>
+                    </div>
                     <div className={s.edit}>
                           <div>
                                 Quiz Name
@@ -29,8 +34,8 @@ class editQuiz extends React.Component {
                               settings
                           </div>
                           <div className={s.question}>
-                              {this.state.questions !== null ? this.state.questions.map(val => <EditQuestion key={val.id}
-                                                                                                        value={val}/>) : ' '}
+                              {this.state.questions === null ? ' ' : this.state.questions.map(val => <EditQuestion key={val.id}
+                                                                                                        value={val}/>)}
                           </div>
                         <IconButton color='primary' size='large' className={s.addbutton}>
                             <AddIcon fontSize='large'/>

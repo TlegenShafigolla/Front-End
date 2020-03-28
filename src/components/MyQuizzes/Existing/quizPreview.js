@@ -5,8 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import DeleteIcon from '@material-ui/icons/Delete';
-import '../../../App.css'
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import {Link, NavLink} from "react-router-dom";
 class QuizPreview extends React.Component {
 //quiz_name, questions_count, description, last_edited_date
@@ -29,9 +28,9 @@ class QuizPreview extends React.Component {
                         <ArrowForwardIosIcon fontSize='large'/>
                     </IconButton>
                     </Link>
-                    {/*<IconButton size='small'className={s.DeleteButton} >*/}
-                    {/*    <DeleteIcon fontSize='small'/>*/}
-                    {/*</IconButton>*/}
+                    <IconButton size='small'className={s.DeleteButton} >
+                        <HighlightOffIcon fontSize='small' color='secondary'/>
+                    </IconButton>
 
                 </CardActions>
             </div>
