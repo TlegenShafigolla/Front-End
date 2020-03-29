@@ -6,6 +6,8 @@ import AddIcon from "@material-ui/icons/Add";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import {Link} from "react-router-dom";
 import Question from "./question";
+import Board from "../Existing/Board";
+
 class editQuiz extends React.Component {
     constructor(props){
         super(props);
@@ -41,7 +43,11 @@ class editQuiz extends React.Component {
                         </IconButton>
                     </div>
                     <div className={s.questionsbord}>
-                        questions
+                        <div>
+                            {this.state.questions === undefined || this.state.questions === null ? ' ' :
+                                this.state.questions.map(val => <Board key={val.id} value={val}/>)}
+
+                        </div>
                     </div>
                 </div>
 

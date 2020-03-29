@@ -1,0 +1,10 @@
+.Bord{
+    width: 100%;
+    min-height: 100%;
+    border: 1px solid silver;
+    margin-top: 5px;
+    display: flex;
+}
+.orderid{
+
+}
