@@ -14,7 +14,6 @@ class Profile extends React.Component {
 
     render() {
         return (
-            <div>
                 <div className={s.profile}>
                     <div className={s.profile1}>
 
@@ -30,7 +29,6 @@ class Profile extends React.Component {
                          <CssBaseline />
                         <MenuItem>setings</MenuItem>
                     </div>
-                </div>
             </div>
         )
     };

@@ -6,13 +6,13 @@
 }
 
 .edit {
-    min-height: 100px;
+    min-height: 90vh;
     width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: center;
     margin: auto;
+    justify-content: space-between;
 
 }
 
@@ -20,7 +20,7 @@
     width: 100%;
     box-shadow: 5px 5px 10px #333333;
     padding: 10px;
-    height: 10%;
+    height: 100px;
 }
 
 .questionsbord {
@@ -35,7 +35,7 @@
 
 .question {
     width: 100%;
-    min-height: 100vh;
+    min-height: 50vh;
 }
 
 .addbutton {

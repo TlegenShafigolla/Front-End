@@ -7,6 +7,8 @@ import IconButton from "@material-ui/core/IconButton";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import {Link, NavLink} from "react-router-dom";
+import {Tooltip} from "@material-ui/core";
+
 class QuizPreview extends React.Component {
 //quiz_name, questions_count, description, last_edited_date
 
@@ -23,15 +25,16 @@ class QuizPreview extends React.Component {
                                 component="p"> {this.props.value.last_edited_date.toString()} </Typography>
                 </CardContent>
                 <CardActions className={s.CardActions}>
-                    <Link to={'/admin/quizzes/edit/'+this.props.value.id.toString()}>
-                    <IconButton color="primary" className={s.ArrowButton}  onClick={this.handleClick}>
-                        <ArrowForwardIosIcon fontSize='large'/>
-                    </IconButton>
+                    <Link to={'/admin/quizzes/edit/' + this.props.value.id.toString()}>
+                        <IconButton color="primary" className={s.ArrowButton} onClick={this.handleClick}>
+                            <ArrowForwardIosIcon fontSize='large'/>
+                        </IconButton>
                     </Link>
-                    <IconButton size='small'className={s.DeleteButton} >
-                        <HighlightOffIcon fontSize='small' color='secondary'/>
-                    </IconButton>
-
+                    <Tooltip title='Delete'>
+                        <IconButton size='small' className={s.DeleteButton} aria-label='delete'>
+                            <HighlightOffIcon fontSize='small' color='secondary'/>
+                        </IconButton>
+                    </Tooltip>
                 </CardActions>
             </div>
         );
