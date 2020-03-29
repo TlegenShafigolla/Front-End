@@ -16,7 +16,10 @@ class ShowQuestion extends React.Component{
                     </Typography>
                 </div>
                 <div className={s.answerType}>
-                    <ShowAnswer editMode={this.props.editMode} type={this.props.answerType} id={this.props.value.id} changeType={this.props.changeType}/>
+                    <ShowAnswer
+                        id={this.props.value.id}
+                        {...this.props}
+                    />
                 </div>
                 <Button variant="contained" color="primary" onClick={this.props.editOnClick}>
                     Edit

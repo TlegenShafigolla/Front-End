@@ -10,12 +10,12 @@ class Question extends React.Component {
         this.state = {
             editMode: false,
             answerType: this.props.value.type,
-            answers: null
+            answers: []
         };
     }
 
     componentDidMount() {
-        getAnswers(this.state.question_id).then(val => this.setState({answers: val}));
+        getAnswers(this.props.value.id).then(val => this.setState({answers: val.answers}));
     }
 
     changeType = (newType) => {

@@ -33,8 +33,8 @@ class editQuiz extends React.Component {
                               settings
                           </div>
                           <div className={s.question}>
-                              {this.state.questions === null ? ' ' : this.state.questions.map(val => <Question key={val.id}
-                                                                                                        value={val}/>)}
+                              {this.state.questions === undefined || this.state.questions === null ? ' ' :
+                                  this.state.questions.map(val => <Question key={val.id} value={val}/>)}
                           </div>
                         <IconButton color='primary' size='medium' className={s.addbutton}>
                             <AddIcon fontSize='large'/>

@@ -40,10 +40,9 @@ class admin extends Component {
             </div>
         );
     }
-    async componentDidMount() {
-        const profile = await getProfile();
-        const displayName = profile['name'] + " " + profile['surname'];
-        this.setState({displayName: displayName});
+
+    componentDidMount() {
+        getProfile().then(value => this.setState({displayName: value['name'] + " " + value['surname']}));
      }
 
 }

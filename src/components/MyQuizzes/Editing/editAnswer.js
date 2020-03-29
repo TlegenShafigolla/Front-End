@@ -3,6 +3,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import TextField from "@material-ui/core/TextField";
 import getAnswers from "../../../services/api/answers";
+import Question from "./question";
 
 class EditAnswer extends React.Component{
     constructor(props){
@@ -11,7 +12,7 @@ class EditAnswer extends React.Component{
             question_id: props.id,
             multiple_choice: props.type === 'MULTIPLE CHOICE',
             fill_the_blank: props.type === 'FILL THE BLANK',
-            answers: null,
+            answers: props.answers,
         };
     }
 
@@ -29,6 +30,7 @@ class EditAnswer extends React.Component{
 
     render() {
         return (
+            <div>
             <div>
                 <FormControlLabel
                     control={
@@ -55,12 +57,28 @@ class EditAnswer extends React.Component{
                     label="Fill the blank"
                 />
             </div>
+                <div>
+                    {this.state.answers === [] ? '' : this.state.answers.map(val =>
+                        <TextField
+                            id="standard-full-width"
+                            key={val.id}
+                            style={{ margin: 8 }}
+                            placeholder="Placeholder"
+                            label="Question"
+                            margin="normal"
+                            multiline={true}
+                            rows={1}
+                            rowsMax={2}
+                            fullWidth
+                            defaultValue={val.answer}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />)}
+                </div>
+            </div>
 
         );
-    }
-
-    componentDidMount() {
-        getAnswers(this.state.question_id).then(val => this.setState({answers: val}));
     }
 }
 
