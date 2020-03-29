@@ -13,7 +13,7 @@ class EditQuestion extends React.Component {
             id: this.props.value.id,
             order: this.props.value.order_id,
             question: this.props.value.question,
-            type: this.props.answerType,
+            answerType: this.props.answerType,
         };
     }
 
