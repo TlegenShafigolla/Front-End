@@ -44,6 +44,9 @@ class EditQuestion extends React.Component {
                     <Button variant="contained" color="primary" onClick={this.props.saveOnClick}>
                         Save
                     </Button>
+                    <Button variant="contained" color="primary" onClick={this.props.saveOnClick}>
+                        New Answer
+                    </Button>
                 </div>
             );
     }
