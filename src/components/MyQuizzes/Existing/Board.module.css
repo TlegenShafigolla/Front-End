@@ -1,10 +1,15 @@
-.Bord{
+.Board{
     width: 100%;
     min-height: 100%;
     border: 1px solid silver;
     margin-top: 5px;
     display: flex;
+    cursor: pointer;
 }
 .orderid{
 
+}
+a {
+    color: #000 !important;
+    text-decoration: none;
 }

@@ -7,7 +7,6 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import {Link} from "react-router-dom";
 import Question from "./question";
 import Board from "../Existing/Board";
-
 class editQuiz extends React.Component {
     constructor(props){
         super(props);
@@ -18,6 +17,8 @@ class editQuiz extends React.Component {
     }
 
     render() {
+
+
         return (
                 <div className={s.body}>
                     <div className={s.ArrowButton}>
@@ -42,7 +43,7 @@ class editQuiz extends React.Component {
                             <AddIcon fontSize='large'/>
                         </IconButton>
                     </div>
-                    <div className={s.questionsbord}>
+                    <div className={s.questionsboard}>
                         <div>
                             {this.state.questions === undefined || this.state.questions === null ? ' ' :
                                 this.state.questions.map(val => <Board key={val.id} value={val}/>)}
