@@ -5,7 +5,7 @@ import QuizPreview from "./quizPreview";
 import s from '../listQuizPreview.module.css'
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from '@material-ui/icons/Add';
-class ListQuizPreview extends React.Component {
+class   ListQuizPreview extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

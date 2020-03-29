@@ -9,6 +9,7 @@ import EditQuestion from "./editQuestion";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import {Link} from "react-router-dom";
 class editQuiz extends React.Component {
     constructor(props){
         super(props);
@@ -22,9 +23,11 @@ class editQuiz extends React.Component {
         return (
                 <div className={s.body}>
                     <div className={s.ArrowButton}>
+                        <Link to='/admin/quizzes/'>
                     <IconButton className={s.ArrowBackIosIcon} color="primary">
                         <ArrowBackIosIcon/>
                     </IconButton>
+                        </Link>
                     </div>
                     <div className={s.edit}>
                           <div>
