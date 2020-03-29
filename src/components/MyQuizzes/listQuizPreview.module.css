@@ -5,22 +5,22 @@
 .Container{
     height: 91vh;
     width: 100%;
-
+   display: flex;
+    flex-direction: column;
 }
 
 
 .Box{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 100%;
+    width: 50%;
+    margin: auto;
 }
 .Quizz{
 
 }
 /*existingQuizPreview */
 .root {
-    min-width: 450px;
     margin: 10px;
     box-shadow: 3px 3px 10px #333333 ;
     display: flex;
@@ -54,35 +54,49 @@
     right: -20px;
     flex: 0.5;
 }
-/*MyQuizRoute*/
-.fade{
-    transition: 0.5s;
-}
-.fadeEnter {
-    opacity: 0.01;
-    transition: 0.5s;
-    transform: translateX(100%)
-}
-.fadeEnter.fadeEnterActive {
-    opacity: 1;
-    transition: 0.5s;
-    transform: translateX(0%)
+/*.root {*/
+/*    padding: 2px 4px;*/
+/*    display: flex;*/
+/*    alignItems: center;*/
+/*    right: 0;*/
+/*}*/
+/*.input {*/
+/*    marginLeft: 20px;*/
+/*    flex: 1;*/
+/*}*/
+/*.iconButton {*/
+/*    padding: 10px;*/
+/*}*/
 
-}
-.fadeExit {
-    transition: 0.5s;
-    transform: translateX(-100%)
-}
-.fadeExit.fadeExitActive {
-    opacity: 1;
-    transition: 1s ;
-}
-div.transitiongroup {
-    position: relative;
-}
-section.routesection {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-}
+/*MyQuizRoute*/
+/*.fade{*/
+/*    transition: 0.5s;*/
+/*}*/
+/*.fadeEnter {*/
+/*    opacity: 0.01;*/
+/*    transition: 0.5s;*/
+/*    transform: translateX(100%)*/
+/*}*/
+/*.fadeEnter.fadeEnterActive {*/
+/*    opacity: 1;*/
+/*    transition: 0.5s;*/
+/*    transform: translateX(0%)*/
+
+/*}*/
+/*.fadeExit {*/
+/*    transition: 0.5s;*/
+/*    transform: translateX(-100%)*/
+/*}*/
+/*.fadeExit.fadeExitActive {*/
+/*    opacity: 1;*/
+/*    transition: 1s ;*/
+/*}*/
+/*div.transitiongroup {*/
+/*    position: relative;*/
+/*}*/
+/*section.routesection {*/
+/*    position: absolute;*/
+/*    width: 100%;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*}*/

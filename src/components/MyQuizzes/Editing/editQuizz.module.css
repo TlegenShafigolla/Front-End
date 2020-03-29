@@ -1,14 +1,12 @@
 .body {
     width: 99%;
-    min-height: 89vh;
     margin: 10px;
-    display: flex;
+    display: inline-flex;
 }
 
 .edit {
-    min-height: 90vh;
     width: 50%;
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     align-items: center;
     margin: auto;
