@@ -1,5 +1,5 @@
 import React from "react";
-import s from './editQuestion.module.css'
+import s from './css/editQuestion.module.css'
 import TextField from '@material-ui/core/TextField';
 import EditAnswer from "./editAnswer";
 import Button from "@material-ui/core/Button";

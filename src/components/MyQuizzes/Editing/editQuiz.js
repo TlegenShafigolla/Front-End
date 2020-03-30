@@ -1,5 +1,5 @@
 import React from 'react'
-import s from './editQuizz.module.css'
+import s from './css/editQuizz.module.css'
 import getQuestions from "../../../services/api/questions";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
@@ -13,6 +13,7 @@ class editQuiz extends React.Component {
         this.state = {
             quiz_id: 1,
             questions: null,
+            quiz_name: 'props.value.quiz_name'
         };
     }
 addNewQuestion=()=>{
@@ -43,7 +44,7 @@ addNewQuestion=()=>{
                     </div>
                     <div className={s.edit}>
                           <div>
-                                Quiz Name
+                               Quiz Name
                           </div>
                           <div className={s.settings}>
                               settings
@@ -72,6 +73,7 @@ addNewQuestion=()=>{
         getQuestions(this.state.quiz_id).then(json => {
             this.setState({questions: json.questions})
         });
+
     }
 }
 
