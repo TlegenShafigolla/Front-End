@@ -6,6 +6,7 @@
 }
 
 .edit {
+    width: 50%;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
