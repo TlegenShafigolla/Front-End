@@ -2,14 +2,13 @@
     width: 99%;
     margin: 10px;
     display: inline-flex;
+    justify-content: center;
 }
 
 .edit {
-    width: 50%;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    margin: auto;
     justify-content: space-between;
 
 }
@@ -24,7 +23,7 @@
 .questionsboard {
     width: 13%;
     position: fixed;
-    right: 80px;
+    right: 20px;
     box-shadow: 5px 5px 10px #333333;
     padding: 10px;
     display: inline-flex;

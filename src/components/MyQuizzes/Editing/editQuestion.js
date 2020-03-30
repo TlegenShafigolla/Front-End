@@ -23,20 +23,13 @@ class EditQuestion extends React.Component {
                     <div className={s.questionOrder}>{this.state.order}</div>
                     <div className={s.questionField}>
                         <TextField
-                            id="standard-full-width"
                             style={{ margin: 8 }}
                             placeholder="Placeholder"
-                            label="Question"
-                            margin="normal"
-                            multiline={true}
-                            rows={2}
-                            rowsMax={3}
+                            autoFocus={true}
                             fullWidth
                             defaultValue={this.state.question}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
+
+                        ></TextField>
                     </div>
                     <div className={s.answerType}>
                         <EditAnswer

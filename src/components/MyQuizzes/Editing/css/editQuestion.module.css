@@ -20,6 +20,13 @@ margin-top:2px;
 }
 
 .answerType {
-    flex-direction: row;
-    margin: auto;
+}
+.answer{
+    display: flex;
+    border: 1px solid silver;
+    flex-direction: column;
+}
+.Button{
+    display: flex;
+    flex-direction: row-reverse;
 }

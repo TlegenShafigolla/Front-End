@@ -2,7 +2,8 @@ import React from "react";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import TextField from "@material-ui/core/TextField";
-
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import s from './css/editAnswer.module.css'
 class EditAnswer extends React.Component{
     constructor(props){
         super(props);
@@ -28,7 +29,7 @@ class EditAnswer extends React.Component{
 
     render() {
         return (
-            <div>
+            <div className={s.editAnswer}>
             <div>
                 <FormControlLabel
                     control={
@@ -55,14 +56,13 @@ class EditAnswer extends React.Component{
                     label="Fill the blank"
                 />
             </div>
-                <div>
+                <div className={s.TextField}>
                     {this.state.answers === [] ? '' : this.state.answers.map(val =>
                         <TextField
                             id="standard-full-width"
                             key={val.id}
                             style={{ margin: 8 }}
-                            placeholder="Placeholder"
-                            label="Question"
+                            placeholder="Answer"
                             margin="normal"
                             multiline={true}
                             rows={1}
@@ -72,7 +72,9 @@ class EditAnswer extends React.Component{
                             InputLabelProps={{
                                 shrink: true,
                             }}
-                        />)}
+                        >dsfsdf </TextField>
+                        )}
+
                 </div>
             </div>
 
