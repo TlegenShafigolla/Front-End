@@ -1,5 +1,5 @@
 import React from 'react'
-import s from './editQuizz.module.css'
+import s from './css/editQuizz.module.css'
 import getQuestions from "../../../services/api/questions";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
@@ -9,6 +9,7 @@ import Question from "./question";
 import Board from "../Existing/Board";
 import EditQuestion from "./editQuestion";
 import EditQuizSettings from "./editQuizSettings";
+
 class editQuiz extends React.Component {
     constructor(props){
         super(props);
