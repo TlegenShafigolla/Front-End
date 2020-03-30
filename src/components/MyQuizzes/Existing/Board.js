@@ -1,7 +1,6 @@
 import React from "react";
 import s from './Board.module.css'
-import * as Scroll from 'react-scroll';
-import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+import { Link} from 'react-scroll'
 class board extends React.Component {
     constructor(props){
         super(props);
@@ -12,13 +11,20 @@ class board extends React.Component {
     }
     render() {
         return (
-            <a href={'#'+this.props.value.order_id}  >
+            <Link
+                activeClass="active"
+                to={this.props.value.order_id}
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration= {500}
+            >
             <div className={s.Board} >
             <div className={s.orderid}>
                 {this.props.value.order_id}
             </div>
             </div>
-            </a>
+            </Link>
         );
     };
 };
