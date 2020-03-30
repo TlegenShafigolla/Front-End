@@ -18,7 +18,11 @@ class editQuiz extends React.Component {
             questions: null,
             mixed: true,
             showResults: true,
-            points: false
+            points: false,
+            description: "",
+            last_edited_date: "",
+            quiz_name: "Quiz Name",
+            questions_count: 0
         };
     }
 
@@ -46,7 +50,10 @@ addNewQuestion=()=>{
                     </div>
                     <div className={s.edit}>
                           <div>
-                                Quiz Name
+                                {this.state.quiz_name}
+                          </div>
+                          <div>
+                                {this.state.description}
                           </div>
                           <div className={s.settings}>
                               <EditQuizSettings/>
@@ -73,7 +80,13 @@ addNewQuestion=()=>{
 
     componentDidMount() {
         getQuestions(this.state.quiz_id).then(json => {
-            this.setState({questions: json.questions})
+            this.setState({
+                questions: json.questions,
+                quiz_name: json.quiz_name,
+                description: json.description,
+                questions_count: json.questions_count,
+                last_edited_date: json.last_edited_date
+            });
         });
     }
 }
