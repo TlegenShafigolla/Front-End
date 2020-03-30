@@ -1,5 +1,5 @@
 import React from "react";
-import s from './editQuestion.module.css'
+import s from './css/editQuestion.module.css'
 import TextField from '@material-ui/core/TextField';
 import EditAnswer from "./editAnswer";
 import Button from "@material-ui/core/Button";
@@ -23,20 +23,13 @@ class EditQuestion extends React.Component {
                     <div className={s.questionOrder}>{this.state.order}</div>
                     <div className={s.questionField}>
                         <TextField
-                            id="standard-full-width"
                             style={{ margin: 8 }}
                             placeholder="Placeholder"
-                            label="Question"
-                            margin="normal"
-                            multiline={true}
-                            rows={2}
-                            rowsMax={3}
+                            autoFocus={true}
                             fullWidth
                             defaultValue={this.state.question}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
+
+                        ></TextField>
                     </div>
                     <div className={s.answerType}>
                         <EditAnswer

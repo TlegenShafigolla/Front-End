@@ -1,0 +1,9 @@
+.formControll{
+    display:flex;
+        justify-content: center;
+    flex-wrap: wrap;
+}
+.answer{
+    margin: auto;
+    width: 95%;
+}

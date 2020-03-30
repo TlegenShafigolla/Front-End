@@ -6,7 +6,7 @@ import CardActions from "@material-ui/core/CardActions";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import {Link, NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {Tooltip} from "@material-ui/core";
 
 class QuizPreview extends React.Component {

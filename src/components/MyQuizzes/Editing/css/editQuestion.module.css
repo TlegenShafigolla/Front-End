@@ -1,0 +1,32 @@
+.question {
+    margin-top: 20px;
+    box-shadow: 5px 5px 10px #333333;
+    border: 1px solid silver;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.questioninfo{
+    display: flex;
+}
+.questionOrder {
+margin-top:2px;
+}
+
+
+.questionField {
+    padding: 0;
+    margin-left: 5px;
+}
+
+.answerType {
+}
+.answer{
+    display: flex;
+    border: 1px solid silver;
+    flex-direction: column;
+}
+.Button{
+    display: flex;
+    flex-direction: row-reverse;
+}

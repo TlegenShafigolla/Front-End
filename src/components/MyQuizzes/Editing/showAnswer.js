@@ -1,10 +1,9 @@
 import React from "react";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import TextField from "@material-ui/core/TextField";
-import getAnswers from "../../../services/api/answers";
 import Typography from "@material-ui/core/Typography";
-
+import s from './css/showAnswer.module.css'
+import Divider from "@material-ui/core/Divider";
 class ShowAnswer extends React.Component{
     constructor(props){
         super(props);
@@ -18,7 +17,7 @@ class ShowAnswer extends React.Component{
     render() {
         return (
             <div>
-                <div>
+                <div className={s.formControll}>
                     <FormControlLabel
                         control={
                             <Checkbox
@@ -44,10 +43,11 @@ class ShowAnswer extends React.Component{
                         label="Fill the blank"
                     />
                 </div>
-                <div>
+                <div className={s.answer}>
                 {this.props.answers === null ? '' : this.props.answers.map(val =>
                     <Typography variant="body1" gutterBottom key={val.id}>
                         {val.answer}
+                        <Divider />
                     </Typography>
                 )}
                 </div>
