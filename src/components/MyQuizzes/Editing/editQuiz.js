@@ -7,16 +7,21 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import {Link} from "react-router-dom";
 import Question from "./question";
 import Board from "../Existing/Board";
+import EditQuestion from "./editQuestion";
+import EditQuizSettings from "./editQuizSettings";
 class editQuiz extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             quiz_id: 1,
             questions: null,
+            mixed: true,
+            showResults: true,
+            points: false
         };
     }
-addNewQuestion=()=>{
 
+addNewQuestion=()=>{
         const questions=this.state.questions;
         questions.push( {
         order_id: this.state.questions.length + 1,
@@ -25,13 +30,10 @@ addNewQuestion=()=>{
         question: "Question",
         type: "FILL THE BLANK"
     })
-        this.setState({questions:questions})
-
+    this.setState({questions:questions})
 }
 
     render() {
-
-
         return (
                 <div className={s.body}>
                     <div className={s.ArrowButton}>
@@ -46,7 +48,7 @@ addNewQuestion=()=>{
                                 Quiz Name
                           </div>
                           <div className={s.settings}>
-                              settings
+                              <EditQuizSettings/>
                           </div>
                           <div className={s.question}>
                               {this.state.questions === undefined || this.state.questions === null ? ' ' :

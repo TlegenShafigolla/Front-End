@@ -8,7 +8,7 @@ class   ListQuizPreview extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            quizzes: null
+            quizzes: []
         };
     }
 addNewQuizz=()=>{
