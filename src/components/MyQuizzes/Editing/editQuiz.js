@@ -15,6 +15,19 @@ class editQuiz extends React.Component {
             questions: null,
         };
     }
+addNewQuestion=()=>{
+
+        const questions=this.state.questions;
+        questions.push( {
+        order_id: this.state.questions.length + 1,
+        quiz_id: 1,
+        image: null,
+        question: "Question",
+        type: "FILL THE BLANK"
+    })
+        this.setState({questions:questions})
+
+}
 
     render() {
 
@@ -39,7 +52,7 @@ class editQuiz extends React.Component {
                               {this.state.questions === undefined || this.state.questions === null ? ' ' :
                                   this.state.questions.map(val => <Question key={val.id} value={val}/>)}
                           </div>
-                        <IconButton color='primary' size='medium' className={s.addbutton}>
+                        <IconButton color='primary' size='medium' className={s.addbutton} onClick={this.addNewQuestion}>
                             <AddIcon fontSize='large'/>
                         </IconButton>
                     </div>

@@ -11,7 +11,6 @@ import {Tooltip} from "@material-ui/core";
 
 class QuizPreview extends React.Component {
 //quiz_name, questions_count, description, last_edited_date
-
     render() {
         return (
             <div className={s.root}>

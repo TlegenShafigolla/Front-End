@@ -5,13 +5,14 @@ import getAnswers from "../../../services/api/answers";
 
 
 class Question extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             editMode: false,
             answerType: this.props.value.type,
             answers: []
         };
+
     }
 
     componentDidMount() {
@@ -32,16 +33,24 @@ class Question extends React.Component {
     saveOnClick = () => {
         this.setState({editMode: false});
     };
+    addNewAnswer = () => {
+        const answers = this.state.answers;
+        answers.push({
+            answers: this.state.answers.length + 1
+        })
+        this.setState({answers: answers})
+    }
 
     render() {
-        if(this.state.editMode){
-            return <EditQuestion saveOnClick={this.saveOnClick}
+        if (this.state.editMode) {
+            return <EditQuestion addNewAnswer={this.addNewAnswer}
+                                 saveOnClick={this.saveOnClick}
                                  changeType={this.changeType}
                                  editMode={this.state.editMode}
                                  answerType={this.state.answerType}
                                  answers={this.state.answers}
                                  {...this.props}/>
-        } else{
+        } else {
             return <ShowQuestion editOnClick={this.editOnClick}
                                  deleteOnClick={this.deleteOnClick}
                                  editMode={this.state.editMode}

@@ -2,8 +2,6 @@ import React from "react";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import TextField from "@material-ui/core/TextField";
-import getAnswers from "../../../services/api/answers";
-import Question from "./question";
 
 class EditAnswer extends React.Component{
     constructor(props){

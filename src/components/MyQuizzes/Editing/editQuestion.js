@@ -3,7 +3,6 @@ import s from './editQuestion.module.css'
 import TextField from '@material-ui/core/TextField';
 import EditAnswer from "./editAnswer";
 import Button from "@material-ui/core/Button";
-import Question from "./question";
 
 
 class EditQuestion extends React.Component {
@@ -20,7 +19,7 @@ class EditQuestion extends React.Component {
 
     render() {
             return (
-                <div className={s.question}>
+                <div className={s.question} id={this.state.order}>
                     <div className={s.questionOrder}>{this.state.order}</div>
                     <div className={s.questionField}>
                         <TextField
@@ -39,12 +38,6 @@ class EditQuestion extends React.Component {
                             }}
                         />
                     </div>
-                    <Button variant="contained" color="primary" onClick={this.props.saveOnClick}>
-                        Save
-                    </Button>
-                    <Button variant="contained" color="primary" onClick={this.props.saveOnClick}>
-                        New Answer
-                    </Button>
                     <div className={s.answerType}>
                         <EditAnswer
                             editMode={this.props.editMode}
@@ -54,6 +47,13 @@ class EditQuestion extends React.Component {
                             answers={this.props.answers}
                         />
                     </div>
+                    <Button variant="contained" color="primary" onClick={this.props.saveOnClick}>
+                        Save
+                    </Button>
+                    <Button variant="contained" color="primary" onClick={this.props.addNewAnswer}>
+                        New Answer
+                    </Button>
+
                 </div>
             );
     }

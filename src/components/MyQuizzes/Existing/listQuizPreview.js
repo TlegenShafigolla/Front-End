@@ -1,13 +1,9 @@
 import React from "react";
-import Container from '@material-ui/core/Container';
 import getQuizzes from "../../../services/api/myquizzes";
 import QuizPreview from "./quizPreview";
 import s from '../listQuizPreview.module.css'
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from '@material-ui/icons/Add';
-import Paper from "@material-ui/core/Paper";
-import InputBase from "@material-ui/core/InputBase";
-import SearchIcon from '@material-ui/icons/Search';
 class   ListQuizPreview extends React.Component {
     constructor(props) {
         super(props);
@@ -15,7 +11,18 @@ class   ListQuizPreview extends React.Component {
             quizzes: null
         };
     }
-
+addNewQuizz=()=>{
+    const quizzes=this.state.quizzes;
+    quizzes.push( {
+        last_edited_date: Date(),
+        quiz_name: "Quizname",
+        description: "Description",
+        id: this.state.quizzes.length+1,
+        questions_count: 0,
+        created_date: Date,
+    })
+    this.setState({quizzes:quizzes})
+}
     render() {
         return (
             <div  className={s.Container}>
@@ -26,7 +33,7 @@ class   ListQuizPreview extends React.Component {
                         {this.state.quizzes !== null ? this.state.quizzes.map(val => <QuizPreview key={val.id}
                                                                                                   value={val}/>) : ' '}
                     </div>
-                    <IconButton color='primary' >
+                    <IconButton color='primary'  onClick={this.addNewQuizz}>
                         <AddIcon fontSize='large'/>
                     </IconButton>
 

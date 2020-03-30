@@ -13,8 +13,8 @@ class ShowAnswer extends React.Component{
             multiple_choice: props.answerType === 'MULTIPLE CHOICE',
             fill_the_blank: props.answerType === 'FILL THE BLANK',
         };
-    }
 
+    }
     render() {
         return (
             <div>
