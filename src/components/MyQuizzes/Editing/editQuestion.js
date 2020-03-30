@@ -26,10 +26,14 @@ class EditQuestion extends React.Component {
                             style={{ margin: 8 }}
                             placeholder="Placeholder"
                             autoFocus={true}
+                            rows={2}
+                            rowsMax={3}
                             fullWidth
                             defaultValue={this.state.question}
-
-                        ></TextField>
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
                     </div>
                     <div className={s.answerType}>
                         <EditAnswer

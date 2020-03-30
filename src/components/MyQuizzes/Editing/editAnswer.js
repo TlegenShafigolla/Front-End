@@ -72,7 +72,7 @@ class EditAnswer extends React.Component{
                             InputLabelProps={{
                                 shrink: true,
                             }}
-                        >dsfsdf </TextField>
+                        />
                         )}
 
                 </div>
