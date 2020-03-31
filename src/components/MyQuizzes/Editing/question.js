@@ -10,8 +10,10 @@ class Question extends React.Component {
         this.state = {
             editMode: false,
             answerType: this.props.value.type,
-            answers: []
+            answers: [],
+
         };
+        this.onChangeAnswer=this.onChangeAnswer.bind(this)
 
     }
 
@@ -30,26 +32,36 @@ class Question extends React.Component {
     deleteOnClick = () => {
     };
 
-    saveOnClick = () => {
+
+    saveOnClick = (answer, correct, point) => {
         this.setState({editMode: false});
     };
-    addNewAnswer = () => {
-        const answers = this.state.answers;
-        answers.push({
-            answers: this.state.answers.length + 1
-        })
-        this.setState({answers: answers})
+
+    onChangeAnswer = (event, answer_id=this.props.value.id) => {
     }
 
+    addNewAnswer =() => {
+        const answers = this.state.answers;
+        answers.push({
+
+            question_id: this.props.value.question_id,
+            correct: 0,
+            points: 0,
+            answer: ''
+        })
+        this.setState({answers: answers})
+    };
     render() {
         if (this.state.editMode) {
-            return <EditQuestion addNewAnswer={this.addNewAnswer}
-                                 saveOnClick={this.saveOnClick}
-                                 changeType={this.changeType}
-                                 editMode={this.state.editMode}
-                                 answerType={this.state.answerType}
-                                 answers={this.state.answers}
-                                 {...this.props}/>
+            return <EditQuestion
+                onChangeAnswer={this.onChangeAnswer}
+                addNewAnswer={this.addNewAnswer}
+                saveOnClick={this.saveOnClick}
+                changeType={this.changeType}
+                editMode={this.state.editMode}
+                answerType={this.state.answerType}
+                answers={this.state.answers}
+                {...this.props}/>
         } else {
             return <ShowQuestion editOnClick={this.editOnClick}
                                  deleteOnClick={this.deleteOnClick}

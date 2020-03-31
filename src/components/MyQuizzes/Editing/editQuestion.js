@@ -37,6 +37,7 @@ class EditQuestion extends React.Component {
                     </div>
                     <div className={s.answerType}>
                         <EditAnswer
+                            onChangeAnswer={this.props.onChangeAnswer}
                             editMode={this.props.editMode}
                             type={this.state.answerType}
                             id={this.props.value.id}

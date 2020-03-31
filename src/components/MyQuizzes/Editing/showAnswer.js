@@ -4,8 +4,10 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Typography from "@material-ui/core/Typography";
 import s from './css/showAnswer.module.css'
 import Divider from "@material-ui/core/Divider";
-class ShowAnswer extends React.Component{
-    constructor(props){
+import Radio from "@material-ui/core/Radio";
+
+class ShowAnswer extends React.Component {
+    constructor(props) {
         super(props);
         this.state = {
             question_id: props.id,
@@ -14,42 +16,33 @@ class ShowAnswer extends React.Component{
         };
 
     }
+
     render() {
         return (
             <div>
                 <div className={s.formControll}>
-                    <FormControlLabel
-                        control={
-                            <Checkbox
-                                checked={this.state.multiple_choice}
-                                onChange={this.multipleChoiceChecked}
-                                name="checkedB"
-                                color="primary"
-                                disabled={true}
-                            />
-                        }
-                        label="Multiple Choice"
-                    />
-                    <FormControlLabel
-                        control={
-                            <Checkbox
-                                checked={this.state.fill_the_blank}
-                                onChange={this.fillTheBlankChecked}
-                                name="checkedB"
-                                color="primary"
-                                disabled={true}
-                            />
-                        }
-                        label="Fill the blank"
-                    />
+
+                    <FormControlLabel value="Type question"
+                                      control={
+                                          <Radio
+                                              checked={this.state.multiple_choice}
+                                              disabled={true}
+                                          />} label='Multiple Choice'/>
+                    <FormControlLabel value="end"
+                                      control={
+                                          <Radio
+                                              checked={this.state.fill_the_blank}
+                                              disabled={true}
+                                          />} label='Fill the blank '/>
+
                 </div>
                 <div className={s.answer}>
-                {this.props.answers === null ? '' : this.props.answers.map(val =>
-                    <Typography variant="body1" gutterBottom key={val.id}>
-                        {val.answer}
-                        <Divider />
-                    </Typography>
-                )}
+                    {this.props.answers === null ? '' : this.props.answers.map(val =>
+                        <Typography variant="body1" gutterBottom key={val.id}>
+                            {val.answer}
+                            <Divider/>
+                        </Typography>
+                    )}
                 </div>
             </div>
         );
