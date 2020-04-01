@@ -59,7 +59,7 @@ class Question extends React.Component {
     addNewAnswer =() => {
         const answers = this.state.answers;
         answers.push({
-            question_id: this.props.value.question_id,
+            question_id: this.props.value.id,
             correct: 0,
             points: 0,
             answer: '',
