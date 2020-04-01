@@ -34,9 +34,9 @@ addNewQuestion=()=>{
         image: null,
         question: "Question",
         type: "FILL THE BLANK"
-    })
+    });
     this.setState({questions:questions})
-}
+};
 
     render() {
         return (
