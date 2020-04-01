@@ -25,6 +25,9 @@ class QuizPreview extends React.Component {
                                 component="p"> {this.props.value.last_edited_date.toString()} </Typography>
                 </CardContent>
                 <CardActions className={s.CardActions}>
+                    <Button component='primary'>
+                        Edit
+                    </Button>
                     <Link to={'/admin/quizzes/edit/' + this.props.value.id.toString()}>
                         <IconButton color="primary" className={s.ArrowButton} onClick={this.handleClick}>
                             <ArrowForwardIosIcon fontSize='large'/>
@@ -35,9 +38,6 @@ class QuizPreview extends React.Component {
                             <HighlightOffIcon fontSize='small' color='secondary'/>
                         </IconButton>
                     </Tooltip>
-                    <Button>
-                        Edit
-                    </Button>
                 </CardActions>
             </div>
         );
