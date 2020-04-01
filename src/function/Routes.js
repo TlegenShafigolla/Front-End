@@ -1,7 +1,6 @@
 import React from 'react'
 import {Route} from "react-router-dom";
 import Profile from '../components/Profile/Profile';
-import ListQuizPreview from '../components/MyQuizzes/Existing/listQuizPreview';
 import clsx from "clsx";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import MyQuizRoute from "../components/MyQuizzes/MyQuizRoute";

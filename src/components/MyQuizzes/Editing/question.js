@@ -2,7 +2,6 @@ import React from "react";
 import ShowQuestion from "./showQuestion";
 import EditQuestion from "./editQuestion";
 import getAnswers, {postAnswers} from "../../../services/api/answers";
-import {postQuestions} from "../../../services/api/questions";
 
 
 class Question extends React.Component {

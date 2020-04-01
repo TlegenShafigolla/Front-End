@@ -5,7 +5,6 @@ import Login from "./pages/login";
 import {Route, Switch} from "react-router-dom";
 import {PrivateAdminRoute, PrivateUserRoute} from "./function/PrivateRoute";
 import home from "./pages/home";
-import editQuiz from "./components/MyQuizzes/Editing/editQuiz";
 
 const Routes = () => {
     return (

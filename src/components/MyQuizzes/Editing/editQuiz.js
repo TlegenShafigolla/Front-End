@@ -7,7 +7,6 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import {Link} from "react-router-dom";
 import Question from "./question";
 import Board from "../Existing/Board";
-import EditQuestion from "./editQuestion";
 import EditQuizSettings from "./editQuizSettings";
 
 class editQuiz extends React.Component {

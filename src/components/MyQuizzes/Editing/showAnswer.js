@@ -1,6 +1,5 @@
 import React from "react";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Typography from "@material-ui/core/Typography";
 import s from './css/showAnswer.module.css'
 import Divider from "@material-ui/core/Divider";
