@@ -32,7 +32,7 @@ class EditAnswer extends React.Component {
 
     render() {
         return (
-         <div>
+            <div>
                 <div className={s.formControll}>
                     <FormControlLabel value="Type question"
                                       control={
@@ -51,20 +51,41 @@ class EditAnswer extends React.Component {
 
                 </div>
                 <div className={s.TextField}>
-                    {this.state.answers === [] ? '' : this.state.answers.map( (val, index) =>
-                        <TextField
+                    {this.state.answers === [] ? '' : this.state.answers.map((val, index) =>
+                        <SaveAnswers
                             id={index.toString()}
                             key={index}
-                            placeholder="Answer"
-                            fullWidth
-                            defaultValue={val.answer}
-                            onChange={this.props.onChangeAnswer}
-
+                            value={val}
+                            onChangeAnswer={this.props.onChangeAnswer}
                         />
-
                     )}
+                </div>
             </div>
-         </div>
+        );
+    }
+}
+
+class SaveAnswers extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            id:this.props.id,
+            index: this.props.index,
+            value: this.props.value
+        }
+    }
+
+    render() {
+        return (
+            <TextField
+                id={this.state.id}
+                key={this.state.index}
+                placeholder="Answer"
+                fullWidth
+                defaultValue={this.state.value.answer}
+                onChange={this.props.onChangeAnswer}
+            />
+
         );
     }
 }
