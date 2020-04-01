@@ -70,6 +70,9 @@ class Question extends React.Component {
         }
         if(this.state.answersChanged){
             await postAnswers(this.state.id, this.state.answers);
+            if(this.state.id !== undefined){
+                await getAnswers(this.state.id).then(val => this.setState({answers: val.answers}))
+            }
             this.setState({answersChanged: false});
         }
         this.setState({editMode: false});
