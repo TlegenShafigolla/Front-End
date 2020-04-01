@@ -13,8 +13,9 @@ import EditQuizSettings from "./editQuizSettings";
 class editQuiz extends React.Component {
     constructor(props){
         super(props);
+        const {id} = this.props.match.params
         this.state = {
-            quiz_id: 1,
+            quiz_id: id,
             questions: null,
             mixed: true,
             showResults: true,
@@ -30,12 +31,11 @@ addNewQuestion=()=>{
         const questions=this.state.questions;
         questions.push( {
         order_id: this.state.questions.length + 1,
-        quiz_id: 1,
+        quiz_id: this.state.quiz_id,
         image: null,
-        question: "Question",
-        type: "FILL THE BLANK"
-    });
-    this.setState({questions:questions})
+        question: "New Question",
+        type: "FILL THE BLANK"});
+        this.setState({questions:questions});
 };
 
     render() {

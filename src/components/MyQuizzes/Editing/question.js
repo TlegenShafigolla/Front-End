@@ -1,7 +1,8 @@
 import React from "react";
 import ShowQuestion from "./showQuestion";
 import EditQuestion from "./editQuestion";
-import getAnswers from "../../../services/api/answers";
+import getAnswers, {postAnswers} from "../../../services/api/answers";
+import {postQuestions} from "../../../services/api/questions";
 
 
 class Question extends React.Component {
@@ -11,6 +12,8 @@ class Question extends React.Component {
             editMode: false,
             answerType: this.props.value.type,
             question: this.props.value.question,
+            questionChanged: false,
+            answersChanged: false,
             answers: [],
         };
     }
@@ -30,7 +33,14 @@ class Question extends React.Component {
     deleteOnClick = () => {
     };
 
-    saveOnClick = (answer, correct, point) => {
+    saveOnClick = () => {
+        if(this.state.questionChanged){
+            //postQuestions(this.props.value.quiz_id, this.state.answers);
+        }
+        if(this.props.value.id !== null && this.state.answersChanged){
+            console.log(this.state.answers);
+            postAnswers(this.props.value.id, this.state.answers).then(val => console.log(val));
+        }
         this.setState({editMode: false});
     };
 
@@ -38,10 +48,12 @@ class Question extends React.Component {
         let answer = this.state.answers;
         answer[Number(event.target.id)].answer = event.target.value;
         this.setState({answers: answer});
+        this.setState({answersChanged: true});
     };
 
     onChangeQuestion = (event) => {
         this.setState({ question: event.target.value});
+        this.setState({ questionChanged: true});
     };
 
     addNewAnswer =() => {
