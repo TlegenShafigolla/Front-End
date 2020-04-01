@@ -8,3 +8,16 @@
     display: flex;
     justify-content: center;
 }
+.SaveAnswer{
+    display: flex;
+}
+.deleteButton{
+
+}
+.point{
+    width: 30px;
+    height: 30px;
+    border: 1px solid silver;
+    margin-bottom:5px;
+    border-radius: 10px;
+}

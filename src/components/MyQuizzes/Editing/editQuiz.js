@@ -23,8 +23,8 @@ class editQuiz extends React.Component {
             description: "",
             last_edited_date: "",
             quiz_name: "Quiz Name",
-            questions_count: 0
-
+            questions_count: 0,
+            point:false
         };
     }
 
@@ -34,11 +34,17 @@ addNewQuestion=()=>{
         order_id: this.state.questions.length + 1,
         quiz_id: this.state.quiz_id,
         image: null,
-        question: "New Question",
+        question: "",
         type: "FILL THE BLANK"});
         this.setState({questions:questions});
 };
 
+    points=()=>{
+            this.setState({point:true})
+        }
+    correct=()=>{
+        this.setState({point:false})
+    }
     render() {
         return (
                 <div className={s.body}>
@@ -57,11 +63,11 @@ addNewQuestion=()=>{
                                 {this.state.description}
                           </div>
                           <div className={s.settings}>
-                              <EditQuizSettings/>
+                              <EditQuizSettings points={this.points} correct={this.correct} point={this.state.point}/>
                           </div>
                           <div className={s.question}>
                               {this.state.questions === undefined || this.state.questions === null ? ' ' :
-                                  this.state.questions.map(val => <Question key={val.id} value={val}/>)}
+                                  this.state.questions.map(val => <Question key={val.id} value={val} point={this.state.point} />)}
                           </div>
                         <IconButton color='primary' size='medium' className={s.addbutton} onClick={this.addNewQuestion}>
                             <AddIcon fontSize='large'/>
