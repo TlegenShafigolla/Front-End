@@ -7,7 +7,7 @@ const MyQuizRoute = () => {
     return (
         <div>
             <Route exact path='/admin/quizzes' component={listQuizPreview}/>
-            <Route path='/admin/quizzes/edit' component={editQuiz}/>
+            <Route path='/admin/quizzes/edit/:id' component={editQuiz}/>
         </div>
     )
 }

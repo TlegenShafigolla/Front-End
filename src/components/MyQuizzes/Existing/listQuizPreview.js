@@ -20,7 +20,7 @@ addNewQuizz=()=>{
         id: this.state.quizzes.length+1,
         questions_count: 0,
         created_date: Date,
-    })
+    });
     this.setState({quizzes:quizzes})
 }
     render() {
