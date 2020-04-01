@@ -33,7 +33,7 @@ addNewQuestion=()=>{
         order_id: this.state.questions.length + 1,
         quiz_id: 1,
         image: null,
-        question: "Question",
+        question: "",
         type: "FILL THE BLANK"
     });
     this.setState({questions:questions})
