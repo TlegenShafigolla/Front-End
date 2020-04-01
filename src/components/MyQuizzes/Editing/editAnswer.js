@@ -7,6 +7,7 @@ import s from './css/editAnswer.module.css'
 import Radio from "@material-ui/core/Radio";
 import IconButton from "@material-ui/core/IconButton";
 import InputBase from "@material-ui/core/InputBase";
+import FormControl from "@material-ui/core/FormControl";
 
 class EditAnswer extends React.Component {
     constructor(props) {
@@ -55,6 +56,7 @@ class EditAnswer extends React.Component {
                 <div className={s.TextField}>
                     {this.state.answers === [] ? '' : this.state.answers.map((val, index) =>
                         <SaveAnswers
+                            changeCheck={this.props.changeCheck}
                             changePoint={this.props.changePoint}
                             id={index.toString()}
                             key={index}
@@ -116,8 +118,14 @@ class SaveAnswers extends React.Component {
                         defaultValue={this.state.value.answer}
                         onChange={this.props.onChangeAnswer}
                     />
-                    <Checkbox color='primary'
-                                checked={this.props.value.correct}/>
+                    <FormControlLabel  control={
+                    <Checkbox
+                        id={this.state.id}
+                        key={this.state.index}
+                        color='primary'
+                                checked={this.props.value.correct}
+                    onChange={this.props.changeCheck}/>}
+                                  />
                     <IconButton className={s.deleteButton} size='small' color='inherit'>
                         <HighlightOffIcon color='error'
                                           fontSize='small'/></IconButton>

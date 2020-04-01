@@ -32,6 +32,13 @@ class Question extends React.Component {
         this.setState({answers: answer});
         this.setState({answersChanged: true});
     }
+    ChangeCheck=(event)=>{
+        let answer = this.state.answers;
+        answer[Number(event.target.id)].correct = event.target.checked;
+        this.setState({answers: answer});
+        this.setState({answersChanged: true});
+    }
+
     changeType = (newType) => {
         this.setState({answerType: newType});
     };
@@ -110,6 +117,7 @@ class Question extends React.Component {
     render() {
         if (this.state.editMode) {
             return <EditQuestion
+                ChangeCheck={this.ChangeCheck}
                 changePoint={this.changePoint}
                 point={this.props.point}
                 correctWrong={this.props.correctWrong}

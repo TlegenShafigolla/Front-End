@@ -8,6 +8,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import {Link} from "react-router-dom";
 import {Tooltip} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 
 class QuizPreview extends React.Component {
 //quiz_name, questions_count, description, last_edited_date
@@ -34,6 +35,9 @@ class QuizPreview extends React.Component {
                             <HighlightOffIcon fontSize='small' color='secondary'/>
                         </IconButton>
                     </Tooltip>
+                    <Button>
+                        Edit
+                    </Button>
                 </CardActions>
             </div>
         );
