@@ -15,7 +15,6 @@ class EditAnswer extends React.Component {
             multiple_choice: props.type === 'MULTIPLE CHOICE',
             fill_the_blank: props.type === 'FILL THE BLANK',
             answers: props.answers,
-            answer: props.answer
         };
     }
 
@@ -53,16 +52,15 @@ class EditAnswer extends React.Component {
 
                 </div>
                 <div className={s.TextField}>
-                    {this.state.answers === [] ? '' : this.state.answers.map(val =>
+                    {this.state.answers === [] ? '' : this.state.answers.map( (val, index) =>
                         <TextField
-                            id="standard-full-width"
-                            key={val.id}
+                            id={index.toString()}
+                            key={index}
                             style={{margin: 8}}
                             placeholder="Answer"
                             margin="normal"
                             multiline={true}
                             rows={1}
-
                             rowsMax={2}
                             fullWidth
                             defaultValue={val.answer}

@@ -11,14 +11,13 @@ class Question extends React.Component {
             editMode: false,
             answerType: this.props.value.type,
             answers: [],
-
         };
         this.onChangeAnswer=this.onChangeAnswer.bind(this)
 
     }
 
     componentDidMount() {
-        getAnswers(this.props.value.id).then(val => this.setState({answers: val.answers}));
+        getAnswers(this.props.value.id).then(val => this.setState({answers: val.answers}))
     }
 
     changeType = (newType) => {
@@ -32,23 +31,24 @@ class Question extends React.Component {
     deleteOnClick = () => {
     };
 
-
     saveOnClick = (answer, correct, point) => {
         this.setState({editMode: false});
     };
 
-    onChangeAnswer = (event, answer_id=this.props.value.id) => {
-    }
+    onChangeAnswer = (event) => {
+        let answer = this.state.answers;
+        answer[Number(event.target.id)].answer = event.target.value;
+        this.setState({answers: answer});
+    };
 
     addNewAnswer =() => {
         const answers = this.state.answers;
         answers.push({
-
             question_id: this.props.value.question_id,
             correct: 0,
             points: 0,
             answer: ''
-        })
+        });
         this.setState({answers: answers})
     };
     render() {
