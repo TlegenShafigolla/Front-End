@@ -12,7 +12,6 @@ class EditQuestion extends React.Component {
             editMode: this.props.editMode,
             id: this.props.value.id,
             order: this.props.value.order_id,
-            question: this.props.value.question,
             answerType: this.props.answerType,
         };
     }
@@ -23,13 +22,14 @@ class EditQuestion extends React.Component {
                     <div className={s.questionOrder}>{this.state.order}</div>
                     <div className={s.questionField}>
                         <TextField
+                            onChange={this.props.onChangeQuestion}
                             style={{ margin: 8 }}
                             placeholder="Placeholder"
                             autoFocus={true}
                             rows={2}
                             rowsMax={3}
                             fullWidth
-                            defaultValue={this.state.question}
+                            defaultValue={this.props.question}
                             InputLabelProps={{
                                 shrink: true,
                             }}

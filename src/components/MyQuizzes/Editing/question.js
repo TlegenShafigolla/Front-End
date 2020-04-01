@@ -10,10 +10,9 @@ class Question extends React.Component {
         this.state = {
             editMode: false,
             answerType: this.props.value.type,
+            question: this.props.value.question,
             answers: [],
         };
-        this.onChangeAnswer=this.onChangeAnswer.bind(this)
-
     }
 
     componentDidMount() {
@@ -41,6 +40,10 @@ class Question extends React.Component {
         this.setState({answers: answer});
     };
 
+    onChangeQuestion = (event) => {
+        this.setState({ question: event.target.value});
+    };
+
     addNewAnswer =() => {
         const answers = this.state.answers;
         answers.push({
@@ -56,11 +59,13 @@ class Question extends React.Component {
             return <EditQuestion
                 onChangeAnswer={this.onChangeAnswer}
                 addNewAnswer={this.addNewAnswer}
+                onChangeQuestion={this.onChangeQuestion}
                 saveOnClick={this.saveOnClick}
                 changeType={this.changeType}
                 editMode={this.state.editMode}
                 answerType={this.state.answerType}
                 answers={this.state.answers}
+                question={this.state.question}
                 {...this.props}/>
         } else {
             return <ShowQuestion editOnClick={this.editOnClick}
@@ -68,6 +73,7 @@ class Question extends React.Component {
                                  editMode={this.state.editMode}
                                  answerType={this.state.answerType}
                                  answers={this.state.answers}
+                                 question={this.state.question}
                                  {...this.props}/>
         }
     }
