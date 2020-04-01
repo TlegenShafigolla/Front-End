@@ -1,6 +1,9 @@
 import React from "react";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import FormControl from "@material-ui/core/FormControl";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import Radio from "@material-ui/core/Radio";
 
 class EditQuizSettings extends React.Component{
     constructor(props){
@@ -10,8 +13,6 @@ class EditQuizSettings extends React.Component{
             notMixed: false,
             showResults: false,
             notShowResults: true,
-            correctWrong: true,
-            points: false
         };
     }
 
@@ -35,17 +36,10 @@ class EditQuizSettings extends React.Component{
         this.setState({notShowResults: true});
     };
 
-    correctWrong = () => {
-        this.setState({correctWrong: true});
-        this.setState({points: false});
-    };
 
-    points = () => {
-        this.setState({correctWrong: false});
-        this.setState({points: true});
-    };
 
     render() {
+
         return (<div>
             <div>
                 <FormControlLabel
@@ -96,28 +90,12 @@ class EditQuizSettings extends React.Component{
                 />
             </div>
             <div>
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={this.state.correctWrong}
-                            onChange={this.correctWrong}
-                            name="checkedB"
-                            color="primary"
-                        />
-                    }
-                    label="Correct/Wrong"
-                />
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={this.state.points}
-                            onChange={this.points}
-                            name="checkedB"
-                            color="primary"
-                        />
-                    }
-                    label="Points"
-                />
+                <FormControl component="fieldset">
+                    <RadioGroup aria-label="type" name="Correct/Wrong/Point"  >
+                        <FormControlLabel value="Correct/Wrong" control={<Radio color="primary"/>} onChange={this.props.correct} checked={!this.props.point} label="Correct/Wrong" />
+                        <FormControlLabel value="Point" control={<Radio color="primary" />} onChange={this.props.points} checked={this.props.point} label="Point" />
+                    </RadioGroup>
+                </FormControl>
             </div>
         </div>);
     }

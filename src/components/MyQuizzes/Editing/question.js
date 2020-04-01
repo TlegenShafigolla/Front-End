@@ -69,6 +69,8 @@ class Question extends React.Component {
     render() {
         if (this.state.editMode) {
             return <EditQuestion
+                point={this.props.point}
+                correctWrong={this.props.correctWrong}
                 onChangeAnswer={this.onChangeAnswer}
                 addNewAnswer={this.addNewAnswer}
                 onChangeQuestion={this.onChangeQuestion}

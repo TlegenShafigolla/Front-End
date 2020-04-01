@@ -28,7 +28,7 @@ class ShowAnswer extends React.Component {
                                               checked={this.state.multiple_choice}
                                               disabled={true}
                                           />} label='Multiple Choice'/>
-                    <FormControlLabel value="end"
+                    <FormControlLabel value=""
                                       control={
                                           <Radio
                                               checked={this.state.fill_the_blank}

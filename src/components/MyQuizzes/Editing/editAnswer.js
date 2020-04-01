@@ -5,6 +5,8 @@ import TextField from "@material-ui/core/TextField";
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import s from './css/editAnswer.module.css'
 import Radio from "@material-ui/core/Radio";
+import IconButton from "@material-ui/core/IconButton";
+import InputBase from "@material-ui/core/InputBase";
 
 class EditAnswer extends React.Component {
     constructor(props) {
@@ -32,7 +34,7 @@ class EditAnswer extends React.Component {
 
     render() {
         return (
-         <div>
+            <div>
                 <div className={s.formControll}>
                     <FormControlLabel value="Type question"
                                       control={
@@ -51,21 +53,72 @@ class EditAnswer extends React.Component {
 
                 </div>
                 <div className={s.TextField}>
-                    {this.state.answers === [] ? '' : this.state.answers.map( (val, index) =>
-                        <TextField
+                    {this.state.answers === [] ? '' : this.state.answers.map((val, index) =>
+                        <SaveAnswers
                             id={index.toString()}
                             key={index}
-                            placeholder="Answer"
-                            fullWidth
-                            defaultValue={val.answer}
-                            onChange={this.props.onChangeAnswer}
-
+                            value={val}
+                            onChangeAnswer={this.props.onChangeAnswer}
+                            point={this.props.point}
                         />
-
                     )}
+                </div>
             </div>
-         </div>
         );
+    }
+}
+
+class SaveAnswers extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            id: this.props.id,
+            index: this.props.index,
+            value: this.props.value
+        }
+    }
+
+    render() {
+        if (this.props.point) {
+            return (
+                <div className={s.SaveAnswer}>
+                    <TextField
+                        id={this.state.id}
+                        key={this.state.index}
+                        placeholder="Answer"
+                        fullWidth
+                        defaultValue={this.state.value.answer}
+                        onChange={this.props.onChangeAnswer}
+                    />
+                    <div className={s.point}>
+                        <InputBase
+                            inputProps={{ 'aria-label': 'Point' }}
+                        />
+                    </div>
+                    <IconButton className={s.deleteButton} size='small' color='inherit'><HighlightOffIcon color='error'
+                                                                                                          fontSize='small'/></IconButton>
+                </div>
+
+            );
+        } else {
+            return (
+                <div className={s.SaveAnswer}>
+                    <TextField
+                        id={this.state.id}
+                        key={this.state.index}
+                        placeholder="Answer"
+                        fullWidth
+                        defaultValue={this.state.value.answer}
+                        onChange={this.props.onChangeAnswer}
+                    />
+                    <Checkbox color='primary'/>
+                    <IconButton className={s.deleteButton} size='small' color='inherit'>
+                        <HighlightOffIcon color='error'
+                                          fontSize='small'/></IconButton>
+                </div>
+
+            );
+        }
     }
 }
 
