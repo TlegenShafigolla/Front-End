@@ -112,7 +112,8 @@ class SaveAnswers extends React.Component {
                         defaultValue={this.state.value.answer}
                         onChange={this.props.onChangeAnswer}
                     />
-                    <Checkbox color='primary'/>
+                    <Checkbox color='primary'
+                                checked={this.props.value.correct}/>
                     <IconButton className={s.deleteButton} size='small' color='inherit'>
                         <HighlightOffIcon color='error'
                                           fontSize='small'/></IconButton>
