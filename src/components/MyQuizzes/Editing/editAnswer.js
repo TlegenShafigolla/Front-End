@@ -55,6 +55,7 @@ class EditAnswer extends React.Component {
                 <div className={s.TextField}>
                     {this.state.answers === [] ? '' : this.state.answers.map((val, index) =>
                         <SaveAnswers
+                            changePoint={this.props.changePoint}
                             id={index.toString()}
                             key={index}
                             value={val}
@@ -92,8 +93,11 @@ class SaveAnswers extends React.Component {
                     />
                     <div className={s.point}>
                         <InputBase
+                            id={this.state.id}
+                            key={this.state.index}
                             inputProps={{ 'aria-label': 'Point' }}
                             defaultValue={this.props.value.points}
+                            onChange={this.props.changePoint}
                         />
                     </div>
                     <IconButton className={s.deleteButton} size='small' color='inherit'><HighlightOffIcon color='error'

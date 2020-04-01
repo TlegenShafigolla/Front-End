@@ -33,6 +33,7 @@ class EditQuestion extends React.Component {
                     </div>
                     <div className={s.answerType}>
                         <EditAnswer
+                            changePoint={this.props.changePoint}
                             point={this.props.point}
                             correctWrong={this.props.correctWrong}
                             onChangeAnswer={this.props.onChangeAnswer}
