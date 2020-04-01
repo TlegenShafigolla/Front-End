@@ -5,7 +5,6 @@ import TextField from "@material-ui/core/TextField";
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import s from './css/editAnswer.module.css'
 import Radio from "@material-ui/core/Radio";
-import answers from "../../../services/api/answers";
 
 class EditAnswer extends React.Component {
     constructor(props) {
@@ -33,8 +32,8 @@ class EditAnswer extends React.Component {
 
     render() {
         return (
-            <div className={s.editAnswer}>
-                <div>
+         <div>
+                <div className={s.formControll}>
                     <FormControlLabel value="Type question"
                                       control={
                                           <Radio
@@ -56,24 +55,16 @@ class EditAnswer extends React.Component {
                         <TextField
                             id={index.toString()}
                             key={index}
-                            style={{margin: 8}}
                             placeholder="Answer"
-                            margin="normal"
-                            multiline={true}
-                            rows={1}
-                            rowsMax={2}
                             fullWidth
                             defaultValue={val.answer}
                             onChange={this.props.onChangeAnswer}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
+
                         />
+
                     )}
-
-                </div>
             </div>
-
+         </div>
         );
     }
 }

@@ -2,35 +2,24 @@
     margin-top: 20px;
     box-shadow: 5px 5px 10px #333333;
     padding: 10px;
-    display: flex;
-   flex-direction: column;
 }
 .questioninfo{
     display: flex;
 }
 .questionOrder {
-margin-top:2px;
+    margin-top:2px;
 }
 
 
 .questionField {
     padding: 0;
     margin-left: 5px;
-    width: 98%;
 }
 
 .answerType {
 }
 
-.Buttons{
-    width: 55%;
+.Button{
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-left: auto;
-    margin-right: 0px;
-}
-.AddButton{
-}
-.saveButton{
+    flex-direction: row-reverse;
 }
