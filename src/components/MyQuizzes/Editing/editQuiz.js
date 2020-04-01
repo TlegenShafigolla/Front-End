@@ -19,7 +19,6 @@ class editQuiz extends React.Component {
             questions: null,
             mixed: true,
             showResults: true,
-            points: false,
             description: "",
             last_edited_date: "",
             quiz_name: "Quiz Name",
