@@ -19,9 +19,10 @@ export  function postAnswers(question_id, answers) {
         method: 'POST',
         headers: {
             Authorization: authToken,
-            Accept: 'application/json',
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
         },
-        data: JSON.stringify({
+        body: JSON.stringify({
             "answers": answers,
         }),
     };

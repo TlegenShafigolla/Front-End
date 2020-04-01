@@ -17,7 +17,11 @@ export function postQuestions(quiz_id, questions) {
     const authToken = `Bearer ${getSession()}`;
     const requestOptions = {
         method: 'POST',
-        headers: {Authorization: authToken},
+        headers: {
+            Authorization: authToken,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
             questions: questions,
         }),
