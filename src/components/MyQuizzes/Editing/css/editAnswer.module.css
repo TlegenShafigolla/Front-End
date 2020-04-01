@@ -1,8 +1,10 @@
 
-.editAnswer{
-    display: inline-flex;
-    flex-direction: column;
-    border: 1px solid silver;
-}
+
 .TextField{
+    margin: auto;
+    width: 95%;
+}
+.formControll{
+    display: flex;
+    justify-content: center;
 }

@@ -3,8 +3,8 @@ import s from './css/editQuestion.module.css'
 import TextField from '@material-ui/core/TextField';
 import EditAnswer from "./editAnswer";
 import Button from "@material-ui/core/Button";
-
-
+import AddIcon from '@material-ui/icons/Add';
+import IconButton from "@material-ui/core/IconButton";
 class EditQuestion extends React.Component {
     constructor(props){
         super(props);
@@ -19,21 +19,17 @@ class EditQuestion extends React.Component {
     render() {
             return (
                 <div className={s.question} id={this.state.order}>
-                    <div className={s.questionOrder}>{this.state.order}</div>
+                    <div className={s.questioninfo}>
+                    <div className={s.questionOrder}>{this.state.order}.</div>
                     <div className={s.questionField}>
                         <TextField
-                            onChange={this.props.onChangeQuestion}
-                            style={{ margin: 8 }}
-                            placeholder="Placeholder"
-                            autoFocus={true}
-                            rows={2}
-                            rowsMax={3}
+                            placeholder="Question"
                             fullWidth
+                            size='small'
                             defaultValue={this.props.question}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
+                            onChange={this.props.onChangeQuestion}
                         />
+                    </div>
                     </div>
                     <div className={s.answerType}>
                         <EditAnswer
@@ -45,12 +41,14 @@ class EditQuestion extends React.Component {
                             answers={this.props.answers}
                         />
                     </div>
-                    <Button variant="contained" color="primary" onClick={this.props.saveOnClick}>
+                    <din className={s.Buttons}>
+                        <IconButton className={s.AddButton}  color="primary" onClick={this.props.addNewAnswer}>
+                            <AddIcon/>
+                        </IconButton>
+                    <Button  color="primary" className={s.saveButton} onClick={this.props.saveOnClick}>
                         Save
                     </Button>
-                    <Button variant="contained" color="primary" onClick={this.props.addNewAnswer}>
-                        New Answer
-                    </Button>
+                    </din>
 
                 </div>
             );

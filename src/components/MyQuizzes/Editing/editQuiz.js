@@ -24,6 +24,7 @@ class editQuiz extends React.Component {
             last_edited_date: "",
             quiz_name: "Quiz Name",
             questions_count: 0
+
         };
     }
 
