@@ -19,6 +19,7 @@ class Question extends React.Component {
             image: this.props.value.image,
             disableSaveButton: false,
         };
+        console.log(this.state.answers)
     }
 
     componentDidMount() {

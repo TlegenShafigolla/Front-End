@@ -93,6 +93,7 @@ class SaveAnswers extends React.Component {
                     <div className={s.point}>
                         <InputBase
                             inputProps={{ 'aria-label': 'Point' }}
+                            defaultValue={this.props.value.points}
                         />
                     </div>
                     <IconButton className={s.deleteButton} size='small' color='inherit'><HighlightOffIcon color='error'
