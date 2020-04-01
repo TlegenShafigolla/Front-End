@@ -1,6 +1,5 @@
 import React from "react";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Typography from "@material-ui/core/Typography";
 import s from './css/showAnswer.module.css'
 import Divider from "@material-ui/core/Divider";
@@ -10,7 +9,7 @@ class ShowAnswer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            question_id: props.id,
+            question_id: props.question_id,
             multiple_choice: props.answerType === 'MULTIPLE CHOICE',
             fill_the_blank: props.answerType === 'FILL THE BLANK',
         };
