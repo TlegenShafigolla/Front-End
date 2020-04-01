@@ -9,7 +9,7 @@ class ShowAnswer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            question_id: props.id,
+            question_id: props.question_id,
             multiple_choice: props.answerType === 'MULTIPLE CHOICE',
             fill_the_blank: props.answerType === 'FILL THE BLANK',
         };

@@ -2,6 +2,7 @@ import React from "react";
 import ShowQuestion from "./showQuestion";
 import EditQuestion from "./editQuestion";
 import getAnswers, {postAnswers} from "../../../services/api/answers";
+import {postQuestions} from "../../../services/api/questions";
 
 
 class Question extends React.Component {
@@ -9,16 +10,21 @@ class Question extends React.Component {
         super(props);
         this.state = {
             editMode: false,
+            id: this.props.value.id,
             answerType: this.props.value.type,
             question: this.props.value.question,
             questionChanged: false,
             answersChanged: false,
             answers: [],
+            image: this.props.value.image,
+            disableSaveButton: false,
         };
     }
 
     componentDidMount() {
-        getAnswers(this.props.value.id).then(val => this.setState({answers: val.answers}))
+        if(this.state.id !== undefined){
+            getAnswers(this.state.id).then(val => this.setState({answers: val.answers}))
+        }
     }
 
     changeType = (newType) => {
@@ -32,15 +38,42 @@ class Question extends React.Component {
     deleteOnClick = () => {
     };
 
-    saveOnClick = () => {
-        if(this.state.questionChanged){
-            //postQuestions(this.props.value.quiz_id, this.state.answers);
+    saveOnClick = async () => {
+        if(this.state.disableSaveButton){
+            return;
         }
-        if(this.props.value.id !== null && this.state.answersChanged){
-            console.log(this.state.answers);
-            postAnswers(this.props.value.id, this.state.answers).then(val => console.log(val));
+        this.setState({disableSaveButton: true});
+        if(this.state.id == null && (this.state.questionChanged || this.state.answersChanged)){
+            const question = {
+                quiz_id: this.props.value.quiz_id,
+                order_id: this.props.value.order_id,
+                type: this.state.answerType,
+                question: this.state.question,
+                image: this.state.image,
+            };
+            await postQuestions(this.props.value.quiz_id, [question]).then(ret => this.setState({id: ret.created.id}));
+            console.log(this.state.id);
+            this.setState({questionChanged: false});
+        }
+        if(this.state.questionChanged){
+            const question = {
+                id: this.state.id,
+                quiz_id: this.props.value.quiz_id,
+                order_id: this.props.value.order_id,
+                type: this.state.answerType,
+                question: this.state.question,
+                image: this.state.image,
+            };
+            console.log(question);
+            await postQuestions(this.props.value.quiz_id, [question]);
+            this.setState({questionChanged: false});
+        }
+        if(this.state.answersChanged){
+            await postAnswers(this.state.id, this.state.answers);
+            this.setState({answersChanged: false});
         }
         this.setState({editMode: false});
+        this.setState({disableSaveButton: false});
     };
 
     onChangeAnswer = (event) => {
@@ -61,10 +94,11 @@ class Question extends React.Component {
             question_id: this.props.value.id,
             correct: 0,
             points: 0,
-            answer: '',
+            answer: 'New answer',
         });
         this.setState({answers: answers})
     };
+
     render() {
         if (this.state.editMode) {
             return <EditQuestion
@@ -79,6 +113,7 @@ class Question extends React.Component {
                 answerType={this.state.answerType}
                 answers={this.state.answers}
                 question={this.state.question}
+                question_id={this.state.id}
                 {...this.props}/>
         } else {
             return <ShowQuestion editOnClick={this.editOnClick}
@@ -87,6 +122,7 @@ class Question extends React.Component {
                                  answerType={this.state.answerType}
                                  answers={this.state.answers}
                                  question={this.state.question}
+                                 question_id={this.state.id}
                                  {...this.props}/>
         }
     }

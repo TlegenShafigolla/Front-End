@@ -12,7 +12,7 @@ import EditQuizSettings from "./editQuizSettings";
 class editQuiz extends React.Component {
     constructor(props){
         super(props);
-        const {id} = this.props.match.params
+        const {id} = this.props.match.params;
         this.state = {
             quiz_id: id,
             questions: null,
@@ -23,7 +23,7 @@ class editQuiz extends React.Component {
             last_edited_date: "",
             quiz_name: "Quiz Name",
             questions_count: 0,
-            point:false
+            point: false
         };
     }
 
@@ -40,10 +40,10 @@ addNewQuestion=()=>{
 
     points=()=>{
             this.setState({point:true})
-        }
+        };
     correct=()=>{
         this.setState({point:false})
-    }
+    };
     render() {
         return (
                 <div className={s.body}>
@@ -66,7 +66,7 @@ addNewQuestion=()=>{
                           </div>
                           <div className={s.question}>
                               {this.state.questions === undefined || this.state.questions === null ? ' ' :
-                                  this.state.questions.map(val => <Question key={val.id} value={val} point={this.state.point} />)}
+                                  this.state.questions.map(val => <Question key={val.order_id} value={val} point={this.state.point} />)}
                           </div>
                         <IconButton color='primary' size='medium' className={s.addbutton} onClick={this.addNewQuestion}>
                             <AddIcon fontSize='large'/>
@@ -75,7 +75,7 @@ addNewQuestion=()=>{
                     <div className={s.questionsboard}>
                         <div>
                             {this.state.questions === undefined || this.state.questions === null ? ' ' :
-                                this.state.questions.map(val => <Board key={val.id} value={val}/>)}
+                                this.state.questions.map(val => <Board key={val.order_id} value={val}/>)}
 
                         </div>
                     </div>

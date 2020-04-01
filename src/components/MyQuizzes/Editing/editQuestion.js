@@ -10,7 +10,7 @@ class EditQuestion extends React.Component {
         super(props);
         this.state = {
             editMode: this.props.editMode,
-            id: this.props.value.id,
+            question_id: this.props.question_id,
             order: this.props.value.order_id,
             answerType: this.props.answerType,
         };
@@ -38,19 +38,19 @@ class EditQuestion extends React.Component {
                             onChangeAnswer={this.props.onChangeAnswer}
                             editMode={this.props.editMode}
                             type={this.state.answerType}
-                            id={this.props.value.id}
+                            question_id={this.state.id}
                             changeType={this.props.changeType}
                             answers={this.props.answers}
                         />
                     </div>
-                    <din className={s.Buttons}>
+                    <div className={s.Buttons}>
                         <IconButton className={s.AddButton}  color="primary" onClick={this.props.addNewAnswer}>
                             <AddIcon/>
                         </IconButton>
                     <Button  color="primary" className={s.saveButton} onClick={this.props.saveOnClick}>
                         Save
                     </Button>
-                    </din>
+                    </div>
 
                 </div>
             );
