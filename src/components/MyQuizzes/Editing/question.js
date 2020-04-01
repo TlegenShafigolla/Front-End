@@ -50,7 +50,7 @@ class Question extends React.Component {
             question_id: this.props.value.question_id,
             correct: 0,
             points: 0,
-            answer: ''
+            answer: '',
         });
         this.setState({answers: answers})
     };

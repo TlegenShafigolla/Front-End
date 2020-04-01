@@ -12,7 +12,6 @@ class EditQuestion extends React.Component {
             editMode: this.props.editMode,
             id: this.props.value.id,
             order: this.props.value.order_id,
-            question: this.props.value.question,
             answerType: this.props.answerType,
         };
     }
@@ -27,8 +26,8 @@ class EditQuestion extends React.Component {
                             placeholder="Question"
                             fullWidth
                             size='small'
-                            defaultValue={this.state.question}
-
+                            defaultValue={this.props.question}
+                            onChange={this.props.onChangeQuestion}
                         />
                     </div>
                     </div>
