@@ -1,7 +1,7 @@
 import React from "react";
 import ShowQuestion from "./showQuestion";
 import EditQuestion from "./editQuestion";
-import getAnswers, {postAnswers} from "../../../services/api/answers";
+import getAnswers, {deleteAnswers, postAnswers} from "../../../services/api/answers";
 import {deleteQuestions, postQuestions} from "../../../services/api/questions";
 
 
@@ -46,6 +46,16 @@ class Question extends React.Component {
 
     editOnClick = () => {
         this.setState({editMode: true});
+    };
+
+    deleteAnswerOnClick = (index) => {
+        let answers = this.state.answers;
+        //delete answers[index]
+        if(this.state.id !== undefined && answers[index].id !== undefined){
+            deleteAnswers(this.state.id, answers[index].id);
+        }
+        answers.splice(index, 1);
+        this.setState({answers: answers});
     };
 
     deleteQuestionOnClick = () => {
@@ -130,6 +140,7 @@ class Question extends React.Component {
             return <EditQuestion
                 changeCheck={this.changeCheck}
                 changePoint={this.changePoint}
+                deleteAnswerOnClick={this.deleteAnswerOnClick}
                 point={this.props.point}
                 correctWrong={this.props.correctWrong}
                 onChangeAnswer={this.onChangeAnswer}
