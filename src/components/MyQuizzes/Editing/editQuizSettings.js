@@ -10,30 +10,24 @@ class EditQuizSettings extends React.Component {
         super(props);
         this.state = {
             mixed: true,
-            notMixed: false,
             showResults: false,
-            notShowResults: true,
         };
     }
 
     mixedChecked = () => {
         this.setState({mixed: true});
-        this.setState({notMixed: false});
     };
 
     notMixedChecked = () => {
         this.setState({mixed: false});
-        this.setState({notMixed: true});
     };
 
-    showResults = () => {
+    showResult = () => {
         this.setState({showResults: true});
-        this.setState({notShowResults: false});
     };
 
     notShowResults = () => {
         this.setState({showResults: false});
-        this.setState({notShowResults: true});
     };
 
 
@@ -47,7 +41,7 @@ class EditQuizSettings extends React.Component {
                                           checked={this.state.mixed}
                                           onChange={this.mixedChecked} label="Mixed"/>
                         <FormControlLabel value="Not mixed" control={<Radio color="primary"/>}
-                                          checked={this.state.notMixed}
+                                          checked={!this.state.mixed}
                                           onChange={this.notMixedChecked} label="Not Mixed"/>
 
                     </RadioGroup>
@@ -58,9 +52,9 @@ class EditQuizSettings extends React.Component {
                     <RadioGroup aria-label="type" name="Results">
                         <FormControlLabel value="Point" control={<Radio color="primary"/>}
                                           checked={this.state.showResults}
-                                          onChange={this.showResults} label="Show Results"/>
+                                          onChange={this.showResult} label="Show Results"/>
                         <FormControlLabel value="Do not ShowResult" control={<Radio color="primary"/>}
-                                          checked={this.state.notShowResults}
+                                          checked={!this.state.showResults}
                                           onChange={this.notShowResults} label='Do not show results'/>
 
                     </RadioGroup>
