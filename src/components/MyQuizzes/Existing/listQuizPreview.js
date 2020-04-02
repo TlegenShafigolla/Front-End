@@ -1,6 +1,6 @@
 import React from "react";
 import getQuizzes from "../../../services/api/myquizzes";
-import QuizPreview from "./quizPreview";
+import Quiz from "./quiz";
 import s from '../listQuizPreview.module.css'
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from '@material-ui/icons/Add';
@@ -8,7 +8,8 @@ class   ListQuizPreview extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            quizzes: []
+            quizzes: null,
+            editMode:false
         };
     }
 addNewQuizz=()=>{
@@ -23,6 +24,7 @@ addNewQuizz=()=>{
     });
     this.setState({quizzes:quizzes})
 }
+
     render() {
         return (
             <div  className={s.Container}>
@@ -30,8 +32,8 @@ addNewQuizz=()=>{
                 <div className={s.Box}>
                     <div className={s.Quizz}>
 
-                        {this.state.quizzes !== null ? this.state.quizzes.map(val => <QuizPreview key={val.id}
-                                                                                                  value={val}/>) : ' '}
+                        {this.state.quizzes !== null ? this.state.quizzes.map((val,index) => <Quiz key={index} id={index}
+                                                                                           value={val} />) : ' '}
                     </div>
                     <IconButton color='primary'  onClick={this.addNewQuizz}>
                         <AddIcon fontSize='large'/>

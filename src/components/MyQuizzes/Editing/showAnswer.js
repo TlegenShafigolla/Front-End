@@ -37,6 +37,7 @@ class ShowAnswer extends React.Component {
                 </div>
                 <div className={s.answer}>
                     {this.props.answers === null ? '' : this.props.answers.map(val =>
+
                         <Typography variant="body1" gutterBottom key={val.id}>
                             {val.answer}
                             <Divider/>
