@@ -22,18 +22,19 @@ class Question extends React.Component {
     }
 
     componentDidMount() {
-        if(this.state.id !== undefined){
+        if (this.state.id !== undefined) {
             getAnswers(this.state.id).then(val => this.setState({answers: val.answers}))
         }
     }
-    changePoint=(event)=>{
+
+    changePoint = (event) => {
         let answer = this.state.answers;
         answer[Number(event.target.id)].points = event.target.value;
         this.setState({answers: answer});
         this.setState({answersChanged: true});
     };
 
-    changeCheck=(event)=>{
+    changeCheck = (event) => {
         let answer = this.state.answers;
         answer[Number(event.target.id)].correct = event.target.checked;
         this.setState({answers: answer});
@@ -49,23 +50,22 @@ class Question extends React.Component {
     };
 
     deleteQuestionOnClick = () => {
-        if(this.state.id !== undefined){
+        if (this.state.id !== undefined) {
             deleteQuestions(this.props.value.quiz_id, this.state.id);
-            if(true){
+            if (true) {
                 this.props.deleteQuestion(this.props.value.order_id);
             }
-        }
-        else{
+        } else {
             this.props.deleteQuestion(this.props.value.order_id);
         }
     };
 
     saveOnClick = async () => {
-        if(this.state.disableSaveButton){
+        if (this.state.disableSaveButton) {
             return;
         }
         this.setState({disableSaveButton: true});
-        if(this.state.id === undefined && (this.state.questionChanged || this.state.answersChanged)){
+        if (this.state.id === undefined && (this.state.questionChanged || this.state.answersChanged)) {
             const question = {
                 quiz_id: this.props.value.quiz_id,
                 order_id: this.props.value.order_id,
@@ -76,7 +76,7 @@ class Question extends React.Component {
             await postQuestions(this.props.value.quiz_id, [question]).then(ret => this.setState({id: ret.created[0].id}));
             this.setState({questionChanged: false});
         }
-        if(this.state.questionChanged){
+        if (this.state.questionChanged) {
             const question = {
                 id: this.state.id,
                 quiz_id: this.props.value.quiz_id,
@@ -89,9 +89,9 @@ class Question extends React.Component {
             await postQuestions(this.props.value.quiz_id, [question]);
             this.setState({questionChanged: false});
         }
-        if(this.state.answersChanged){
+        if (this.state.answersChanged) {
             let answers = this.state.answers;
-            for(let i in answers){
+            for (let i in answers) {
                 answers[i].question_id = this.state.id.toString();
             }
             await postAnswers(this.state.id, this.state.answers);
@@ -110,11 +110,11 @@ class Question extends React.Component {
     };
 
     onChangeQuestion = (event) => {
-        this.setState({ question: event.target.value});
-        this.setState({ questionChanged: true});
+        this.setState({question: event.target.value});
+        this.setState({questionChanged: true});
     };
 
-    addNewAnswer =() => {
+    addNewAnswer = () => {
         const answers = this.state.answers;
         answers.push({
             question_id: this.state.id,

@@ -13,7 +13,6 @@ class EditAnswer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            question_id: props.question_id,
             multiple_choice: props.type === 'MULTIPLE CHOICE',
             fill_the_blank: props.type === 'FILL THE BLANK',
             answers: props.answers,

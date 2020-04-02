@@ -13,7 +13,8 @@ export default function getQuizzes() {
     })
     return json;
 }
-export function postQuiz(quizzes) {
+
+export function postQuiz(quiz) {
     const authToken = `Bearer ${getSession()}`;
     const requestOptions = {
         method: 'POST',
@@ -22,10 +23,11 @@ export function postQuiz(quizzes) {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
-        body:JSON.stringify({
-            quizzes:quizzes,
-        }),
+        body: JSON.stringify(quiz),
     }
-    const api='http://35.228.95.87:7000';
-    return fetch(`${api}/quiz`)
+    const api = 'http://35.228.95.87:7000';
+    console.log(quiz);
+    return fetch(`${api}/quiz`, requestOptions).then(res => {
+        return res.json();
+    })
 }

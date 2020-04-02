@@ -40,7 +40,6 @@ class EditQuestion extends React.Component {
                             onChangeAnswer={this.props.onChangeAnswer}
                             editMode={this.props.editMode}
                             type={this.state.answerType}
-                            question_id={this.state.id}
                             changeType={this.props.changeType}
                             answers={this.props.answers}
                         />

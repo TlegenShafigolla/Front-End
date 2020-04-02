@@ -33,7 +33,7 @@ class EditDescription extends React.Component {
                 <Typography variant="body2"
                             component="p"> {this.props.value.last_edited_date} </Typography>
                 <div>
-                    <Button color="primary" onClick={this.props.showMode}>SAVE</Button>
+                    <Button color="primary" onClick={this.props.saveButton}>SAVE</Button>
                 </div>
             </div>
         )
