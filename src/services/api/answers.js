@@ -33,6 +33,26 @@ export  function postAnswers(question_id, answers) {
     });
 }
 
+export function deleteAnswers(question_id, answer_id) {
+    const authToken = `Bearer ${getSession()}`;
+    const requestOptions = {
+        method: 'DELETE',
+        headers: {
+            Authorization: authToken,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            id: answer_id,
+        }),
+    };
+
+    const api = 'http://35.228.95.87:7000';
+    return fetch(`${api}/quiz/answer/${question_id}`, requestOptions).then(res => {
+        return res.json();
+    });
+}
+
 /*
 * "answers": [
 		{

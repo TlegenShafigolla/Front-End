@@ -55,10 +55,11 @@ class EditAnswer extends React.Component {
                 <div className={s.TextField}>
                     {this.state.answers === [] ? '' : this.state.answers.map((val, index) =>
                         <SaveAnswers
+                            deleteAnswerOnClick={this.props.deleteAnswerOnClick}
                             changeCheck={this.props.changeCheck}
                             changePoint={this.props.changePoint}
                             id={index.toString()}
-                            key={index}
+                            key={val.answer + index.toString()}
                             value={val}
                             onChangeAnswer={this.props.onChangeAnswer}
                             point={this.props.point}
@@ -101,8 +102,11 @@ class SaveAnswers extends React.Component {
                             onChange={this.props.changePoint}
                         />
                     </div>
-                    <IconButton className={s.deleteButton} size='small' color='inherit'><HighlightOffIcon color='error'
-                                                                                                          fontSize='small'/></IconButton>
+                    <IconButton className={s.deleteButton}
+                                size='small' color='inherit'
+                                onClick={event => this.props.deleteAnswerOnClick(this.state.id)}>
+                        <HighlightOffIcon color='error' fontSize='small'/>
+                    </IconButton>
                 </div>
 
             );
@@ -122,12 +126,15 @@ class SaveAnswers extends React.Component {
                         id={this.state.id}
                         key={this.state.index}
                         color='primary'
-                                checked={this.props.value.correct}
-                    onChange={this.props.changeCheck}/>}
-                                  />
-                    <IconButton className={s.deleteButton} size='small' color='inherit'>
-                        <HighlightOffIcon color='error'
-                                          fontSize='small'/></IconButton>
+                        checked={this.props.value.correct === 1}
+                        onChange={this.props.changeCheck}/>}
+                    />
+                    <IconButton className={s.deleteButton}
+                                size='small'
+                                color='inherit'
+                                onClick={event => this.props.deleteAnswerOnClick(this.state.id)}>
+                        <HighlightOffIcon color='error' fontSize='small'/>
+                    </IconButton>
                 </div>
 
             );
