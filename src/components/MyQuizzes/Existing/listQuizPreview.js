@@ -49,7 +49,7 @@ class ListQuizPreview extends React.Component {
                                   deleteQuiz={this.deleteQuiz}
                                    />) : ' '}
                     </div>
-                    <IconButton color='primary' onClick={this.addNewQuizz}>
+                    <IconButton color="primary" onClick={this.addNewQuizz}>
                         <AddIcon fontSize='large'/>
                     </IconButton>
 

@@ -23,7 +23,7 @@ class ShowQuiz extends React.Component {
                             component="p"> {this.props.value.last_edited_date.toString()} </Typography>
             </CardContent>
             <CardActions className={s.CardActions}>
-                <Button component='primary' onClick={this.props.editMode}>
+                <Button  onClick={this.props.editMode}>
                     Edit
                 </Button>
                 <Link to={'/admin/quizzes/edit/' + this.props.value.id.toString()}>

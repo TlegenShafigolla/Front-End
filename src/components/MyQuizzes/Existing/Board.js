@@ -13,7 +13,7 @@ class board extends React.Component {
         return (
             <Link
                 activeClass="active"
-                to={this.props.value.order_id}
+                to={this.props.value.order_id.toString()}
                 spy={true}
                 smooth={true}
                 offset={-70}
