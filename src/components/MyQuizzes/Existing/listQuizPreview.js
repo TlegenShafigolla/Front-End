@@ -15,12 +15,11 @@ class   ListQuizPreview extends React.Component {
 addNewQuizz=()=>{
     const quizzes=this.state.quizzes;
     quizzes.push( {
-        last_edited_date: Date(),
+        last_edited_date: '',
         quiz_name: "Quizname",
         description: "Description",
         id: this.state.quizzes.length+1,
         questions_count: 0,
-        created_date: Date,
     });
     this.setState({quizzes:quizzes})
 }
