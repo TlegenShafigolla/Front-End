@@ -2,7 +2,7 @@ import React from "react";
 import ShowQuestion from "./showQuestion";
 import EditQuestion from "./editQuestion";
 import getAnswers, {postAnswers} from "../../../services/api/answers";
-import {postQuestions} from "../../../services/api/questions";
+import {deleteQuestions, postQuestions} from "../../../services/api/questions";
 
 
 class Question extends React.Component {
@@ -31,13 +31,14 @@ class Question extends React.Component {
         answer[Number(event.target.id)].points = event.target.value;
         this.setState({answers: answer});
         this.setState({answersChanged: true});
-    }
-    ChangeCheck=(event)=>{
+    };
+
+    changeCheck=(event)=>{
         let answer = this.state.answers;
         answer[Number(event.target.id)].correct = event.target.checked;
         this.setState({answers: answer});
         this.setState({answersChanged: true});
-    }
+    };
 
     changeType = (newType) => {
         this.setState({answerType: newType});
@@ -47,7 +48,16 @@ class Question extends React.Component {
         this.setState({editMode: true});
     };
 
-    deleteOnClick = () => {
+    deleteQuestionOnClick = () => {
+        if(this.state.id !== undefined){
+            deleteQuestions(this.props.value.quiz_id, this.state.id);
+            if(true){
+                this.props.deleteQuestion(this.props.value.order_id);
+            }
+        }
+        else{
+            this.props.deleteQuestion(this.props.value.order_id);
+        }
     };
 
     saveOnClick = async () => {
@@ -118,7 +128,7 @@ class Question extends React.Component {
     render() {
         if (this.state.editMode) {
             return <EditQuestion
-                ChangeCheck={this.ChangeCheck}
+                changeCheck={this.changeCheck}
                 changePoint={this.changePoint}
                 point={this.props.point}
                 correctWrong={this.props.correctWrong}
@@ -135,7 +145,7 @@ class Question extends React.Component {
                 {...this.props}/>
         } else {
             return <ShowQuestion editOnClick={this.editOnClick}
-                                 deleteOnClick={this.deleteOnClick}
+                                 deleteQuestionOnClick={this.deleteQuestionOnClick}
                                  editMode={this.state.editMode}
                                  answerType={this.state.answerType}
                                  answers={this.state.answers}
