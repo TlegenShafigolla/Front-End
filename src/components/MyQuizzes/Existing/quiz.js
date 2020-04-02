@@ -1,7 +1,7 @@
 import React from "react";
 import ShowQuiz from "../Editing/showQuiz";
 import EditDescription from "../Editing/editDescription";
-import {postQuiz} from "../../../services/api/myquizzes";
+import {deleteQuiz, postQuiz} from "../../../services/api/myquizzes";
 
 class Quiz extends React.Component {
 //quiz_name, questions_count, description, last_edited_date
@@ -19,18 +19,25 @@ class Quiz extends React.Component {
         }
     }
 
+    deleteQuizOnClick = () => {
+        if(this.state.id !== undefined) {
+            deleteQuiz(this.state.id)
+        }
+        this.props.deleteQuiz(this.props.value.id)
+    };
+
     changeDescription = (event) => {
         this.setState({description: event.target.value})
         this.setState({quizChange: true})
 
-    }
+    };
     changeQuizName = (event) => {
         this.setState({quiz_name: event.target.value});
         this.setState({quizChange: true})
-    }
+    };
     editMode = () => {
         this.setState({editMode: true})
-    }
+    };
     saveButton = async () => {
         this.setState({editMode: false});
         if (this.state.quizChange) {
@@ -41,7 +48,7 @@ class Quiz extends React.Component {
                 point: this.state.point,
                 showResult: this.state.showResult
             };
-           // await postQuiz([quizzes]);
+            // await postQuiz([quizzes]);
             this.setState({quizChange: false})
         }
     };
@@ -50,6 +57,7 @@ class Quiz extends React.Component {
         if (!this.state.editMode) {
             return (<div>
                     <ShowQuiz
+                        deleteQuizOnClick={this.deleteQuizOnClick}
                         editMode={this.editMode}
                         quiz_name={this.state.quiz_name}
                         description={this.state.description}

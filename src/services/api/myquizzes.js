@@ -10,7 +10,7 @@ export default function getQuizzes() {
     const api = 'http://35.228.95.87:7000';
     const json = fetch(`${api}/quiz`, requestOptions).then(res => {
         return res.json();
-    })
+    });
     return json;
 }
 
@@ -24,10 +24,28 @@ export function postQuiz(quiz) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(quiz),
-    }
+    };
     const api = 'http://35.228.95.87:7000';
-    console.log(quiz);
     return fetch(`${api}/quiz`, requestOptions).then(res => {
         return res.json();
     })
+}
+export function deleteQuiz(quiz_id) {
+    const authToken = `Bearer ${getSession()}`;
+    const requestOptions = {
+        method: 'DELETE',
+        headers: {
+            Authorization: authToken,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            id: quiz_id
+        })
+    };
+
+    const api = 'http://35.228.95.87:7000';
+    return fetch(`${api}/quiz`, requestOptions).then(res => {
+        return res.json();
+    });
 }

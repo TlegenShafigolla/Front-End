@@ -32,7 +32,7 @@ class ShowQuiz extends React.Component {
                     </IconButton>
                 </Link>
                 <Tooltip title='Delete'>
-                    <IconButton size='small' className={s.DeleteButton} aria-label='delete'>
+                    <IconButton size='small' className={s.DeleteButton} onClick={this.props.deleteQuizOnClick} aria-label='delete'>
                         <HighlightOffIcon fontSize='small' color='secondary'/>
                     </IconButton>
                 </Tooltip>
