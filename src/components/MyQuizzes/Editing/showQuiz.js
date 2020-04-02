@@ -20,7 +20,7 @@ class ShowQuiz extends React.Component {
                 <Typography className={s.pos}
                             color="textSecondary"> {this.props.value.questions_count.toString()} </Typography>
                 <Typography variant="body2"
-                            component="p"> {this.props.value.last_edited_date.toString()} </Typography>
+                            component="p"> {this.props.last_edited_date.toString()} </Typography>
             </CardContent>
             <CardActions className={s.CardActions}>
                 <Button  onClick={this.props.editMode}>

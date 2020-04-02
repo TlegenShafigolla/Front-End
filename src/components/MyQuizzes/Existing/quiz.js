@@ -14,13 +14,15 @@ class Quiz extends React.Component {
             quiz_name: this.props.value.quiz_name,
             quizChange: false,
             mixed: this.props.value.mixed,
-            point: this.props.value.point,
-            showResult: this.props.value.showResult
+            points: this.props.value.points,
+            showResults: this.props.value.showResults,
+            disabledSaveButton: false,
+            last_edited_date: this.props.value.last_edited_date
         }
     }
 
     deleteQuizOnClick = () => {
-        if(this.state.id !== undefined) {
+        if (this.state.id !== undefined) {
             deleteQuiz(this.state.id)
         }
         this.props.deleteQuiz(this.props.value.id)
@@ -36,21 +38,30 @@ class Quiz extends React.Component {
         this.setState({quizChange: true})
     };
     editMode = () => {
+
         this.setState({editMode: true})
     };
     saveButton = async () => {
+        if(this.state.disabledSaveButton){
+            return;
+        }
+        this.setState({disabledSaveButton:true});
         this.setState({editMode: false});
         if (this.state.quizChange) {
             const quiz = {
+                id: this.state.id,
                 quiz_name: this.state.quiz_name,
                 description: this.state.description,
                 mixed: this.state.mixed,
-                point: this.state.point,
-                showResult: this.state.showResult
+                points: this.state.points,
+                showResults: this.state.showResults,
+                last_edited_date: this.props.value.last_edited_date
             };
-            // await postQuiz([quizzes]);
+            await postQuiz(quiz).then(val => console.log(val));
             this.setState({quizChange: false})
         }
+        this.setState({disabledSaveButton:false});
+
     };
 
     render() {
@@ -61,6 +72,7 @@ class Quiz extends React.Component {
                         editMode={this.editMode}
                         quiz_name={this.state.quiz_name}
                         description={this.state.description}
+                        last_edited_date={this.state.last_edited_date}
                         {...this.props}
                     />
                 </div>
