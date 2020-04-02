@@ -2,7 +2,7 @@ import React from "react";
 import ShowQuestion from "./showQuestion";
 import EditQuestion from "./editQuestion";
 import getAnswers, {postAnswers} from "../../../services/api/answers";
-import {postQuestions} from "../../../services/api/questions";
+import {deleteQuestions, postQuestions} from "../../../services/api/questions";
 
 
 class Question extends React.Component {
@@ -31,13 +31,14 @@ class Question extends React.Component {
         answer[Number(event.target.id)].points = event.target.value;
         this.setState({answers: answer});
         this.setState({answersChanged: true});
-    }
+    };
+
     changeCheck=(event)=>{
         let answer = this.state.answers;
         answer[Number(event.target.id)].correct = event.target.checked;
         this.setState({answers: answer});
         this.setState({answersChanged: true});
-    }
+    };
 
     changeType = (newType) => {
         this.setState({answerType: newType});
@@ -47,7 +48,16 @@ class Question extends React.Component {
         this.setState({editMode: true});
     };
 
-    deleteOnClick = () => {
+    deleteQuestionOnClick = () => {
+        if(this.state.id !== undefined){
+            deleteQuestions(this.props.value.quiz_id, this.state.id);
+            if(true){
+                this.props.deleteQuestion(this.props.value.order_id);
+            }
+        }
+        else{
+            this.props.deleteQuestion(this.props.value.order_id);
+        }
     };
 
     saveOnClick = async () => {
@@ -55,7 +65,7 @@ class Question extends React.Component {
             return;
         }
         this.setState({disableSaveButton: true});
-        if(this.state.id == null && (this.state.questionChanged || this.state.answersChanged)){
+        if(this.state.id === undefined && (this.state.questionChanged || this.state.answersChanged)){
             const question = {
                 quiz_id: this.props.value.quiz_id,
                 order_id: this.props.value.order_id,
@@ -63,8 +73,7 @@ class Question extends React.Component {
                 question: this.state.question,
                 image: this.state.image,
             };
-            await postQuestions(this.props.value.quiz_id, [question]).then(ret => this.setState({id: ret.created.id}));
-            console.log(this.state.id);
+            await postQuestions(this.props.value.quiz_id, [question]).then(ret => this.setState({id: ret.created[0].id}));
             this.setState({questionChanged: false});
         }
         if(this.state.questionChanged){
@@ -81,10 +90,12 @@ class Question extends React.Component {
             this.setState({questionChanged: false});
         }
         if(this.state.answersChanged){
-            await postAnswers(this.state.id, this.state.answers);
-            if(this.state.id !== undefined){
-                await getAnswers(this.state.id).then(val => this.setState({answers: val.answers}))
+            let answers = this.state.answers;
+            for(let i in answers){
+                answers[i].question_id = this.state.id.toString();
             }
+            await postAnswers(this.state.id, this.state.answers);
+            await getAnswers(this.state.id).then(val => this.setState({answers: val.answers}));
             this.setState({answersChanged: false});
         }
         this.setState({editMode: false});
@@ -106,7 +117,7 @@ class Question extends React.Component {
     addNewAnswer =() => {
         const answers = this.state.answers;
         answers.push({
-            question_id: this.props.value.id,
+            question_id: this.state.id,
             correct: 0,
             points: 0,
             answer: 'New answer',
@@ -134,7 +145,7 @@ class Question extends React.Component {
                 {...this.props}/>
         } else {
             return <ShowQuestion editOnClick={this.editOnClick}
-                                 deleteOnClick={this.deleteOnClick}
+                                 deleteQuestionOnClick={this.deleteQuestionOnClick}
                                  editMode={this.state.editMode}
                                  answerType={this.state.answerType}
                                  answers={this.state.answers}

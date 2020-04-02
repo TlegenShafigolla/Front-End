@@ -31,7 +31,7 @@ class ShowQuestion extends React.Component {
                     <IconButton color="primary" onClick={this.props.editOnClick}>
                         <EditIcon/>
                     </IconButton>
-                    <IconButton aria-label="delete" onClick={this.props.deleteOnClick}>
+                    <IconButton aria-label="delete" onClick={this.props.deleteQuestionOnClick}>
                         <DeleteIcon/>
                     </IconButton>
                 </div>

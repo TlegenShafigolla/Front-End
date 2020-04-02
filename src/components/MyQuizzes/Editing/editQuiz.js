@@ -1,6 +1,6 @@
 import React from 'react'
 import s from './css/editQuizz.module.css'
-import getQuestions from "../../../services/api/questions";
+import getQuestions, {postQuestions} from "../../../services/api/questions";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
@@ -37,9 +37,19 @@ addNewQuestion=()=>{
         this.setState({questions:questions});
 };
 
+    deleteQuestion = (order_id) => {
+        let questions = this.state.questions;
+        questions.splice(order_id - 1, 1);
+        for(let i = order_id - 1; i < questions.length; i++){
+            questions[i].order_id = i + 1;
+        }
+        postQuestions(this.state.id, questions);
+        this.setState({questions: questions});
+    };
+
     points=()=>{
-            this.setState({point:true})
-        };
+        this.setState({point:true})
+    };
     correct=()=>{
         this.setState({point:false})
     };
@@ -65,7 +75,12 @@ addNewQuestion=()=>{
                           </div>
                           <div className={s.question}>
                               {this.state.questions === undefined || this.state.questions === null ? ' ' :
-                                  this.state.questions.map(val => <Question key={val.order_id} value={val} point={this.state.point} />)}
+                                  this.state.questions.map(val => <Question
+                                      key={val.id}
+                                      value={val}
+                                      point={this.state.point}
+                                      deleteQuestion={this.deleteQuestion}
+                                  />)}
                           </div>
                         <IconButton color='primary' size='medium' className={s.addbutton} onClick={this.addNewQuestion}>
                             <AddIcon fontSize='large'/>
@@ -75,7 +90,6 @@ addNewQuestion=()=>{
                         <div>
                             {this.state.questions === undefined || this.state.questions === null ? ' ' :
                                 this.state.questions.map(val => <Board key={val.order_id} value={val}/>)}
-
                         </div>
                     </div>
                 </div>
