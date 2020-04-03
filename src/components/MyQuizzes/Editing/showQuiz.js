@@ -19,17 +19,28 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import FormControl from "@material-ui/core/FormControl";
+import Snackbar from "@material-ui/core/Snackbar";
 
 class ShowQuiz extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            open: false
+            open: false,
+            openSnackbar: false,
+            vertical: 'top',
+            horizontal: 'center',
         }
     }
 
     onClickInvite = () => {
-        this.setState({open: !this.state.open})
+        this.setState({open: true})
+    }
+    onClickInviteInDialog = (newState) => {
+        this.setState({open: false});
+        this.setState({openSnackbar: true, ...newState})
+    }
+    snackClose = () => {
+        this.setState({openSnackbar: false})
     }
 
     render() {
@@ -60,14 +71,15 @@ class ShowQuiz extends React.Component {
                     </IconButton>
                 </Tooltip>
             </CardActions>
-            <Dialog open={this.state.open} onBackdropClick={()=>this.setState({open:false})} aria-labelledby="Invite">
+            <Dialog open={this.state.open} onBackdropClick={() => this.setState({open: false})}
+                    aria-labelledby="Invite">
                 <DialogActions>
-                    <IconButton size='small'  onClick={()=>this.setState({open:false})}
+                    <IconButton size='small' onClick={() => this.setState({open: false})}
                                 aria-label='delete'>
                         <HighlightOffIcon fontSize='small' color='secondary'/>
                     </IconButton>
                 </DialogActions>
-                <DialogTitle id="Invite">Invite:  {this.props.quiz_name}</DialogTitle>
+                <DialogTitle id="Invite">Invite: {this.props.quiz_name}</DialogTitle>
                 <FormControl component="fieldset">
                     <RadioGroup aria-label="type" name="Results">
                         <FormControlLabel value="person" control={<Radio color="primary"/>}
@@ -86,7 +98,7 @@ class ShowQuiz extends React.Component {
                         id="name"
                         label="Name"
                         fullWidth
-                    />  <TextField
+                    /> <TextField
                     autoFocus
                     margin="dense"
                     id="Surname"
@@ -94,7 +106,6 @@ class ShowQuiz extends React.Component {
                     fullWidth
                 />
                     <TextField
-                        autoFocus
                         margin="dense"
                         id="Email"
                         label="Email Address"
@@ -103,11 +114,16 @@ class ShowQuiz extends React.Component {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button color="primary" onClick={this.onClickInvite}>
+                    <Button color="primary" onClick={this.onClickInviteInDialog}>
                         Invite
                     </Button>
                 </DialogActions>
             </Dialog>
+            <Snackbar
+                open={this.state.openSnackbar}
+                message="Message"
+                onClose={this.snackClose}
+            />
         </div>);
     }
 }
