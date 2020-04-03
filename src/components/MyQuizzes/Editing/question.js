@@ -3,6 +3,7 @@ import ShowQuestion from "./showQuestion";
 import EditQuestion from "./editQuestion";
 import getAnswers, {deleteAnswers, postAnswers} from "../../../services/api/answers";
 import {deleteQuestions, postQuestions} from "../../../services/api/questions";
+import $ from "jquery";
 
 
 class Question extends React.Component {
@@ -130,7 +131,7 @@ class Question extends React.Component {
             question_id: this.state.id,
             correct: 0,
             points: 0,
-            answer: 'New answer',
+            answer:'',
         });
         this.setState({answers: answers})
     };

@@ -15,7 +15,7 @@ class EditAnswer extends React.Component {
         this.state = {
             multiple_choice: props.type === 'MULTIPLE CHOICE',
             fill_the_blank: props.type === 'FILL THE BLANK',
-            answers: props.answers,
+            answer:props.answer
         };
     }
 
@@ -53,19 +53,21 @@ class EditAnswer extends React.Component {
 
                 </div>
                 <div className={s.TextField}>
-                    {this.state.answers === [] ? '' : this.state.answers.map((val, index) =>
+                    {this.props.answers === [] ? '' : this.props.answers.map((val, index) =>
                         <SaveAnswers
                             deleteAnswerOnClick={this.props.deleteAnswerOnClick}
                             changeCheck={this.props.changeCheck}
                             changePoint={this.props.changePoint}
                             id={index.toString()}
-                            key={val.answer + index.toString()}
+                            key={val.answer + index}
                             value={val}
                             onChangeAnswer={this.props.onChangeAnswer}
                             point={this.props.point}
+                            index={index}
                         />
                     )}
                 </div>
+
             </div>
         );
     }
@@ -88,9 +90,9 @@ class SaveAnswers extends React.Component {
                     <TextField
                         id={this.state.id}
                         key={this.state.index}
-                        placeholder="Answer"
+                        placeholder="New answer"
                         fullWidth
-                        defaultValue={this.state.value.answer}
+                        defaultValue={this.props.value.answer}
                         onChange={this.props.onChangeAnswer}
                     />
                     <div className={s.point}>

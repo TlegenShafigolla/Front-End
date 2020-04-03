@@ -9,8 +9,29 @@ import IconButton from "@material-ui/core/IconButton";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import {Tooltip} from "@material-ui/core";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import TextField from "@material-ui/core/TextField";
+import DialogActions from "@material-ui/core/DialogActions";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Radio from "@material-ui/core/Radio";
+import FormControl from "@material-ui/core/FormControl";
 
 class ShowQuiz extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            open: false
+        }
+    }
+
+    onClickInvite = () => {
+        this.setState({open: !this.state.open})
+    }
+
     render() {
         return (<div className={s.root}>
             <CardContent className={s.CardContent}>
@@ -23,7 +44,8 @@ class ShowQuiz extends React.Component {
                             component="p"> {this.props.last_edited_date.toString()} </Typography>
             </CardContent>
             <CardActions className={s.CardActions}>
-                <Button  onClick={this.props.editMode}>
+                <Button onClick={this.onClickInvite}>Invite</Button>
+                <Button onClick={this.props.editMode}>
                     Edit
                 </Button>
                 <Link to={'/admin/quizzes/edit/' + this.props.value.id.toString()}>
@@ -32,11 +54,60 @@ class ShowQuiz extends React.Component {
                     </IconButton>
                 </Link>
                 <Tooltip title='Delete'>
-                    <IconButton size='small' className={s.DeleteButton} onClick={this.props.deleteQuizOnClick} aria-label='delete'>
+                    <IconButton size='small' className={s.DeleteButton} onClick={this.props.deleteQuizOnClick}
+                                aria-label='delete'>
                         <HighlightOffIcon fontSize='small' color='secondary'/>
                     </IconButton>
                 </Tooltip>
             </CardActions>
+            <Dialog open={this.state.open} onBackdropClick={()=>this.setState({open:false})} aria-labelledby="Invite">
+                <DialogActions>
+                    <IconButton size='small'  onClick={()=>this.setState({open:false})}
+                                aria-label='delete'>
+                        <HighlightOffIcon fontSize='small' color='secondary'/>
+                    </IconButton>
+                </DialogActions>
+                <DialogTitle id="Invite">Invite:  {this.props.quiz_name}</DialogTitle>
+                <FormControl component="fieldset">
+                    <RadioGroup aria-label="type" name="Results">
+                        <FormControlLabel value="person" control={<Radio color="primary"/>}
+                                          checked={true}
+                                          label="Person"/>
+                        <FormControlLabel value="Class" control={<Radio color="primary"/>}
+                                          checked={true}
+                                          disabled={true} label='Class'/>
+
+                    </RadioGroup>
+                </FormControl>
+                <DialogContent>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Name"
+                        fullWidth
+                    />  <TextField
+                    autoFocus
+                    margin="dense"
+                    id="Surname"
+                    label="Surname"
+                    fullWidth
+                />
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="Email"
+                        label="Email Address"
+                        type="email"
+                        fullWidth
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button color="primary" onClick={this.onClickInvite}>
+                        Invite
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </div>);
     }
 }

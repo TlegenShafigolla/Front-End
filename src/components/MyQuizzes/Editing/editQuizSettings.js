@@ -5,44 +5,29 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import Radio from "@material-ui/core/Radio";
 import Button from "@material-ui/core/Button";
 import s from './css/editQuizz.module.css'
+import $ from 'jquery'
 class EditQuizSettings extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            mixed: true,
-            showResults: false,
         };
     }
+hideSaveButton=()=>{
+        $('#saveButton').show(1000)
+}
+render() {
 
-    mixedChecked = () => {
-        this.setState({mixed: true});
-    };
-
-    notMixedChecked = () => {
-        this.setState({mixed: false});
-    };
-
-    showResult = () => {
-        this.setState({showResults: true});
-    };
-
-    notShowResults = () => {
-        this.setState({showResults: false});
-    };
-
-
-    render() {
-
-        return (<div className={s.quizSettings}>
-            <div>
+        return (<div>
+            <div  className={s.quizSettings} onClick={this.hideSaveButton}>
+                <div>
                 <FormControl component="fieldset">
                     <RadioGroup aria-label="type" name="Results">
                         <FormControlLabel value="Mixed" control={<Radio color="primary"/>}
-                                          checked={this.state.mixed}
-                                          onChange={this.mixedChecked} label="Mixed"/>
+                                          checked={this.props.mixed}
+                                          onChange={this.props.mixedChecked} label="Mixed"/>
                         <FormControlLabel value="Not mixed" control={<Radio color="primary"/>}
-                                          checked={!this.state.mixed}
-                                          onChange={this.notMixedChecked} label="Not Mixed"/>
+                                          checked={!this.props.mixed}
+                                          onChange={this.props.notmixed} label="Not Mixed"/>
 
                     </RadioGroup>
                 </FormControl>
@@ -51,11 +36,11 @@ class EditQuizSettings extends React.Component {
                 <FormControl component="fieldset">
                     <RadioGroup aria-label="type" name="Results">
                         <FormControlLabel value="Point" control={<Radio color="primary"/>}
-                                          checked={this.state.showResults}
-                                          onChange={this.showResult} label="Show Results"/>
+                                          checked={this.props.showResults}
+                                          onChange={this.props.showResult} label="Show Results"/>
                         <FormControlLabel value="Do not ShowResult" control={<Radio color="primary"/>}
-                                          checked={!this.state.showResults}
-                                          onChange={this.notShowResults} label='Do not show results'/>
+                                          checked={!this.props.showResults}
+                                          onChange={this.props.notShowResult} label='Do not show results'/>
 
                     </RadioGroup>
                 </FormControl>
@@ -64,14 +49,15 @@ class EditQuizSettings extends React.Component {
                 <FormControl component="fieldset">
                     <RadioGroup aria-label="type" name="Correct/Wrong/Point">
                         <FormControlLabel value="Correct/Wrong" control={<Radio color="primary"/>}
-                                          onChange={this.props.correct} checked={!this.props.point}
+                                          onChange={this.props.correct} checked={!this.props.points}
                                           label="Correct/Wrong"/>
-                        <FormControlLabel value="Point" control={<Radio color="primary"/>} onChange={this.props.points}
-                                          checked={this.props.point} label="Point"/>
+                        <FormControlLabel value="Point" control={<Radio color="primary"/>} onChange={this.props.point}
+                                          checked={this.props.points} label="Point"/>
                     </RadioGroup>
                 </FormControl>
             </div>
-            <Button>Edit</Button>
+            </div>
+            <Button id='saveButton' onClick={this.props.saveButton}>Save</Button>
         </div>);
     }
 }

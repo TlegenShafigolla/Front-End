@@ -8,6 +8,8 @@ import {Link} from "react-router-dom";
 import Question from "./question";
 import Board from "../Existing/Board";
 import EditQuizSettings from "./editQuizSettings";
+import $ from "jquery";
+import {postQuiz} from "../../../services/api/myquizzes";
 
 class editQuiz extends React.Component {
     constructor(props) {
@@ -16,13 +18,14 @@ class editQuiz extends React.Component {
         this.state = {
             quiz_id: id,
             questions: null,
-            mixed: true,
-            showResults: true,
-            description: "",
-            last_edited_date: "",
-            quiz_name: "Quiz Name",
+            mixed: this.props.match.mixed,
+            showResults: this.props.match.showResults,
+            description: this.props.match.description,
+            last_edited_date: this.props.match.last_edited_date,
+            quiz_name: this.props.match.quiz_name,
             questions_count: 0,
-            point: false
+            points:this.props.match.points,
+            quizChanges:false
         };
     }
 
@@ -49,11 +52,54 @@ class editQuiz extends React.Component {
         this.setState({questions: questions});
     };
 
-    points = () => {
-        this.setState({point: true})
+    point = () => {
+        this.setState({points: true})
+        this.setState({quizChanges:true})
     };
     correct = () => {
-        this.setState({point: false})
+        this.setState({points: false})
+        this.setState({quizChanges:true})
+
+    };
+    saveButton = async () => {
+        if (this.state.quizChanges) {
+            const quiz = {
+                id: this.state.quiz_id,
+                quiz_name: this.state.quiz_name,
+                description: this.state.description,
+                mixed: this.state.mixed,
+                points: this.state.points,
+                showResults: this.state.showResults,
+                last_edited_date: Date
+            };
+            await postQuiz(quiz)
+            this.setState({quizChanges: false})
+        }
+        $('#saveButton').hide()
+
+    };
+
+    mixedChecked = () => {
+        this.setState({mixed: true});
+        this.setState({quizChanges:true})
+
+    };
+
+    notMixedChecked = () => {
+        this.setState({mixed: false});
+        this.setState({quizChanges:true})
+
+    };
+    showResult = () => {
+        this.setState({showResults: true});
+        this.setState({quizChanges:true})
+
+    };
+
+    notShowResults = () => {
+        this.setState({showResults: false});
+        this.setState({quizChanges:true})
+
     };
 
     render() {
@@ -74,7 +120,12 @@ class editQuiz extends React.Component {
                         {this.state.description}
                     </div>
                     <div className={s.settings}>
-                        <EditQuizSettings points={this.points} correct={this.correct} point={this.state.point}/>
+                        <EditQuizSettings point={this.point} correct={this.correct} points={this.state.points}
+                                          saveButton={this.saveButton} mixedChecked={this.mixedChecked}
+                                          notmixed={this.notMixedChecked} mixed={this.state.mixed}
+                                          showResult={this.showResult} showResults={this.state.showResults}
+                                          notShowResult={this.notShowResults}
+                        />
                     </div>
                     <div className={s.question}>
                         {this.state.questions === undefined || this.state.questions === null ? ' ' :
@@ -103,11 +154,14 @@ class editQuiz extends React.Component {
     componentDidMount() {
         getQuestions(this.state.quiz_id).then(json => {
             this.setState({
+                mixed:json.mixed,
+                showResults:json.showResults,
                 questions: json.questions,
                 quiz_name: json.quiz_name,
                 description: json.description,
                 questions_count: json.questions_count,
-                last_edited_date: json.last_edited_date
+                last_edited_date: json.last_edited_date,
+                points:json.points
             });
         });
     }

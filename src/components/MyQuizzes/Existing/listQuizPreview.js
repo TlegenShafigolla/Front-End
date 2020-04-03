@@ -19,9 +19,9 @@ class ListQuizPreview extends React.Component {
         const newQuiz = {
             quiz_name: "Quizname",
             description: "Description",
-            mixed: false,
-            showResults: false,
-            points: false,
+            mixed: null,
+            showResults: null,
+            points: null,
         };
         await postQuiz(newQuiz).then(val => quizzes.push(val));
         this.setState({quizzes: quizzes})
