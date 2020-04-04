@@ -68,6 +68,7 @@ class Quiz extends React.Component {
         if (!this.state.editMode) {
             return (<div>
                     <ShowQuiz
+                        quiz_id={this.state.id}
                         deleteQuizOnClick={this.deleteQuizOnClick}
                         editMode={this.editMode}
                         quiz_name={this.state.quiz_name}

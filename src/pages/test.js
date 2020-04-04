@@ -1,10 +1,10 @@
 import React from 'react'
-import getTest, {postTest} from "../services/api/test";
 import {Dialog} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
+import {getInvitation} from "../services/api/invitation";
 
 class Test extends React.Component {
     constructor(props) {
@@ -12,7 +12,7 @@ class Test extends React.Component {
         this.state = {
             status: '',
             email: '',
-            correctEmail:false
+            correctEmail:false,
         }
     }
 
@@ -20,17 +20,17 @@ class Test extends React.Component {
         this.setState({email: event.target.value})
     }
     onClickContinue = async () => {
-        const email = {
-            email: this.state.email
-        }
-        await postTest(email)
-        this.setState({correctEmail:true})
+        // const email = {
+        //     email: this.state.email
+        // }
+        // await postTest(email)
+        // this.setState({correctEmail:true})
     }
 
 componentWillMount() {
-        getTest().then(json => {
+        getInvitation().then(json => {
             this.setState({status: json.status})
-        }).then(res=>console.log(res))
+        }).then(val=>console.log(val))
 }
 
     render() {

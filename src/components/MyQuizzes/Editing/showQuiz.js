@@ -19,6 +19,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import FormControl from "@material-ui/core/FormControl";
 import Snackbar from "@material-ui/core/Snackbar";
+import {postInvitation} from "../../../services/api/invitation";
 
 class ShowQuiz extends React.Component {
     constructor(props) {
@@ -26,17 +27,36 @@ class ShowQuiz extends React.Component {
         this.state = {
             open: false,
             openSnackbar: false,
-            vertical: 'top',
-            horizontal: 'center',
+            name: '',
+            surname: '',
+            email: '',
+            quiz_id: this.props.quiz_id,
+            inviteChange: false
         }
     }
 
+    onChangeName = (event) => {
+        this.setState({name: event.target.value})
+    };
+    onChangeSurname = (event) => {
+        this.setState({surname: event.target.value})
+    };
+    onChangeEmail = (event) => {
+        this.setState({email: event.target.value})
+    };
     onClickInvite = () => {
         this.setState({open: true})
     }
-    onClickInviteInDialog = (newState) => {
+    onClickInviteInDialog = async () => {
+            const invite = {
+                name: this.state.name,
+                surname: this.state.surname,
+                email: this.state.email,
+                quiz_id: this.state.quiz_id
+            };
+            await postInvitation(invite).then(()=>this.setState({openSnackbar:true}))
+
         this.setState({open: false});
-        this.setState({openSnackbar: true, ...newState})
     }
     snackClose = () => {
         this.setState({openSnackbar: false})
@@ -97,12 +117,14 @@ class ShowQuiz extends React.Component {
                         id="name"
                         label="Name"
                         fullWidth
+                        onChange={this.onChangeName}
                     /> <TextField
                     autoFocus
                     margin="dense"
                     id="Surname"
                     label="Surname"
                     fullWidth
+                    onChange={this.onChangeSurname}
                 />
                     <TextField
                         margin="dense"
@@ -110,6 +132,7 @@ class ShowQuiz extends React.Component {
                         label="Email Address"
                         type="email"
                         fullWidth
+                        onChange={this.onChangeEmail}
                     />
                 </DialogContent>
                 <DialogActions>
@@ -120,7 +143,7 @@ class ShowQuiz extends React.Component {
             </Dialog>
             <Snackbar
                 open={this.state.openSnackbar}
-                message="Message"
+                message="Success"
                 onClose={this.snackClose}
             />
         </div>);
