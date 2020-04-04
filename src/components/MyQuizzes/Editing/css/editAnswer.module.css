@@ -1,8 +1,8 @@
 
 
 .TextField{
-    margin: auto;
-    width: 95%;
+    margin: 5px;
+    width: 100%;
 }
 .formControll{
     display: flex;

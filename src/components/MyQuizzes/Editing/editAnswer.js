@@ -91,12 +91,13 @@ class SaveAnswers extends React.Component {
                         key={this.state.index}
                         placeholder="New answer"
                         fullWidth
+                        autoFocus={true}
                         defaultValue={this.props.value.answer}
                         onChange={this.props.onChangeAnswer}
                     />
                     <div className={s.point}>
-                        <TextField
-                            id={this.state.id}
+                        <InputBase
+                            id={this.state.id+1}
                             key={this.state.index}
                             inputProps={{ 'aria-label': 'Point' }}
                             defaultValue={this.props.value.points}

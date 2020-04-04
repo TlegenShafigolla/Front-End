@@ -26,7 +26,7 @@ class Question extends React.Component {
         }
     }
 
-    changePoint = (event) => {
+    onChangePoint = (event) => {
         let answer = this.state.answers;
         answer[Number(event.target.id)].points = event.target.value;
         this.setState({answers: answer});
@@ -94,7 +94,6 @@ class Question extends React.Component {
                 question: this.state.question,
                 image: this.state.image,
             };
-            console.log(question);
             await postQuestions(this.props.value.quiz_id, [question]);
             this.setState({questionChanged: false});
         }
@@ -138,7 +137,7 @@ class Question extends React.Component {
         if (this.state.editMode) {
             return <EditQuestion
                 changeCheck={this.changeCheck}
-                changePoint={this.changePoint}
+                changePoint={this.onChangePoint}
                 deleteAnswerOnClick={this.deleteAnswerOnClick}
                 point={this.props.point}
                 correctWrong={this.props.correctWrong}
