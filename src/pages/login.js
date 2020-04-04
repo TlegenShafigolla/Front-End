@@ -19,6 +19,7 @@ class Login extends React.Component {
         this.onChangePassword = this.onChangePassword.bind(this);
     }
 
+
     onChangePassword(event) {
         this.setState({password: event.target.value});
     }

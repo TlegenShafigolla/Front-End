@@ -26,10 +26,11 @@ class Test extends React.Component {
         await postTest(email)
         this.setState({correctEmail:true})
     }
+
 componentWillMount() {
         getTest().then(json => {
             this.setState({status: json.status})
-        })
+        }).then(res=>console.log(res))
 }
 
     render() {

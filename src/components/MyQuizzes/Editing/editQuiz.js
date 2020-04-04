@@ -132,7 +132,7 @@ class editQuiz extends React.Component {
                             this.state.questions.map(val => <Question
                                 key={val.id}
                                 value={val}
-                                point={this.state.point}
+                                point={this.state.points}
                                 deleteQuestion={this.deleteQuestion}
                             />)}
                     </div>

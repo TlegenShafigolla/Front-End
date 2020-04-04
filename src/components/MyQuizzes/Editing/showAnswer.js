@@ -2,7 +2,6 @@ import React from "react";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Typography from "@material-ui/core/Typography";
 import s from './css/showAnswer.module.css'
-import Divider from "@material-ui/core/Divider";
 import Radio from "@material-ui/core/Radio";
 
 class ShowAnswer extends React.Component {

@@ -3,8 +3,6 @@ import ShowQuestion from "./showQuestion";
 import EditQuestion from "./editQuestion";
 import getAnswers, {deleteAnswers, postAnswers} from "../../../services/api/answers";
 import {deleteQuestions, postQuestions} from "../../../services/api/questions";
-import $ from "jquery";
-
 
 class Question extends React.Component {
     constructor(props) {
@@ -53,7 +51,7 @@ class Question extends React.Component {
     deleteAnswerOnClick = (index) => {
         let answers = this.state.answers;
         //delete answers[index]
-        if(this.state.id !== undefined && answers[index].id !== undefined){
+        if (this.state.id !== undefined && answers[index].id !== undefined) {
             deleteAnswers(this.state.id, answers[index].id);
         }
         answers.splice(index, 1);
@@ -131,7 +129,7 @@ class Question extends React.Component {
             question_id: this.state.id,
             correct: 0,
             points: 0,
-            answer:'',
+            answer: '',
         });
         this.setState({answers: answers})
     };

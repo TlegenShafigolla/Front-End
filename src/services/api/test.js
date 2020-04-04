@@ -22,7 +22,7 @@ export function postTest(link, email) {
         }),
     };
     const api = 'http://35.228.95.87:7000';
-    const json = fetch(`${api}/invitation/${link}`, requestOptions).then(res => {
+    return fetch(`${api}/invitation/${link}`, requestOptions).then(res => {
         return res.json();
     });
 }

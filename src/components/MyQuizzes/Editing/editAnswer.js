@@ -7,7 +7,6 @@ import s from './css/editAnswer.module.css'
 import Radio from "@material-ui/core/Radio";
 import IconButton from "@material-ui/core/IconButton";
 import InputBase from "@material-ui/core/InputBase";
-import FormControl from "@material-ui/core/FormControl";
 
 class EditAnswer extends React.Component {
     constructor(props) {
@@ -96,7 +95,7 @@ class SaveAnswers extends React.Component {
                         onChange={this.props.onChangeAnswer}
                     />
                     <div className={s.point}>
-                        <InputBase
+                        <TextField
                             id={this.state.id}
                             key={this.state.index}
                             inputProps={{ 'aria-label': 'Point' }}
