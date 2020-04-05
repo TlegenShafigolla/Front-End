@@ -5,14 +5,14 @@ import Login from "./pages/login";
 import {Route, Switch} from "react-router-dom";
 import {PrivateAdminRoute, PrivateUserRoute} from "./function/PrivateRoute";
 import home from "./pages/home";
-import Test from "./pages/test";
+import Quiz from "./pages/quiz";
 
 const Routes = () => {
     return (
         <Switch>
             <Route exact path="/" component={home}/>
             <Route path="/login" component={Login}/>
-            <Route path='/test/:link' component={Test}/>
+            <Route path='/test/:link' component={Quiz}/>
             <PrivateAdminRoute  path="/admin/" component={admin}/>
             <PrivateUserRoute path="/user" component={users}/>
         </Switch>

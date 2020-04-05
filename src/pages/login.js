@@ -31,7 +31,7 @@ class Login extends React.Component {
     render() {
         const email = this.state.email;
         const password = this.state.password;
-        const status = window.localStorage.getItem('status');
+        const status = localStorage.getItem('status');
 
         if (status === 'admin') {
             return <Redirect to='/admin/profile'/>;

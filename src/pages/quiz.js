@@ -4,37 +4,42 @@ import TextField from "@material-ui/core/TextField";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
-import {getInvitation} from "../services/api/invitation";
+import {getInvitation, postEmail} from "../services/api/invitation";
 
-class Test extends React.Component {
+class Quiz extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            status: '',
-            email: '',
-            correctEmail:false,
+            status: null,
+            email: null,
+            statusEmail: false,
         }
     }
 
     onChangeEmail = (event) => {
         this.setState({email: event.target.value})
-    }
-    onClickContinue = async () => {
-        // const email = {
-        //     email: this.state.email
-        // }
-        // await postTest(email)
-        // this.setState({correctEmail:true})
-    }
+    };
 
-componentWillMount() {
-        getInvitation().then(json => {
-            this.setState({status: json.status})
-        }).then(val=>console.log(val))
-}
+    onClickContinue = async () => {
+        const path = window.location.pathname.split('/');
+        const email = this.state.email;
+        await postEmail(path[2], email).then(json => console.log(json));
+    };
+
+    UNSAFE_componentWillMount = async () => {
+        const path = window.location.pathname.split('/')
+        localStorage.setItem('quiz_link', path[2]);
+        await getInvitation(path[2]).then(json => {
+            console.log(json);
+            this.setState({status: "Success" === json.Status});
+        });
+    };
 
     render() {
-        if (this.state.status === 'Success') {
+        if(this.state.status === null){
+            return '';
+        }
+        if (this.state.status === true && this.state.statusEmail === false) {
             return (
                 <div>
                     <Dialog open={true}>
@@ -44,7 +49,7 @@ componentWillMount() {
                                        label="Email Address"
                                        type="email"
                                        onChange={this.onChangeEmail}
-                                       fullWidt/>
+                                       fullWidth/>
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={this.onClickContinue}>Continue</Button>
@@ -52,15 +57,13 @@ componentWillMount() {
                     </Dialog>
                 </div>
             );
-        }
-        if (this.state.status === 'Success' &&this.state.correctEmail) {
+        } else if (this.state.status === true && this.state.statusEmail === true) {
             return (
-                 <div>
-                    test
+                <div>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem, explicabo.
                 </div>
             )
-        }
-        else {
+        } else {
             return (
                 <div>
                     error
@@ -69,7 +72,6 @@ componentWillMount() {
         }
     }
 
-
 }
 
-export default Test;
+export default Quiz;
