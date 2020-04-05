@@ -4,7 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
-import {getInvitation, postEmail} from "../services/api/invitation";
+import {getInvitation, postInvitation} from "../services/api/invitation";
 
 class Quiz extends React.Component {
     constructor(props) {
@@ -12,7 +12,8 @@ class Quiz extends React.Component {
         this.state = {
             status: null,
             email: null,
-            statusEmail: false,
+            statusEmail: null,
+            session_id: localStorage.getItem('session_id')
         }
     }
 
@@ -23,23 +24,26 @@ class Quiz extends React.Component {
     onClickContinue = async () => {
         const path = window.location.pathname.split('/');
         const email = this.state.email;
-        await postEmail(path[2], email).then(json => console.log(json));
+        await postInvitation(path[2], email).then(json => {
+            localStorage.setItem('session_id', json['session_id']);
+            this.setState({session_id: json['session_id']});
+            this.setState({statusEmail: 'Success' === json.Status})
+        });
     };
 
     UNSAFE_componentWillMount = async () => {
-        const path = window.location.pathname.split('/')
+        const path = window.location.pathname.split('/');
         localStorage.setItem('quiz_link', path[2]);
         await getInvitation(path[2]).then(json => {
-            console.log(json);
             this.setState({status: "Success" === json.Status});
         });
     };
 
     render() {
-        if(this.state.status === null){
+        if (this.state.status === null) {
             return '';
         }
-        if (this.state.status === true && this.state.statusEmail === false) {
+        if (this.state.status === true && this.state.session_id === null) {
             return (
                 <div>
                     <Dialog open={true}>
@@ -57,7 +61,8 @@ class Quiz extends React.Component {
                     </Dialog>
                 </div>
             );
-        } else if (this.state.status === true && this.state.statusEmail === true) {
+        }
+        if (this.state.status && this.state.session_id !== null) {
             return (
                 <div>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem, explicabo.
