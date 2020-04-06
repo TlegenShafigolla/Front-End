@@ -19,7 +19,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import FormControl from "@material-ui/core/FormControl";
 import Snackbar from "@material-ui/core/Snackbar";
-import {postQuizInvitation} from "../../../services/api/myquizzes";
+import {postQuizInvitation} from "../../../services/adminAPI/quiz";
 
 class ShowQuiz extends React.Component {
     constructor(props) {
@@ -54,7 +54,8 @@ class ShowQuiz extends React.Component {
                 email: this.state.email,
                 quiz_id: this.state.quiz_id
             };
-            await postQuizInvitation(invite).then(()=>this.setState({openSnackbar:true}))
+            await postQuizInvitation(invite).then((val)=>{this.setState({openSnackbar:true})
+            console.log(val)})
 
         this.setState({open: false});
     }

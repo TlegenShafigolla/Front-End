@@ -1,8 +1,8 @@
 import React from "react";
 import ShowQuestion from "./showQuestion";
 import EditQuestion from "./editQuestion";
-import getAnswers, {deleteAnswers, postAnswers} from "../../../services/api/answers";
-import {deleteQuestions, postQuestions} from "../../../services/api/questions";
+import getAnswers, {deleteAnswers, postAnswers} from "../../../services/adminAPI/answers";
+import {deleteQuestions, postQuestions} from "../../../services/adminAPI/questions";
 
 class Question extends React.Component {
     constructor(props) {

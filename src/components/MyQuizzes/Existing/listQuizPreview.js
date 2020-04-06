@@ -1,5 +1,5 @@
 import React from "react";
-import getQuizzes, {postQuiz} from "../../../services/api/myquizzes";
+import getQuiz, {postQuiz} from "../../../services/adminAPI/quiz";
 import Quiz from "./quiz";
 import s from '../listQuizPreview.module.css'
 import IconButton from "@material-ui/core/IconButton";
@@ -60,7 +60,7 @@ class ListQuizPreview extends React.Component {
 
 //quiz_name description mixed showResult points
     componentDidMount() {
-        getQuizzes().then(json => {
+        getQuiz().then(json => {
             this.setState({quizzes: json.quizzes})
         });
     }

@@ -1,6 +1,6 @@
 import {getSession} from "../GetSession";
 
-export default function getQuizzes() {
+export default function getQuiz() {
     const authToken = `Bearer ${getSession()}`;
     const requestOptions = {
         method: 'GET',
@@ -48,6 +48,7 @@ export function postQuizInvitation(invitation) {
     });
 
 }
+
 export function deleteQuiz(quiz_id) {
     const authToken = `Bearer ${getSession()}`;
     const requestOptions = {
@@ -67,3 +68,4 @@ export function deleteQuiz(quiz_id) {
         return res.json();
     });
 }
+

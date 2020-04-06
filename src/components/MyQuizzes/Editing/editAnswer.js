@@ -97,7 +97,7 @@ class SaveAnswers extends React.Component {
                     />
                     <div className={s.point}>
                         <InputBase
-                            id={this.state.id+1}
+                            id={this.state.id}
                             key={this.state.index}
                             inputProps={{ 'aria-label': 'Point' }}
                             defaultValue={this.props.value.points}
@@ -128,7 +128,7 @@ class SaveAnswers extends React.Component {
                         id={this.state.id}
                         key={this.state.index}
                         color='primary'
-                        checked={this.props.value.correct === 1}
+                        checked={this.props.value.correct}
                         onChange={this.props.changeCheck}/>}
                     />
                     <IconButton className={s.deleteButton}

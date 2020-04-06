@@ -1,7 +1,7 @@
 import React from "react";
 import ShowQuiz from "../Editing/showQuiz";
 import EditDescription from "../Editing/editDescription";
-import {deleteQuiz, postQuiz} from "../../../services/api/myquizzes";
+import {deleteQuiz, postQuiz} from "../../../services/adminAPI/quiz";
 
 class Quiz extends React.Component {
 //quiz_name, questions_count, description, last_edited_date

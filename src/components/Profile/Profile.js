@@ -1,6 +1,6 @@
 import React from "react";
 import s from './Profile.module.css'
-import getProfile from "../../services/api/profile";
+import getProfile from "../../services/adminAPI/profile";
 import MenuItem from "@material-ui/core/MenuItem";
 import CssBaseline from "@material-ui/core/CssBaseline";
 class Profile extends React.Component {

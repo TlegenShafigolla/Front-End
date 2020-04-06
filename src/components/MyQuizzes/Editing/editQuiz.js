@@ -1,6 +1,6 @@
 import React from 'react'
 import s from './css/editQuizz.module.css'
-import getQuestions, {postQuestions} from "../../../services/api/questions";
+import getQuestions, {postQuestions} from "../../../services/adminAPI/questions";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
@@ -9,7 +9,7 @@ import Question from "./question";
 import Board from "../Existing/Board";
 import EditQuizSettings from "./editQuizSettings";
 import $ from "jquery";
-import {postQuiz} from "../../../services/api/myquizzes";
+import {postQuiz} from "../../../services/adminAPI/quiz";
 
 class editQuiz extends React.Component {
     constructor(props) {
@@ -29,7 +29,7 @@ class editQuiz extends React.Component {
         };
     }
 
-    addNewQuestion = () => {
+     addNewQuestion = () => {
         const questions = this.state.questions;
         questions.push({
             editMode: false,
