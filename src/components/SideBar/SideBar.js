@@ -21,17 +21,22 @@ const SideBar = (props) => {
         >
 
             <div className={s.buttongroup}>
-                <NavLink to="/admin/profile"
-                >
+                <NavLink to="/admin/profile">
                     <Button color='primary'
-                            startIcon={<PermIdentityOutlinedIcon/>}
-                    >Profile</Button>
+                            startIcon={<PermIdentityOutlinedIcon/>}>
+                        Profile
+                    </Button>
                 </NavLink>
                 <NavLink to='/admin/quizzes'>
                     <Button color='primary'
-                            startIcon={<PermIdentityOutlinedIcon/>}
-                    >
+                            startIcon={<PermIdentityOutlinedIcon/>}>
                         My Quizzes
+                    </Button>
+                </NavLink>
+                <NavLink to='/admin/invitations'>
+                    <Button color='primary'
+                            startIcon={<PermIdentityOutlinedIcon/>}>
+                        Invitations
                     </Button>
                 </NavLink>
             </div>
