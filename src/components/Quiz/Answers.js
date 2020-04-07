@@ -14,20 +14,18 @@ class Answers extends React.Component {
     }
 
     render() {
-        console.log(this.props.value.answers[0].question_id)
         if (this.state.type === 'MULTIPLE CHOICE') {
             return (
                 <div>
                     {this.props.value.answers === null ? '' : this.props.value.answers.map((val, index) =>
-                        <div key={index} id={index.toString()}>
+                        <div key={index}>
                             <Typography className={s.typography} variant="body1" gutterBottom>
                                 {val.answer}
                             </Typography>
-                            <FormControlLabel
-                                id={index.toString()}
-                                key={index}
-                                control={<Checkbox color='primary'/>}
-                                onChange={this.props.onChangeCheck}/>
+                            <Checkbox id={this.props.index.toString()}
+                                      value={val.id.toString()}
+                                      name={val.question_id.toString()}
+                                      onChange={this.props.onChangeCheck} color='primary'/>
                         </div>
                     )}
                 </div>
@@ -36,13 +34,16 @@ class Answers extends React.Component {
             return (
                 <div>
                     {this.props.value.answers === null ? '' : this.props.value.answers.map((val, index) =>
-                        <TextField id={val.question_id.toString()} key={index} onChange={this.props.onChangeAnswer}/>
+                        <TextField id={val.question_id.toString()} name={this.props.index.toString()} key={index}
+                                   onChange={this.props.onChangeAnswer}/>
                     )}
                 </div>
             );
         }
 
     }
+
+
 }
 
 export default Answers;

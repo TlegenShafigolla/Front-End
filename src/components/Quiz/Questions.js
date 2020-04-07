@@ -8,6 +8,7 @@ class Question extends React.Component {
     render() {
         return (
             <div className={s.question} id={this.props.value.order_id.toString()}>
+
                 <div className={s.questioninfo}>
                     <div className={s.questionOrder}>{this.props.value.order_id}.</div>
                     <div className={s.questionField}>
@@ -17,6 +18,7 @@ class Question extends React.Component {
                     </div>
                     <div>
                         <Answers
+                            index={this.props.index}
                             onChangeAnswer={this.props.onChangeAnswer}
                             key={this.props.value.question_id}
                             onChangeCheck={this.props.onChangeCheck}
