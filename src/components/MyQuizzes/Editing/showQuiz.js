@@ -75,7 +75,9 @@ class ShowQuiz extends React.Component {
                             component="p"> {this.props.last_edited_date.toString()} </Typography>
             </CardContent>
             <CardActions className={s.CardActions}>
-                <Button onClick={this.onClickInvite}>Invite</Button>
+                <Button onClick={this.onClickInvite}>
+                    Invite
+                </Button>
                 <Button onClick={this.props.editMode}>
                     Edit
                 </Button>

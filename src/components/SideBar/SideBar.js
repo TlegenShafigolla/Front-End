@@ -39,6 +39,12 @@ const SideBar = (props) => {
                         Invitations
                     </Button>
                 </NavLink>
+                <NavLink to='/admin/reports'>
+                    <Button color='primary'
+                            startIcon={<PermIdentityOutlinedIcon/>}>
+                        Reports
+                    </Button>
+                </NavLink>
             </div>
 
         </Drawer>
