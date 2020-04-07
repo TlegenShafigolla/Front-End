@@ -5,8 +5,6 @@ import Button from "@material-ui/core/Button";
 import React from "react";
 import {postQuizAnswer} from "../../services/userAPI/answers";
 import {postTakeQuestion} from "../../services/userAPI/questions";
-import s from './Quiz.module.css'
-import answers from "../../services/adminAPI/answers";
 
 class StartQuiz extends React.Component {
     constructor(props) {
@@ -49,15 +47,10 @@ class StartQuiz extends React.Component {
                     }
                 }
             }
-            if (answers.answer_ids.length === 0) {
-                answers.splice(0, 1)
-                this.setState({answers: answers});
-                return;
+
             }
         }
 
-
-    };
 
 
     onChangeAnswer = (event) => {
@@ -109,7 +102,7 @@ class StartQuiz extends React.Component {
     render() {
         console.log(this.state.answers);
         return (
-            <div className={s.question}>
+            <div >
                 <div> {this.state.questions === undefined || this.state.questions === null ? ' ' :
                     this.state.questions.map((val, index) => <Question
                         onChangeCheck={this.onChangeCheck}
