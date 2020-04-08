@@ -5,7 +5,7 @@ import clsx from "clsx";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import MyQuizRoute from "../components/MyQuizzes/MyQuizRoute";
 import Invitations from "../components/Invitations/Invitations";
-import Reports from "../components/Reports/Reports";
+import ReportRoute from "../components/Reports/ReportRoute";
 
 const drawerWidth = 240;
 const styles = makeStyles(theme => ({
@@ -53,7 +53,7 @@ export const Routes = (props) => {
                 <Route  path="/admin/profile" component={Profile}/>
                 <Route  path="/admin/quizzes" component={MyQuizRoute}/>
                 <Route  path="/admin/invitations" component={Invitations}/>
-                <Route  path="/admin/reports" component={Reports}/>
+                <Route  path="/admin/reports" component={ReportRoute}/>
             </main>
         </div>
 

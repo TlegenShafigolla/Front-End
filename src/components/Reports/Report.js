@@ -1,13 +1,13 @@
 import React from "react";
 
-class Reports extends React.Component{
+class Report extends React.Component{
     render() {
         return(
             <div>
-                Reports
+                Report
             </div>
         );
     }
 }
 
-export default Reports;
+export default Report;

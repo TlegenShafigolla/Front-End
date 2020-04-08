@@ -1,5 +1,4 @@
 import React from "react";
-import Quiz from "../MyQuizzes/Existing/quiz";
 import InvitationCard from "./invitationCard";
 
 class ListInvitationPreview extends React.Component{
