@@ -3,8 +3,12 @@ import {Dialog} from "@material-ui/core";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import React from "react";
-import {postTakeQuestion} from "../../services/userAPI/questions";
 import {postQuizAnswer} from "../../services/userAPI/answers";
+import {postTakeQuestion} from "../../services/userAPI/questions";
+import s from './Quiz.module.css'
+import Toolbar from "@material-ui/core/Toolbar";
+import AppBar from "@material-ui/core/AppBar";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
 class StartQuiz extends React.Component {
     constructor(props) {
@@ -18,34 +22,71 @@ class StartQuiz extends React.Component {
     }
 
     onChangeCheck = (event) => {
+        let answers = this.state.answers;
+        if (event.target.checked) {
+            for (let i = 0; i < answers.length; i++) {
+                if (answers[i].question_id === Number(event.target.id)) {
+                    answers[i].answer_ids.push(Number(event.target.value));
+                    this.setState({answers: answers});
+                    return;
+                }
+            }
+            let newQuestion = {
+                "question_id": Number(event.target.id),
+                "answer_ids": [Number(event.target.value)]
+            };
+            answers.push(newQuestion);
+            this.setState({answers: answers});
+        }
 
-        // const answers = this.state.answers;
-        // const answer_ids = [];
-        // answer_ids[Number(event.target.id)] = (event.target.checked);
-        // answers.push({
-        //     // question_id:Number(event.target.id),
-        //     answer_ids: answer_ids
-        // })
-        // console.log('=' + event.target.id);
-        // console.log(this.state.answers);
-        // console.log(answer_ids)
+        if (!event.target.checked) {
+            for (let i = 0; i < answers.length; i++) {
+                if (answers[i].question_id === Number(event.target.id)) {
+                    for (let j = 0; j < answers[i].answer_ids.length; j++) {
+                        if (answers[i].answer_ids[j] === Number(event.target.value)) {
+                            answers[i].answer_ids.splice(j, 1);
+                        }
+                    }
+                    if (answers[i].answer_ids.length === 0) {
+                        answers.splice(i, 1)
+                    }
+                    this.setState({answers: answers});
+                    return;
+                }
+            }
+        }
     };
+
+
     onChangeAnswer = (event) => {
-        let answers=this.state.answers;
-        const answer=event.target.value.trim();
-        answers[Number(event.target.id)]={
-            question_id:Number(event.target.id),
-            answer:answer}
-        console.log(answers)
+        let answers = this.state.answers;
+        for (let i = 0; i < answers.length; i++) {
+            if (answers[i].question_id === Number(event.target.id)) {
+                answers[i].answer = event.target.value;
+                if (answers[i].answer === null || answers[i].answer === '') {
+                    answers.splice(i, 1)
+                }
+                this.setState({answers: answers});
+                return;
+            }
+        }
+        let newQuestion = {
+            "question_id": Number(event.target.id),
+            "answer": [event.target.value]
+        };
+        answers.push(newQuestion);
+        this.setState({answers: answers});
 
     };
+
 
     componentDidMount() {
         const path = window.location.pathname.split('/');
         const session_id = localStorage.getItem('session_id');
         postTakeQuestion(path[2], session_id).then(json => {
-            this.setState({questions: json.questions})
+            this.setState({questions: json.questions});
             console.log(json)
+
         });
     }
 
@@ -54,38 +95,61 @@ class StartQuiz extends React.Component {
     }
 
     onClickSubmit = async () => {
-        this.setState({finished: 1})
+        this.setState({finished: 1});
         if (this.state.finished === 1) {
             const path = window.location.pathname.split('/');
             const session_id = localStorage.getItem('session_id');
             let answer = this.state.answers;
-            await postQuizAnswer(path[2], session_id, this.state.finished, answer).then(val => console.log(val))
-            localStorage.clear()
+            await postQuizAnswer(path[2], session_id, this.state.finished, answer).then(val => console.log(val));
+            localStorage.removeItem('session_id')
         }
-    }
+    };
     startTest = () => {
         this.setState({startTestDialog: false})
-    }
+    };
 
     render() {
+        const styles = makeStyles(theme => ({
+            drawerHeader: {
+                display: 'flex',
+                alignItems: 'center',
+                padding: theme.spacing(0, 2),
+                // necessary for content to be below app bar
+                ...theme.mixins.toolbar,
+                justifyContent: 'flex-end',
+            },
+        }));
         return (
             <div>
-                <div> {this.state.questions === undefined || this.state.questions === null ? ' ' :
-                    this.state.questions.map(val => <Question
-                        onChangeCheck={this.onChangeCheck}
-                        onChangeAnswer={this.onChangeAnswer}
-                        key={val.id}
-                        value={val}
-                    />)}
+                <AppBar>
+                    <Toolbar>
+                        header
+                    </Toolbar>
+                </AppBar>
+                <div className={s.quiz}>
+                    <div
+                        className={s.questions}> {this.state.questions === undefined || this.state.questions === null ? ' ' :
+                        this.state.questions.map((val, index) => <Question
+                            onChangeCheck={this.onChangeCheck}
+                            onChangeAnswer={this.onChangeAnswer}
+                            key={val.id}
+                            index={index}
+                            value={val}
+                        />)}
+                    </div>
+                    <div className={s.info}>
+                        <div className={s.board}>
+                       {this.state.questions === undefined || this.state.questions === null ? ' ' :
+                           this.state.questions.map((val, index) =><div key={index}>{val.order_id}</div>)}
+                        </div>
+                        <Button variant='contained' color='primary'  onClick={this.onClickSubmit}>End</Button>
+                    </div>
+                    <Dialog open={this.state.startTestDialog} fullScreen={this.state.startTestDialog}>
+                        <DialogActions>
+                            <Button color='primary' onClick={this.startTest}>Start test</Button>
+                        </DialogActions>
+                    </Dialog>
                 </div>
-                <div>
-                    <Button onClick={this.onClickSubmit}>Submit</Button>
-                </div>
-                <Dialog open={this.state.startTestDialog} fullScreen={this.state.startTestDialog}>
-                    <DialogActions>
-                        <Button color='primary' onClick={this.startTest}>Start test</Button>
-                    </DialogActions>
-                </Dialog>
             </div>
         );
     }

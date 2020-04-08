@@ -1,0 +1,26 @@
+.question{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.board {
+    width: 100%;
+}
+
+.info {
+    margin-top: 20px;
+    right: 50px;
+    height: calc(93% - 20px);
+    width: 20%;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+   justify-content: space-between;
+}
+
+.info button {
+    bottom: 0;
+    float: right;
+    margin-bottom: 0;
+}
