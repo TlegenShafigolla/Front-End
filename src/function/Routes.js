@@ -39,7 +39,7 @@ const styles = makeStyles(theme => ({
         justifyContent: 'flex-end',
     },
 
-}))
+}));
 
 export const Routes = (props) => {
     const classes = styles();

@@ -5,6 +5,10 @@ import Button from "@material-ui/core/Button";
 import React from "react";
 import {postQuizAnswer} from "../../services/userAPI/answers";
 import {postTakeQuestion} from "../../services/userAPI/questions";
+import s from './Quiz.module.css'
+import Toolbar from "@material-ui/core/Toolbar";
+import AppBar from "@material-ui/core/AppBar";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
 class StartQuiz extends React.Component {
     constructor(props) {
@@ -43,8 +47,8 @@ class StartQuiz extends React.Component {
                             answers[i].answer_ids.splice(j, 1);
                         }
                     }
-                    if (answers[i].answer_ids.length===0) {
-                        answers.splice(i,1)
+                    if (answers[i].answer_ids.length === 0) {
+                        answers.splice(i, 1)
                     }
                     this.setState({answers: answers});
                     return;
@@ -59,10 +63,10 @@ class StartQuiz extends React.Component {
         for (let i = 0; i < answers.length; i++) {
             if (answers[i].question_id === Number(event.target.id)) {
                 answers[i].answer = event.target.value;
-                if (answers[i].answer===null||answers[i].answer==='') {
-                    answers.splice(i,1)
+                if (answers[i].answer === null || answers[i].answer === '') {
+                    answers.splice(i, 1)
                 }
-                this.setState({answers:answers})
+                this.setState({answers: answers});
                 return;
             }
         }
@@ -73,7 +77,7 @@ class StartQuiz extends React.Component {
         answers.push(newQuestion);
         this.setState({answers: answers});
 
-                };
+    };
 
 
     componentDidMount() {
@@ -97,7 +101,7 @@ class StartQuiz extends React.Component {
             const session_id = localStorage.getItem('session_id');
             let answer = this.state.answers;
             await postQuizAnswer(path[2], session_id, this.state.finished, answer).then(val => console.log(val));
-            localStorage.clear()
+            localStorage.removeItem('session_id')
         }
     };
     startTest = () => {
@@ -105,26 +109,47 @@ class StartQuiz extends React.Component {
     };
 
     render() {
-        console.log(this.state.answers);
+        const styles = makeStyles(theme => ({
+            drawerHeader: {
+                display: 'flex',
+                alignItems: 'center',
+                padding: theme.spacing(0, 2),
+                // necessary for content to be below app bar
+                ...theme.mixins.toolbar,
+                justifyContent: 'flex-end',
+            },
+        }));
         return (
             <div>
-                <div> {this.state.questions === undefined || this.state.questions === null ? ' ' :
-                    this.state.questions.map((val, index) => <Question
-                        onChangeCheck={this.onChangeCheck}
-                        onChangeAnswer={this.onChangeAnswer}
-                        key={val.id}
-                        index={index}
-                        value={val}
-                    />)}
+                <AppBar>
+                    <Toolbar>
+                        header
+                    </Toolbar>
+                </AppBar>
+                <div className={s.quiz}>
+                    <div
+                        className={s.questions}> {this.state.questions === undefined || this.state.questions === null ? ' ' :
+                        this.state.questions.map((val, index) => <Question
+                            onChangeCheck={this.onChangeCheck}
+                            onChangeAnswer={this.onChangeAnswer}
+                            key={val.id}
+                            index={index}
+                            value={val}
+                        />)}
+                    </div>
+                    <div className={s.info}>
+                        <div className={s.board}>
+                       {this.state.questions === undefined || this.state.questions === null ? ' ' :
+                           this.state.questions.map((val, index) =><div key={index}>{val.order_id}</div>)}
+                        </div>
+                        <Button variant='contained' color='primary'  onClick={this.onClickSubmit}>End</Button>
+                    </div>
+                    <Dialog open={this.state.startTestDialog} fullScreen={this.state.startTestDialog}>
+                        <DialogActions>
+                            <Button color='primary' onClick={this.startTest}>Start test</Button>
+                        </DialogActions>
+                    </Dialog>
                 </div>
-                <div>
-                    <Button onClick={this.onClickSubmit}>Submit</Button>
-                </div>
-                <Dialog open={this.state.startTestDialog} fullScreen={this.state.startTestDialog}>
-                    <DialogActions>
-                        <Button color='primary' onClick={this.startTest}>Start test</Button>
-                    </DialogActions>
-                </Dialog>
             </div>
         );
     }
