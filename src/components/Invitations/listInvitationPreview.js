@@ -22,6 +22,7 @@ class ListInvitationPreview extends React.Component{
                         id={index}
                         invitation={val}
                         type={this.props.tab}
+                        onClickDelete={this.props.onClickDelete}
                     />) : ' '}
             </div>
         );

@@ -4,7 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import Tab from "@material-ui/core/Tab";
 import classes from './invitations.module.css'
 import ListInvitationPreview from "./listInvitationPreview";
-import getInvitations from "../../services/adminAPI/invitations";
+import getInvitations, {deleteInvitations} from "../../services/adminAPI/invitations";
 
 class Invitations extends React.Component{
     constructor(props){
@@ -30,6 +30,17 @@ class Invitations extends React.Component{
         }
     };
 
+    onClickDelete = (event, index) => {
+        const invitation = this.state.invitations[index];
+        let deletedInvitation = this.state.deleted;
+        deletedInvitation.push(invitation);
+        this.setState({deleted: deletedInvitation});
+        let pendingInvitation = this.state.pending;
+        pendingInvitation.splice(index, 1);
+        this.setState({pending: pendingInvitation});
+        deleteInvitations(invitation.id);
+    };
+
     render() {
         return(
             <div className={classes.Container}>
@@ -52,6 +63,7 @@ class Invitations extends React.Component{
                             tab={this.state.tab}
                             invitations={this.state.invitations}
                             inprogress={this.state.inprogress}
+                            onClickDelete={this.onClickDelete}
                         />
                     </div>
                 </div>
