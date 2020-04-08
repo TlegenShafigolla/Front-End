@@ -8,8 +8,8 @@ class ReportRoute extends React.Component{
     render() {
         return(
             <div>
-                <Route exact path='/admin/reports' component={Report}/>
-                <Route path='/admin/reports/:id' component={listReportPreview}/>
+                <Route exact path='/admin/reports' component={listReportPreview}/>
+                <Route path='/admin/reports/:id' component={Report}/>
             </div>
         );
     }
