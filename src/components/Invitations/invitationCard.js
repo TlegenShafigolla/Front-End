@@ -28,14 +28,18 @@ class InvitationCard extends React.Component{
                         {"Quiz version of: " +this.props.invitation.quiz.created_date}
                     </Typography>
                     <Typography variant="body2" component="p">
-                        {"Invited: " +this.props.invitation.invited_date}
+                        {"Invited: " + this.props.invitation.invited_date}
                     </Typography>
                     <Typography variant="body2" component="p">
-                        {"Mixed: " +this.props.invitation.quiz.mixed}
+                        {"Mixed: " + this.props.invitation.quiz.mixed}
                     </Typography>
                     <Typography variant="body2" component="p">
-                        {"showResults: " +this.props.invitation.quiz.showResults}
+                        {"showResults: " + this.props.invitation.quiz.showResults}
                     </Typography>
+                    {this.props.type === 3 ?
+                        <Typography variant="body2" component="p">
+                            {"Type: In-Progress"}
+                        </Typography> : ''}
                 </CardContent>
             </div>
         );
