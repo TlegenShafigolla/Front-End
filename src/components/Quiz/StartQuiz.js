@@ -21,14 +21,14 @@ class StartQuiz extends React.Component {
         let answers = this.state.answers;
         if (event.target.checked) {
             for (let i = 0; i < answers.length; i++) {
-                if (answers[i].question_id === Number(event.target.name)) {
+                if (answers[i].question_id === Number(event.target.id)) {
                     answers[i].answer_ids.push(Number(event.target.value));
                     this.setState({answers: answers});
                     return;
                 }
             }
             let newQuestion = {
-                "question_id": Number(event.target.name),
+                "question_id": Number(event.target.id),
                 "answer_ids": [Number(event.target.value)]
             };
             answers.push(newQuestion);
@@ -37,20 +37,21 @@ class StartQuiz extends React.Component {
 
         if (!event.target.checked) {
             for (let i = 0; i < answers.length; i++) {
-                for (let j = 0; j < answers[i].answer_ids.length; j++) {
-                    if (answers[i].question_id === Number(event.target.name)) {
+                if (answers[i].question_id === Number(event.target.id)) {
+                    for (let j = 0; j < answers[i].answer_ids.length; j++) {
                         if (answers[i].answer_ids[j] === Number(event.target.value)) {
                             answers[i].answer_ids.splice(j, 1);
-                            this.setState({answers: answers});
-                            return;
                         }
                     }
+                    if (answers[i].answer_ids.length===0) {
+                        answers.splice(i,1)
+                    }
+                    this.setState({answers: answers});
+                    return;
                 }
             }
-
-            }
         }
-
+    };
 
 
     onChangeAnswer = (event) => {
@@ -58,7 +59,10 @@ class StartQuiz extends React.Component {
         for (let i = 0; i < answers.length; i++) {
             if (answers[i].question_id === Number(event.target.id)) {
                 answers[i].answer = event.target.value;
-                this.setState({answers: answers});
+                if (answers[i].answer===null||answers[i].answer==='') {
+                    answers.splice(i,1)
+                }
+                this.setState({answers:answers})
                 return;
             }
         }
@@ -69,7 +73,8 @@ class StartQuiz extends React.Component {
         answers.push(newQuestion);
         this.setState({answers: answers});
 
-    };
+                };
+
 
     componentDidMount() {
         const path = window.location.pathname.split('/');
@@ -91,18 +96,18 @@ class StartQuiz extends React.Component {
             const path = window.location.pathname.split('/');
             const session_id = localStorage.getItem('session_id');
             let answer = this.state.answers;
-            await postQuizAnswer(path[2], session_id, this.state.finished, answer).then(val => console.log(val))
+            await postQuizAnswer(path[2], session_id, this.state.finished, answer).then(val => console.log(val));
             localStorage.clear()
         }
     };
     startTest = () => {
         this.setState({startTestDialog: false})
-    }
+    };
 
     render() {
         console.log(this.state.answers);
         return (
-            <div >
+            <div>
                 <div> {this.state.questions === undefined || this.state.questions === null ? ' ' :
                     this.state.questions.map((val, index) => <Question
                         onChangeCheck={this.onChangeCheck}
