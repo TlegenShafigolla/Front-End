@@ -54,6 +54,10 @@
     right: -20px;
     flex: 0.5;
 }
+.radioButton{
+    display: flex;
+    justify-content: space-around;
+}
 /*.root {*/
 /*    padding: 2px 4px;*/
 /*    display: flex;*/

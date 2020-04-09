@@ -114,7 +114,6 @@ class StartQuiz extends React.Component {
     };
 
     render() {
-        console.log(this.state.correct);
         return (
             <div>
                 <AppBar>

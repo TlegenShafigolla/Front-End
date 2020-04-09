@@ -34,28 +34,29 @@ class ShowQuiz extends React.Component {
             inviteChange: false,
             errorName: false,
             errorSurname: false,
-            errorEmail: false
+            errorEmail: false,
+            last_edited_date: this.props.last_edited_date,
+            quiz_name: this.props.quiz_name
         }
     }
 
     onChangeName = (event) => {
-        this.setState({name: event.target.value})
+        this.setState({name: event.target.value});
         this.setState({errorName: false})
     };
     onChangeSurname = (event) => {
-        this.setState({surname: event.target.value})
+        this.setState({surname: event.target.value});
         this.setState({errorSurname: false})
     };
     onChangeEmail = (event) => {
-        this.setState({email: event.target.value})
+        this.setState({email: event.target.value});
         this.setState({errorEmail: false})
     };
     onClickInvite = () => {
         this.setState({open: true})
-    }
+    };
     onClickInviteInDialog = async () => {
-        let email=/[0-9a-z_-]+@[0-9a-z_-]+\.[a-z]{2,5}$/i;
-        console.log(email)
+        let email = /[0-9a-z_-]+@[0-9a-z_-]+\.[a-z]{2,5}$/i;
         if (this.state.name !== null && this.state.name !== '' && this.state.surname !== null && this.state.surname !== '' && email.test(this.state.email)) {
             const invite = {
                 name: this.state.name,
@@ -66,8 +67,8 @@ class ShowQuiz extends React.Component {
             await postQuizInvitation(invite).then((val) => {
                 if (val.Status === 'Success') {
                     this.setState({openSnackbar: true});
+                    console.log(val)
                 }
-                console.log(val)
             });
 
             this.setState({open: false});
@@ -85,6 +86,13 @@ class ShowQuiz extends React.Component {
     };
     snackClose = () => {
         this.setState({openSnackbar: false})
+    };
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log(this.state.last_edited_date)
+        if (prevProps.last_edited_date !== this.props.last_edited_date) {
+            this.setState({last_edited_date: Date})
+        }
     }
 
     render() {
@@ -122,24 +130,27 @@ class ShowQuiz extends React.Component {
             >
                 <DialogActions>
                     <IconButton size='small' onClick={() => {
-                        this.setState({open: false})
-                        this.setState({email: null})
-                        this.setState({name: null})
+                        this.setState({open: false});
+                        this.setState({email: null});
+                        this.setState({name: null});
                         this.setState({surname: null})
                     }}
                                 aria-label='delete'>
                         <HighlightOffIcon fontSize='small' color='secondary'/>
                     </IconButton>
                 </DialogActions>
-                <DialogTitle id="Invite">Invite: {this.props.quiz_name}</DialogTitle>
+                <DialogTitle id="Invite">Invite: {this.state.quiz_name}</DialogTitle>
                 <FormControl component="fieldset">
                     <RadioGroup aria-label="type" name="Results">
-                        <FormControlLabel value="person" control={<Radio color="primary"/>}
-                                          checked={true}
-                                          label="Person"/>
-                        <FormControlLabel value="Class" control={<Radio color="primary"/>}
-                                          checked={true}
-                                          disabled={true} label='Class'/>
+                        <div className={s.radioButton}>
+
+                            <FormControlLabel value="person" control={<Radio color="primary"/>}
+                                              checked={true}
+                                              label="Person"/>
+                            <FormControlLabel value="Class" control={<Radio color="primary"/>}
+                                              checked={true}
+                                              disabled={true} label='Class'/>
+                        </div>
 
                     </RadioGroup>
                 </FormControl>

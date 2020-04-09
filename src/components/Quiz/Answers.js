@@ -2,7 +2,7 @@ import React from "react";
 import {Checkbox} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import s from "../MyQuizzes/Editing/css/showAnswer.module.css";
+import s from "./Quiz.module.css";
 
 class Answers extends React.Component {
     constructor(props) {
@@ -17,8 +17,8 @@ class Answers extends React.Component {
             return (
                 <div>
                     {this.props.value.answers === null ? '' : this.props.value.answers.map((val, index) =>
-                        <div key={index}>
-                            <Typography className={s.typography} variant="body1" gutterBottom>
+                        <div key={index} className={s.answer}>
+                            <Typography variant="body1" gutterBottom>
                                 {val.answer}
                             </Typography>
                             <Checkbox id={val.question_id.toString()}

@@ -40,7 +40,6 @@ class Quiz extends React.Component {
         const path = window.location.pathname.split('/');
         await getInvitation(path[2]).then(json => {
             this.setState({status: "Success" === json.Status});
-            console.log(json)
         });
     };
 

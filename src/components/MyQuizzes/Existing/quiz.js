@@ -55,7 +55,7 @@ class Quiz extends React.Component {
                 mixed: this.state.mixed,
                 points: this.state.points,
                 showResults: this.state.showResults,
-                last_edited_date: this.props.value.last_edited_date
+                last_edited_date: this.state.last_edited_date,
             };
             await postQuiz(quiz).then(val => console.log(val));
             this.setState({quizChange: false})
