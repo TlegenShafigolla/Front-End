@@ -11,12 +11,14 @@ class Quiz extends React.Component {
             email: null,
             statusEmail: null,
             session_id: localStorage.getItem('session_id'),
-            questions: []
+            questions: [],
+            error:false
         }
     }
 
     onChangeEmail = (event) => {
-        this.setState({email: event.target.value})
+        this.setState({email: event.target.value});
+        this.setState({error:false})
     };
 
     onClickContinue = async () => {
@@ -27,8 +29,8 @@ class Quiz extends React.Component {
             if(json.Status==='Success'){
                 this.setState({session_id: json['session_id']});
                 localStorage.setItem('session_id', json['session_id']);
-            }if (json.status==='Failed'){
-                alert('error')
+            }if (json.Status==='Failed'){
+                this.setState({error:true})
             }
         });
     };
@@ -49,6 +51,7 @@ class Quiz extends React.Component {
         if (this.state.status === true && (this.state.session_id === null || this.state.session_id === undefined)) {
             return (
                 <CheckEmail
+                    error={this.state.error}
                     onChangeEmail={this.onChangeEmail}
                     onClickContinue={this.onClickContinue}
                 />

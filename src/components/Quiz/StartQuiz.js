@@ -148,7 +148,7 @@ class StartQuiz extends React.Component {
                     <DialogContent>
                         <Typography>
                             Thank you for passing the test
-                            {this.state.corrects===null?' null':'You result:'+ this.state.corrects/this.state.questions.length}
+                            {this.state.corrects===null?' null':'You result: '+ this.state.corrects+'/'+this.state.questions.length}
                         </Typography>
                     </DialogContent>
                 </Dialog>

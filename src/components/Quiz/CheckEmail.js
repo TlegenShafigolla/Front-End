@@ -10,7 +10,9 @@ import Button from "@material-ui/core/Button";
              <div>
                  <Dialog open={true}>
                      <DialogContent>
-                         <TextField margin="dense"
+                         <TextField
+                                    error={this.props.error}
+                                    margin="dense"
                                     id="Email"
                                     label="Email Address"
                                     type="email"
