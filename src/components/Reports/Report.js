@@ -22,7 +22,8 @@ class Report extends React.Component{
     }
 
     scrollTabHandleChange = (event, newValue) => {
-
+        console.log(newValue);
+        this.setState({question: this.state.report.questions[newValue]});
     };
 
     render() {
@@ -65,7 +66,7 @@ class Report extends React.Component{
                 <div >
                     <AppBar position="static" color="default">
                         <Tabs
-                            value={this.state.question}
+                            value={0}
                             onChange={this.scrollTabHandleChange}
                             variant="scrollable"
                             scrollButtons="on"
@@ -78,12 +79,20 @@ class Report extends React.Component{
                         </Tabs>
                     </AppBar>
                 </div>
+                <div>
+
+                </div>
             </div>
         );
     }
 
     componentDidMount() {
-        getReport(this.state.report_id).then(val => this.setState({report: val}))
+        getReport(this.state.report_id).then(val => {
+            console.log(val);
+            this.setState({report: val});
+            this.setState({question: this.state.report.questions[0]});
+        })
+
     }
 }
 

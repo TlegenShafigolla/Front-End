@@ -48,7 +48,7 @@ class editQuiz extends React.Component {
         for (let i = order_id - 1; i < questions.length; i++) {
             questions[i].order_id = i + 1;
         }
-        postQuestions(this.state.id, questions);
+        postQuestions(this.state.quiz_id, questions);
         this.setState({questions: questions});
     };
 
@@ -156,7 +156,7 @@ class editQuiz extends React.Component {
             this.setState({
                 mixed:json.mixed,
                 showResults:json.showResults,
-                questions: json.questions,
+                questions: json.questions.sort((a, b) => Number(a.order_id) - Number(b.order_id)),
                 quiz_name: json.quiz_name,
                 description: json.description,
                 questions_count: json.questions_count,

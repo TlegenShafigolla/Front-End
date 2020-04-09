@@ -10,6 +10,7 @@ class Question extends React.Component {
         this.state = {
             editMode: false,
             id: this.props.value.id,
+            quiz_id: this.props.value.quiz_id,
             answerType: this.props.value.type,
             question: this.props.value.question,
             questionChanged: false,
@@ -60,7 +61,7 @@ class Question extends React.Component {
 
     deleteQuestionOnClick = () => {
         if (this.state.id !== undefined) {
-            deleteQuestions(this.props.value.quiz_id, this.state.id);
+            deleteQuestions(this.state.quiz_id, this.state.id);
             if (true) {
                 this.props.deleteQuestion(this.props.value.order_id);
             }
@@ -76,25 +77,27 @@ class Question extends React.Component {
         this.setState({disableSaveButton: true});
         if (this.state.id === undefined && (this.state.questionChanged || this.state.answersChanged)) {
             const question = {
-                quiz_id: this.props.value.quiz_id,
+                quiz_id: this.state.quiz_id,
                 order_id: this.props.value.order_id,
                 type: this.state.answerType,
                 question: this.state.question,
                 image: this.state.image,
             };
-            await postQuestions(this.props.value.quiz_id, [question]).then(ret => this.setState({id: ret.created[0].id}));
+            await postQuestions(this.state.quiz_id, [question]).then(ret => {
+                this.setState({id: ret.created[0].id});
+            });
             this.setState({questionChanged: false});
         }
         if (this.state.questionChanged) {
             const question = {
                 id: this.state.id,
-                quiz_id: this.props.value.quiz_id,
+                quiz_id: this.state.quiz_id,
                 order_id: this.props.value.order_id,
                 type: this.state.answerType,
                 question: this.state.question,
                 image: this.state.image,
             };
-            await postQuestions(this.props.value.quiz_id, [question]);
+            await postQuestions(this.state.quiz_id, [question]);
             this.setState({questionChanged: false});
         }
         if (this.state.answersChanged) {
