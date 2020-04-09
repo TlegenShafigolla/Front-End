@@ -1,22 +1,30 @@
 .buttongroup Button{
 color: #f3f3f3;
     width: 210px;
-    margin: 5px;
-
+    margin-top: 5px;
+   margin-bottom: 20px;
 }
 .buttongroup {
-    width: 240px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     height: 100%;
-}
+   align-items: center;
 
+}
+.buttongroup Button.main{
+    display: flex;
+    justify-content: flex-start;
+}
 .buttongroup Button:focus {
      transition: 0.8s;
      background: #00d3ee;
-     box-shadow: 0px 0px 10px #00d3ee;
+     box-shadow: 0 0 10px #00d3ee;
  }
 .buttongroup a{
     text-decoration: none;
+}
+.buttongroup Button.secondary{
+    display: flex;
+    padding-left: 60px;
+    justify-content: start;
 }

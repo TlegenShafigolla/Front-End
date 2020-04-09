@@ -5,6 +5,7 @@ import {useStyle} from "./Style";
 import {NavLink} from "react-router-dom";
 import PermIdentityOutlinedIcon from '@material-ui/icons/PermIdentityOutlined';
 import s from './SideBar.module.css'
+
 const SideBar = (props) => {
 
     const classes = useStyle();
@@ -23,28 +24,52 @@ const SideBar = (props) => {
             <div className={s.buttongroup}>
                 <NavLink to="/admin/profile">
                     <Button color='primary'
+                            className={s.main}
                             startIcon={<PermIdentityOutlinedIcon/>}>
                         Profile
                     </Button>
                 </NavLink>
                 <NavLink to='/admin/quizzes'>
                     <Button color='primary'
+                            className={s.main}
                             startIcon={<PermIdentityOutlinedIcon/>}>
                         My Quizzes
                     </Button>
                 </NavLink>
                 <NavLink to='/admin/invitations'>
                     <Button color='primary'
-                            startIcon={<PermIdentityOutlinedIcon/>}>
+                            className={s.secondary}
+                            startIcon={<PermIdentityOutlinedIcon/>}
+                    >
                         Invitations
                     </Button>
                 </NavLink>
                 <NavLink to='/admin/reports'>
                     <Button color='primary'
+                            className={s.secondary}
                             startIcon={<PermIdentityOutlinedIcon/>}>
                         Reports
                     </Button>
                 </NavLink>
+                <Button color='primary'
+                        className={s.main}
+                        startIcon={<PermIdentityOutlinedIcon/>}
+                        disabled={true}>
+                    Survey
+                </Button>
+                <Button color='primary'
+                        disabled={true}
+                    className={s.secondary}
+                    startIcon={<PermIdentityOutlinedIcon/>}
+                    >
+                    Invitations
+                </Button>
+                <Button color='primary'
+                        disabled={true}
+                    className={s.secondary}
+                    startIcon={<PermIdentityOutlinedIcon/>}>
+                    Reports
+                </Button>
             </div>
 
         </Drawer>

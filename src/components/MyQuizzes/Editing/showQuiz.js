@@ -31,7 +31,10 @@ class ShowQuiz extends React.Component {
             surname: '',
             email: '',
             quiz_id: this.props.quiz_id,
-            inviteChange: false
+            inviteChange: false,
+            errorName:false,
+            errorSurname:false,
+            errorEmail:false
         }
     }
 
@@ -48,17 +51,28 @@ class ShowQuiz extends React.Component {
         this.setState({open: true})
     }
     onClickInviteInDialog = async () => {
+        if(this.state.name!==''&&this.state.surname!==''&&this.state.email!=='') {
             const invite = {
-                name: this.state.name,
-                surname: this.state.surname,
-                email: this.state.email,
+                name: this.state.name.trim(),
+                surname: this.state.surname.trim(),
+                email: this.state.email.trim(),
                 quiz_id: this.state.quiz_id
             };
-            await postQuizInvitation(invite).then((val)=>{this.setState({openSnackbar:true})
-            console.log(val)})
+            await postQuizInvitation(invite).then((val) => {
+                if (val.Status === 'Success') {
+                    this.setState({openSnackbar: true});
+                }
+                console.log(val)
+            });
 
-        this.setState({open: false});
-    }
+            this.setState({open: false});
+        }
+       else if(this.state.name==='') {
+             this.setState({errorName:true})
+        } else if(this.state.surname==='') {
+             this.setState({errorName:true})
+        }
+        };
     snackClose = () => {
         this.setState({openSnackbar: false})
     }
@@ -115,18 +129,21 @@ class ShowQuiz extends React.Component {
                 </FormControl>
                 <DialogContent>
                     <TextField
+                        error={this.state.errorName}
                         autoFocus
                         margin="dense"
                         id="name"
                         label="Name"
                         fullWidth
+                        variant='outlined'
                         onChange={this.onChangeName}
                     /> <TextField
-                    autoFocus
+                    error={this.state.errorEmail}
                     margin="dense"
                     id="Surname"
                     label="Surname"
                     fullWidth
+                    variant='outlined'
                     onChange={this.onChangeSurname}
                 />
                     <TextField
@@ -135,6 +152,7 @@ class ShowQuiz extends React.Component {
                         label="Email Address"
                         type="email"
                         fullWidth
+                        variant='outlined'
                         onChange={this.onChangeEmail}
                     />
                 </DialogContent>
