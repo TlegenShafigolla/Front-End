@@ -1,7 +1,14 @@
-.question{
+.quiz {
     display: flex;
-    justify-content: center;
     width: 100%;
+    margin-top: 30px;
+    padding: 20px;
+}
+
+.questions {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
 }
 
 .board {
