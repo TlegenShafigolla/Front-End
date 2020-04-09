@@ -48,17 +48,26 @@ class ShowQuiz extends React.Component {
         this.setState({open: true})
     }
     onClickInviteInDialog = async () => {
+        if(this.state.name!==''&&this.state.surname!==''&&this.state.email!=='') {
             const invite = {
-                name: this.state.name,
-                surname: this.state.surname,
-                email: this.state.email,
+                name: this.state.name.trim(),
+                surname: this.state.surname.trim(),
+                email: this.state.email.trim(),
                 quiz_id: this.state.quiz_id
             };
-            await postQuizInvitation(invite).then((val)=>{this.setState({openSnackbar:true})
-            console.log(val)})
+            await postQuizInvitation(invite).then((val) => {
+                if (val.Status === 'Success') {
+                    this.setState({openSnackbar: true});
+                }
+                console.log(val)
+            });
 
-        this.setState({open: false});
-    }
+            this.setState({open: false});
+        }
+        else {
+            alert('error')
+        }
+        };
     snackClose = () => {
         this.setState({openSnackbar: false})
     }

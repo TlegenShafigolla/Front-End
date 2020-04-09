@@ -8,16 +8,19 @@ import {postTakeQuestion} from "../../services/userAPI/questions";
 import s from './Quiz.module.css'
 import Toolbar from "@material-ui/core/Toolbar";
 import AppBar from "@material-ui/core/AppBar";
-import makeStyles from "@material-ui/core/styles/makeStyles";
+import DialogContent from "@material-ui/core/DialogContent";
+import Typography from "@material-ui/core/Typography";
 
 class StartQuiz extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            startTestDialog: false,
+            startTestDialog: localStorage.getItem('start_test') === null,
+            endTestDialog: false,
+            showResult: false,
             questions: [],
             answers: [],
-            finished: 0,
+            corrects: null,
         }
     }
 
@@ -80,45 +83,36 @@ class StartQuiz extends React.Component {
     };
 
 
-    componentDidMount() {
+    componentDidMount = ()=> {
         const path = window.location.pathname.split('/');
         const session_id = localStorage.getItem('session_id');
-        postTakeQuestion(path[2], session_id).then(json => {
+          postTakeQuestion(path[2], session_id).then(json => {
             this.setState({questions: json.questions});
             console.log(json)
-
         });
     }
 
-    componentWillMount() {
-        this.setState({startTestDialog: true})
-    }
-
-    onClickSubmit = async () => {
-        this.setState({finished: 1});
-        if (this.state.finished === 1) {
+    onClickSubmit = () => {
+            const finished = 1;
             const path = window.location.pathname.split('/');
             const session_id = localStorage.getItem('session_id');
             let answer = this.state.answers;
-            await postQuizAnswer(path[2], session_id, this.state.finished, answer).then(val => console.log(val));
-            localStorage.removeItem('session_id')
-        }
+            postQuizAnswer(path[2], session_id, finished, answer).then(val => {this.setState({corrects: val.corrects});
+            console.log(val)
+            localStorage.removeItem('session_id');
+            this.setState({endTestDialog: true});
+            localStorage.removeItem('start_test');
+    })
     };
     startTest = () => {
-        this.setState({startTestDialog: false})
+        if(this.state.questions!==null||this.state.questions!==[]) {
+            this.setState({startTestDialog: false});
+            localStorage.setItem('start_test', 'true')
+            localStorage.removeItem('endTest')
+        }
     };
-
     render() {
-        const styles = makeStyles(theme => ({
-            drawerHeader: {
-                display: 'flex',
-                alignItems: 'center',
-                padding: theme.spacing(0, 2),
-                // necessary for content to be below app bar
-                ...theme.mixins.toolbar,
-                justifyContent: 'flex-end',
-            },
-        }));
+        console.log(this.state.correct);
         return (
             <div>
                 <AppBar>
@@ -139,17 +133,25 @@ class StartQuiz extends React.Component {
                     </div>
                     <div className={s.info}>
                         <div className={s.board}>
-                       {this.state.questions === undefined || this.state.questions === null ? ' ' :
-                           this.state.questions.map((val, index) =><div key={index}>{val.order_id}</div>)}
+                            {this.state.questions === undefined || this.state.questions === null ? ' ' :
+                                this.state.questions.map((val, index) => <div key={index}>{val.order_id}</div>)}
                         </div>
-                        <Button variant='contained' color='primary'  onClick={this.onClickSubmit}>End</Button>
+                        <Button variant='contained' color='primary' onClick={this.onClickSubmit}>End</Button>
                     </div>
-                    <Dialog open={this.state.startTestDialog} fullScreen={this.state.startTestDialog}>
-                        <DialogActions>
-                            <Button color='primary' onClick={this.startTest}>Start test</Button>
-                        </DialogActions>
-                    </Dialog>
                 </div>
+                <Dialog open={this.state.startTestDialog} fullScreen={this.state.startTestDialog}>
+                    <DialogActions>
+                        <Button color='primary' onClick={this.startTest}>Start test</Button>
+                    </DialogActions>
+                </Dialog>
+                <Dialog open={this.state.endTestDialog} fullScreen={this.state.endTestDialog}>
+                    <DialogContent>
+                        <Typography>
+                            Thank you for passing the test
+                            {this.state.corrects===null?' null':'You result:'+ this.state.corrects/this.state.questions.length}
+                        </Typography>
+                    </DialogContent>
+                </Dialog>
             </div>
         );
     }

@@ -23,20 +23,22 @@ class Quiz extends React.Component {
         const path = window.location.pathname.split('/');
         const email = this.state.email;
         await postInvitation(path[2], email).then(json => {
-            localStorage.setItem('session_id', json['session_id']);
-            this.setState({session_id: json['session_id']});
             this.setState({statusEmail: 'Success' === json.Status})
+            if(json.Status==='Success'){
+                this.setState({session_id: json['session_id']});
+                localStorage.setItem('session_id', json['session_id']);
+            }if (json.status==='Failed'){
+                alert('error')
+            }
         });
     };
-
-
-
 
 
     UNSAFE_componentWillMount = async () => {
         const path = window.location.pathname.split('/');
         await getInvitation(path[2]).then(json => {
             this.setState({status: "Success" === json.Status});
+            console.log(json)
         });
     };
 
@@ -44,17 +46,17 @@ class Quiz extends React.Component {
         if (this.state.status === null) {
             return '';
         }
-        if (this.state.status === true && this.state.session_id === null) {
+        if (this.state.status === true && (this.state.session_id === null || this.state.session_id === undefined)) {
             return (
-            <CheckEmail
-            onChangeEmail={this.onChangeEmail}
-            onClickContinue={this.onClickContinue}
-            />
+                <CheckEmail
+                    onChangeEmail={this.onChangeEmail}
+                    onClickContinue={this.onClickContinue}
+                />
             );
         }
-        if (this.state.status && this.state.session_id !== null) {
+        if (this.state.status && this.state.session_id !== null  ) {
             return (
-               <StartQuiz/>
+                <StartQuiz/>
             )
         } else {
             return (
