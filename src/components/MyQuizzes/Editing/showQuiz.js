@@ -31,7 +31,10 @@ class ShowQuiz extends React.Component {
             surname: '',
             email: '',
             quiz_id: this.props.quiz_id,
-            inviteChange: false
+            inviteChange: false,
+            errorName:false,
+            errorSurname:false,
+            errorEmail:false
         }
     }
 
@@ -64,8 +67,10 @@ class ShowQuiz extends React.Component {
 
             this.setState({open: false});
         }
-        else {
-            alert('error')
+       else if(this.state.name==='') {
+             this.setState({errorName:true})
+        } else if(this.state.surname==='') {
+             this.setState({errorName:true})
         }
         };
     snackClose = () => {
@@ -124,18 +129,21 @@ class ShowQuiz extends React.Component {
                 </FormControl>
                 <DialogContent>
                     <TextField
+                        error={this.state.errorName}
                         autoFocus
                         margin="dense"
                         id="name"
                         label="Name"
                         fullWidth
+                        variant='outlined'
                         onChange={this.onChangeName}
                     /> <TextField
-                    autoFocus
+                    error={this.state.errorEmail}
                     margin="dense"
                     id="Surname"
                     label="Surname"
                     fullWidth
+                    variant='outlined'
                     onChange={this.onChangeSurname}
                 />
                     <TextField
@@ -144,6 +152,7 @@ class ShowQuiz extends React.Component {
                         label="Email Address"
                         type="email"
                         fullWidth
+                        variant='outlined'
                         onChange={this.onChangeEmail}
                     />
                 </DialogContent>
