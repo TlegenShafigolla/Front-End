@@ -52,7 +52,7 @@ class ShowQuiz extends React.Component {
     };
     onClickInvite = () => {
         this.setState({open: true})
-    }
+    };
     onClickInviteInDialog = async () => {
         let email=/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i;
         console.log(email)

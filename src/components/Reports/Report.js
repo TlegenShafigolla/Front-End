@@ -3,18 +3,18 @@ import {getReport} from "../../services/adminAPI/reports";
 import s from "../Invitations/invitationCard.module.css";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
-import ReportPreview from "./ReportPreview";
 import Tab from "@material-ui/core/Tab";
-import PhoneIcon from '@material-ui/icons/Phone';
+import QuestionNumberIcon from "./QuestionNumberIcon";
+import ReportQuestion from "./ReportQuestion";
 
 class Report extends React.Component{
     constructor(props){
         super(props);
         const {id} = this.props.match.params;
         this.state = {
+            tab: 0,
             report_id: id,
             report: null,
             question: null
@@ -23,7 +23,7 @@ class Report extends React.Component{
 
     scrollTabHandleChange = (event, newValue) => {
         console.log(newValue);
-        this.setState({question: this.state.report.questions[newValue]});
+        this.setState({question: this.state.report.questions[newValue], tab: newValue});
     };
 
     render() {
@@ -66,7 +66,7 @@ class Report extends React.Component{
                 <div >
                     <AppBar position="static" color="default">
                         <Tabs
-                            value={0}
+                            value={this.state.tab}
                             onChange={this.scrollTabHandleChange}
                             variant="scrollable"
                             scrollButtons="on"
@@ -75,12 +75,13 @@ class Report extends React.Component{
                             aria-label="scrollable force tabs example"
                         >
                             {this.state.report.questions.map((val, index) =>
-                                   <Tab id={index} key={val.id} label="Item One" icon={<PhoneIcon />} />)}
+                                   <Tab id={index} key={val.id}
+                                        icon={<QuestionNumberIcon val={index}/>} />)}
                         </Tabs>
                     </AppBar>
                 </div>
                 <div>
-
+                    <ReportQuestion val={this.state.question}/>
                 </div>
             </div>
         );
