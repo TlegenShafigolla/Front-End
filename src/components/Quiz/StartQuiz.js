@@ -83,34 +83,36 @@ class StartQuiz extends React.Component {
     };
 
 
-    componentDidMount = ()=> {
-        const path = window.location.pathname.split('/');
-        const session_id = localStorage.getItem('session_id');
-          postTakeQuestion(path[2], session_id).then(json => {
+    componentDidMount = async () => {
+         let path = await window.location.pathname.split('/');
+        let session_id = await localStorage.getItem('session_id');
+       await postTakeQuestion(path[2], session_id).then(json => {
             this.setState({questions: json.questions});
             console.log(json)
         });
-    }
+    };
 
     onClickSubmit = () => {
-            const finished = 1;
-            const path = window.location.pathname.split('/');
-            const session_id = localStorage.getItem('session_id');
-            let answer = this.state.answers;
-            postQuizAnswer(path[2], session_id, finished, answer).then(val => {this.setState({corrects: val.corrects});
+        const finished = 1;
+        const path = window.location.pathname.split('/');
+        const session_id = localStorage.getItem('session_id');
+        let answer = this.state.answers;
+        postQuizAnswer(path[2], session_id, finished, answer).then(val => {
+            this.setState({corrects: val.corrects});
             console.log(val)
             localStorage.removeItem('session_id');
             this.setState({endTestDialog: true});
             localStorage.removeItem('start_test');
-    })
+        })
     };
     startTest = () => {
-        if(this.state.questions!==null||this.state.questions!==[]) {
+        if (this.state.questions !== null || this.state.questions !== []) {
             this.setState({startTestDialog: false});
             localStorage.setItem('start_test', 'true')
             localStorage.removeItem('endTest')
         }
     };
+
     render() {
         console.log(this.state.correct);
         return (
@@ -148,7 +150,7 @@ class StartQuiz extends React.Component {
                     <DialogContent>
                         <Typography>
                             Thank you for passing the test
-                            {this.state.corrects===null?' null':'You result: '+ this.state.corrects+'/'+this.state.questions.length}
+                            {this.state.corrects === undefined ? '' : ' You result: ' + this.state.corrects + ' points'}
                         </Typography>
                     </DialogContent>
                 </Dialog>
