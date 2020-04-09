@@ -54,9 +54,9 @@ class ShowQuiz extends React.Component {
         this.setState({open: true})
     };
     onClickInviteInDialog = async () => {
-        let email=/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i;
+        let email=/[0-9a-z_-]+@[0-9a-z_-]+\.[a-z]{2,5}$/i;
         console.log(email)
-        if (this.state.name !== null && this.state.name !== '' && this.state.surname !== null && this.state.surname !== '' && this.state.email===email) {
+        if (this.state.name !== null && this.state.name !== '' && this.state.surname !== null && this.state.surname !== '' && email.test(this.state.email)) {
             const invite = {
                 name: this.state.name,
                 surname: this.state.surname,
@@ -78,7 +78,7 @@ class ShowQuiz extends React.Component {
         if (this.state.surname === '' || this.state.surname === null) {
             this.setState({errorSurname: true})
         }
-        if (this.state.email !==email) {
+        if (!email.test(this.state.email)) {
             this.setState({errorEmail: true})
         }
 
