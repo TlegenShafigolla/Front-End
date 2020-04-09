@@ -27,35 +27,40 @@ class ShowQuiz extends React.Component {
         this.state = {
             open: false,
             openSnackbar: false,
-            name: '',
-            surname: '',
-            email: '',
+            name: null,
+            surname: null,
+            email: null,
             quiz_id: this.props.quiz_id,
             inviteChange: false,
-            errorName:false,
-            errorSurname:false,
-            errorEmail:false
+            errorName: false,
+            errorSurname: false,
+            errorEmail: false
         }
     }
 
     onChangeName = (event) => {
         this.setState({name: event.target.value})
+        this.setState({errorName: false})
     };
     onChangeSurname = (event) => {
         this.setState({surname: event.target.value})
+        this.setState({errorSurname: false})
     };
     onChangeEmail = (event) => {
         this.setState({email: event.target.value})
+        this.setState({errorEmail: false})
     };
     onClickInvite = () => {
         this.setState({open: true})
     }
     onClickInviteInDialog = async () => {
-        if(this.state.name!==''&&this.state.surname!==''&&this.state.email!=='') {
+        let email=/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i;
+        console.log(email)
+        if (this.state.name !== null && this.state.name !== '' && this.state.surname !== null && this.state.surname !== '' && this.state.email===email) {
             const invite = {
-                name: this.state.name.trim(),
-                surname: this.state.surname.trim(),
-                email: this.state.email.trim(),
+                name: this.state.name,
+                surname: this.state.surname,
+                email: this.state.email,
                 quiz_id: this.state.quiz_id
             };
             await postQuizInvitation(invite).then((val) => {
@@ -67,12 +72,17 @@ class ShowQuiz extends React.Component {
 
             this.setState({open: false});
         }
-       else if(this.state.name==='') {
-             this.setState({errorName:true})
-        } else if(this.state.surname==='') {
-             this.setState({errorName:true})
+        if (this.state.name === '' || this.state.name === null) {
+            this.setState({errorName: true})
         }
-        };
+        if (this.state.surname === '' || this.state.surname === null) {
+            this.setState({errorSurname: true})
+        }
+        if (this.state.email !==email) {
+            this.setState({errorEmail: true})
+        }
+
+    };
     snackClose = () => {
         this.setState({openSnackbar: false})
     }
@@ -107,10 +117,16 @@ class ShowQuiz extends React.Component {
                     </IconButton>
                 </Tooltip>
             </CardActions>
-            <Dialog open={this.state.open} onBackdropClick={() => this.setState({open: false})}
-                    aria-labelledby="Invite">
+            <Dialog open={this.state.open}
+                    aria-labelledby="Invite"
+            >
                 <DialogActions>
-                    <IconButton size='small' onClick={() => this.setState({open: false})}
+                    <IconButton size='small' onClick={() => {
+                        this.setState({open: false})
+                        this.setState({email: null})
+                        this.setState({name: null})
+                        this.setState({surname: null})
+                    }}
                                 aria-label='delete'>
                         <HighlightOffIcon fontSize='small' color='secondary'/>
                     </IconButton>
@@ -138,7 +154,7 @@ class ShowQuiz extends React.Component {
                         variant='outlined'
                         onChange={this.onChangeName}
                     /> <TextField
-                    error={this.state.errorEmail}
+                    error={this.state.errorSurname}
                     margin="dense"
                     id="Surname"
                     label="Surname"
@@ -147,6 +163,7 @@ class ShowQuiz extends React.Component {
                     onChange={this.onChangeSurname}
                 />
                     <TextField
+                        error={this.state.errorEmail}
                         margin="dense"
                         id="Email"
                         label="Email Address"
