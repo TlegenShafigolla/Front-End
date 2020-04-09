@@ -43,6 +43,7 @@ class Question extends React.Component {
 
     changeType = (newType) => {
         this.setState({answerType: newType});
+        this.setState({questionChanged: true});
     };
 
     editOnClick = () => {
@@ -61,10 +62,12 @@ class Question extends React.Component {
 
     deleteQuestionOnClick = () => {
         if (this.state.id !== undefined) {
-            deleteQuestions(this.state.quiz_id, this.state.id);
-            if (true) {
-                this.props.deleteQuestion(this.props.value.order_id);
-            }
+            deleteQuestions(this.state.quiz_id, this.state.id).then( val => {
+                    if(val.Status === 'Success'){
+                        this.props.deleteQuestion(this.props.value.order_id);
+                    }
+                }
+            );
         } else {
             this.props.deleteQuestion(this.props.value.order_id);
         }
