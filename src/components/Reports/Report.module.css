@@ -1,0 +1,33 @@
+.root {
+    margin: 10px;
+    box-shadow: 3px 3px 10px #333333 ;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.CardContent{
+    flex: 10;
+}
+
+.title{
+    fontSize: 14;
+}
+
+.pos{
+    marginBottom: 12;
+}
+
+.Container{
+    height: 91vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Box{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}

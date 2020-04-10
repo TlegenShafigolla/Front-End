@@ -1,7 +1,7 @@
 import React from "react";
 import getReportList from "../../services/adminAPI/reports";
 import ReportPreview from "./ReportPreview";
-import s from './ListReportReview.module.css'
+import s from './ListReportPreview.module.css'
 
 
 class ListReportPreview extends React.Component{
