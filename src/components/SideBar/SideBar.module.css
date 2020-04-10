@@ -8,8 +8,7 @@ color: #f3f3f3;
     display: flex;
     flex-direction: column;
     height: 100%;
-   align-items: center;
-
+    align-items: center;
 }
 .buttongroup Button.main{
     display: flex;
@@ -17,8 +16,8 @@ color: #f3f3f3;
 }
 .buttongroup Button:focus {
      transition: 0.8s;
-     background: #00d3ee;
-     box-shadow: 0 0 10px #00d3ee;
+     background: #3F51B5;
+     box-shadow: 0 0 10px #2f57b5;
  }
 .buttongroup a{
     text-decoration: none;

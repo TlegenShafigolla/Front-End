@@ -1,6 +1,7 @@
 import React from "react";
 import getReportList from "../../services/adminAPI/reports";
 import ReportPreview from "./ReportPreview";
+import s from './ListReportReview.module.css'
 
 
 class ListReportPreview extends React.Component{
@@ -13,11 +14,13 @@ class ListReportPreview extends React.Component{
 
     render() {
         return(
-            <div>
-                <div> List Report Preview </div>
-                <div>
-                    {this.state.reports !== [] ? this.state.reports.map((val, index) =>
-                        <ReportPreview id={index} key={val.id} val={val}/>) : ' '}
+            <div className={s.Container}>
+                <div className={s.Box}>
+                    <div> List Report Preview </div>
+                    <div>
+                        {this.state.reports !== [] ? this.state.reports.map((val, index) =>
+                            <ReportPreview id={index} key={val.id} val={val}/>) : ' '}
+                    </div>
                 </div>
             </div>
         );

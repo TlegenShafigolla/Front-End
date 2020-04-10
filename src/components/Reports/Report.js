@@ -76,7 +76,7 @@ class Report extends React.Component{
                         >
                             {this.state.report.questions.map((val, index) =>
                                    <Tab id={index} key={val.id}
-                                        icon={<QuestionNumberIcon val={index}/>} />)}
+                                        icon={<QuestionNumberIcon val={index+1}/>} />)}
                         </Tabs>
                     </AppBar>
                 </div>

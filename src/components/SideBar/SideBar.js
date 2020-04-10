@@ -3,7 +3,10 @@ import Button from "@material-ui/core/Button";
 import {Drawer} from "@material-ui/core";
 import {useStyle} from "./Style";
 import {NavLink} from "react-router-dom";
-import PermIdentityOutlinedIcon from '@material-ui/icons/PermIdentityOutlined';
+import AccountBoxSharpIcon from '@material-ui/icons/AccountBoxSharp';
+import InsertInvitationSharpIcon from '@material-ui/icons/InsertInvitation';
+import AssessmentSharpIcon from '@material-ui/icons/Assessment';
+import AssignmentSharpIcon from '@material-ui/icons/AssignmentSharp';
 import s from './SideBar.module.css'
 
 const SideBar = (props) => {
@@ -25,21 +28,21 @@ const SideBar = (props) => {
                 <NavLink to="/admin/profile">
                     <Button color='primary'
                             className={s.main}
-                            startIcon={<PermIdentityOutlinedIcon/>}>
+                            startIcon={<AccountBoxSharpIcon/>}>
                         Profile
                     </Button>
                 </NavLink>
                 <NavLink to='/admin/quizzes'>
                     <Button color='primary'
                             className={s.main}
-                            startIcon={<PermIdentityOutlinedIcon/>}>
-                        My Quizzes
+                            startIcon={<AssignmentSharpIcon/>}>
+                        Quizzes
                     </Button>
                 </NavLink>
                 <NavLink to='/admin/invitations'>
                     <Button color='primary'
                             className={s.secondary}
-                            startIcon={<PermIdentityOutlinedIcon/>}
+                            startIcon={<InsertInvitationSharpIcon/>}
                     >
                         Invitations
                     </Button>
@@ -47,27 +50,27 @@ const SideBar = (props) => {
                 <NavLink to='/admin/reports'>
                     <Button color='primary'
                             className={s.secondary}
-                            startIcon={<PermIdentityOutlinedIcon/>}>
+                            startIcon={<AssessmentSharpIcon/>}>
                         Reports
                     </Button>
                 </NavLink>
                 <Button color='primary'
                         className={s.main}
-                        startIcon={<PermIdentityOutlinedIcon/>}
+                        startIcon={<AssignmentSharpIcon/>}
                         disabled={true}>
-                    Survey
+                    Surveys
                 </Button>
                 <Button color='primary'
                         disabled={true}
                     className={s.secondary}
-                    startIcon={<PermIdentityOutlinedIcon/>}
+                    startIcon={<InsertInvitationSharpIcon/>}
                     >
                     Invitations
                 </Button>
                 <Button color='primary'
                         disabled={true}
                     className={s.secondary}
-                    startIcon={<PermIdentityOutlinedIcon/>}>
+                    startIcon={<AssessmentSharpIcon/>}>
                     Reports
                 </Button>
             </div>

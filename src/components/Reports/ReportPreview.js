@@ -12,9 +12,9 @@ class ReportPreview extends React.Component{
         return(
             <div className={s.root}>
                 <CardContent className={s.CardContent}>
-                    <Typography className={s.title} color="textSecondary" gutterBottom>
+                    <Typography variant="h5" component="h2" >
                         {this.props.val.quiz_name}  </Typography>
-                    <Typography variant="h5" component="h2"> {this.props.val.description} </Typography>
+                    <Typography className={s.title} color="textSecondary" gutterBottom> {this.props.val.description} </Typography>
                     <Typography className={s.pos}
                                 color="textSecondary"> {this.props.val.email} </Typography>
                     <Typography variant="body2"
