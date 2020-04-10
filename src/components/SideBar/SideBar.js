@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import {Drawer} from "@material-ui/core";
+import {Drawer, Typography} from "@material-ui/core";
 import {useStyle} from "./Style";
 import {NavLink} from "react-router-dom";
 import AccountBoxSharpIcon from '@material-ui/icons/AccountBoxSharp';
@@ -8,6 +8,7 @@ import InsertInvitationSharpIcon from '@material-ui/icons/InsertInvitation';
 import AssessmentSharpIcon from '@material-ui/icons/Assessment';
 import AssignmentSharpIcon from '@material-ui/icons/AssignmentSharp';
 import s from './SideBar.module.css'
+import logo from './192x192.png'
 
 const SideBar = (props) => {
 
@@ -23,7 +24,12 @@ const SideBar = (props) => {
             }}
 
         >
-
+            <div className={s.header}>
+                <img className={s.logo} src={logo} alt="Logo"/>
+                <Typography className={s.name} variant="h5" noWrap color="primary">
+                    QUIZZES
+                </Typography>
+            </div>
             <div className={s.buttongroup}>
                 <NavLink to="/admin/profile">
                     <Button color='primary'
