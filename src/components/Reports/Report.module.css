@@ -3,7 +3,6 @@
     box-shadow: 3px 3px 10px #333333 ;
     display: flex;
     justify-content: space-between;
-
 }
 
 .CardContent{
@@ -12,10 +11,6 @@
 
 .title{
     fontSize: 14;
-}
-
-.pos{
-    marginBottom: 12;
 }
 
 .Container{

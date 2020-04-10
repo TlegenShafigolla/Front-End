@@ -47,7 +47,7 @@ class Report extends React.Component{
                             <Typography variant="h5" component="h2">
                                 {"Description: " + this.state.report.description}
                             </Typography>
-                            <Typography className={s.pos} color="textSecondary">
+                            <Typography color="textSecondary">
                                 {"No of questions: " + this.state.report.questions_count.toString()}
                             </Typography>
                             <Typography variant="body2" component="p">

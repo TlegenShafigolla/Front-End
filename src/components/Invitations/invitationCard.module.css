@@ -10,10 +10,14 @@
     flex: 10;
 }
 
-.title{
-    fontSize: 14;
+.header{
+    display: flex;
 }
 
-.pos{
-    marginBottom: 12;
+.headerRightColumn{
+
+}
+
+.headerLeftColumn{
+    width: 60%;
 }

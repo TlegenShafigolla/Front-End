@@ -1,5 +1,3 @@
-
-
 export async function login(email, password) {
   return await fetch("http://35.228.95.87:7000/login", {
     method: "POST",
@@ -16,7 +14,7 @@ export async function login(email, password) {
       return res.json();
     })
     .then(data => {
-      localStorage.setItem('refresh_token',data['refresh_token'])
+      localStorage.setItem('refresh_token',data['refresh_token']);
       localStorage.setItem("access_token", data["access_token"]);
       localStorage.setItem("status", data["type"]);
       localStorage.setItem('access_time', Date())
