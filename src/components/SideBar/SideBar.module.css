@@ -14,8 +14,9 @@ color: #f3f3f3;
     display: flex;
     justify-content: flex-start;
 }
-.buttongroup Button:focus {
-     transition: 0.8s;
+.buttongroup Button:disabled {
+    color: #f3f3f3;
+     transition: 1s;
      background: #3F51B5;
      box-shadow: 0 0 10px #2f57b5;
  }
@@ -32,7 +33,7 @@ color: #f3f3f3;
     flex-direction: row;
     width: 100%;
     height: 64px;
-    background-color: white;
+    background-color: #f3f3f3;
 }
 .logo{
     height: 64px;
@@ -43,4 +44,14 @@ color: #f3f3f3;
     align-items: center;
     justify-content: center;
     width: 100%;
+}
+.buttongroup Button.main1:disabled{
+    background: #272827;
+    color: #333333;
+    box-shadow: none;
+}
+.buttongroup Button.secondary1:disabled{
+    background: #272827;
+    color: #333333;
+    box-shadow: none;
 }

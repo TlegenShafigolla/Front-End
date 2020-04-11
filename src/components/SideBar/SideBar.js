@@ -11,7 +11,6 @@ import s from './SideBar.module.css'
 import logo from './192x192.png'
 
 const SideBar = (props) => {
-
     const classes = useStyle();
     return (
         <Drawer
@@ -33,6 +32,7 @@ const SideBar = (props) => {
             <div className={s.buttongroup}>
                 <NavLink to="/admin/profile">
                     <Button color='primary'
+                            disabled={window.location.pathname==="/admin/profile"}
                             className={s.main}
                             startIcon={<AccountBoxSharpIcon/>}>
                         Profile
@@ -40,6 +40,7 @@ const SideBar = (props) => {
                 </NavLink>
                 <NavLink to='/admin/quizzes'>
                     <Button color='primary'
+                            disabled={window.location.pathname==='/admin/quizzes'}
                             className={s.main}
                             startIcon={<AssignmentSharpIcon/>}>
                         Quizzes
@@ -47,6 +48,7 @@ const SideBar = (props) => {
                 </NavLink>
                 <NavLink to='/admin/invitations'>
                     <Button color='primary'
+                            disabled={window.location.pathname==='/admin/invitations'}
                             className={s.secondary}
                             startIcon={<InsertInvitationSharpIcon/>}
                     >
@@ -55,27 +57,28 @@ const SideBar = (props) => {
                 </NavLink>
                 <NavLink to='/admin/reports'>
                     <Button color='primary'
+                            disabled={window.location.pathname==='/admin/reports'}
                             className={s.secondary}
                             startIcon={<AssessmentSharpIcon/>}>
                         Reports
                     </Button>
                 </NavLink>
                 <Button color='primary'
-                        className={s.main}
+                        className={s.main1}
                         startIcon={<AssignmentSharpIcon/>}
                         disabled={true}>
                     Surveys
                 </Button>
                 <Button color='primary'
                         disabled={true}
-                    className={s.secondary}
+                    className={s.secondary1}
                     startIcon={<InsertInvitationSharpIcon/>}
                     >
                     Invitations
                 </Button>
                 <Button color='primary'
                         disabled={true}
-                    className={s.secondary}
+                    className={s.secondary1}
                     startIcon={<AssessmentSharpIcon/>}>
                     Reports
                 </Button>
