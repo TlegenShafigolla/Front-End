@@ -34,14 +34,16 @@ const SideBar = (props) => {
                 <NavLink to="/admin/profile">
                     <Button color='primary'
                             className={s.main}
-                            startIcon={<AccountBoxSharpIcon/>}>
+                            startIcon={<AccountBoxSharpIcon/>}
+                            onClick={() => props.onClickSideBar('Profile')}>
                         Profile
                     </Button>
                 </NavLink>
                 <NavLink to='/admin/quizzes'>
                     <Button color='primary'
                             className={s.main}
-                            startIcon={<AssignmentSharpIcon/>}>
+                            startIcon={<AssignmentSharpIcon/>}
+                            onClick={() => props.onClickSideBar('Quizzes')}>
                         Quizzes
                     </Button>
                 </NavLink>
@@ -49,34 +51,37 @@ const SideBar = (props) => {
                     <Button color='primary'
                             className={s.secondary}
                             startIcon={<InsertInvitationSharpIcon/>}
-                    >
+                            onClick={() => props.onClickSideBar('Quiz - Invitations')}>
                         Invitations
                     </Button>
                 </NavLink>
                 <NavLink to='/admin/reports'>
                     <Button color='primary'
                             className={s.secondary}
-                            startIcon={<AssessmentSharpIcon/>}>
+                            startIcon={<AssessmentSharpIcon/>}
+                            onClick={() => props.onClickSideBar('Quiz - Reports')}>
                         Reports
                     </Button>
                 </NavLink>
                 <Button color='primary'
                         className={s.main}
                         startIcon={<AssignmentSharpIcon/>}
-                        disabled={true}>
+                        disabled={true}
+                        onClick={() => props.onClickSideBar('Surveys')}>
                     Surveys
                 </Button>
                 <Button color='primary'
                         disabled={true}
-                    className={s.secondary}
-                    startIcon={<InsertInvitationSharpIcon/>}
-                    >
+                        className={s.secondary}
+                        startIcon={<InsertInvitationSharpIcon/>}
+                        onClick={() => props.onClickSideBar('Surveys - Invitations')}>
                     Invitations
                 </Button>
                 <Button color='primary'
                         disabled={true}
-                    className={s.secondary}
-                    startIcon={<AssessmentSharpIcon/>}>
+                        className={s.secondary}
+                        startIcon={<AssessmentSharpIcon/>}
+                        onClick={() => props.onClickSideBar('Surveys - Reports')}>
                     Reports
                 </Button>
             </div>

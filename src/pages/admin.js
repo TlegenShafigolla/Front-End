@@ -13,29 +13,41 @@ class admin extends Component {
             isSideBarOpen: false,
             isLoggedIn: true,
             displayName: '',
+            pageName: 'Profile',
         }
     }
     LogOut = () => {
         localStorage.clear();
         this.setState({isLoggedIn: false})
-    }
-    SideBar=()=>{
+    };
+    openSideBar = () => {
         this.setState({isSideBarOpen: !this.state.isSideBarOpen})
-    }
+    };
+
+    onClickSideBar = (pageName) => {
+        this.setState({pageName: pageName});
+    };
+
     render() {
         if (!this.state.isLoggedIn) {
             return <Redirect to="/login"/>;
         }
         return (
             <div>
-            <AdminHeader OpenButton={this.SideBar}
-                         Logout={this.LogOut}
-                         OpenSideBar={this.state.isSideBarOpen}
-            DisplayName={this.state.displayName}/>
-                <SideBar open={this.state.isSideBarOpen}/>
+                <AdminHeader
+                    OpenButton={this.openSideBar}
+                    Logout={this.LogOut}
+                    OpenSideBar={this.state.isSideBarOpen}
+                    DisplayName={this.state.displayName}
+                    PageName={this.state.pageName}
+                />
+                <SideBar
+                    open={this.state.isSideBarOpen}
+                    onClickSideBar={this.onClickSideBar}
+                />
                 <div onClick={()=>this.setState({isSideBarOpen: false})} >
                     <Routes open={this.state.isSideBarOpen}/>
-            </div>
+                </div>
 
             </div>
         );
