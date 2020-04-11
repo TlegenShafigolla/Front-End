@@ -23,7 +23,7 @@ const AdminHeader = (props) => {
                     </IconButton>
                     <Link to='/admin/profile'>
                     <Typography variant="h6" className={classes.title} noWrap color="primary">
-                        E-COURSES
+                        QUIZZES
                     </Typography>
                     </Link>
                     <div className={classes.grow}/>

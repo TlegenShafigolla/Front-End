@@ -98,9 +98,9 @@ class ShowQuiz extends React.Component {
     render() {
         return (<div className={s.root}>
             <CardContent className={s.CardContent}>
-                <Typography className={s.title} color="textSecondary" gutterBottom>
+                <Typography variant="h5" component="h2">
                     {this.props.quiz_name}  </Typography>
-                <Typography variant="h5" component="h2"> {this.props.description} </Typography>
+                <Typography className={s.title} color="textSecondary" gutterBottom> {this.props.description} </Typography>
                 <Typography className={s.pos}
                             color="textSecondary"> {this.props.value.questions_count.toString()} </Typography>
                 <Typography variant="body2"

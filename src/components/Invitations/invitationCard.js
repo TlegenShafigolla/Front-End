@@ -10,26 +10,32 @@ class InvitationCard extends React.Component{
         return(
             <div className={s.root}>
                 <CardContent className={s.CardContent}>
-                    <Typography className={s.title} gutterBottom>
-                        {"Quiz: " + this.props.invitation.quiz.quiz_name}
-                    </Typography>
-                    <Typography className={s.title} gutterBottom>
-                        {"Email: " + this.props.invitation.email}
-                    </Typography>
-                    <Typography className={s.title} gutterBottom>
-                        {"To: " + this.props.invitation.name + " " + this.props.invitation.surname}
-                    </Typography>
-                    <Typography variant="h5" component="h2">
+                    <div className={s.header}>
+                        <div className={s.headerLeftColumn}>
+                            <Typography variant="h4" component="p" gutterBottom>
+                                {"Quiz: " + this.props.invitation.quiz.quiz_name}
+                            </Typography>
+                            <Typography variant="body2" component="p">
+                                {"Quiz version of: " +this.props.invitation.quiz.created_date}
+                            </Typography>
+                        </div>
+                        <div className={s.headerRightColumn}>
+                            <Typography className={s.title} gutterBottom>
+                                {"Email: " + this.props.invitation.email}
+                            </Typography>
+                            <Typography className={s.title} gutterBottom>
+                                {"To: " + this.props.invitation.name + " " + this.props.invitation.surname}
+                            </Typography>
+                            <Typography variant="body2" component="p">
+                                {"Invited: " + this.props.invitation.invited_date}
+                            </Typography>
+                        </div>
+                    </div>
+                    <Typography variant="body2" component="p">
                         {"Description: " + this.props.invitation.quiz.description}
                     </Typography>
                     <Typography className={s.pos} color="textSecondary">
                         {"No of questions: " + this.props.invitation.quiz.questions_count.toString()}
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                        {"Quiz version of: " +this.props.invitation.quiz.created_date}
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                        {"Invited: " + this.props.invitation.invited_date}
                     </Typography>
                     <Typography variant="body2" component="p">
                         {"Mixed: " + this.props.invitation.quiz.mixed}
@@ -43,7 +49,7 @@ class InvitationCard extends React.Component{
                         </Typography> : ''}
                     {this.props.type === 0 ?
                         <Button onClick={event => this.props.onClickDelete(event, this.props.id)}>
-                            Delete
+                            Cancel
                         </Button> : ''}
                 </CardContent>
             </div>
