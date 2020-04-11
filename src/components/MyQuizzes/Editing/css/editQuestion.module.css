@@ -11,7 +11,10 @@
 .questionOrder {
 margin-top:2px;
 }
-
+.formControll{
+    display: flex;
+    justify-content: center;
+}
 
 .questionField {
     padding: 0;
@@ -20,6 +23,7 @@ margin-top:2px;
 }
 
 .answerType {
+
 }
 
 .Buttons{

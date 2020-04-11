@@ -36,7 +36,7 @@ class Question extends React.Component {
 
     changeCheck = (event) => {
         let answer = this.state.answers;
-        answer[Number(event.target.id)].correct = event.target.checked;
+        answer[Number(event.target.id)].correct = Number(event.target.checked);
         this.setState({answers: answer});
         this.setState({answersChanged: true});
     };
@@ -52,7 +52,6 @@ class Question extends React.Component {
 
     deleteAnswerOnClick = (index) => {
         let answers = this.state.answers;
-        //delete answers[index]
         if (this.state.id !== undefined && answers[index].id !== undefined) {
             deleteAnswers(this.state.id, answers[index].id);
         }
@@ -62,8 +61,8 @@ class Question extends React.Component {
 
     deleteQuestionOnClick = () => {
         if (this.state.id !== undefined) {
-            deleteQuestions(this.state.quiz_id, this.state.id).then( val => {
-                    if(val.Status === 'Success'){
+            deleteQuestions(this.state.quiz_id, this.state.id).then(val => {
+                    if (val.Status === 'Success') {
                         this.props.deleteQuestion(this.props.value.order_id);
                     }
                 }
@@ -145,8 +144,6 @@ class Question extends React.Component {
                 changeCheck={this.changeCheck}
                 changePoint={this.onChangePoint}
                 deleteAnswerOnClick={this.deleteAnswerOnClick}
-                point={this.props.point}
-                correctWrong={this.props.correctWrong}
                 onChangeAnswer={this.onChangeAnswer}
                 addNewAnswer={this.addNewAnswer}
                 onChangeQuestion={this.onChangeQuestion}
