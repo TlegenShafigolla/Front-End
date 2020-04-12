@@ -1,6 +1,5 @@
 import Question from "./Questions";
 import {Dialog} from "@material-ui/core";
-import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import React from "react";
 import {postQuizAnswer} from "../../services/userAPI/answers";
@@ -10,6 +9,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 import AppBar from "@material-ui/core/AppBar";
 import DialogContent from "@material-ui/core/DialogContent";
 import Typography from "@material-ui/core/Typography";
+import {Link} from "react-scroll";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Slide from "@material-ui/core/Slide";
 
 class StartQuiz extends React.Component {
     constructor(props) {
@@ -21,6 +23,9 @@ class StartQuiz extends React.Component {
             questions: [],
             answers: [],
             corrects: null,
+            quiz_name: '',
+            description: '',
+            questions_count: '',
         }
     }
 
@@ -84,10 +89,13 @@ class StartQuiz extends React.Component {
 
 
     componentDidMount = async () => {
-         let path = await window.location.pathname.split('/');
+        let path = await window.location.pathname.split('/');
         let session_id = await localStorage.getItem('session_id');
-       await postTakeQuestion(path[2], session_id).then(json => {
+        await postTakeQuestion(path[2], session_id).then(json => {
             this.setState({questions: json.questions});
+            this.setState({quiz_name: json.quiz_name});
+            this.setState({questions_count: json.questions_count});
+            this.setState({description: json.description});
             console.log(json)
         });
     };
@@ -114,11 +122,15 @@ class StartQuiz extends React.Component {
     };
 
     render() {
+        const Transition = React.forwardRef(function Transition(props, ref) {
+            return <Slide direction="up" ref={ref} {...props} />;
+        });
         return (
             <div>
                 <AppBar>
-                    <Toolbar>
-                        header
+                    <Toolbar className={s.header}>
+                        <Typography variant='h6'> {this.state.quiz_name}</Typography>
+                        <Button  onClick={this.onClickSubmit}>End Test</Button>
                     </Toolbar>
                 </AppBar>
                 <div className={s.quiz}>
@@ -133,19 +145,38 @@ class StartQuiz extends React.Component {
                         />)}
                     </div>
                     <div className={s.info}>
-                        <div className={s.board}>
+
                             {this.state.questions === undefined || this.state.questions === null ? ' ' :
-                                this.state.questions.map((val, index) => <div key={index}>{val.order_id}</div>)}
-                        </div>
-                        <Button variant='contained' color='primary' onClick={this.onClickSubmit}>End</Button>
+                                this.state.questions.map((val, index) =>
+                                    <Link
+                                        key={index}
+                                        activeClass="active"
+                                        to={val.order_id.toString()}
+                                        spy={true}
+                                        smooth={true}
+                                        offset={-70}
+                                        duration={500}
+                                    >
+                                        <Button  key={index}>{val.order_id}
+
+                                        </Button></Link>)}
+
                     </div>
                 </div>
-                <Dialog open={this.state.startTestDialog} fullScreen={this.state.startTestDialog}>
-                    <DialogActions>
-                        <Button color='primary' onClick={this.startTest}>Start test</Button>
-                    </DialogActions>
+                <Dialog open={this.state.startTestDialog} className={s.dialog} fullScreen>
+
+                    <div className={s.dialogActions}>
+                        <div><Typography
+                            variant='h5'>Quiz name: {this.state.quiz_name}</Typography>
+                        </div>
+                        <Button color='primary' variant='contained' onClick={this.startTest}>Start test</Button>
+                    </div>
+                    <DialogContent className={s.dialogContent}>
+                        <Typography variant='h3'>{this.state.description}</Typography>
+                        <Typography variant='h6'>Question count: {this.state.questions_count}</Typography>
+                    </DialogContent>
                 </Dialog>
-                <Dialog open={this.state.endTestDialog} fullScreen={this.state.endTestDialog}>
+                <Dialog open={this.state.endTestDialog} fullScreen TransitionComponent={Transition}>
                     <DialogContent>
                         <Typography>
                             Thank you for passing the test

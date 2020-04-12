@@ -11,9 +11,10 @@ class Question extends React.Component {
             <div className={s.question} id={this.props.value.order_id.toString()}>
 
                 <div className={s.questionInfo}>
-                    <div className={s.questionOrder}>{this.props.value.order_id}.</div>
+                    <Typography variant="h6" component="h2">
+                        {this.props.value.order_id}.</Typography>
                     <div className={s.questionField}>
-                        <Typography variant="body1">
+                        <Typography variant="h6" component="h2">
                             {this.props.value.question}
                         </Typography>
                     </div>
@@ -28,8 +29,6 @@ class Question extends React.Component {
                     />
 
                 </div>
-
-
             </div>
         );
     }

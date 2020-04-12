@@ -6,7 +6,6 @@ import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import React from "react";
-import AddIcon from "@material-ui/icons/Add";
 
 class MultipleChoice extends React.Component {
     render() {

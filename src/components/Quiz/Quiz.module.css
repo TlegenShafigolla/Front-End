@@ -3,54 +3,94 @@
     width: 100%;
     margin-top: 30px;
     padding: 20px;
+    justify-content: center;
 }
 
 .questions {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 40%;
 }
 
-.board {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-}
+
 
 .info {
-    margin-top: 20px;
+    margin-top: 60px;
     right: 50px;
-    height: calc(93% - 20px);
     width: 20%;
     position: fixed;
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
-    justify-content: space-between;
+    box-shadow: 3px 3px 10px #333333;
 }
 
-.info button {
-    bottom: 0;
-    float: right;
-    margin-bottom: 0;
-}
-.question{
+.question {
     padding: 10px;
     margin-top: 25px;
     border-radius: 4px;
-    box-shadow:  5px 5px 10px #333333;
+    box-shadow: 5px 5px 10px #333333;
 }
-.questionInfo{
+
+.questionInfo {
     display: flex;
     width: 100%;
     padding: 0;
 }
-.questionField{
+
+.questionField {
     margin-left: 5px;
 }
-.answer{
-display: flex;
+
+.answer {
+    display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid #E0E0E0;
+    align-items: center;
+    margin: 0;
+    left: -15px;
+    height: 35px;
+}
+
+.textarea {
+    margin-top: 5px;
+    width: 100%;
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    border-radius: 5px;
+    outline: none;
+    min-height: 100px;
+    border: 1px solid silver;
+    resize: none;
+}
+
+.info Button {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.dialog {
+    flex-direction: column;
+}
+
+.dialogActions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+}
+.dialogActions Button{
+    margin-right: 5px;
+}
+.dialogContent{
+    margin: auto;
+}
+.header{
+    display: flex;
+justify-content: space-between;
+}
+.header Button{
+    background: #3F51B5;
+    color: white;
 }
