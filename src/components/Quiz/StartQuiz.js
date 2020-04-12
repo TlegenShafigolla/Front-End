@@ -10,8 +10,10 @@ import AppBar from "@material-ui/core/AppBar";
 import DialogContent from "@material-ui/core/DialogContent";
 import Typography from "@material-ui/core/Typography";
 import {Link} from "react-scroll";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
+import {NavLink} from "react-router-dom";
+import DialogActions from "@material-ui/core/DialogActions";
+
 
 class StartQuiz extends React.Component {
     constructor(props) {
@@ -130,7 +132,7 @@ class StartQuiz extends React.Component {
                 <AppBar>
                     <Toolbar className={s.header}>
                         <Typography variant='h6'> {this.state.quiz_name}</Typography>
-                        <Button  onClick={this.onClickSubmit}>End Test</Button>
+                        <Button onClick={this.onClickSubmit}>End Test</Button>
                     </Toolbar>
                 </AppBar>
                 <div className={s.quiz}>
@@ -146,20 +148,20 @@ class StartQuiz extends React.Component {
                     </div>
                     <div className={s.info}>
 
-                            {this.state.questions === undefined || this.state.questions === null ? ' ' :
-                                this.state.questions.map((val, index) =>
-                                    <Link
-                                        key={index}
-                                        activeClass="active"
-                                        to={val.order_id.toString()}
-                                        spy={true}
-                                        smooth={true}
-                                        offset={-70}
-                                        duration={500}
-                                    >
-                                        <Button  key={index}>{val.order_id}
+                        {this.state.questions === undefined || this.state.questions === null ? ' ' :
+                            this.state.questions.map((val, index) =>
+                                <Link
+                                    key={index}
+                                    activeClass="active"
+                                    to={val.order_id.toString()}
+                                    spy={true}
+                                    smooth={true}
+                                    offset={-70}
+                                    duration={500}
+                                >
+                                    <Button key={index}>{val.order_id}
 
-                                        </Button></Link>)}
+                                    </Button></Link>)}
 
                     </div>
                 </div>
@@ -183,6 +185,13 @@ class StartQuiz extends React.Component {
                             {this.state.corrects === undefined ? '' : ' You result: ' + this.state.corrects + ' points'}
                         </Typography>
                     </DialogContent>
+
+                    <DialogActions>
+                        <NavLink className={s.button} to='/'>
+                            <Button color='primary'  variant='contained'>Back to home
+                                page</Button>
+                        </NavLink>
+                    </DialogActions>
                 </Dialog>
             </div>
         );
