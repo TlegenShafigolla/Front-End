@@ -6,8 +6,7 @@ import {useStyles} from "./Style";
 import Toolbar from '@material-ui/core/Toolbar';
 import clsx from "clsx";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import {Link} from "react-router-dom";
-import s from '../../css/AdminHeader.module.css'
+
 const AdminHeader = (props) => {
     const classes = useStyles();
     return (
@@ -22,11 +21,9 @@ const AdminHeader = (props) => {
                     <IconButton className={classes.menuButton} onClick={props.OpenButton} color="primary">
                         <MenuIcon/>
                     </IconButton>
-                    <Link to='/admin/profile'>
                     <Typography variant="h6" className={classes.title} noWrap color="primary">
-                        QUIZZES
+                        {props.PageName}
                     </Typography>
-                    </Link>
                     <div className={classes.grow}/>
                     <div className={classes.sectionDesktop}>
                         <Typography className={classes.title} noWrap color="primary">
