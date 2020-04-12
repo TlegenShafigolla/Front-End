@@ -44,19 +44,17 @@ const styles = makeStyles(theme => ({
 export const Routes = (props) => {
     const classes = styles();
     return (
-
         <div className={classes.grow}>
             <main className={clsx(classes.content, {
                 [classes.contentShift]: props.open,
             })}>
                 <div className={classes.drawerHeader}/>
-                <Route  path="/admin/profile" component={Profile}/>
-                <Route  path="/admin/quizzes" component={MyQuizRoute}/>
-                <Route  path="/admin/invitations" component={Invitations}/>
-                <Route  path="/admin/reports" component={ReportRoute}/>
+                <Route path="/admin/profile" component={Profile}/>
+                <Route path="/admin/quizzes" component={MyQuizRoute}/>
+                <Route path="/admin/invitations" component={Invitations}/>
+                <Route path="/admin/reports" component={ReportRoute}/>
             </main>
         </div>
-
     );
 
 };

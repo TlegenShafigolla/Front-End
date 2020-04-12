@@ -22,7 +22,6 @@ class Report extends React.Component{
     }
 
     scrollTabHandleChange = (event, newValue) => {
-        console.log(newValue);
         this.setState({question: this.state.report.questions[newValue], tab: newValue});
     };
 
