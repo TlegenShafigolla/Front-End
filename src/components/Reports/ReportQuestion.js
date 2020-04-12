@@ -7,6 +7,12 @@ class ReportQuestion extends React.Component{
         if(this.props.val === null){
             return '';
         }
+        let map = {};
+        let key = this.props.points ? "points" : "correct";
+        for(let i = 0; i < this.props.val.session.length; i++) {
+            map[this.props.val.session[i].answer_id] = this.props.val.session[i][key];
+        }
+        console.log(map);
         return(
             <div className={s.question} id={this.props.val.question_id.toString()}>
                 <div className={s.questioninfo}>
@@ -19,7 +25,10 @@ class ReportQuestion extends React.Component{
                 </div>
                 <div className={s.answer}>
                     {this.props.val.answers === null ? '' : this.props.val.answers.map(val =>
-                        <Typography  className={s.typography} variant="body1" gutterBottom key={val.id}>
+                        <Typography
+                            className={map[val.id] > 0 ? s.typographyCorrect: map[val.id] === 0 ? s.typographyWrong: s.typography}
+                            variant="body1"
+                            key={val.id}>
                             {val.answer}
                         </Typography>
                     )}

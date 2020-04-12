@@ -37,3 +37,11 @@
 .typography{
     border-bottom: 1px solid silver;
 }
+
+.typographyCorrect{
+    border-bottom: 2px solid green;
+}
+
+.typographyWrong{
+    border-bottom: 2px solid red;
+}

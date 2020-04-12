@@ -82,7 +82,7 @@ class Report extends React.Component{
                         </AppBar>
                     </div>
                     <div>
-                        <ReportQuestion val={this.state.question}/>
+                        <ReportQuestion val={this.state.question} points={this.state.report.points}/>
                     </div>
                 </div>
             </div>
