@@ -2,27 +2,29 @@
 /*    .Box{}*/
 /*}*/
 
-.Container{
+.Container {
     height: 91vh;
     width: 100%;
-   display: flex;
+    display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 
-.Box{
+.Box {
     display: flex;
     flex-direction: column;
     width: 50%;
-    margin: auto;
 }
-.Quizz{
+
+.Quizz {
 
 }
+
 /*existingQuizPreview */
 .root {
     margin: 10px;
-    box-shadow: 3px 3px 10px #333333 ;
+    box-shadow: 3px 3px 10px #333333;
     display: flex;
     justify-content: space-between;
 
@@ -33,31 +35,38 @@
     margin: 0 2px;
     transform: scale(0.8);
 }
-.title{
+
+.title {
     fontSize: 14;
 }
-.pos{
+
+.pos {
     marginBottom: 12;
 }
-.CardContent{
+
+.CardContent {
     flex: 10;
 }
-.CardActions{
+
+.CardActions {
     height: 100%;
     width: 100%;
     flex: 1;
     display: flex;
     flex-direction: column-reverse;
 }
-.DeleteButton{
+
+.DeleteButton {
     top: -7px;
     right: -20px;
     flex: 0.5;
 }
-.radioButton{
+
+.radioButton {
     display: flex;
     justify-content: space-around;
 }
+
 /*.root {*/
 /*    padding: 2px 4px;*/
 /*    display: flex;*/

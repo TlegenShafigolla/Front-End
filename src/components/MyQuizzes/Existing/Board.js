@@ -27,5 +27,5 @@ class board extends React.Component {
             </Link>
         );
     };
-};
+}
 export default board;

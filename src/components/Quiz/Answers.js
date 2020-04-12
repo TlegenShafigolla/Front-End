@@ -1,8 +1,8 @@
 import React from "react";
 import {Checkbox} from "@material-ui/core";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
 import s from "./Quiz.module.css";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import Divider from "@material-ui/core/Divider";
 
 class Answers extends React.Component {
     constructor(props) {
@@ -15,25 +15,29 @@ class Answers extends React.Component {
     render() {
         if (this.state.type === 'MULTIPLE CHOICE') {
             return (
-                <div>
-                    {this.props.value.answers === null ? '' : this.props.value.answers.map((val, index) =>
-                        <div key={index} className={s.answer}>
-                            <Typography variant="body1" gutterBottom>
-                                {val.answer}
-                            </Typography>
-                            <Checkbox id={val.question_id.toString()}
-                                      value={val.id.toString()}
-                                      onChange={this.props.onChangeCheck} color='primary'/>
-                        </div>
-                    )}
+                <div className={s.answers}>
+                    <ol type='A' className={s.ol}>
+                        {this.props.value.answers === null ? '' : this.props.value.answers.map((val, index) =>
+                            <div key={index}>
+                                <div  className={s.answer}>
+                                    <li>  {val.answer}</li>
+                                    <Checkbox id={val.question_id.toString()}
+                                              value={val.id.toString()}
+                                              onChange={this.props.onChangeCheck} color='primary'/>
+                                </div>
+                                <Divider/>
+                            </div>
+                        )}
+                    </ol>
+
                 </div>
             );
         } else {
             return (
                 <div>
                     {this.props.value.answers === null ? '' : this.props.value.answers.map((val, index) =>
-                        <TextField id={val.question_id.toString()} key={index}
-                                   onChange={this.props.onChangeAnswer}/>
+                        <TextareaAutosize id={val.question_id.toString()} className={s.textarea} key={index}
+                                          onChange={this.props.onChangeAnswer}/>
                     )}
                 </div>
             );
