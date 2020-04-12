@@ -2,7 +2,7 @@ import React from "react";
 import s from "./Quiz.module.css";
 import Typography from "@material-ui/core/Typography";
 import Answers from "./Answers";
-import {CssBaseline} from "@material-ui/core";
+import Divider from "@material-ui/core/Divider";
 
 
 class Question extends React.Component {
@@ -18,7 +18,7 @@ class Question extends React.Component {
                         </Typography>
                     </div>
                 </div>
-                <hr/>
+                <Divider/>
                 <div>
                     <Answers
                         onChangeAnswer={this.props.onChangeAnswer}

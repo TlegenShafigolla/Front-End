@@ -13,6 +13,10 @@
 
 .board {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .info {
@@ -48,5 +52,5 @@
 .answer{
 display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid silver;
+    border-bottom: 1px solid #E0E0E0;
 }

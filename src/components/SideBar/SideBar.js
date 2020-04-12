@@ -11,7 +11,6 @@ import s from './SideBar.module.css'
 import logo from './192x192.png'
 
 const SideBar = (props) => {
-
     const classes = useStyle();
     return (
         <Drawer
