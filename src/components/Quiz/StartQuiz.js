@@ -156,13 +156,13 @@ class StartQuiz extends React.Component {
                                 <Link
                                     key={index}
                                     activeClass="active"
-                                    to={val.order_id.toString()}
+                                    to={index.toString()}
                                     spy={true}
                                     smooth={true}
                                     offset={-70}
                                     duration={500}
                                 >
-                                    <Button key={index}>{val.order_id}
+                                    <Button key={index}>{index+1}
 
                                     </Button></Link>)}
 
