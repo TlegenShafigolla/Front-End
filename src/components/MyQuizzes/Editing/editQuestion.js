@@ -7,6 +7,7 @@ import AddIcon from '@material-ui/icons/Add';
 import IconButton from "@material-ui/core/IconButton";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
+import ChangeTypeDialog from "./AnswerTypes/changeTypeDialog";
 
 class EditQuestion extends React.Component {
     constructor(props) {
@@ -17,21 +18,30 @@ class EditQuestion extends React.Component {
             order: this.props.value.order_id,
             answerType: this.props.answerType,
             isMultipleChoice: this.props.answerType === 'MULTIPLE CHOICE',
+            openChangeTypeDialog: false,
         };
     }
 
+    dialog = (action) => {
+        this.setState({openChangeTypeDialog: false});
+        console.log(action);
+        if(!action){
+            return;
+        }
+        this.setState({isMultipleChoice: !this.state.isMultipleChoice});
+        let newType = this.state.answerType === 'MULTIPLE CHOICE' ? 'FILL THE BLANK' : 'MULTIPLE CHOICE';
+        this.props.changeType(newType);
+    };
+
     multipleChoiceChecked = () => {
-        this.setState({isMultipleChoice: true});
-        this.props.changeType('MULTIPLE CHOICE');
+        this.setState({openChangeTypeDialog: true});
     };
 
     fillTheBlankChecked = () => {
-        this.setState({isMultipleChoice: false});
-        this.props.changeType('FILL THE BLANK');
+        this.setState({openChangeTypeDialog: true});
     };
 
     render() {
-        console.log(this.props.answers)
         return (
             <div className={s.question} id={this.state.order}>
                 <div className={s.questioninfo}>
@@ -68,18 +78,10 @@ class EditQuestion extends React.Component {
                                           />} label='Fill the blank '/>
                 </div>
                 <div className={s.answerType}>
-                    {this.props.answers === [] ?'555' : this.props.answers.map((val, index) =>
-                        <div key={this.props.index_key[index]} >
                             <EditAnswer
-                                id={index.toString()}
-                                key={this.props.index_key[index]}
-                                val={val}
-                                index={index}
                                 isMultipleChoice={this.state.isMultipleChoice}
                                 {...this.props}
                             />
-                        </div>
-                    )}
                 </div>
                 <div className={s.Buttons}>
                     {this.state.isMultipleChoice ?
@@ -90,7 +92,7 @@ class EditQuestion extends React.Component {
                         Save
                     </Button>
                 </div>
-
+                <ChangeTypeDialog openDialog={this.state.openChangeTypeDialog} onClose={this.dialog}/>
             </div>
         );
     }

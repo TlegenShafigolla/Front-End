@@ -7,15 +7,15 @@ import React from "react";
 
 class FillTheBlank extends React.Component {
     render() {
-        console.log(this.props.val);
+        console.log("Here");
         return (
             <div className={s.SaveAnswer}>
-                {this.props.val.answer !== [] ? <TextField
+                <TextField
                     id={this.props.id}
                     key={this.props.index}
                     placeholder="New answer"
                     fullWidth
-                    defaultValue={this.props.val.answer}
+                    defaultValue={'Test'}
                     onSubmit={this.props.changeCheck}
                     onChange={this.props.onChangeAnswer}
                     size="small"
@@ -23,11 +23,7 @@ class FillTheBlank extends React.Component {
                     rows={1}
                     rowsMax={3}
                     variant="outlined"
-                /> : <TextField placeholder="New answer"
-                                fullWidth
-                                onChange={this.props.onChangeAnswer}
-                />}
-
+                />
                 {this.props.point ?
                     <div>
                         <InputBase
@@ -35,7 +31,7 @@ class FillTheBlank extends React.Component {
                             id={this.props.id}
                             key={this.props.index}
                             inputProps={{'aria-label': 'Point'}}
-                            defaultValue={this.props.val.points}
+                            defaultValue={'2'}
                             onChange={this.props.changePoint}
                         />
                     </div> : ''}
