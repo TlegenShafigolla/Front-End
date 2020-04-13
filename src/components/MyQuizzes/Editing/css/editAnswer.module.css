@@ -1,25 +1,45 @@
-.TextField{
-    margin: auto;
+.TextField {
     width: 100%;
 }
-.formControll{
+
+.formControll {
     display: flex;
     justify-content: center;
 }
-.SaveAnswer{
+
+.SaveAnswer {
     display: flex;
     margin: 7px;
+    justify-content: space-between;
+    align-items: center;
 }
-.deleteButton{
+
+.deleteButton {
 
 }
-.point{
+
+.text {
+    width: 100%;
+}
+
+.point {
     width: 30px;
     height: 30px;
-    border: 1px solid silver;
-    margin-bottom:5px;
+    margin-bottom: 5px;
     border-radius: 10px;
+    padding: 5px;
 }
-.pointsField{
+
+.pointsField {
     margin-left: 10px;
+}
+
+.answer {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.checkbox{
+    width: 20px;
 }

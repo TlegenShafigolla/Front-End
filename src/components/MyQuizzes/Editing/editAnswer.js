@@ -1,7 +1,7 @@
 import React from "react";
 import s from './css/editAnswer.module.css'
-import FillTheBlank from "./fillTheBlank";
-import MultipleChoice from "./multipleChoice";
+import FillTheBlank from "./AnswerTypes/fillTheBlank";
+import MultipleChoice from "./AnswerTypes/multipleChoice";
 class EditAnswer extends React.Component {
     render() {
         console.log(this.props.isMultipleChoice);

@@ -68,7 +68,7 @@ class EditQuestion extends React.Component {
                                           />} label='Fill the blank '/>
                 </div>
                 <div className={s.answerType}>
-                    {this.props.answers === [] ?'' : this.props.answers.map((val, index) =>
+                    {this.props.answers === [] ?'555' : this.props.answers.map((val, index) =>
                         <div key={this.props.index_key[index]} >
                             <EditAnswer
                                 id={index.toString()}
