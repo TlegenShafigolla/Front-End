@@ -7,10 +7,10 @@ import React from "react";
 
 class FillTheBlank extends React.Component {
     render() {
-        console.log(this.props.answers);
+        console.log(this.props.val);
         return (
             <div className={s.SaveAnswer}>
-                {this.props.answers !== [] ? <TextField
+                {this.props.val.answer !== [] ? <TextField
                     id={this.props.id}
                     key={this.props.index}
                     placeholder="New answer"
@@ -21,7 +21,6 @@ class FillTheBlank extends React.Component {
                 /> : <TextField placeholder="New answer"
                                 fullWidth
                                 onChange={this.props.onChangeAnswer}
-
                 />}
 
                 {this.props.point ?
