@@ -38,11 +38,12 @@ class ShowAnswer extends React.Component {
                 <div>
                     {this.props.answers === null ? '' : this.props.answers.map(val =>
                         <div className={s.answer} key={val.id}>
-                            <Typography variant="body1" gutterBottom>
+                            <Typography variant="body1" noWrap>
                                 {val.answer}
                             </Typography>
                             {this.props.point ? <Typography variant="body1">{val.points} </Typography> :
-                                <Checkbox checked={val.correct === 1} disabled={true}/>}
+                                (this.state.multiple_choice ?
+                                    <Checkbox checked={val.correct === 1} disabled={true}/> : '')}
                         </div>
                     )}
                 </div>
