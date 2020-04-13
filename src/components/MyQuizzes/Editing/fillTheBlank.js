@@ -18,6 +18,11 @@ class FillTheBlank extends React.Component {
                     defaultValue={this.props.val.answer}
                     onSubmit={this.props.changeCheck}
                     onChange={this.props.onChangeAnswer}
+                    size="small"
+                    multiline={true}
+                    rows={1}
+                    rowsMax={3}
+                    variant="outlined"
                 /> : <TextField placeholder="New answer"
                                 fullWidth
                                 onChange={this.props.onChangeAnswer}

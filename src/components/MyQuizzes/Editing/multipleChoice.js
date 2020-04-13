@@ -19,8 +19,13 @@ class MultipleChoice extends React.Component {
                     fullWidth
                     defaultValue={this.props.val.answer}
                     onChange={this.props.onChangeAnswer}
+                    size="small"
+                    multiline={true}
+                    rows={1}
+                    rowsMax={3}
+                    variant="outlined"
                 />
-                <div >
+                <div className={s.pointsField}>
                     {this.props.point ?
                         <InputBase
                             id={this.props.id}

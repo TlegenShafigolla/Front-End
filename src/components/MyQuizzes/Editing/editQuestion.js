@@ -43,6 +43,11 @@ class EditQuestion extends React.Component {
                             size='small'
                             defaultValue={this.props.question}
                             onChange={this.props.onChangeQuestion}
+                            multiline={true}
+                            rows={4}
+                            rowsMax={6}
+                            label="Question"
+                            variant="outlined"
                         />
                     </div>
                 </div>

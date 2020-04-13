@@ -8,6 +8,7 @@
 }
 .SaveAnswer{
     display: flex;
+    margin: 7px;
 }
 .deleteButton{
 
@@ -18,4 +19,7 @@
     border: 1px solid silver;
     margin-bottom:5px;
     border-radius: 10px;
+}
+.pointsField{
+    margin-left: 10px;
 }
