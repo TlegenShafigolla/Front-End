@@ -10,6 +10,7 @@ import Board from "../Existing/Board";
 import EditQuizSettings from "./editQuizSettings";
 import $ from "jquery";
 import {postQuiz} from "../../../services/adminAPI/quiz";
+import Typography from "@material-ui/core/Typography";
 
 class editQuiz extends React.Component {
     constructor(props) {
@@ -115,10 +116,7 @@ class editQuiz extends React.Component {
                 </div>
                 <div className={s.edit}>
                     <div>
-                        {this.state.quiz_name}
-                    </div>
-                    <div>
-                        {this.state.description}
+                        <Typography variant='h6'> {this.state.quiz_name}</Typography>
                     </div>
                     <div className={s.settings}>
                         <EditQuizSettings point={this.point} correct={this.correct} points={this.state.points}
