@@ -7,13 +7,17 @@ import {Redirect} from "react-router-dom";
 import getProfile from "../services/adminAPI/profile";
 
 class admin extends Component {
+    pageName = {
+
+    };
+
     constructor(props) {
         super(props);
         this.state = {
             isSideBarOpen: false,
             isLoggedIn: true,
             displayName: '',
-            pageName: 'Profile',
+            pageName: '',
         }
     }
     LogOut = () => {

@@ -13,10 +13,12 @@ class ListReportPreview extends React.Component{
     }
 
     render() {
+        if(this.state.report === []){
+            return '';
+        }
         return(
             <div className={s.Container}>
                 <div className={s.Box}>
-                    <div> List Report Preview </div>
                     <div>
                         {this.state.reports !== [] ? this.state.reports.map((val, index) =>
                             <ReportPreview id={index} key={val.id} val={val}/>) : ' '}

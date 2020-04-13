@@ -73,7 +73,7 @@ class editQuiz extends React.Component {
                 showResults: this.state.showResults,
                 last_edited_date: Date
             };
-            await postQuiz(quiz)
+            await postQuiz(quiz);
             this.setState({quizChanges: false})
         }
         $('#saveButton').hide()
@@ -104,7 +104,7 @@ class editQuiz extends React.Component {
     };
 
     render() {
-        console.log(this.state.questions)
+        console.log(this.state.questions);
         return (
             <div className={s.body}>
                 <div className={s.ArrowButton}>
