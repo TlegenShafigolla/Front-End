@@ -4,9 +4,10 @@
     flex-wrap: wrap;
 }
 .answer{
-    margin: auto;
-    width: 95%;
-}
-.typography{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
     border-bottom: 1px solid silver;
+    align-items: center;
 }
+

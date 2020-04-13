@@ -23,7 +23,9 @@ class Question extends React.Component {
 
     componentDidMount() {
         if (this.state.id !== undefined) {
-            getAnswers(this.state.id).then(val => this.setState({answers: val.answers}))
+            getAnswers(this.state.id).then(val => {this.setState({answers: val.answers})
+            console.log(val)
+            })
         }
     }
 

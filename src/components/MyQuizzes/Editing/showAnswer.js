@@ -3,14 +3,15 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Typography from "@material-ui/core/Typography";
 import s from './css/showAnswer.module.css'
 import Radio from "@material-ui/core/Radio";
+import {Checkbox} from "@material-ui/core";
 
 class ShowAnswer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            question_id: props.question_id,
-            multiple_choice: props.answerType === 'MULTIPLE CHOICE',
-            fill_the_blank: props.answerType === 'FILL THE BLANK',
+            question_id: this.props.question_id,
+            multiple_choice: this.props.answerType === 'MULTIPLE CHOICE',
+            fill_the_blank: this.props.answerType === 'FILL THE BLANK',
         };
 
     }
@@ -34,12 +35,15 @@ class ShowAnswer extends React.Component {
                                           />} label='Fill the blank '/>
 
                 </div>
-                <div className={s.answer}>
+                <div>
                     {this.props.answers === null ? '' : this.props.answers.map(val =>
-
-                        <Typography  className={s.typography} variant="body1" gutterBottom key={val.id}>
-                            {val.answer}
-                        </Typography>
+                        <div className={s.answer} key={val.id}>
+                            <Typography variant="body1" gutterBottom>
+                                {val.answer}
+                            </Typography>
+                            {this.props.point ? <Typography variant="body1">{val.points} </Typography> :
+                                <Checkbox checked={val.correct === 1} disabled={true}/>}
+                        </div>
                     )}
                 </div>
             </div>
