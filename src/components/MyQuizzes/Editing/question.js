@@ -53,6 +53,10 @@ class Question extends React.Component {
     changeType = (newType) => {
         this.setState({answerType: newType});
         this.setState({questionChanged: true});
+        this.setState({answersChanged: true});
+        for(let i = 0; i < this.state.answers.length; i++){
+            this.deleteAnswerOnClick(i);
+        }
     };
 
     editOnClick = () => {
@@ -91,6 +95,7 @@ class Question extends React.Component {
         if (this.state.disableSaveButton) {
             return;
         }
+        console.log(this.state.answers);
         this.setState({disableSaveButton: true});
         if (this.state.id === undefined && (this.state.questionChanged || this.state.answersChanged)) {
             const question = {
@@ -122,7 +127,7 @@ class Question extends React.Component {
             for (let i in answers) {
                 answers[i].question_id = this.state.id.toString();
             }
-            await postAnswers(this.state.id, this.state.answers);
+            await postAnswers(this.state.id, this.state.answers).then(json => console.log(json));
             await getAnswers(this.state.id).then(val => this.setState({answers: val.answers}));
             this.setState({answersChanged: false});
         }
@@ -142,12 +147,12 @@ class Question extends React.Component {
         this.setState({questionChanged: true});
     };
 
-    addNewAnswer = () => {
+    addNewAnswer = (correct=0, points=0) => {
         const answers = this.state.answers;
         answers.push({
             question_id: this.state.id,
-            correct: 0,
-            points: 0,
+            correct: correct,
+            points: points,
             answer: '',
         });
         this.setState({answers: answers});

@@ -24,7 +24,6 @@ class EditQuestion extends React.Component {
 
     dialog = (action) => {
         this.setState({openChangeTypeDialog: false});
-        console.log(action);
         if(!action){
             return;
         }
@@ -85,7 +84,7 @@ class EditQuestion extends React.Component {
                 </div>
                 <div className={s.Buttons}>
                     {this.state.isMultipleChoice ?
-                        <IconButton className={s.AddButton} color="primary" onClick={this.props.addNewAnswer}>
+                        <IconButton className={s.AddButton} color="primary" onClick={ event=> this.props.addNewAnswer()}>
                             <AddIcon/>
                         </IconButton> : ''}
                     <Button color="primary" className={s.saveButton} onClick={this.props.saveOnClick}>
