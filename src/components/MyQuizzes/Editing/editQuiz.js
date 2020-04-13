@@ -76,7 +76,7 @@ class editQuiz extends React.Component {
             await postQuiz(quiz);
             this.setState({quizChanges: false})
         }
-            $('#saveButton').hide(500)
+        $('#saveButton').hide(500)
 
     };
 
@@ -142,7 +142,7 @@ class editQuiz extends React.Component {
                 <div className={s.questionsboard}>
                     <div>
                         {this.state.questions === undefined || this.state.questions === null ? ' ' :
-                            this.state.questions.map(val => <Board key={val.id} value={val}/>)}
+                            this.state.questions.map(val => <Board key={val.order_id} value={val}/>)}
                     </div>
                 </div>
             </div>
