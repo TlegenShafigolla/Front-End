@@ -21,6 +21,8 @@ class ShowQuestion extends React.Component {
 
                 <div className={s.answerType}>
                     <ShowAnswer
+                        key={this.props.question_id}
+                        question_id={this.props.question_id}
                         {...this.props}
                     />
                 </div>
