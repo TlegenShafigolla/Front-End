@@ -7,7 +7,7 @@ import React from "react";
 
 class FillTheBlank extends React.Component {
     render() {
-        console.log(this.props.answers)
+        console.log(this.props.answers);
         return (
             <div className={s.SaveAnswer}>
                 {this.props.answers !== [] ? <TextField

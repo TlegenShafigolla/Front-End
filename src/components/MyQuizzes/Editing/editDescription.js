@@ -16,17 +16,25 @@ class EditDescription extends React.Component {
             <div className={s.editDescription}>
                 <TextField
                     placeholder="Question"
+                    label="Quiz"
                     fullWidth
                     size='small'
                     defaultValue={this.props.quiz_name}
                     onChange={this.props.changeQuizName}
+                    variant="outlined"
                 />
+                <div className={s.gap}/>
                 <TextField
                     placeholder="Question"
-                    fullWidth
+                    label="Description"
                     size='small'
+                    fullWidth
+                    multiline={true}
+                    rows={3}
+                    rowsMax={4}
                     onChange={this.props.changeDescription}
                     defaultValue={this.props.description}
+                    variant="outlined"
                 />
                 <Typography
                     color="textSecondary"> {this.props.value.questions_count} </Typography>
