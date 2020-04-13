@@ -104,7 +104,6 @@ class editQuiz extends React.Component {
     };
 
     render() {
-        console.log(this.state.questions);
         return (
             <div className={s.body}>
                 <div className={s.ArrowButton}>
@@ -155,7 +154,7 @@ class editQuiz extends React.Component {
             this.setState({
                 mixed:json.mixed,
                 showResults:json.showResults,
-                questions: json.questions.sort((a, b) => Number(a.order_id) - Number(b.order_id)),
+                questions: json.questions,
                 quiz_name: json.quiz_name,
                 description: json.description,
                 questions_count: json.questions_count,

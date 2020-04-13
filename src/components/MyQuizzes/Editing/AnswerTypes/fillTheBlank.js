@@ -6,16 +6,24 @@ import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import React from "react";
 
 class FillTheBlank extends React.Component {
+    componentDidMount() {
+        if(this.props.answers.length === 0){
+            this.props.addNewAnswer(1,1);
+        }
+    }
+
     render() {
-        console.log(this.props.val);
+        if(this.props.answers.length === 0){
+            return null;
+        }
         return (
             <div className={s.SaveAnswer}>
-                {this.props.val.answer !== [] ? <TextField
+                <TextField
                     id={this.props.id}
                     key={this.props.index}
                     placeholder="New answer"
                     fullWidth
-                    defaultValue={this.props.val.answer}
+                    defaultValue={this.props.answers[0].answer}
                     onSubmit={this.props.changeCheck}
                     onChange={this.props.onChangeAnswer}
                     size="small"
@@ -23,11 +31,7 @@ class FillTheBlank extends React.Component {
                     rows={1}
                     rowsMax={3}
                     variant="outlined"
-                /> : <TextField placeholder="New answer"
-                                fullWidth
-                                onChange={this.props.onChangeAnswer}
-                />}
-
+                />
                 {this.props.point ?
                     <div>
                         <InputBase
@@ -35,15 +39,10 @@ class FillTheBlank extends React.Component {
                             id={this.props.id}
                             key={this.props.index}
                             inputProps={{'aria-label': 'Point'}}
-                            defaultValue={this.props.val.points}
+                            defaultValue={this.props.answers[0].points}
                             onChange={this.props.changePoint}
                         />
                     </div> : ''}
-                <IconButton className={s.deleteButton}
-                            size='small' color='inherit'
-                            onClick={event => this.props.deleteAnswerOnClick(this.props.id)}>
-                    <HighlightOffIcon color='error' fontSize='small'/>
-                </IconButton>
             </div>
 
         );

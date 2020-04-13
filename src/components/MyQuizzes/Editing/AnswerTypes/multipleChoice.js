@@ -9,7 +9,6 @@ import React from "react";
 
 class MultipleChoice extends React.Component {
     render() {
-        console.log(this.props.val);
         return (
             <div className={s.SaveAnswer}>
                 <div className={s.answer}>
