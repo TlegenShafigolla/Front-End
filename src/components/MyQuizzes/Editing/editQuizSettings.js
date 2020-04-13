@@ -6,21 +6,22 @@ import Radio from "@material-ui/core/Radio";
 import Button from "@material-ui/core/Button";
 import s from './css/editQuizz.module.css'
 import $ from 'jquery'
+
 class EditQuizSettings extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-        };
+        this.state = {};
     }
-hideSaveButton=()=>{
-        $('#saveButton').show(1000)
-}
-render() {
 
-        return (<div>
-            <div  className={s.quizSettings} onClick={this.hideSaveButton}>
-                <div>
-                <FormControl component="fieldset">
+    hideSaveButton = () => {
+        $('#saveButton').show(500)
+    }
+
+    render() {
+
+        return (
+            <div className={s.quizSettings} onClick={this.hideSaveButton}>
+                <div className={s.radio}>
                     <RadioGroup aria-label="type" name="Results">
                         <FormControlLabel value="Mixed" control={<Radio color="primary"/>}
                                           checked={this.props.mixed}
@@ -30,10 +31,6 @@ render() {
                                           onChange={this.props.notmixed} label="Not Mixed"/>
 
                     </RadioGroup>
-                </FormControl>
-            </div>
-            <div>
-                <FormControl component="fieldset">
                     <RadioGroup aria-label="type" name="Results">
                         <FormControlLabel value="Point" control={<Radio color="primary"/>}
                                           checked={this.props.showResults}
@@ -43,10 +40,6 @@ render() {
                                           onChange={this.props.notShowResult} label='Do not show results'/>
 
                     </RadioGroup>
-                </FormControl>
-            </div>
-            <div>
-                <FormControl component="fieldset">
                     <RadioGroup aria-label="type" name="Correct/Wrong/Point">
                         <FormControlLabel value="Correct/Wrong" control={<Radio color="primary"/>}
                                           onChange={this.props.correct} checked={!this.props.points}
@@ -54,11 +47,10 @@ render() {
                         <FormControlLabel value="Point" control={<Radio color="primary"/>} onChange={this.props.point}
                                           checked={this.props.points} label="Point"/>
                     </RadioGroup>
-                </FormControl>
+                </div>
+                <Button id='saveButton' onClick={this.props.saveButton} color='primary'>Save</Button>
             </div>
-            </div>
-            <Button id='saveButton' onClick={this.props.saveButton}>Save</Button>
-        </div>);
+        );
     }
 }
 

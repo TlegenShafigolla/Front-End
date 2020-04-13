@@ -22,10 +22,11 @@
     flex-direction: column;
 }
 .quizSettings{
-    width: 100%;
-    display: inline-flex;
 }
-
+.quizSettings Button{
+float: right;
+    display: none;
+}
 .questionsboard {
     width: 13%;
     position: fixed;
@@ -37,7 +38,9 @@
 
 
 }
-
+.radio{
+    display: flex;
+}
 .question {
     width: 100%;
     min-height: 50vh;

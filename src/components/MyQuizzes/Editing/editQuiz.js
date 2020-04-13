@@ -76,7 +76,7 @@ class editQuiz extends React.Component {
             await postQuiz(quiz);
             this.setState({quizChanges: false})
         }
-        $('#saveButton').hide()
+        $('#saveButton').hide(500)
 
     };
 
