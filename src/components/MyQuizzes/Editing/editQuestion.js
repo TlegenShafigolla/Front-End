@@ -69,14 +69,16 @@ class EditQuestion extends React.Component {
                 </div>
                 <div className={s.answerType}>
                     {this.props.answers === [] ?'' : this.props.answers.map((val, index) =>
-                        <EditAnswer
-                            id={index.toString()}
-                            key={val.answer + index}
-                            val={val}
-                            index={index}
-                            isMultipleChoice={this.state.isMultipleChoice}
-                            {...this.props}
-                        />
+                        <div key={this.props.index_key[index]} >
+                            <EditAnswer
+                                id={index.toString()}
+                                key={this.props.index_key[index]}
+                                val={val}
+                                index={index}
+                                isMultipleChoice={this.state.isMultipleChoice}
+                                {...this.props}
+                            />
+                        </div>
                     )}
                 </div>
                 <div className={s.Buttons}>

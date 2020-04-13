@@ -3,6 +3,7 @@ import ShowQuestion from "./showQuestion";
 import EditQuestion from "./editQuestion";
 import getAnswers, {deleteAnswers, postAnswers} from "../../../services/adminAPI/answers";
 import {deleteQuestions, postQuestions} from "../../../services/adminAPI/questions";
+import makeID from "../../../services/utils";
 
 class Question extends React.Component {
     constructor(props) {
@@ -18,13 +19,19 @@ class Question extends React.Component {
             answers: [],
             image: this.props.value.image,
             disableSaveButton: false,
+            index_key: {},
         };
     }
 
     componentDidMount() {
         if (this.state.id !== undefined) {
-            getAnswers(this.state.id).then(val => {this.setState({answers: val.answers})
-            console.log(val)
+            getAnswers(this.state.id).then(val => {
+                this.setState({answers: val.answers});
+                let index_key = this.state.index_key;
+                for(let i = 0; i < this.state.answers.length; i++){
+                    index_key[i] = makeID(8);
+                }
+                this.setState({index_key: index_key});
             })
         }
     }
@@ -57,8 +64,14 @@ class Question extends React.Component {
         if (this.state.id !== undefined && answers[index].id !== undefined) {
             deleteAnswers(this.state.id, answers[index].id);
         }
+        let index_key = this.state.index_key;
+        for(let i = index; i < answers.length - 1; i++){
+            index_key[i] = this.state.index_key[i+1];
+        }
+        delete index_key[answers.length - 1];
         answers.splice(index, 1);
         this.setState({answers: answers});
+        this.setState({index_key: index_key});
     };
 
     deleteQuestionOnClick = () => {
@@ -137,7 +150,10 @@ class Question extends React.Component {
             points: 0,
             answer: '',
         });
-        this.setState({answers: answers})
+        this.setState({answers: answers});
+        let index_key = this.state.index_key;
+        index_key[answers.length - 1] = makeID(8);
+        this.setState({index_key: index_key});
     };
 
     render() {
@@ -156,6 +172,7 @@ class Question extends React.Component {
                 answers={this.state.answers}
                 question={this.state.question}
                 question_id={this.state.id}
+                index_key={this.state.index_key}
                 {...this.props}/>
         } else {
             return <ShowQuestion editOnClick={this.editOnClick}
