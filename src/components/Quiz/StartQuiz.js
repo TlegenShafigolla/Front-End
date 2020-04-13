@@ -13,6 +13,7 @@ import {Link} from "react-scroll";
 import Slide from "@material-ui/core/Slide";
 import {NavLink} from "react-router-dom";
 import DialogActions from "@material-ui/core/DialogActions";
+import questions from "../../services/adminAPI/questions";
 
 
 class StartQuiz extends React.Component {
@@ -28,7 +29,8 @@ class StartQuiz extends React.Component {
             quiz_name: '',
             description: '',
             questions_count: '',
-            points: null
+            points: null,
+            maxPoint:null,
         }
     }
 
@@ -99,8 +101,8 @@ class StartQuiz extends React.Component {
             this.setState({quiz_name: json.quiz_name});
             this.setState({questions_count: json.questions_count});
             this.setState({description: json.description});
-            this.setState({showResults: json.showResults})
-            console.log(json)
+            this.setState({showResults: json.showResults});
+            console.log(json);
         });
     };
 
@@ -111,8 +113,8 @@ class StartQuiz extends React.Component {
         let answer = this.state.answers;
         postQuizAnswer(path[2], session_id, finished, answer).then(val => {
             this.setState({corrects: val.corrects});
-            this.setState({points: val.points})
-            console.log(val)
+            this.setState({points: val.points});
+            console.log(val);
             localStorage.removeItem('session_id');
             this.setState({endTestDialog: true});
             localStorage.removeItem('start_test');
@@ -171,14 +173,14 @@ class StartQuiz extends React.Component {
                 <Dialog open={this.state.startTestDialog} className={s.dialog} fullScreen>
 
                     <div className={s.dialogActions}>
-                        <div><Typography
-                            variant='h5'>Quiz name: {this.state.quiz_name}</Typography>
+                        <div className={s.typography}><Typography
+                            variant='h4'> {this.state.quiz_name}</Typography>
                         </div>
                         <Button color='primary' variant='contained' onClick={this.startTest}>Start test</Button>
                     </div>
                     <DialogContent className={s.dialogContent}>
-                        <Typography variant='h3'>{this.state.description}</Typography>
-                        <Typography variant='h6'>Question count: {this.state.questions_count}</Typography>
+                        <Typography variant='h6' color='textSecondary'>There are {this.state.questions_count} questions</Typography>
+                        <Typography className={s.description} variant='h3'>{this.state.description}</Typography>
                     </DialogContent>
                 </Dialog>
                 <Dialog open={this.state.endTestDialog} fullScreen TransitionComponent={Transition}>

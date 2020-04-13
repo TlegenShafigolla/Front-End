@@ -12,7 +12,13 @@
     width: 40%;
 }
 
-
+.error{
+    width: 100%;
+    display: inline-flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+}
 
 .info {
     margin-top: 60px;
@@ -75,16 +81,25 @@
 }
 
 .dialogActions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     height: 50px;
 }
 .dialogActions Button{
+    float: right;
+    top: -30px;
     margin-right: 5px;
 }
+.typography{
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
 .dialogContent{
-    margin: auto;
+    display: flex;
+align-items: center;
+    flex-direction: column;
+}
+.description{
+
 }
 .header{
     display: flex;
