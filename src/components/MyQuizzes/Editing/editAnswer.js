@@ -4,14 +4,14 @@ import FillTheBlank from "./fillTheBlank";
 import MultipleChoice from "./multipleChoice";
 class EditAnswer extends React.Component {
     render() {
-        console.log(this.props.isMultipleChoice)
+        console.log(this.props.isMultipleChoice);
         return (
             <div>
                 <div className={s.TextField}>
                     {!this.props.isMultipleChoice ?
                         <FillTheBlank
                             {...this.props}
-                        />:<MultipleChoice
+                        /> : <MultipleChoice
                             {...this.props}
                         />
                     }
