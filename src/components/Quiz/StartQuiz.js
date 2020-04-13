@@ -21,13 +21,14 @@ class StartQuiz extends React.Component {
         this.state = {
             startTestDialog: localStorage.getItem('start_test') === null,
             endTestDialog: false,
-            showResult: false,
+            showResults: false,
             questions: [],
             answers: [],
             corrects: null,
             quiz_name: '',
             description: '',
             questions_count: '',
+            points: null
         }
     }
 
@@ -98,6 +99,7 @@ class StartQuiz extends React.Component {
             this.setState({quiz_name: json.quiz_name});
             this.setState({questions_count: json.questions_count});
             this.setState({description: json.description});
+            this.setState({showResults: json.showResults})
             console.log(json)
         });
     };
@@ -109,6 +111,7 @@ class StartQuiz extends React.Component {
         let answer = this.state.answers;
         postQuizAnswer(path[2], session_id, finished, answer).then(val => {
             this.setState({corrects: val.corrects});
+            this.setState({points: val.points})
             console.log(val)
             localStorage.removeItem('session_id');
             this.setState({endTestDialog: true});
@@ -180,15 +183,15 @@ class StartQuiz extends React.Component {
                 </Dialog>
                 <Dialog open={this.state.endTestDialog} fullScreen TransitionComponent={Transition}>
                     <DialogContent>
-                        <Typography>
+                        <Typography variant='h5'>
                             Thank you for passing the test
-                            {this.state.corrects === undefined ? '' : ' You result: ' + this.state.corrects + ' points'}
+                            {this.state.showResults ?  ' You result: '+(this.state.corrects === undefined ? this.state.points :this.state.corrects)+' points' : ''}
                         </Typography>
                     </DialogContent>
 
                     <DialogActions>
                         <NavLink className={s.button} to='/'>
-                            <Button color='primary'  variant='contained'>Back to home
+                            <Button color='primary' variant='contained'>Back to home
                                 page</Button>
                         </NavLink>
                     </DialogActions>
