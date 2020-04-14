@@ -12,7 +12,13 @@
     width: 40%;
 }
 
-
+.error {
+    width: 100%;
+    display: inline-flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+}
 
 .info {
     margin-top: 60px;
@@ -75,29 +81,46 @@
 }
 
 .dialogActions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     height: 50px;
 }
-.dialogActions Button{
+
+.dialogActions Button {
+    float: right;
+    top: -30px;
     margin-right: 5px;
 }
-.dialogContent{
-    margin: auto;
-}
-.header{
+
+.typography {
     display: flex;
-justify-content: space-between;
+    justify-content: center;
+    margin-top: 5px;
 }
-.header Button{
+
+.dialogContent {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.description {
+
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header Button {
     background: #3F51B5;
     color: white;
 }
-.button{
-float: right;
+
+.button {
+    float: right;
     bottom: 0;
 }
-a{
+
+a {
     text-decoration: none;
 }

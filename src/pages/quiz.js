@@ -2,7 +2,10 @@ import React from 'react'
 import {getInvitation, postInvitation} from "../services/userAPI/invitation";
 import StartQuiz from "../components/Quiz/StartQuiz";
 import CheckEmail from "../components/Quiz/CheckEmail";
-
+import Typography from "@material-ui/core/Typography";
+import s from '../components/Quiz/Quiz.module.css'
+import Button from "@material-ui/core/Button";
+import {NavLink} from "react-router-dom";
 class Quiz extends React.Component {
     constructor(props) {
         super(props);
@@ -62,9 +65,12 @@ class Quiz extends React.Component {
             )
         } else {
             return (
-                <div>
-                    error
+                <div className={s.error}>
+                    <NavLink to='/'><Button color='primary'>Back to home page</Button></NavLink>
+                    <Typography variant='h6'> Sorry, this page does not exist or has been deleted. Try another link</Typography>
+                <Typography variant='h1' color='textSecondary'>404</Typography>
                 </div>
+
             )
         }
     }

@@ -10,8 +10,8 @@ class home extends React.Component {
         <div className={s.body}>
             d;slf
         </div>
-        <Footer/>
-      </div>
+
+              </div>
     );
   }
 }

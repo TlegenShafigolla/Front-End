@@ -35,7 +35,7 @@ class Answers extends React.Component {
         } else {
             return (
                 <div>
-                    {this.props.value.answers === null ? '' : this.props.value.answers.map((val, index) =>
+                    {this.props.value.answers.length ===0 ? <TextareaAutosize className={s.textarea} id={this.props.value.id} onChange={this.props.onChangeAnswer} /> : this.props.value.answers.map((val, index) =>
                         <TextareaAutosize id={val.question_id.toString()} className={s.textarea} key={index}
                                           onChange={this.props.onChangeAnswer}/>
                     )}

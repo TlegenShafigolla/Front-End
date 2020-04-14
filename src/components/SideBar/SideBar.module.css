@@ -14,7 +14,7 @@ color: #f3f3f3;
     display: flex;
     justify-content: flex-start;
 }
-.buttongroup Button:disabled {
+.buttongroup Button:focus {
     color: #f3f3f3;
      transition: 1s;
      background: #3F51B5;

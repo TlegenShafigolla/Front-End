@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
      render() {
          return (
              <div>
-                 <Dialog open={true}>
+                 <Dialog open={true} fullWidth={true} maxWidth='xs'>
                      <DialogContent>
                          <TextField
                                     error={this.props.error}

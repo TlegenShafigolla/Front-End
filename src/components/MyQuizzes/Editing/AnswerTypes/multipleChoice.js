@@ -29,7 +29,8 @@ class MultipleChoice extends React.Component {
                     </div>
                     <div className={s.correct}>
                         {this.props.point ?
-                            <InputBase className={s.point}
+                            <InputBase
+                                className={s.point}
                                        id={this.props.id}
                                        key={this.props.index}
                                        inputProps={{'aria-label': 'Point'}}
