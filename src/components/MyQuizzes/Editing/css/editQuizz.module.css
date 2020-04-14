@@ -26,14 +26,21 @@
 float: right;
     display: none;
 }
-.questionsboard {
-    width: 13%;
+.board {
+    width: 3%;
     position: fixed;
-    right: 20px;
+    right: 15%;
     box-shadow: 5px 5px 10px #333333;
-    padding: 10px;
-    display: inline-flex;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.boardRows {
+    display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .radio{
     display: flex;

@@ -138,9 +138,9 @@ class editQuiz extends React.Component {
                         <AddIcon fontSize='large'/>
                     </IconButton>
                 </div>
-                <div className={s.questionsboard}>
-                    <div>
-                        {this.state.questions === undefined || this.state.questions === null ? ' ' :
+                <div className={s.board}>
+                    <div className={s.boardRows}>
+                        {this.state.questions === undefined || this.state.questions === null ? null :
                             this.state.questions.map(val => <Board key={val.order_id} value={val}/>)}
                     </div>
                 </div>
