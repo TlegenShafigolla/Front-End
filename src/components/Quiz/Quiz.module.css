@@ -12,7 +12,7 @@
     width: 40%;
 }
 
-.error{
+.error {
     width: 100%;
     display: inline-flex;
     flex-direction: column-reverse;
@@ -83,36 +83,44 @@
 .dialogActions {
     height: 50px;
 }
-.dialogActions Button{
+
+.dialogActions Button {
     float: right;
     top: -30px;
     margin-right: 5px;
 }
-.typography{
+
+.typography {
     display: flex;
     justify-content: center;
     margin-top: 5px;
 }
-.dialogContent{
+
+.dialogContent {
     display: flex;
-align-items: center;
+    align-items: center;
     flex-direction: column;
 }
-.description{
+
+.description {
 
 }
-.header{
+
+.header {
     display: flex;
-justify-content: space-between;
+    justify-content: space-between;
 }
-.header Button{
+
+.header Button {
     background: #3F51B5;
     color: white;
 }
-.button{
-float: right;
+
+.button {
+    float: right;
     bottom: 0;
 }
-a{
+
+a {
     text-decoration: none;
 }
