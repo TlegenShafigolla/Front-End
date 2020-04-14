@@ -1,13 +1,12 @@
 import React from "react";
 import {getReport} from "../../services/adminAPI/reports";
 import s from "./Report.module.css";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import QuestionNumberIcon from "./QuestionNumberIcon";
 import ReportQuestion from "./ReportQuestion";
+import ReportCard from "./ReportCard";
 
 class Report extends React.Component{
     constructor(props){
@@ -17,7 +16,8 @@ class Report extends React.Component{
             tab: 0,
             report_id: id,
             report: null,
-            question: null
+            question: null,
+            correctQuestions: null,
         };
     }
 
@@ -33,38 +33,10 @@ class Report extends React.Component{
             <div className={s.Container}>
                 <div className={s.Box}>
                     <div className={s.root}>
-                        <CardContent className={s.CardContent}>
-                            <Typography className={s.title} gutterBottom>
-                                {"Quiz: " + this.state.report.quiz_name}
-                            </Typography>
-                            <Typography className={s.title} gutterBottom>
-                                {"Email: " + this.state.report.email}
-                            </Typography>
-                            <Typography className={s.title} gutterBottom>
-                                {"To: " + this.state.report.name + " " + this.state.report.surname}
-                            </Typography>
-                            <Typography variant="h5" component="h2">
-                                {"Description: " + this.state.report.description}
-                            </Typography>
-                            <Typography color="textSecondary">
-                                {"No of questions: " + this.state.report.questions_count.toString()}
-                            </Typography>
-                            <Typography variant="body2" component="p">
-                                {"Quiz version of: " + this.state.report.created_date}
-                            </Typography>
-                            <Typography variant="body2" component="p">
-                                {"Invited: " + this.state.report.invited_date}
-                            </Typography>
-                            <Typography variant="body2" component="p">
-                                {"Mixed: " + this.state.report.mixed}
-                            </Typography>
-                            <Typography variant="body2" component="p">
-                                {"showResults: " + this.state.report.showResults}
-                            </Typography>
-                        </CardContent>
+                        <ReportCard report={this.state.report}/>
                     </div>
-                    <div >
-                        <AppBar position="static" color="default">
+                    <div className={s.Tabs}>
+                        <AppBar position="static" color="inherit">
                             <Tabs
                                 value={this.state.tab}
                                 onChange={this.scrollTabHandleChange}
@@ -76,7 +48,10 @@ class Report extends React.Component{
                             >
                                 {this.state.report.questions.map((val, index) =>
                                        <Tab id={index} key={val.id}
-                                            icon={<QuestionNumberIcon val={index+1}/>} />)}
+                                            fullWidth={false}
+                                            icon={<QuestionNumberIcon val={index+1}
+                                                                      correct={this.state.correctQuestions === null? false : this.state.correctQuestions[index]}/>}
+                                       />)}
                             </Tabs>
                         </AppBar>
                     </div>
@@ -88,11 +63,30 @@ class Report extends React.Component{
         );
     }
 
+    correctAnswersList = () => {
+        let arr = [];
+        for(let i = 0; i < this.state.report.questions.length; i++){
+            let correct = false;
+            let points = 0;
+            for(let j = 0; j < this.state.report.questions[i].session.length; j++){
+                correct = correct || this.state.report.questions[i].session[j].correct;
+                points += this.state.report.questions[i].session[j].points;
+            }
+            if(correct || points > 0){
+                arr.push(true);
+            } else {
+                arr.push(false);
+            }
+        }
+        this.setState({correctQuestions: arr});
+    };
+
     componentDidMount() {
         getReport(this.state.report_id).then(val => {
             console.log(val);
             this.setState({report: val});
             this.setState({question: this.state.report.questions[0]});
+            this.correctAnswersList()
         })
 
     }

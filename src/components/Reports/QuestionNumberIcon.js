@@ -5,7 +5,7 @@ class QuestionNumberIcon extends React.Component{
     render() {
         return(
             <div className="container">
-                <div className="square">
+                <div className={this.props.correct ? "correctSquare" : "square"}>
                     {this.props.val}
                 </div>
             </div>

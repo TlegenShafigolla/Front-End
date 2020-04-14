@@ -44,6 +44,7 @@ class ReportQuestion extends React.Component{
                     </div>
                 {this.props.val.type !== "FILL THE BLANK" ? null :
                     <div className={s.question}>
+                        <p>Answers: </p>
                         {this.props.val.session === null ? '' : this.props.val.session.map(val =>
                             <Typography
                                 className={s.typography}

@@ -1,0 +1,18 @@
+.CardContent{
+    flex: 10;
+}
+
+.CardHeader{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+
+.CardHeaderRightColumn{
+    width: 40%;
+
+}
+
+.CardHeaderLeftColumn{
+    width: 60%;
+}

@@ -67,7 +67,6 @@ class ShowQuiz extends React.Component {
             await postQuizInvitation(invite).then((val) => {
                 if (val.Status === 'Success') {
                     this.setState({openSnackbar: true});
-                    console.log(val)
                 }
             });
 
@@ -89,7 +88,6 @@ class ShowQuiz extends React.Component {
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log(this.state.last_edited_date)
         if (prevProps.last_edited_date !== this.props.last_edited_date) {
             this.setState({last_edited_date: Date})
         }
