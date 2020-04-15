@@ -5,9 +5,7 @@ import Button from "@material-ui/core/Button";
 import logo from "../../images/192x192logoGray.png";
 import {Typography} from "@material-ui/core";
 
-const Header = props => {
-    let page = props.page;
-    if (page === "home") {
+const Header = () => {
         return (
             <header className={s.header}>
                     <img className={s.logo} src={logo} alt="Logo"/>
@@ -26,15 +24,6 @@ const Header = props => {
                     </div>
             </header>
         );
-    } else if (page === "login") {
-        return (
-            <header className={s.header}>
-                <Button variant="contained" color="primary">
-                    SignUp
-                </Button>
-            </header>
-        );
-    }
 };
 export default Header;
 
