@@ -17,7 +17,8 @@ class Quiz extends React.Component {
             points: this.props.value.points,
             showResults: this.props.value.showResults,
             disabledSaveButton: false,
-            last_edited_date: this.props.value.last_edited_date
+            last_edited_date: this.props.value.last_edited_date,
+            count:0
         }
     }
 
@@ -57,12 +58,16 @@ class Quiz extends React.Component {
                 showResults: this.state.showResults,
                 last_edited_date: this.state.last_edited_date,
             };
-            await postQuiz(quiz).then(val => console.log(val));
+                await postQuiz(quiz).then(val => {console.log(val)
+                    this.setState({last_edited_date:val.last_edited_date})
+
+                });
             this.setState({quizChange: false})
         }
         this.setState({disabledSaveButton:false});
 
     };
+
 
     render() {
         if (!this.state.editMode) {
@@ -86,6 +91,7 @@ class Quiz extends React.Component {
                     changeDescription={this.changeDescription}
                     changeQuizName={this.changeQuizName}
                     saveButton={this.saveButton}
+                    last_edited_date={this.state.last_edited_date}
                     {...this.props}
                 />
             )

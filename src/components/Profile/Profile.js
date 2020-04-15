@@ -3,6 +3,10 @@ import s from './Profile.module.css'
 import getProfile from "../../services/adminAPI/profile";
 import MenuItem from "@material-ui/core/MenuItem";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import Typography from "@material-ui/core/Typography";
+import {TextareaAutosize} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import FaceIcon from '@material-ui/icons/Face';
 class Profile extends React.Component {
     constructor(props) {
         super(props);
@@ -15,21 +19,21 @@ class Profile extends React.Component {
     render() {
         return (
                 <div className={s.profile}>
-                    <div className={s.profile1}>
 
-                    </div>
-
-                    <div className={s.profileinfo}>
-                        <div className={s.avatar}>
-
+                    <div className={s.profileInfo}>
+                        <div >
+                             <FaceIcon className={s.avatar} fontSize='large'/>
                         </div>
-                        {this.state.displayName}
-                        <br/>
-                        {this.state.email}
-                         <CssBaseline />
-                        <MenuItem>setings</MenuItem>
+                        <Typography variant='h6' >{this.state.displayName}</Typography>
+                        <Typography>  {this.state.email}</Typography>
                     </div>
-            </div>
+                    <div className={s.feedback}>
+                        <Typography>Feedback</Typography>
+                        <TextareaAutosize className={s.textarea}/>
+                        <Button color='primary'>submit</Button>
+                    </div>
+
+                </div>
         )
     };
 
