@@ -1,10 +1,12 @@
 import React from "react"
 import {login} from "../services/serverlog"
-import Footer from "../components/Footer/Footer"
-import Header from "../components/Header/Header"
 import {Redirect} from "react-router-dom"
 import s from '../css/Login.module.css'
 import Button from "@material-ui/core/Button"
+import {TextField} from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+import Link from '@material-ui/core/Link'
+import logo from "../images/192x192logoGray.png";
 
 class Login extends React.Component {
     constructor(props) {
@@ -12,7 +14,8 @@ class Login extends React.Component {
         this.state = {
             email: '',
             password: '',
-            loggedIn: false
+            loggedIn: false,
+            disabledButton: false
         };
 
         this.onChangeEmail = this.onChangeEmail.bind(this);
@@ -28,9 +31,19 @@ class Login extends React.Component {
         this.setState({email: event.target.value});
     }
 
+    onClickButton = async () => {
+        if (this.state.disabledButton) {
+            return;
+        }
+        this.setState({disabledButton: true})
+        await login(this.state.email, this.state.password);
+        this.setState({loggedIn: true});
+        this.setState({disabledButton: false})
+
+        console.log('ok')
+    };
+
     render() {
-        const email = this.state.email;
-        const password = this.state.password;
         const status = localStorage.getItem('status');
 
         if (status === 'admin') {
@@ -39,40 +52,45 @@ class Login extends React.Component {
         if (status === 'user') {
             return <Redirect to="/user"/>;
         }
+
         return (
+            <div>
+                <div className={s.loginPage}>
+                    <div className={s.SignIn}>
+                        <img className={s.logo} src={logo} alt="Logo"/>
+                        <div className={s.input}>
+                            <TextField
+                                type="email"
+                                placeholder="Email"
+                                name="email"
+                                label='Email'
+                                variant='outlined'
+                                autoComplete='off'
+                                onChange={this.onChangeEmail}
+                                autoFocus
+                                fullWidth
 
-            <form
-                onSubmit={async (e) => {
-                    await login(email, password, e.preventDefault());
-                    this.setState({loggedIn: true});
-                }}
-            >
-                <Header page='login'/>
-                <div className={s.SignIn}>
-                    <input
-                        type="email"
-                        className={s.email}
-                        placeholder="Email"
-                        name="email"
-                        value={this.state.email}
-                        onChange={this.onChangeEmail}
-                    />
-                    <br/>
-                    <input
-                        type="password"
-                        placeholder="password"
-                        name="password"
-                        className={s.password}
-                        value={this.state.password}
-                        onChange={this.onChangePassword}
-                    />
-                    <br/>
-
-                    <Button variant='contained' color='primary'  type={onsubmit}>Continue</Button>
-
+                            />
+                        </div>
+                        <div className={s.input}>
+                            <TextField
+                                fullWidth
+                                label='Password'
+                                variant='outlined'
+                                type="password"
+                                placeholder="password"
+                                name="password"
+                                onChange={this.onChangePassword}
+                            />
+                        </div>
+                        <Button variant='contained' color='primary' onClick={this.onClickButton}>Continue</Button>
+                        <div className={s.forgot}>
+                                <Link  >Forgot password?</Link>
+                                <Link>SignUp</Link>
+                        </div>
+                    </div>
                 </div>
-                <Footer/>
-            </form>
+            </div>
         );
     }
 }

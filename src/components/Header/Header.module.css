@@ -5,6 +5,7 @@
     background-color: #f3f3f3;
     display: flex;
     justify-content: space-between;
+    position: fixed;
   }
   .header button{
     margin-left: 15px;

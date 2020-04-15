@@ -1,68 +1,43 @@
+.loginPage {
+    display: flex;
+    height: 100vh;
+    background: url('../images/homeBackground.jpg') no-repeat fixed center/cover;
+}
 
 .SignIn {
-    width: 450px;
-    min-height: 550px;
-    border: 0px solid black;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  input {
-    height: 25px;
-    width: 250px;
-    border: 0px solid black;
-    border-bottom: 1px solid black;
-    background: rgba(255, 255, 255, 0);
-    outline: none;
-    font-size: 1em;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 200px;
-  }
-  input:-webkit-autofill {
-    -webkit-box-shadow: inset 0 0 0 50px rgb(255, 255, 255) !important; 
-    -webkit-text-fill-color: rgb(20, 18, 18) !important; 
-    color: rgb(22, 19, 19) !important;
+    padding: 25px;
+    width: 350px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.75);
+    margin: auto;
+    box-shadow: 1px 1px 4px rgba(14, 14, 14, .3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-  .email:checked {
-    background: rgba(255, 255, 255, 0);
-  }
-  
-  input::placeholder {
-    font-family: "Roboto", sans-serif;
-  }
-   
-  
-  .email {
-    font-family: "Roboto", sans-serif;
-  }
-  
-  .SignIn Button {
-    margin-top: 10px;
-    color: white;
-    height: 50px;
-    width: 250px;
-    border-radius: 10px;
-    outline: none;
-    font-size: 1.5em;
-    border: 0;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .button:active {
-    background: rgb(215, 24, 207);
-    background: linear-gradient(
-      270deg,
-      rgba(215, 24, 207, 1) 28%,
-      rgba(0, 48, 255, 0.9752275910364145) 100%
-    );
-    background-color: rgb(19, 19, 19);
-  }
-  
-  .password {
-    margin-top: 5px;
-  }
-  
-  
-  
+
+.SignIn button {
+    margin-top: 20px;
+    width: 350px;
+}
+
+.input {
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+.logo {
+    height: 140px;
+    width: 140px;
+}
+.forgot a{
+    cursor: pointer;
+}
+
+.forgot {
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}

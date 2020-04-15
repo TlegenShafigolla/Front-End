@@ -1,9 +1,4 @@
-.home{
-    width: 100%;
-    overflow: hidden;
-    z-index: 0;
-    position: fixed;
-}
-.backgroundImage{
-    width: 100%;
+.home {
+    background: url('../images/homeBackground.jpg') no-repeat fixed center/cover;
+    height: 100vh;
 }
