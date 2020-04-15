@@ -7,9 +7,12 @@ import Tab from "@material-ui/core/Tab";
 import QuestionNumberIcon from "./QuestionNumberIcon";
 import ReportQuestion from "./ReportQuestion";
 import ReportCard from "./ReportCard";
+import IconButton from "@material-ui/core/IconButton";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import {Link} from "react-router-dom";
 
-class Report extends React.Component{
-    constructor(props){
+class Report extends React.Component {
+    constructor(props) {
         super(props);
         const {id} = this.props.match.params;
         this.state = {
@@ -26,11 +29,18 @@ class Report extends React.Component{
     };
 
     render() {
-        if(this.state.report === null){
+        if (this.state.report === null) {
             return '';
         }
-        return(
+        return (
             <div className={s.Container}>
+                <div className={s.ArrowButton}>
+                    <Link to='/admin/reports'>
+                        <IconButton color="primary">
+                            <ArrowBackIosIcon/>
+                        </IconButton>
+                    </Link>
+                </div>
                 <div className={s.Box}>
                     <div className={s.root}>
                         <ReportCard report={this.state.report}/>
@@ -47,11 +57,11 @@ class Report extends React.Component{
                                 aria-label="scrollable force tabs example"
                             >
                                 {this.state.report.questions.map((val, index) =>
-                                       <Tab id={index} key={val.id}
-                                            fullWidth={false}
-                                            icon={<QuestionNumberIcon val={index+1}
-                                                                      correct={this.state.correctQuestions === null? false : this.state.correctQuestions[index]}/>}
-                                       />)}
+                                    <Tab id={index} key={val.id}
+                                         fullWidth={false}
+                                         icon={<QuestionNumberIcon val={index + 1}
+                                                                   correct={this.state.correctQuestions === null ? false : this.state.correctQuestions[index]}/>}
+                                    />)}
                             </Tabs>
                         </AppBar>
                     </div>
@@ -65,14 +75,14 @@ class Report extends React.Component{
 
     correctAnswersList = () => {
         let arr = [];
-        for(let i = 0; i < this.state.report.questions.length; i++){
+        for (let i = 0; i < this.state.report.questions.length; i++) {
             let correct = false;
             let points = 0;
-            for(let j = 0; j < this.state.report.questions[i].session.length; j++){
+            for (let j = 0; j < this.state.report.questions[i].session.length; j++) {
                 correct = correct || this.state.report.questions[i].session[j].correct;
                 points += this.state.report.questions[i].session[j].points;
             }
-            if(correct || points > 0){
+            if (correct || points > 0) {
                 arr.push(true);
             } else {
                 arr.push(false);

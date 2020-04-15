@@ -1,28 +1,33 @@
 .root {
     margin-top: 15px;
-    box-shadow: 3px 3px 10px #333333 ;
+    box-shadow: 3px 3px 10px #333333;
     justify-content: space-between;
     padding: 10px;
 }
 
-.CardContent{
+.CardContent {
     flex: 10;
 }
 
-.title{
+.title {
     fontSize: 14;
 }
 
-.Tabs{
+.Tabs {
     margin-top: 10px;
-    box-shadow: 3px 3px 10px #333333 ;
+    box-shadow: 3px 3px 10px #333333;
 }
 
-.Tab{
+.Tab {
     width: 100px;
 }
 
-.Container{
+.ArrowButton {
+    position: fixed;
+    left: 10px;
+}
+
+.Container {
     height: 91vh;
     width: 100%;
     display: flex;
@@ -30,7 +35,7 @@
     align-items: center;
 }
 
-.Box{
+.Box {
     display: flex;
     flex-direction: column;
     width: 50%;

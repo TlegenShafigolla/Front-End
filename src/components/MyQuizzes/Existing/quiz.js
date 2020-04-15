@@ -18,7 +18,6 @@ class Quiz extends React.Component {
             showResults: this.props.value.showResults,
             disabledSaveButton: false,
             last_edited_date: this.props.value.last_edited_date,
-            count:0
         }
     }
 
