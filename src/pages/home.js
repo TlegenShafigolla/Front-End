@@ -1,17 +1,15 @@
 import React from "react";
 import Header from "../components/Header/Header";
-import Footer from "../components/Footer/Footer";
 import s from '../css/HomePage.module.css'
+import background from '../images/homeBackground.jpg'
+
 class home extends React.Component {
   render() {
     return (
       <div className={s.home}>
         <Header page='home' />
-        <div className={s.body}>
-            d;slf
-        </div>
-
-              </div>
+        <img src={background} className={s.backgroundImage}/>
+      </div>
     );
   }
 }

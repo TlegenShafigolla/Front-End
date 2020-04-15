@@ -8,7 +8,7 @@ import InsertInvitationSharpIcon from '@material-ui/icons/InsertInvitation';
 import AssessmentSharpIcon from '@material-ui/icons/Assessment';
 import AssignmentSharpIcon from '@material-ui/icons/AssignmentSharp';
 import s from './SideBar.module.css'
-import logo from './192x192logoGray.png'
+import logo from '../../images/192x192logoGray.png'
 
 const SideBar = (props) => {
     const classes = useStyle();
