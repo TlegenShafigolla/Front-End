@@ -9,20 +9,50 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const AdminHeader = (props) => {
     const classes = useStyles();
+
+    const routes = [
+        {
+            path: '/admin/profile',
+            name: 'Profile'
+        },
+        {
+            path: '/admin/quizzes',
+            name: 'Quizzes'
+        },
+        {
+            path: '/admin/invitations',
+            name: 'Quiz - Invitations'
+        },
+        {
+            path: '/admin/reports',
+            name: 'Quiz - Reports'
+        },
+    ];
+
+    const PageName = () => {
+        let name = '';
+        routes.map(obj => {
+            if(window.location.href.indexOf(obj.path) !== -1){
+                name = obj.name;
+            }
+            return null;
+        });
+        return name;
+    };
+
     return (
         <div className={classes.grow}>
 
             <AppBar position="fixed" style={{background: "#f3f3f3"}}
                     className={clsx(classes.appBar, {
                         [classes.appBarShift]: props.OpenSideBar,
-                    })}
-            >
+                    })}>
                 <Toolbar>
                     <IconButton className={classes.menuButton} onClick={props.OpenButton} color="primary">
                         <MenuIcon/>
                     </IconButton>
                     <Typography variant="h6" className={classes.title} noWrap color="primary">
-                        {props.PageName}
+                        {PageName()}
                     </Typography>
                     <div className={classes.grow}/>
                     <div className={classes.sectionDesktop}>
@@ -41,8 +71,6 @@ const AdminHeader = (props) => {
 
                     </div>
                 </Toolbar>
-
-
             </AppBar>
         </div>
     )
