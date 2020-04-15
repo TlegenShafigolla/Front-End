@@ -43,7 +43,7 @@ class ListQuizPreview extends React.Component {
             <div className={s.Container}>
                 <div className={s.Box}>
                     <div className={s.Quizz}>
-                        {this.state.quizzes !== [] ? this.state.quizzes.map((val, index) =>
+                        {this.state.quizzes !== undefined ? this.state.quizzes.map((val, index) =>
                             <Quiz key={index} id={index}
                                   value={val}
                                   deleteQuiz={this.deleteQuiz}

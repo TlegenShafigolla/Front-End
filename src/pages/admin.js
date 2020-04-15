@@ -17,7 +17,6 @@ class admin extends Component {
             isSideBarOpen: false,
             isLoggedIn: true,
             displayName: '',
-            pageName: '',
         }
     }
     LogOut = () => {
@@ -26,10 +25,6 @@ class admin extends Component {
     };
     openSideBar = () => {
         this.setState({isSideBarOpen: !this.state.isSideBarOpen})
-    };
-
-    onClickSideBar = (pageName) => {
-        this.setState({pageName: pageName});
     };
 
     render() {
@@ -43,11 +38,9 @@ class admin extends Component {
                     Logout={this.LogOut}
                     OpenSideBar={this.state.isSideBarOpen}
                     DisplayName={this.state.displayName}
-                    PageName={this.state.pageName}
                 />
                 <SideBar
                     open={this.state.isSideBarOpen}
-                    onClickSideBar={this.onClickSideBar}
                 />
                 <div onClick={()=>this.setState({isSideBarOpen: false})} >
                     <Routes open={this.state.isSideBarOpen}/>

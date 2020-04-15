@@ -2,8 +2,10 @@
     width: 100%;
     min-height: 100%;
     border: 1px solid silver;
-    margin-top: 5px;
+    margin: 5px;
     display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
 }
 .orderid{

@@ -8,7 +8,6 @@ const Header = props => {
     if (page === "home") {
         return (
             <header className={s.header}>
-                Logo
                 <NavLink to="/login">
                     <Button variant="contained" color="primary">
                         SignIn
@@ -22,8 +21,6 @@ const Header = props => {
     } else if (page === "login") {
         return (
             <header className={s.header}>
-                Logoo
-
                 <Button variant="contained" color="primary">
                     SignUp
                 </Button>
