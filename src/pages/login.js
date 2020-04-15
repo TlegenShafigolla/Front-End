@@ -15,7 +15,8 @@ class Login extends React.Component {
             email: '',
             password: '',
             loggedIn: false,
-            disabledButton: false
+            disabledButton: false,
+            error:false
         };
 
         this.onChangeEmail = this.onChangeEmail.bind(this);
@@ -25,22 +26,32 @@ class Login extends React.Component {
 
     onChangePassword(event) {
         this.setState({password: event.target.value});
+        this.setState({error:false})
     }
 
     onChangeEmail(event) {
         this.setState({email: event.target.value});
+        this.setState({error:false})
     }
 
     onClickButton = async () => {
         if (this.state.disabledButton) {
             return;
         }
-        this.setState({disabledButton: true})
-        await login(this.state.email, this.state.password);
-        this.setState({loggedIn: true});
-        this.setState({disabledButton: false})
+        this.setState({disabledButton: true});
+        await login(this.state.email, this.state.password).then(data => {
+            localStorage.setItem('refresh_token',data['refresh_token']);
+            localStorage.setItem("access_token", data["access_token"]);
+            localStorage.setItem("status", data["type"]);
+            localStorage.setItem('access_time', Date())
+             if(data.Status==='Failed') {
+                 this.setState({error: true})
+             }
+        });
 
-        console.log('ok')
+        this.setState({loggedIn: true});
+        this.setState({disabledButton: false});
+
     };
 
     render() {
@@ -69,11 +80,12 @@ class Login extends React.Component {
                                 onChange={this.onChangeEmail}
                                 autoFocus
                                 fullWidth
-
+                                error={this.state.error}
                             />
                         </div>
                         <div className={s.input}>
                             <TextField
+                                error={this.state.error}
                                 fullWidth
                                 label='Password'
                                 variant='outlined'

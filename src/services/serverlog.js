@@ -13,12 +13,6 @@ export async function login(email, password) {
     .then(res => {
       return res.json();
     })
-    .then(data => {
-      localStorage.setItem('refresh_token',data['refresh_token']);
-      localStorage.setItem("access_token", data["access_token"]);
-      localStorage.setItem("status", data["type"]);
-      localStorage.setItem('access_time', Date())
-    })
 
     .catch(error => console.log(error));
 }
