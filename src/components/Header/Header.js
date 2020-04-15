@@ -10,7 +10,6 @@ const Header = props => {
     if (page === "home") {
         return (
             <header className={s.header}>
-                <div className={s.headerLogo}>
                     <img className={s.logo} src={logo} alt="Logo"/>
                     <Typography className={s.name} variant="h5" noWrap color="primary">
                         QUIZZES
@@ -25,7 +24,6 @@ const Header = props => {
                             </Button>
                         </NavLink>
                     </div>
-                </div>
             </header>
         );
     } else if (page === "login") {
