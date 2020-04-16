@@ -31,13 +31,18 @@ class editQuiz extends React.Component {
         };
     }
 
+    setQuestion = (order_id, question) => {
+        let questions = this.state.questions;
+        questions[order_id - 1] = question;
+        this.setState({questions: questions});
+    };
+
      addNewQuestion = () => {
         if(this.state.disableAddButton){
             return;
         }
         this.setState({disableAddButton: true});
         const question = {
-            editMode: false,
             order_id: this.state.questions.length + 1,
             quiz_id: this.state.quiz_id,
             image: null,
@@ -141,6 +146,7 @@ class editQuiz extends React.Component {
                                 value={val}
                                 point={this.state.points}
                                 deleteQuestion={this.deleteQuestion}
+                                setQuestion={this.setQuestion}
                             />)}
                     </div>
                     <IconButton color='primary' size='medium' className={s.addbutton} onClick={this.addNewQuestion}>
