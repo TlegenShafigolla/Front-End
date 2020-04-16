@@ -1,13 +1,12 @@
 .CardContent {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row-reverse;
+    justify-content: space-between;
 }
 
 .ReportCard {
     width: 100%;
 }
-
 
 
 .version {
@@ -17,4 +16,10 @@
 }
 
 .CardHeaderLeftColumn {
+}
+
+.Person {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
