@@ -26,22 +26,31 @@ class editQuiz extends React.Component {
             quiz_name: this.props.match.quiz_name,
             questions_count: 0,
             points:this.props.match.points,
-            quizChanges:false
+            quizChanges:false,
+            disableAddButton: false,
         };
     }
 
      addNewQuestion = () => {
-        const questions = this.state.questions;
-        questions.push({
+        if(this.state.disableAddButton){
+            return;
+        }
+        this.setState({disableAddButton: true});
+        const question = {
             editMode: false,
             order_id: this.state.questions.length + 1,
             quiz_id: this.state.quiz_id,
             image: null,
             question: "",
             type: "FILL THE BLANK"
+        };
+        postQuestions(this.state.quiz_id, [question]).then(ret => {
+            const questions = this.state.questions;
+            questions.push(ret.created[0]);
+            this.setState({questions: questions});
         });
-        this.setState({questions: questions});
-    };
+        this.setState({disableAddButton: false});
+     };
 
     deleteQuestion = (order_id) => {
         let questions = this.state.questions;
