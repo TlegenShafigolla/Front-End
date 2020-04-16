@@ -23,6 +23,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ShareIcon from '@material-ui/icons/Share';
 import {postQuizInvitation} from "../../../services/adminAPI/quiz";
+import DeleteQuizDialog from "./deleteQuizDialog";
 
 class ShowQuiz extends React.Component {
     constructor(props) {
@@ -39,9 +40,22 @@ class ShowQuiz extends React.Component {
             errorSurname: false,
             errorEmail: false,
             last_edited_date: this.props.last_edited_date,
-            quiz_name: this.props.quiz_name
+            quiz_name: this.props.quiz_name,
+            openDeleteQuizDialog: false,
         }
     }
+
+    onClickDelete = (action) => {
+        this.setState({openDeleteQuizDialog: false});
+        if(!action){
+            return;
+        }
+        this.props.deleteQuizOnClick();
+    };
+
+    openDeleteDialog = () => {
+        this.setState({openDeleteQuizDialog: true});
+    };
 
     onChangeName = (event) => {
         this.setState({name: event.target.value});
@@ -121,7 +135,8 @@ class ShowQuiz extends React.Component {
                         </IconButton>
                     </Tooltip>
                     <Tooltip title='Delete'>
-                        <IconButton size='small' onClick={this.props.deleteQuizOnClick}
+                        <IconButton size='small'
+                                    onClick={this.state.quiz_id === undefined ? this.props.deleteQuizOnClick : this.openDeleteDialog}
                                     aria-label='delete'>
                             <DeleteIcon fontSize='medium' color='primary'/>
                         </IconButton>
@@ -203,6 +218,7 @@ class ShowQuiz extends React.Component {
                 message="Success"
                 onClose={this.snackClose}
             />
+            <DeleteQuizDialog openDialog={this.state.openDeleteQuizDialog} onClose={this.onClickDelete}/>
         </div>);
     }
 }

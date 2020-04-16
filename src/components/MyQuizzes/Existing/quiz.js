@@ -29,7 +29,7 @@ class Quiz extends React.Component {
     };
 
     changeDescription = (event) => {
-        this.setState({description: event.target.value})
+        this.setState({description: event.target.value});
         this.setState({quizChange: true})
 
     };
@@ -38,7 +38,6 @@ class Quiz extends React.Component {
         this.setState({quizChange: true})
     };
     editMode = () => {
-
         this.setState({editMode: true})
     };
     saveButton = async () => {
