@@ -10,6 +10,7 @@ import ReportCard from "./ReportCard";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import {Link} from "react-router-dom";
+import Typography from "@material-ui/core/Typography";
 
 class Report extends React.Component {
     constructor(props) {
@@ -42,6 +43,9 @@ class Report extends React.Component {
                     </Link>
                 </div>
                 <div className={s.Box}>
+                    <Typography className={s.quizName} variant="h5" component="p" gutterBottom>
+                        {this.state.report.quiz_name}
+                    </Typography>
                     <div className={s.root}>
                         <ReportCard report={this.state.report}/>
                     </div>

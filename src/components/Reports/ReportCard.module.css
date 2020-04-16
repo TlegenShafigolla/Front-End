@@ -1,18 +1,20 @@
-.CardContent{
-    flex: 10;
-}
-
-.CardHeader{
+.CardContent {
     display: flex;
-    margin-bottom: 10px;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ReportCard {
+    width: 100%;
 }
 
 
-.CardHeaderRightColumn{
-    width: 40%;
 
+.version {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 5px;
 }
 
-.CardHeaderLeftColumn{
-    width: 60%;
+.CardHeaderLeftColumn {
 }
