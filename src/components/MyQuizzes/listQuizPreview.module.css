@@ -45,7 +45,7 @@
 }
 
 .CardContent {
-    flex: 10;
+    flex: 6;
 }
 
 .CardActions {
@@ -67,6 +67,15 @@
     justify-content: space-around;
 }
 
+.ArrowButton{
+    top: 20px;
+    right: -40px;
+}
+
+.ButtonPanel{
+    margin-top: 50px;
+    display: flex;
+}
 /*.root {*/
 /*    padding: 2px 4px;*/
 /*    display: flex;*/

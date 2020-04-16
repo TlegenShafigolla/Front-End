@@ -19,6 +19,9 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import FormControl from "@material-ui/core/FormControl";
 import Snackbar from "@material-ui/core/Snackbar";
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import ShareIcon from '@material-ui/icons/Share';
 import {postQuizInvitation} from "../../../services/adminAPI/quiz";
 
 class ShowQuiz extends React.Component {
@@ -98,30 +101,37 @@ class ShowQuiz extends React.Component {
             <CardContent className={s.CardContent}>
                 <Typography variant="h5" component="h2">
                     {this.props.quiz_name}  </Typography>
-                <Typography className={s.title} color="textSecondary" gutterBottom> {this.props.description} </Typography>
-                <Typography className={s.pos}
-                            color="textSecondary"> {this.props.value.questions_count.toString()} </Typography>
+                <Typography className={s.title} gutterBottom> {this.props.description} </Typography>
+                <Typography className={s.pos} > {this.props.value.questions_count.toString()} </Typography>
                 <Typography variant="body2"
-                            component="p"> {this.props.last_edited_date.toString()} </Typography>
+                            component="p"
+                            color="textSecondary"
+                            >Version: {this.props.last_edited_date.toString()} </Typography>
             </CardContent>
             <CardActions className={s.CardActions}>
-                <Button onClick={this.onClickInvite}>
-                    Invite
-                </Button>
-                <Button onClick={this.props.editMode}>
-                    Edit
-                </Button>
+                <div className={s.ButtonPanel}>
+                    <Tooltip title='Invite'>
+                        <IconButton color="primary" onClick={this.onClickInvite}>
+                           <ShareIcon fontSize='meduim'/>
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title='Edit'>
+                        <IconButton color="primary" onClick={this.props.editMode}>
+                            <EditIcon fontSize='meduim'/>
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title='Delete'>
+                        <IconButton size='small' onClick={this.props.deleteQuizOnClick}
+                                    aria-label='delete'>
+                            <DeleteIcon fontSize='medium' color='primary'/>
+                        </IconButton>
+                    </Tooltip>
+                </div>
                 <Link to={'/admin/quizzes/edit/' + this.props.value.id.toString()}>
                     <IconButton color="primary" className={s.ArrowButton} onClick={this.handleClick}>
                         <ArrowForwardIosIcon fontSize='large'/>
                     </IconButton>
                 </Link>
-                <Tooltip title='Delete'>
-                    <IconButton size='small' className={s.DeleteButton} onClick={this.props.deleteQuizOnClick}
-                                aria-label='delete'>
-                        <HighlightOffIcon fontSize='small' color='secondary'/>
-                    </IconButton>
-                </Tooltip>
             </CardActions>
             <Dialog open={this.state.open}
                     aria-labelledby="Invite"

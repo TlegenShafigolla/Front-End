@@ -114,8 +114,8 @@ class editQuiz extends React.Component {
                     </Link>
                 </div>
                 <div className={s.edit}>
-                    <div>
-                        <Typography variant='h6'> {this.state.quiz_name}</Typography>
+                    <div className={s.QuizName}>
+                        <Typography variant='h4'> {this.state.quiz_name}</Typography>
                     </div>
                     <div className={s.settings}>
                         <EditQuizSettings point={this.point} correct={this.correct} points={this.state.points}
