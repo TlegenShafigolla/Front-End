@@ -26,7 +26,7 @@ color: #f3f3f3;
 .buttongroup Button.secondary{
     display: flex;
     padding-left: 60px;
-    justify-content: start;
+    justify-content: flex-start;
 }
 .header{
     display: flex;
