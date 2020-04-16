@@ -13,7 +13,6 @@ import {Link} from "react-scroll";
 import Slide from "@material-ui/core/Slide";
 import {NavLink} from "react-router-dom";
 import DialogActions from "@material-ui/core/DialogActions";
-import questions from "../../services/adminAPI/questions";
 
 
 class StartQuiz extends React.Component {

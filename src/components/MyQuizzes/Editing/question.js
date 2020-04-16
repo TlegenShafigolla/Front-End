@@ -95,7 +95,6 @@ class Question extends React.Component {
         if (this.state.disableSaveButton) {
             return;
         }
-        console.log(this.state.answers);
         this.setState({disableSaveButton: true});
         if (this.state.id === undefined && (this.state.questionChanged || this.state.answersChanged)) {
             const question = {

@@ -1,8 +1,6 @@
 import s from "../css/editAnswer.module.css";
 import TextField from "@material-ui/core/TextField";
 import InputBase from "@material-ui/core/InputBase";
-import IconButton from "@material-ui/core/IconButton";
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import React from "react";
 
 class FillTheBlank extends React.Component {
