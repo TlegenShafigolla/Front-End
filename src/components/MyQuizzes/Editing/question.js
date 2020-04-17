@@ -9,7 +9,7 @@ class Question extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            editMode: false,
+            editMode: this.props.value.question === '',
             id: this.props.value.id,
             quiz_id: this.props.value.quiz_id,
             answerType: this.props.value.type,
@@ -96,18 +96,14 @@ class Question extends React.Component {
             return;
         }
         this.setState({disableSaveButton: true});
-        if (this.state.id === undefined && (this.state.questionChanged || this.state.answersChanged)) {
-            const question = {
-                quiz_id: this.state.quiz_id,
-                order_id: this.props.value.order_id,
-                type: this.state.answerType,
-                question: this.state.question,
-                image: this.state.image,
-            };
-            await postQuestions(this.state.quiz_id, [question]).then(ret => {
-                this.setState({id: ret.created[0].id});
-            });
-            this.setState({questionChanged: false});
+        if (this.state.answersChanged) {
+            let answers = this.state.answers;
+            for (let i in answers) {
+                answers[i].question_id = this.state.id.toString();
+            }
+            await postAnswers(this.state.id, this.state.answers).then(json => console.log(json));
+            await getAnswers(this.state.id).then(val => this.setState({answers: val.answers}));
+            this.setState({answersChanged: false});
         }
         if (this.state.questionChanged) {
             const question = {
@@ -120,15 +116,7 @@ class Question extends React.Component {
             };
             await postQuestions(this.state.quiz_id, [question]);
             this.setState({questionChanged: false});
-        }
-        if (this.state.answersChanged) {
-            let answers = this.state.answers;
-            for (let i in answers) {
-                answers[i].question_id = this.state.id.toString();
-            }
-            await postAnswers(this.state.id, this.state.answers).then(json => console.log(json));
-            await getAnswers(this.state.id).then(val => this.setState({answers: val.answers}));
-            this.setState({answersChanged: false});
+            this.props.setQuestion(this.props.value.order_id, question);
         }
         this.setState({editMode: false});
         this.setState({disableSaveButton: false});

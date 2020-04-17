@@ -52,6 +52,7 @@
 
 .radio {
     display: flex;
+    flex-direction: column;
 }
 
 .question {
@@ -80,4 +81,20 @@
 .QuizName {
     margin-top: 10px;
     margin-bottom: 15px;
+}
+.switchLine{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.switchTextRight{
+    width: 150px;
+}
+.switchTextLeft{
+    width: 150px;
+    text-align: right;
+}
+.switch{
+    margin-left: 30px;
+    margin-right: 10px;
 }
