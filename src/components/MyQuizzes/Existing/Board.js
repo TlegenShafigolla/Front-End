@@ -10,7 +10,6 @@ class board extends React.Component {
         };
     }
     render() {
-        console.log(this.props.value)
         return (
             <Link
                 activeClass="active"
