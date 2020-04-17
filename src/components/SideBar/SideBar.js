@@ -1,7 +1,6 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import {Drawer, Typography} from "@material-ui/core";
-import {useStyle} from "./Style";
 import {NavLink} from "react-router-dom";
 import AccountBoxSharpIcon from '@material-ui/icons/AccountBoxSharp';
 import InsertInvitationSharpIcon from '@material-ui/icons/InsertInvitation';
@@ -11,24 +10,25 @@ import s from './SideBar.module.css'
 import logo from '../../images/192x192logoGray.png'
 
 const SideBar = (props) => {
-    const classes = useStyle();
     return (
         <Drawer
             open={props.open}
             variant='persistent'
-            className={classes.drawer}
+            className={s.drawer}
             anchor='left'
             classes={{
-                paper: classes.drawerPaper
+                paper: s.drawerPaper
             }}
 
         >
+
             <div className={s.header}>
                 <img className={s.logo} src={logo} alt="Logo"/>
                 <Typography className={s.name} variant="h5" noWrap color="primary">
                     QUIZZES
                 </Typography>
             </div>
+            <div className={s.sidebar}>
             <div className={s.buttongroup}>
                 <NavLink to="/admin/profile">
                     <Button color='primary'
@@ -77,7 +77,7 @@ const SideBar = (props) => {
                     Reports
                 </Button>
             </div>
-
+            </div>
         </Drawer>
 
     );

@@ -4,6 +4,30 @@ color: #f3f3f3;
     margin-top: 5px;
    margin-bottom: 20px;
 }
+.drawer {
+    width: 100%;
+    flexShrink: 0;
+
+}
+.sidebar{
+    position: relative;
+    height: 100%;
+    background: #333333;
+}
+.sidebar:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: inherit;
+}
+.drawerPaper{
+     display: flex;
+     width: 240px;
+
+}
 .buttongroup {
     display: flex;
     flex-direction: column;

@@ -5,7 +5,7 @@ import s from '../css/Login.module.css'
 import Button from "@material-ui/core/Button"
 import {TextField} from "@material-ui/core";
 import Link from '@material-ui/core/Link'
-import logo from "../images/192x192logoGray.png";
+import logo from "../images/logoPng.png";
 
 class Login extends React.Component {
     constructor(props) {
