@@ -5,14 +5,43 @@ import Typography from "@material-ui/core/Typography";
 import {TextareaAutosize} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import FaceIcon from '@material-ui/icons/Face';
+import postFeedback from "../../services/adminAPI/feedback";
+import Snackbar from "@material-ui/core/Snackbar";
 class Profile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             displayName:'',
-            email:''
+            email:'',
+            feedback: '',
+            openSnackbar: false,
+            submitPressed: false,
         };
     }
+
+    snackClose = () => {
+        this.setState({openSnackbar: false})
+    };
+
+    handleOnChange = (event) => {
+        this.setState({feedback: event.target.value});
+    };
+
+    handleOnSubmit = () => {
+        if(this.state.submitPressed){
+            return;
+        }
+        this.setState({submitPressed: true});
+        if(this.state.feedback !== ''){
+            postFeedback(this.state.feedback).then(value => {
+                if(value.Status === "Success"){
+                    this.setState({openSnackbar: true});
+                    this.setState({feedback: ''});
+                }
+            });
+        }
+        this.setState({submitPressed: false});
+    };
 
     render() {
         return (
@@ -27,10 +56,14 @@ class Profile extends React.Component {
                     </div>
                     <div className={s.feedback}>
                         <Typography>Feedback</Typography>
-                        <TextareaAutosize className={s.textarea}/>
-                        <Button color='primary'>submit</Button>
+                        <TextareaAutosize value={this.state.feedback} className={s.textarea} onChange={this.handleOnChange}/>
+                        <Button color='primary' onClick={this.handleOnSubmit}>submit</Button>
                     </div>
-
+                    <Snackbar
+                        open={this.state.openSnackbar}
+                        message="Success! Feedback sent!"
+                        onClose={this.snackClose}
+                    />
                 </div>
         )
     };
