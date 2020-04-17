@@ -13,6 +13,24 @@ export default function getInvitations() {
     });
 }
 
+export function postInvitations(invitation) {
+    const authToken = `Bearer ${getSession()}`;
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            Authorization: authToken,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(invitation),
+    };
+    const api = 'http://35.228.95.87:7000';
+    return fetch(`${api}/quiz/invitation`, requestOptions).then(res => {
+        return res.json();
+    });
+
+}
+
 export function deleteInvitations(invitation_id) {
     const authToken = `Bearer ${getSession()}`;
     const requestOptions = {

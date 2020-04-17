@@ -12,13 +12,14 @@ import DialogContent from "@material-ui/core/DialogContent";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
-import {postQuizInvitation} from "../../../services/adminAPI/quiz";
+import {postInvitations} from "../../../services/adminAPI/invitations";
 import Snackbar from "@material-ui/core/Snackbar";
 
 class InviteDialog extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+            quiz_id: this.props.quiz_id,
             name: null,
             surname: null,
             email: null,
@@ -29,6 +30,10 @@ class InviteDialog extends React.Component{
         };
     }
 
+    handleCancel = () => {
+        this.props.onClose();
+    };
+
     onClickInviteInDialog = async () => {
         let email = /[0-9a-z_-]+@[0-9a-z_-]+\.[a-z]{2,5}$/i;
         if (this.state.name !== null && this.state.name !== '' && this.state.surname !== null && this.state.surname !== '' && email.test(this.state.email)) {
@@ -38,13 +43,14 @@ class InviteDialog extends React.Component{
                 email: this.state.email,
                 quiz_id: this.state.quiz_id
             };
-            await postQuizInvitation(invite).then((val) => {
+            await postInvitations(invite).then((val) => {
                 console.log(val);
                 if (val.Status === 'Success') {
                     this.setState({openSnackbar: true});
                 }
             });
             this.setState({open: false});
+            this.props.onClose();
         }
         if (this.state.name === '' || this.state.name === null) {
             this.setState({errorName: true})
@@ -81,6 +87,7 @@ class InviteDialog extends React.Component{
             <div>
                 <Dialog open={this.props.openDialog}
                         aria-labelledby="Invite"
+                        onClose={this.handleCancel}
                 >
                     <DialogActions>
                         <IconButton size='small' onClick={() => {

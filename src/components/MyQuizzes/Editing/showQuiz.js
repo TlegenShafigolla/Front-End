@@ -37,9 +37,12 @@ class ShowQuiz extends React.Component {
         this.setState({openDeleteQuizDialog: true});
     };
 
+    onClickInvite = () => {
+        this.setState({openInviteDialog: false});
+    };
 
-    openInviteDialog = () => {
-        this.setState({openInviteDialog: true})
+    inviteDialog = () => {
+        this.setState({openInviteDialog: !this.state.openInviteDialog})
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -63,7 +66,7 @@ class ShowQuiz extends React.Component {
             <CardActions className={s.CardActions}>
                 <div className={s.ButtonPanel}>
                     <Tooltip title='Invite'>
-                        <IconButton color="primary" onClick={this.openInviteDialog}>
+                        <IconButton color="primary" onClick={this.inviteDialog}>
                            <ShareIcon />
                         </IconButton>
                     </Tooltip>
@@ -86,7 +89,7 @@ class ShowQuiz extends React.Component {
                     </IconButton>
                 </Link>
             </CardActions>
-            <InviteDialog openDialog={this.state.openInviteDialog}/>
+            <InviteDialog openDialog={this.state.openInviteDialog} onClose={this.onClickInvite} quiz_id={this.state.quiz_id}/>
             <DeleteQuizDialog openDialog={this.state.openDeleteQuizDialog} onClose={this.onClickDelete}/>
         </div>);
     }
