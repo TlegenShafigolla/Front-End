@@ -19,14 +19,14 @@ class editQuiz extends React.Component {
         this.state = {
             quiz_id: id,
             questions: null,
-            mixed: this.props.match.mixed,
-            showResults: this.props.match.showResults,
-            description: this.props.match.description,
-            last_edited_date: this.props.match.last_edited_date,
-            quiz_name: this.props.match.quiz_name,
-            questions_count: 0,
-            points:this.props.match.points,
-            quizChanges:false,
+            mixed: null,
+            showResults: null,
+            description: null,
+            last_edited_date: null,
+            quiz_name: null,
+            questions_count: null,
+            points: null,
+            quizChanges: false,
             disableAddButton: false,
         };
     }
@@ -67,15 +67,6 @@ class editQuiz extends React.Component {
         this.setState({questions: questions});
     };
 
-    point = () => {
-        this.setState({points: true})
-        this.setState({quizChanges:true})
-    };
-    correct = () => {
-        this.setState({points: false})
-        this.setState({quizChanges:true})
-
-    };
     saveButton = async () => {
         if (this.state.quizChanges) {
             const quiz = {
@@ -87,37 +78,32 @@ class editQuiz extends React.Component {
                 showResults: this.state.showResults,
                 last_edited_date: Date
             };
-            await postQuiz(quiz);
-            this.setState({quizChanges: false})
+            console.log(quiz)
+            await postQuiz(quiz).then(value => {
+                console.log(value);
+                this.setState({quizChanges: false});
+            });
         }
         $('#saveButton').hide(500)
 
     };
-
-    mixedChecked = () => {
-        this.setState({mixed: true});
+    pointsChecked = (event) => {
+        this.setState({points: event});
         this.setState({quizChanges:true})
-
     };
-
-    notMixedChecked = () => {
-        this.setState({mixed: false});
+    mixedChecked = (event) => {
+        this.setState({mixed: event});
         this.setState({quizChanges:true})
-
     };
-    showResult = () => {
-        this.setState({showResults: true});
+    showResultsChecked = (event) => {
+        this.setState({showResults: event});
         this.setState({quizChanges:true})
-
-    };
-
-    notShowResults = () => {
-        this.setState({showResults: false});
-        this.setState({quizChanges:true})
-
     };
 
     render() {
+        if(this.state.questions === null){
+            return '';
+        }
         return (
             <div className={s.body}>
                 <div className={s.ArrowButton}>
@@ -132,11 +118,13 @@ class editQuiz extends React.Component {
                         <Typography variant='h4'> {this.state.quiz_name}</Typography>
                     </div>
                     <div className={s.settings}>
-                        <EditQuizSettings point={this.point} correct={this.correct} points={this.state.points}
-                                          saveButton={this.saveButton} mixedChecked={this.mixedChecked}
-                                          notmixed={this.notMixedChecked} mixed={this.state.mixed}
-                                          showResult={this.showResult} showResults={this.state.showResults}
-                                          notShowResult={this.notShowResults}
+                        <EditQuizSettings pointsChecked={this.pointsChecked}
+                                          saveButton={this.saveButton}
+                                          mixedChecked={this.mixedChecked}
+                                          showResultsChecked={this.showResultsChecked}
+                                          showResults={this.state.showResults}
+                                          mixed={this.state.mixed}
+                                          points={this.state.points}
                         />
                     </div>
                     <div className={s.question}>
@@ -167,8 +155,8 @@ class editQuiz extends React.Component {
     componentDidMount() {
         getQuestions(this.state.quiz_id).then(json => {
             this.setState({
-                mixed:json.mixed,
-                showResults:json.showResults,
+                mixed: json.mixed,
+                showResults: json.showResults,
                 questions: json.questions,
                 quiz_name: json.quiz_name,
                 description: json.description,
