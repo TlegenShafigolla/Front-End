@@ -1,14 +1,20 @@
-.Board{
-    width: 100%;
-    min-height: 100%;
-    border: 1px solid silver;
-    border-radius: 50%;
-    margin: 5px;
+.Board {
+    min-width: 60px;
+    padding: 1px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.orderid {
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
-}
-.orderid{
-
+    width: 20px;
+    height: 20px;
+    background: #2f57b5;
+    border-radius: 50%;
+    color: white;
+    box-shadow: 0px 0px 5px #2f57b5;
+    margin: 5px;
 }

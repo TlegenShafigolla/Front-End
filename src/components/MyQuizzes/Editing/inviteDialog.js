@@ -19,6 +19,7 @@ class InviteDialog extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+
             name: null,
             surname: null,
             email: null,
@@ -83,14 +84,14 @@ class InviteDialog extends React.Component{
                         aria-labelledby="Invite"
                 >
                     <DialogActions>
-                        <IconButton size='small' onClick={() => {
+                        <IconButton size='small'onClick={() => {
                             this.setState({open: false});
                             this.setState({email: null});
                             this.setState({name: null});
                             this.setState({surname: null})
                         }}
                                     aria-label='delete'>
-                            <HighlightOffIcon fontSize='small' color='secondary'/>
+                            <HighlightOffIcon fontSize='small' color='primary'/>
                         </IconButton>
                     </DialogActions>
                     <DialogTitle id="Invite">Invite: {this.state.quiz_name}</DialogTitle>

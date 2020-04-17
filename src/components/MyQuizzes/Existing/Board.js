@@ -10,6 +10,7 @@ class board extends React.Component {
         };
     }
     render() {
+        console.log(this.props.value)
         return (
             <Link
                 activeClass="active"
@@ -19,10 +20,11 @@ class board extends React.Component {
                 offset={-70}
                 duration= {500}
             >
-            <div className={s.Board} >
-            <div className={s.orderid}>
-                {this.props.value.order_id}
-            </div>
+            <div className={s.Board}>
+                <div className={s.orderid}>
+                    {this.props.value.order_id}
+                </div>
+                {this.props.value.type==='FILL THE BLANK'?'FB':'MC'}
             </div>
             </Link>
         );

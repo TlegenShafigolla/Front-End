@@ -25,14 +25,14 @@ class editQuiz extends React.Component {
             last_edited_date: this.props.match.last_edited_date,
             quiz_name: this.props.match.quiz_name,
             questions_count: 0,
-            points:this.props.match.points,
-            quizChanges:false,
+            points: this.props.match.points,
+            quizChanges: false,
             disableAddButton: false,
         };
     }
 
-     addNewQuestion = () => {
-        if(this.state.disableAddButton){
+    addNewQuestion = () => {
+        if (this.state.disableAddButton) {
             return;
         }
         this.setState({disableAddButton: true});
@@ -44,13 +44,14 @@ class editQuiz extends React.Component {
             question: "",
             type: "FILL THE BLANK"
         };
+
         postQuestions(this.state.quiz_id, [question]).then(ret => {
             const questions = this.state.questions;
             questions.push(ret.created[0]);
             this.setState({questions: questions});
         });
         this.setState({disableAddButton: false});
-     };
+    };
 
     deleteQuestion = (order_id) => {
         let questions = this.state.questions;
@@ -64,11 +65,11 @@ class editQuiz extends React.Component {
 
     point = () => {
         this.setState({points: true})
-        this.setState({quizChanges:true})
+        this.setState({quizChanges: true})
     };
     correct = () => {
         this.setState({points: false})
-        this.setState({quizChanges:true})
+        this.setState({quizChanges: true})
 
     };
     saveButton = async () => {
@@ -91,28 +92,29 @@ class editQuiz extends React.Component {
 
     mixedChecked = () => {
         this.setState({mixed: true});
-        this.setState({quizChanges:true})
+        this.setState({quizChanges: true})
 
     };
 
     notMixedChecked = () => {
         this.setState({mixed: false});
-        this.setState({quizChanges:true})
+        this.setState({quizChanges: true})
 
     };
     showResult = () => {
         this.setState({showResults: true});
-        this.setState({quizChanges:true})
+        this.setState({quizChanges: true})
 
     };
 
     notShowResults = () => {
         this.setState({showResults: false});
-        this.setState({quizChanges:true})
+        this.setState({quizChanges: true})
 
     };
 
     render() {
+        console.log(this.state.questions)
         return (
             <div className={s.body}>
                 <div className={s.ArrowButton}>
@@ -147,11 +149,9 @@ class editQuiz extends React.Component {
                         <AddIcon fontSize='large'/>
                     </IconButton>
                 </div>
-                <div className={s.board}>
-                    <div className={s.boardRows}>
-                        {this.state.questions === undefined || this.state.questions === null ? null :
-                            this.state.questions.map(val => <Board key={val.order_id} value={val}/>)}
-                    </div>
+                <div className={this.state.questions !== [] ? s.board : s.boardNone}>
+                    {this.state.questions === undefined || this.state.questions === null ? null :
+                        this.state.questions.map(val => <Board key={val.order_id} value={val}/>)}
                 </div>
             </div>
 
@@ -161,14 +161,14 @@ class editQuiz extends React.Component {
     componentDidMount() {
         getQuestions(this.state.quiz_id).then(json => {
             this.setState({
-                mixed:json.mixed,
-                showResults:json.showResults,
+                mixed: json.mixed,
+                showResults: json.showResults,
                 questions: json.questions,
                 quiz_name: json.quiz_name,
                 description: json.description,
                 questions_count: json.questions_count,
                 last_edited_date: json.last_edited_date,
-                points:json.points
+                points: json.points
             });
         });
     }
