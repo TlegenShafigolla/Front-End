@@ -4,11 +4,12 @@
     padding: 10px;
 }
 
-.questioninfo{
+.questioninfo {
     display: flex;
 }
+
 .questionOrder {
-    margin-top:2px;
+    margin-top: 2px;
 }
 
 
@@ -20,30 +21,23 @@
 .answerType {
 }
 
-.Button{
+.Button {
     display: flex;
     flex-direction: row-reverse;
 }
 
-.formControll{
-    display:flex;
+.formControll {
+    display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
-.answer{
-    margin: auto;
-    width: 95%;
-}
-.answerForm{
+
+.answerForm {
     display: flex;
-    flex-direction: row;
+    align-items: center;
 }
-.typography{
-    border-bottom: 1px solid silver;
-}
-.typographyCorrect{
-    border-bottom: 2px solid green;
-}
-.typographyWrong{
-    border-bottom: 2px solid red;
+.answer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
