@@ -4,6 +4,11 @@ import EditQuestion from "./editQuestion";
 import getAnswers, {deleteAnswers, postAnswers} from "../../../services/adminAPI/answers";
 import {deleteQuestions, postQuestions} from "../../../services/adminAPI/questions";
 import makeID from "../../../services/utils";
+import {Dialog} from "@material-ui/core";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogActions from "@material-ui/core/DialogActions";
+import Button from "@material-ui/core/Button";
 
 class Question extends React.Component {
     constructor(props) {
@@ -20,6 +25,8 @@ class Question extends React.Component {
             image: this.props.value.image,
             disableSaveButton: false,
             index_key: {},
+            addNewAnswerButton: false,
+            dialogOpenAnswer: false
         };
     }
 
@@ -28,7 +35,7 @@ class Question extends React.Component {
             getAnswers(this.state.id).then(val => {
                 this.setState({answers: val.answers});
                 let index_key = this.state.index_key;
-                for(let i = 0; i < this.state.answers.length; i++){
+                for (let i = 0; i < this.state.answers.length; i++) {
                     index_key[i] = makeID(8);
                 }
                 this.setState({index_key: index_key});
@@ -54,7 +61,7 @@ class Question extends React.Component {
         this.setState({answerType: newType});
         this.setState({questionChanged: true});
         this.setState({answersChanged: true});
-        for(let i = 0; i < this.state.answers.length; i++){
+        for (let i = 0; i < this.state.answers.length; i++) {
             this.deleteAnswerOnClick(i);
         }
     };
@@ -69,8 +76,8 @@ class Question extends React.Component {
             deleteAnswers(this.state.id, answers[index].id);
         }
         let index_key = this.state.index_key;
-        for(let i = index; i < answers.length - 1; i++){
-            index_key[i] = this.state.index_key[i+1];
+        for (let i = index; i < answers.length - 1; i++) {
+            index_key[i] = this.state.index_key[i + 1];
         }
         delete index_key[answers.length - 1];
         answers.splice(index, 1);
@@ -91,37 +98,63 @@ class Question extends React.Component {
         }
     };
 
-    saveOnClick = async () => {
+    saveOnClick = async (dialog) => {
         if (this.state.disableSaveButton) {
             return;
         }
+        console.log(this.state.answers)
+        console.log(this.state.question)
+
         this.setState({disableSaveButton: true});
-        if (this.state.answersChanged) {
-            let answers = this.state.answers;
-            for (let i in answers) {
-                answers[i].question_id = this.state.id.toString();
+        const answer = this.state.answers;
+        let wrong = 0;
+        for (let i = 0; i < answer.length; i++) {
+            if (this.props.point) {
+                if (answer[i].points === 0) {
+                    wrong++
+                }
+            } else {
+                if (answer[i].correct === 0) {
+                    wrong++
+                }
             }
-            await postAnswers(this.state.id, this.state.answers).then(json => console.log(json));
-            await getAnswers(this.state.id).then(val => this.setState({answers: val.answers}));
-            this.setState({answersChanged: false});
         }
-        if (this.state.questionChanged) {
-            const question = {
-                id: this.state.id,
-                quiz_id: this.state.quiz_id,
-                order_id: this.props.value.order_id,
-                type: this.state.answerType,
-                question: this.state.question,
-                image: this.state.image,
-            };
-            await postQuestions(this.state.quiz_id, [question]);
-            this.setState({questionChanged: false});
-            this.props.setQuestion(this.props.value.order_id, question);
+
+        let corrects = answer.length - wrong;
+        console.log('c' + corrects)
+        console.log('w' + wrong)
+        console.log()
+        if (this.state.answerType === 'MULTIPLE CHOICE' ? corrects > 0 && wrong > 0 : wrong === 0) {
+            if (this.state.answersChanged) {
+                let answers = this.state.answers;
+                for (let i in answers) {
+                    answers[i].question_id = this.state.id.toString();
+                }
+                await postAnswers(this.state.id, this.state.answers).then(json => console.log(json));
+                await getAnswers(this.state.id).then(val => this.setState({answers: val.answers}));
+                this.setState({answersChanged: false});
+            }
+            if (this.state.questionChanged) {
+                const question = {
+                    id: this.state.id,
+                    quiz_id: this.state.quiz_id,
+                    order_id: this.props.value.order_id,
+                    type: this.state.answerType,
+                    question: this.state.question,
+                    image: this.state.image,
+                };
+                await postQuestions(this.state.quiz_id, [question]);
+                this.setState({questionChanged: false});
+                this.props.setQuestion(this.props.value.order_id, question);
+            }
+            this.setState({editMode: false});
+        } else {
+            console.log("ol" + this.state.dialogOpenAnswer)
+            this.setState({dialogOpenAnswer: true})
         }
-        this.setState({editMode: false});
+
         this.setState({disableSaveButton: false});
     };
-
     onChangeAnswer = (event) => {
         let answer = this.state.answers;
         answer[Number(event.target.id)].answer = event.target.value;
@@ -134,7 +167,8 @@ class Question extends React.Component {
         this.setState({questionChanged: true});
     };
 
-    addNewAnswer = (correct=0, points=0) => {
+    addNewAnswer = (correct = 0, points = 0) => {
+
         const answers = this.state.answers;
         answers.push({
             question_id: this.state.id,
@@ -146,26 +180,49 @@ class Question extends React.Component {
         let index_key = this.state.index_key;
         index_key[answers.length - 1] = makeID(8);
         this.setState({index_key: index_key});
+        console.log(answers)
     };
-
+    onClick=()=>{
+        this.setState({dialogOpenAnswer:false})
+    };
     render() {
         if (this.state.editMode) {
-            return <EditQuestion
-                changeCheck={this.changeCheck}
-                changePoint={this.onChangePoint}
-                deleteAnswerOnClick={this.deleteAnswerOnClick}
-                onChangeAnswer={this.onChangeAnswer}
-                addNewAnswer={this.addNewAnswer}
-                onChangeQuestion={this.onChangeQuestion}
-                saveOnClick={this.saveOnClick}
-                changeType={this.changeType}
-                editMode={this.state.editMode}
-                answerType={this.state.answerType}
-                answers={this.state.answers}
-                question={this.state.question}
-                question_id={this.state.id}
-                index_key={this.state.index_key}
-                {...this.props}/>
+            console.log(this.state.dialogOpenAnswer)
+
+            return <div>
+                <EditQuestion
+                    changeCheck={this.changeCheck}
+                    changePoint={this.onChangePoint}
+                    deleteAnswerOnClick={this.deleteAnswerOnClick}
+                    onChangeAnswer={this.onChangeAnswer}
+                    addNewAnswer={this.addNewAnswer}
+                    onChangeQuestion={this.onChangeQuestion}
+                    saveOnClick={this.saveOnClick}
+                    changeType={this.changeType}
+                    editMode={this.state.editMode}
+                    answerType={this.state.answerType}
+                    answers={this.state.answers}
+                    question={this.state.question}
+                    question_id={this.state.id}
+                    index_key={this.state.index_key}
+                    {...this.props}/>
+                <Dialog
+                    open={this.state.dialogOpenAnswer}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            There must be at least 1 correct and incorrect answer
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.onClick} color="primary" autoFocus>
+                            Agree
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </div>
         } else {
             return <ShowQuestion editOnClick={this.editOnClick}
                                  deleteQuestionOnClick={this.deleteQuestionOnClick}

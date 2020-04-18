@@ -8,6 +8,10 @@ import IconButton from "@material-ui/core/IconButton";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import ChangeTypeDialog from "./AnswerTypes/changeTypeDialog";
+import {Dialog} from "@material-ui/core";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogActions from "@material-ui/core/DialogActions";
 
 class EditQuestion extends React.Component {
     constructor(props) {
@@ -19,12 +23,13 @@ class EditQuestion extends React.Component {
             answerType: this.props.answerType,
             isMultipleChoice: this.props.answerType === 'MULTIPLE CHOICE',
             openChangeTypeDialog: false,
+            openDialogAnswer:this.props.openDialogAnswer
         };
     }
 
     dialog = (action) => {
         this.setState({openChangeTypeDialog: false});
-        if(!action){
+        if (!action) {
             return;
         }
         this.setState({isMultipleChoice: !this.state.isMultipleChoice});
@@ -41,57 +46,61 @@ class EditQuestion extends React.Component {
     };
 
     render() {
-        return (
-            <div className={s.question} id={this.state.order}>
-                <div className={s.questioninfo}>
-                    <div className={s.questionOrder}>{this.state.order}.</div>
-                    <div className={s.questionField}>
-                        <TextField
-                            placeholder="Question"
-                            fullWidth
-                            size='small'
-                            defaultValue={this.props.question}
-                            onChange={this.props.onChangeQuestion}
-                            multiline={true}
-                            rows={4}
-                            rowsMax={6}
-                            label="Question"
-                            variant="outlined"
+        const dialog=this.state.openDialogAnswer;
+        return (<div>
+                <div className={s.question} id={this.state.order}>
+                    <div className={s.questioninfo}>
+                        <div className={s.questionOrder}>{this.state.order}.</div>
+                        <div className={s.questionField}>
+                            <TextField
+                                placeholder="Question"
+                                fullWidth
+                                size='small'
+                                defaultValue={this.props.question}
+                                onChange={this.props.onChangeQuestion}
+                                multiline={true}
+                                rows={4}
+                                rowsMax={6}
+                                label="Question"
+                                variant="outlined"
+                            />
+                        </div>
+                    </div>
+                    <div className={s.formControll}>
+                        <FormControlLabel value="Type question"
+                                          control={
+                                              <Radio
+                                                  checked={this.state.isMultipleChoice}
+                                                  onChange={this.multipleChoiceChecked}
+                                                  color="primary"
+                                              />} label='Multiple Choice'/>
+                        <FormControlLabel value="Type question"
+                                          control={
+                                              <Radio
+                                                  color="primary"
+                                                  onChange={this.fillTheBlankChecked}
+                                                  checked={!this.state.isMultipleChoice}
+                                              />} label='Fill the blank '/>
+                    </div>
+                    <div className={s.answerType}>
+                        <EditAnswer
+                            isMultipleChoice={this.state.isMultipleChoice}
+                            {...this.props}
                         />
                     </div>
+                    <div className={s.Buttons}>
+                        {this.state.isMultipleChoice ?
+                            <IconButton className={s.AddButton} color="primary"
+                                        onClick={event => this.props.addNewAnswer()}>
+                                <AddIcon/>
+                            </IconButton> : ''}
+                        <Button color="primary" className={s.saveButton} onClick={this.props.saveOnClick}>
+                            Save
+                        </Button>
+                    </div>
+                    <ChangeTypeDialog openDialog={this.state.openChangeTypeDialog} onClose={this.dialog}/>
                 </div>
-                <div className={s.formControll}>
-                    <FormControlLabel value="Type question"
-                                      control={
-                                          <Radio
-                                              checked={this.state.isMultipleChoice}
-                                              onChange={this.multipleChoiceChecked}
-                                              color="primary"
-                                          />} label='Multiple Choice'/>
-                    <FormControlLabel value="Type question"
-                                      control={
-                                          <Radio
-                                              color="primary"
-                                              onChange={this.fillTheBlankChecked}
-                                              checked={!this.state.isMultipleChoice}
-                                          />} label='Fill the blank '/>
-                </div>
-                <div className={s.answerType}>
-                            <EditAnswer
-                                isMultipleChoice={this.state.isMultipleChoice}
-                                {...this.props}
-                            />
-                </div>
-                <div className={s.Buttons}>
-                    {this.state.isMultipleChoice ?
-                        <IconButton className={s.AddButton} color="primary" onClick={event=> this.props.addNewAnswer()}>
-                            <AddIcon/>
-                        </IconButton> : ''}
-                    <Button color="primary" className={s.saveButton} onClick={this.props.saveOnClick}>
-                        Save
-                    </Button>
-                </div>
-                <ChangeTypeDialog openDialog={this.state.openChangeTypeDialog} onClose={this.dialog}/>
+
             </div>
         );
     }
