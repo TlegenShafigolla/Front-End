@@ -4,11 +4,10 @@ import EditQuestion from "./editQuestion";
 import getAnswers, {deleteAnswers, postAnswers} from "../../../services/adminAPI/answers";
 import {deleteQuestions, postQuestions} from "../../../services/adminAPI/questions";
 import makeID from "../../../services/utils";
-import {Dialog} from "@material-ui/core";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogActions from "@material-ui/core/DialogActions";
-import Button from "@material-ui/core/Button";
+import Snackbar from "@material-ui/core/Snackbar";
+import s from './css/editQuestion.module.css'
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import Typography from "@material-ui/core/Typography";
 
 class Question extends React.Component {
     constructor(props) {
@@ -161,7 +160,9 @@ class Question extends React.Component {
         this.setState({answers: answer});
         this.setState({answersChanged: true});
     };
-
+    onClose = () => {
+        this.setState({dialogOpenAnswer: false})
+    }
     onChangeQuestion = (event) => {
         this.setState({question: event.target.value});
         this.setState({questionChanged: true});
@@ -182,9 +183,10 @@ class Question extends React.Component {
         this.setState({index_key: index_key});
         console.log(answers)
     };
-    onClick=()=>{
-        this.setState({dialogOpenAnswer:false})
+    onClick = () => {
+        this.setState({dialogOpenAnswer: false})
     };
+
     render() {
         if (this.state.editMode) {
             console.log(this.state.dialogOpenAnswer)
@@ -206,22 +208,16 @@ class Question extends React.Component {
                     question_id={this.state.id}
                     index_key={this.state.index_key}
                     {...this.props}/>
-                <Dialog
+                <Snackbar
                     open={this.state.dialogOpenAnswer}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
+                    autoHideDuration={6000}
+                    onClose={this.onClose}
                 >
-                    <DialogContent>
-                        <DialogContentText id="alert-dialog-description">
-                            There must be at least 1 correct and incorrect answer
-                        </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={this.onClick} color="primary" autoFocus>
-                            Agree
-                        </Button>
-                    </DialogActions>
-                </Dialog>
+                    <div className={s.snackbar} color={'secondary'}>
+                        <div><ErrorOutlineIcon/></div>
+                        <Typography>There must be at least 1 correct and incorrect answer</Typography>
+                    </div>
+                </Snackbar>
             </div>
         } else {
             return <ShowQuestion editOnClick={this.editOnClick}
