@@ -75,7 +75,7 @@ class EditQuizSettings extends React.Component {
                         </Tooltip>
                     </div>
                     <div className={s.switchLine}>
-                        <Tooltip title={""}>
+                        <Tooltip title={"Grading system. Answers can be correct or wrong."}>
                         <Typography className={s.switchTextLeft}>Use Correct/Wrong</Typography>
                         </Tooltip>
                         <div className={s.switch}>
@@ -86,7 +86,7 @@ class EditQuizSettings extends React.Component {
                                                  checked={this.state.points}/>}
                              label={''}/>
                         </div>
-                        <Tooltip title={""}>
+                        <Tooltip title={"Grading system. Any answer can have own weight."}>
                         <Typography className={s.switchTextRight}>Use Points</Typography>
                         </Tooltip>
                     </div>
