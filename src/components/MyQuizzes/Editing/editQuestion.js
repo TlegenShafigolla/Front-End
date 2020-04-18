@@ -23,7 +23,7 @@ class EditQuestion extends React.Component {
             answerType: this.props.answerType,
             isMultipleChoice: this.props.answerType === 'MULTIPLE CHOICE',
             openChangeTypeDialog: false,
-            openDialogAnswer:this.props.openDialogAnswer
+            openDialogAnswer: this.props.openDialogAnswer,
         };
     }
 
@@ -46,13 +46,13 @@ class EditQuestion extends React.Component {
     };
 
     render() {
-        const dialog=this.state.openDialogAnswer;
         return (<div>
                 <div className={s.question} id={this.state.order}>
                     <div className={s.questioninfo}>
                         <div className={s.questionOrder}>{this.state.order}.</div>
                         <div className={s.questionField}>
                             <TextField
+                                error={this.props.errorQuestion}
                                 placeholder="Question"
                                 fullWidth
                                 size='small'

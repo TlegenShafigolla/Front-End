@@ -14,6 +14,7 @@ class MultipleChoice extends React.Component {
                 <div className={s.answer}>
                     <div className={s.text} >
                         <TextField
+                            error={this.props.errorAnswer}
                             id={this.props.id}
                             key={this.props.index}
                             placeholder="New answer"

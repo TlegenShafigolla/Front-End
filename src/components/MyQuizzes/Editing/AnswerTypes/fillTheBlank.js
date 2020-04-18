@@ -4,12 +4,17 @@ import InputBase from "@material-ui/core/InputBase";
 import React from "react";
 
 class FillTheBlank extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state={
+            error:false
+        }
+    }
     componentDidMount() {
         if(this.props.answers.length === 0){
             this.props.addNewAnswer(1,1);
         }
     }
-
     render() {
         if(this.props.answers.length === 0){
             return null;
@@ -17,6 +22,7 @@ class FillTheBlank extends React.Component {
         return (
             <div className={s.SaveAnswer}>
                 <TextField
+                    error={this.props.errorAnswer}
                     id={this.props.id}
                     key={this.props.index}
                     placeholder="New answer"
