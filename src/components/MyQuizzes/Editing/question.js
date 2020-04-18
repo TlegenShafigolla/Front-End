@@ -189,8 +189,6 @@ class Question extends React.Component {
 
     render() {
         if (this.state.editMode) {
-            console.log(this.state.dialogOpenAnswer)
-
             return <div>
                 <EditQuestion
                     changeCheck={this.changeCheck}

@@ -11,7 +11,7 @@ class FillTheBlank extends React.Component {
     }
 
     render() {
-        if(this.props.answers.length === 0){
+        if(this.props.answers === undefined){
             return null;
         }
         return (
@@ -21,7 +21,7 @@ class FillTheBlank extends React.Component {
                     key={this.props.index}
                     placeholder="New answer"
                     fullWidth
-                    defaultValue={this.props.answers[0].answer}
+                    defaultValue={this.props.answers[0] !== undefined ? this.props.answers[0].answer : ''}
                     onSubmit={this.props.changeCheck}
                     onChange={this.props.onChangeAnswer}
                     size="small"
@@ -37,7 +37,7 @@ class FillTheBlank extends React.Component {
                             id={this.props.id}
                             key={this.props.index}
                             inputProps={{'aria-label': 'Point'}}
-                            defaultValue={this.props.answers[0].points}
+                            defaultValue={this.props.answers[0] !== undefined ? this.props.answers[0].points : 1}
                             onChange={this.props.changePoint}
                         />
                     </div> : ''}
