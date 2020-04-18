@@ -137,9 +137,11 @@ class editQuiz extends React.Component {
                                 setQuestion={this.setQuestion}
                             />)}
                     </div>
+                    <div>
                     <IconButton color='primary' size='medium' className={s.addbutton} onClick={this.addNewQuestion}>
                         <AddIcon fontSize='large'/>
                     </IconButton>
+                    </div>
                 </div>
                 <div className={s.board}>
 

@@ -25,7 +25,9 @@ class Question extends React.Component {
             disableSaveButton: false,
             index_key: {},
             addNewAnswerButton: false,
-            dialogOpenAnswer: false
+            dialogOpenAnswer: false,
+            errorQuestion: false,
+            errorAnswer: false
         };
     }
 
@@ -69,10 +71,10 @@ class Question extends React.Component {
         this.setState({editMode: true});
     };
 
-    deleteAnswerOnClick = (index) => {
+    deleteAnswerOnClick =async (index) => {
         let answers = this.state.answers;
         if (this.state.id !== undefined && answers[index].id !== undefined) {
-            deleteAnswers(this.state.id, answers[index].id);
+           await deleteAnswers(this.state.id, answers[index].id);
         }
         let index_key = this.state.index_key;
         for (let i = index; i < answers.length - 1; i++) {
@@ -97,55 +99,64 @@ class Question extends React.Component {
         }
     };
 
-    saveOnClick = async (dialog) => {
+    saveOnClick = async () => {
         if (this.state.disableSaveButton) {
             return;
         }
-        console.log(this.state.answers)
-        console.log(this.state.question)
-
         this.setState({disableSaveButton: true});
         const answer = this.state.answers;
         let wrong = 0;
-        for (let i = 0; i < answer.length; i++) {
+        let empty = 0;
+        for (let j = 0; j < answer.length; j++) {
+            if (answer[j].answer === '') {
+                empty = 1
+            }
             if (this.props.point) {
-                if (answer[i].points === 0) {
+                if (answer[j].points === 0) {
                     wrong++
                 }
             } else {
-                if (answer[i].correct === 0) {
+                if (answer[j].correct === 0) {
                     wrong++
                 }
             }
         }
 
         let corrects = answer.length - wrong;
-        if (this.state.answerType === 'MULTIPLE CHOICE' ? corrects > 0 && wrong > 0 : wrong === 0) {
-            if (this.state.answersChanged) {
-                let answers = this.state.answers;
-                for (let i in answers) {
-                    answers[i].question_id = this.state.id.toString();
+        if (this.state.question !== '') {
+            if (empty === 0) {
+                if (this.state.answerType === 'MULTIPLE CHOICE' ? corrects > 0 && wrong > 0 : wrong === 0) {
+                    if (this.state.answersChanged) {
+                        let answers = this.state.answers;
+                        for (let i in answers) {
+                            answers[i].question_id = this.state.id.toString();
+                        }
+                        await postAnswers(this.state.id, this.state.answers).then(json => console.log(json));
+                        await getAnswers(this.state.id).then(val => this.setState({answers: val.answers}));
+                        this.setState({answersChanged: false});
+                    }
+                    if (this.state.questionChanged) {
+                        const question = {
+                            id: this.state.id,
+                            quiz_id: this.state.quiz_id,
+                            order_id: this.props.value.order_id,
+                            type: this.state.answerType,
+                            question: this.state.question,
+                            image: this.state.image,
+                        };
+                        await postQuestions(this.state.quiz_id, [question]);
+                        this.setState({questionChanged: false});
+                        this.props.setQuestion(this.props.value.order_id, question);
+                    }
+                    this.setState({editMode: false});
+                } else {
+                    this.setState({dialogOpenAnswer: true})
                 }
-                await postAnswers(this.state.id, this.state.answers).then(json => console.log(json));
-                await getAnswers(this.state.id).then(val => this.setState({answers: val.answers}));
-                this.setState({answersChanged: false});
+            } else {
+                this.setState({errorAnswer: true})
             }
-            if (this.state.questionChanged) {
-                const question = {
-                    id: this.state.id,
-                    quiz_id: this.state.quiz_id,
-                    order_id: this.props.value.order_id,
-                    type: this.state.answerType,
-                    question: this.state.question,
-                    image: this.state.image,
-                };
-                await postQuestions(this.state.quiz_id, [question]);
-                this.setState({questionChanged: false});
-                this.props.setQuestion(this.props.value.order_id, question);
-            }
-            this.setState({editMode: false});
         } else {
-            this.setState({dialogOpenAnswer: true})
+            this.setState({errorQuestion: true})
         }
 
         this.setState({disableSaveButton: false});
@@ -155,13 +166,16 @@ class Question extends React.Component {
         answer[Number(event.target.id)].answer = event.target.value;
         this.setState({answers: answer});
         this.setState({answersChanged: true});
+        this.setState({errorAnswer: false});
+
     };
     onClose = () => {
         this.setState({dialogOpenAnswer: false})
-    }
+    };
     onChangeQuestion = (event) => {
         this.setState({question: event.target.value});
         this.setState({questionChanged: true});
+        this.setState({errorQuestion: false})
     };
 
     addNewAnswer = (correct = 0, points = 0) => {
@@ -177,6 +191,7 @@ class Question extends React.Component {
         let index_key = this.state.index_key;
         index_key[answers.length - 1] = makeID(8);
         this.setState({index_key: index_key});
+        console.log(answers)
     };
     onClick = () => {
         this.setState({dialogOpenAnswer: false})
@@ -186,6 +201,8 @@ class Question extends React.Component {
         if (this.state.editMode) {
             return <div>
                 <EditQuestion
+                    errorAnswer={this.state.errorAnswer}
+                    errorQuestion={this.state.errorQuestion}
                     changeCheck={this.changeCheck}
                     changePoint={this.onChangePoint}
                     deleteAnswerOnClick={this.deleteAnswerOnClick}

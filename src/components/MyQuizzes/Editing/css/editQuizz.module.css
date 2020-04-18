@@ -3,14 +3,16 @@
     margin: 10px;
     display: inline-flex;
     justify-content: center;
+    align-items: flex-start;
+
 }
 
 .edit {
     width: 50%;
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .settings {
@@ -56,12 +58,9 @@
 
 .question {
     width: 100%;
-    min-height: 50vh;
 }
 
 .addbutton {
-    width: 50px;
-    height: 50px;
     padding: 0px;
 }
 
