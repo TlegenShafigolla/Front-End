@@ -7,9 +7,6 @@ import {Redirect} from "react-router-dom";
 import getProfile from "../services/adminAPI/profile";
 
 class admin extends Component {
-    pageName = {
-
-    };
 
     constructor(props) {
         super(props);
@@ -51,7 +48,15 @@ class admin extends Component {
     }
 
     componentDidMount() {
-        getProfile().then(value => this.setState({displayName: value['name'] + " " + value['surname']}));
+        if(localStorage.getItem('admin_name') !== null){
+            this.setState({displayName: localStorage.getItem('admin_name') + " " + localStorage.getItem('admin_surname')});
+        } else{
+            getProfile().then(value => {
+                this.setState({displayName: value['name'] + " " + value['surname']});
+                localStorage.setItem('admin_name', value['name']);
+                localStorage.setItem('admin_surname', value['surname']);
+            });
+        }
      }
 
 }
