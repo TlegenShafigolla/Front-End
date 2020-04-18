@@ -61,7 +61,7 @@ class ShowQuiz extends React.Component {
                 <Typography variant="body2"
                             component="p"
                             color="textSecondary"
-                            >Version: {this.props.last_edited_date.toString()} </Typography>
+                            >Version: {this.state.last_edited_date.toString()} </Typography>
             </CardContent>
             <CardActions className={s.CardActions}>
                 <div className={s.ButtonPanel}>

@@ -5,6 +5,8 @@ import s from './css/editQuizz.module.css'
 import $ from 'jquery'
 import Switch from "@material-ui/core/Switch";
 import Typography from "@material-ui/core/Typography";
+import {Tooltip} from "@material-ui/core";
+import HelpIcon from '@material-ui/icons/Help';
 
 class EditQuizSettings extends React.Component {
     constructor(props){
@@ -41,7 +43,9 @@ class EditQuizSettings extends React.Component {
             <div className={s.quizSettings} onClick={this.hideSaveButton}>
                 <div className={s.radio}>
                     <div className={s.switchLine}>
-                        <Typography className={s.switchTextLeft}>In-order</Typography>
+                        <Tooltip title={"During the quiz, your questions will be shown in the order in which you see them now."}>
+                            <Typography className={s.switchTextLeft}>In-order</Typography>
+                        </Tooltip>
                         <div className={s.switch}>
                             <FormControlLabel
                                 control={<Switch color="primary"
@@ -50,10 +54,14 @@ class EditQuizSettings extends React.Component {
                                                  onChange={this.mixedChecked}/>}
                              label={''}/>
                         </div>
-                        <Typography className={s.switchTextRight}>Mixed</Typography>
+                        <Tooltip title={"During the quiz, your questions will be shown in mixed order."}>
+                            <Typography className={s.switchTextRight}>Mixed</Typography>
+                        </Tooltip>
                     </div>
                     <div className={s.switchLine}>
-                        <Typography className={s.switchTextLeft}>Don't show results</Typography>
+                        <Tooltip title={"After taking this quiz, results won't be shown."}>
+                            <Typography className={s.switchTextLeft}>Don't show results</Typography>
+                        </Tooltip>
                             <div className={s.switch}>
                                 <FormControlLabel
                                     control={<Switch color="primary"
@@ -62,10 +70,14 @@ class EditQuizSettings extends React.Component {
                                                      onChange={this.showResultsChecked} />}
                                  label={''}/>
                             </div>
-                        <Typography className={s.switchTextRight}>Show results</Typography>
+                        <Tooltip title={"After taking this quiz, results will be shown."}>
+                            <Typography className={s.switchTextRight}>Show results</Typography>
+                        </Tooltip>
                     </div>
                     <div className={s.switchLine}>
+                        <Tooltip title={""}>
                         <Typography className={s.switchTextLeft}>Use Correct/Wrong</Typography>
+                        </Tooltip>
                         <div className={s.switch}>
                             <FormControlLabel
                                 control={<Switch color="primary"
@@ -74,7 +86,9 @@ class EditQuizSettings extends React.Component {
                                                  checked={this.state.points}/>}
                              label={''}/>
                         </div>
+                        <Tooltip title={""}>
                         <Typography className={s.switchTextRight}>Use Points</Typography>
+                        </Tooltip>
                     </div>
                 </div>
                 <Button id='saveButton' onClick={this.props.saveButton} color='primary'>Save</Button>

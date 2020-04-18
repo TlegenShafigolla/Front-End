@@ -120,9 +120,6 @@ class Question extends React.Component {
         }
 
         let corrects = answer.length - wrong;
-        console.log('c' + corrects)
-        console.log('w' + wrong)
-        console.log()
         if (this.state.answerType === 'MULTIPLE CHOICE' ? corrects > 0 && wrong > 0 : wrong === 0) {
             if (this.state.answersChanged) {
                 let answers = this.state.answers;
@@ -148,7 +145,6 @@ class Question extends React.Component {
             }
             this.setState({editMode: false});
         } else {
-            console.log("ol" + this.state.dialogOpenAnswer)
             this.setState({dialogOpenAnswer: true})
         }
 
@@ -181,7 +177,6 @@ class Question extends React.Component {
         let index_key = this.state.index_key;
         index_key[answers.length - 1] = makeID(8);
         this.setState({index_key: index_key});
-        console.log(answers)
     };
     onClick = () => {
         this.setState({dialogOpenAnswer: false})

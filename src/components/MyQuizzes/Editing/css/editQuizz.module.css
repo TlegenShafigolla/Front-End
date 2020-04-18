@@ -87,6 +87,7 @@
     justify-content: center;
 }
 .switchTextRight{
+    display: flex;
     width: 150px;
 }
 .switchTextLeft{

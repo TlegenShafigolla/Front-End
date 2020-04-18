@@ -4,7 +4,6 @@ import EditDescription from "../Editing/editDescription";
 import {deleteQuiz, postQuiz} from "../../../services/adminAPI/quiz";
 
 class Quiz extends React.Component {
-//quiz_name, questions_count, description, last_edited_date
     constructor(props) {
         super(props);
         this.state = {
@@ -56,14 +55,12 @@ class Quiz extends React.Component {
                 showResults: this.state.showResults,
                 last_edited_date: this.state.last_edited_date,
             };
-                await postQuiz(quiz).then(val => {console.log(val)
+                await postQuiz(quiz).then(val => {console.log(val);
                     this.setState({last_edited_date:val.last_edited_date})
-
                 });
             this.setState({quizChange: false})
         }
         this.setState({disabledSaveButton:false});
-
     };
 
 
