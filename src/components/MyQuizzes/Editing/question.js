@@ -162,12 +162,11 @@ class Question extends React.Component {
         this.setState({disableSaveButton: false});
     };
     onChangeAnswer = (event) => {
-        let answer = this.state.answers;
-        answer[Number(event.target.id)].answer = event.target.value;
-        this.setState({answers: answer});
+        let answers = this.state.answers;
+        answers[Number(event.target.id)].answer = event.target.value;
+        this.setState({answers: answers});
         this.setState({answersChanged: true});
         this.setState({errorAnswer: false});
-
     };
     onClose = () => {
         this.setState({dialogOpenAnswer: false})
@@ -179,7 +178,6 @@ class Question extends React.Component {
     };
 
     addNewAnswer = (correct = 0, points = 0) => {
-
         const answers = this.state.answers;
         answers.push({
             question_id: this.state.id,
