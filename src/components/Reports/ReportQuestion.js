@@ -29,21 +29,21 @@ class ReportQuestion extends React.Component {
                             </Typography>
                         </div>
                     </div>
-                    <div >
+                    <div>
                         {this.props.val.answers === null ? '' : this.props.val.answers.map(val =>
                             <div key={val.id + 'div'} className={s.answer}>
                                 <div className={s.answerForm}>
-                                <Checkbox
-                                    disableRipple
-                                    style={map[val.id] > 0 ? {color: correct} : map[val.id] === 0 ? {color: wrong} : {color: 'primary'}}
-                                    key={val.id + 'Checkbox'}
-                                    checked={val.point > 0 || val.correct > 0 || map[val.id] > 0 ? true : map[val.id] === 0 ? true : false}
-                                />
-                                <Typography
-                                    variant="body1"
-                                    key={val.id}>
-                                    {val.answer}
-                                </Typography>
+                                    <Checkbox
+                                        disableRipple
+                                        style={this.props.val.type !== "FILL THE BLANK" ? (map[val.id] > 0 ? {color: correct} : map[val.id] === 0 ? {color: wrong} : {color: 'primary'}) : {color: correct}}
+                                        key={val.id + 'Checkbox'}
+                                        checked={val.point > 0 || val.correct > 0 || map[val.id] > 0 ? true : map[val.id] === 0 ? true : false}
+                                    />
+                                    <Typography
+                                        variant="body1"
+                                        key={val.id}>
+                                        {val.answer}
+                                    </Typography>
                                 </div>
                                 <div>
                                     {this.props.points ? (val.points > 0 ? <Typography
