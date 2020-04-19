@@ -13,9 +13,11 @@ const Header = () => {
                         QUIZZES
                     </Typography>
                     <div className={s.headerButton}>
+                        <NavLink to='/registration'>
                         <Button color="primary">
                             Register
                         </Button>
+                        </NavLink>
                         <NavLink to="/login">
                             <Button variant="contained" color="primary">
                                 SignIn
