@@ -8,7 +8,6 @@ import AssessmentSharpIcon from '@material-ui/icons/Assessment';
 import AssignmentSharpIcon from '@material-ui/icons/AssignmentSharp';
 import s from './SideBar.module.css'
 import logo from '../../images/192x192logoGray.png'
-
 const SideBar = (props) => {
     return (
         <Drawer
@@ -81,7 +80,7 @@ const SideBar = (props) => {
         </Drawer>
 
     );
-}
+};
 
 
 export default SideBar;

@@ -94,7 +94,7 @@ class Login extends React.Component {
                         <Button variant='contained' color='primary' onClick={this.onClickButton}>Continue</Button>
                         <div className={s.forgot}>
                                 <Link underline='none'>Forgot password?</Link>
-                                <Link underline='none'>SignUp</Link>
+                                <Link underline='none'>sign Up</Link>
                         </div>
                     </div>
                 </div>
