@@ -17,21 +17,18 @@ class Login extends React.Component {
             disabledButton: false,
             error:false
         };
-
-        this.onChangeEmail = this.onChangeEmail.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
     }
 
 
-    onChangePassword(event) {
+    onChangePassword = (event) => {
         this.setState({password: event.target.value});
         this.setState({error:false})
-    }
+    };
 
-    onChangeEmail(event) {
+    onChangeEmail = (event) => {
         this.setState({email: event.target.value});
         this.setState({error:false})
-    }
+    };
 
     onClickButton = async () => {
         if (this.state.disabledButton) {
