@@ -78,9 +78,7 @@ class editQuiz extends React.Component {
                 showResults: this.state.showResults,
                 last_edited_date: Date
             };
-            console.log(quiz)
             await postQuiz(quiz).then(value => {
-                console.log(value);
                 this.setState({quizChanges: false});
             });
         }

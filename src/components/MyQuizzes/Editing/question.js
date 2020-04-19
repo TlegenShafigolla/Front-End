@@ -27,7 +27,7 @@ class Question extends React.Component {
             addNewAnswerButton: false,
             dialogOpenAnswer: false,
             errorQuestion: false,
-            errorAnswer: false
+            errorAnswer: false,
         };
     }
 
@@ -104,6 +104,8 @@ class Question extends React.Component {
             return;
         }
         this.setState({disableSaveButton: true});
+        console.log(this.state.answerType)
+
         const answer = this.state.answers;
         let wrong = 0;
         let empty = 0;
