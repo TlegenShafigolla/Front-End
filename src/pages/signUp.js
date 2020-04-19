@@ -21,7 +21,8 @@ class SignUp extends React.Component {
             errorSurname: false,
             errorOccupation: false,
             openErrorSnackbar: false,
-            openSnackbar: false
+            openSnackbar: false,
+            openErrorSnackbarPassword:false
         }
     }
 
@@ -51,6 +52,7 @@ class SignUp extends React.Component {
     };
     onClose = () => {
         this.setState({openErrorSnackbar: false})
+        this.setState({openErrorSnackbarPassword: false})
         this.setState({openSnackbar: false})
     };
     onClickSubmitButton = async () => {
@@ -72,6 +74,9 @@ class SignUp extends React.Component {
         }
         if (password === '' || password !== confirmPassword) {
             this.setState({errorPassword: true})
+        }
+        if(password !== confirmPassword){
+            this.setState({openErrorSnackbarPassword:true})
         }
         if (occupation === '') {
             this.setState({errorOccupation: true})
@@ -169,6 +174,15 @@ class SignUp extends React.Component {
                     <div className={s.snackbar} color={'secondary'}>
                         <div><ErrorOutlineIcon/></div>
                         Admin with such email {this.state.email} already exists
+                    </div>
+                </Snackbar>
+                <Snackbar
+                    open={this.state.openErrorSnackbarPassword}
+                    autoHideDuration={6000}
+                    onClose={this.onClose}>
+                    <div className={s.snackbar} color={'secondary'}>
+                        <div><ErrorOutlineIcon/></div>
+                        Password
                     </div>
                 </Snackbar>
                 <Snackbar
