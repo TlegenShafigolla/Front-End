@@ -8,10 +8,6 @@ import IconButton from "@material-ui/core/IconButton";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import ChangeTypeDialog from "./AnswerTypes/changeTypeDialog";
-import {Dialog} from "@material-ui/core";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogActions from "@material-ui/core/DialogActions";
 
 class EditQuestion extends React.Component {
     constructor(props) {
@@ -34,7 +30,9 @@ class EditQuestion extends React.Component {
         }
         this.setState({isMultipleChoice: !this.state.isMultipleChoice});
         let newType = this.state.answerType === 'MULTIPLE CHOICE' ? 'FILL THE BLANK' : 'MULTIPLE CHOICE';
+        this.setState({answerType:newType})
         this.props.changeType(newType);
+
     };
 
     multipleChoiceChecked = () => {

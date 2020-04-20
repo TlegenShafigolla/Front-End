@@ -32,6 +32,7 @@
     width: 140px;
 }
  a{
+    color: #3F51B5;
     cursor: pointer;
     position: relative;
 }

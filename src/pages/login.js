@@ -1,10 +1,9 @@
 import React from "react"
 import {login} from "../services/serverlog"
-import {Redirect} from "react-router-dom"
+import {Link, Redirect} from "react-router-dom"
 import s from '../css/Login.module.css'
 import Button from "@material-ui/core/Button"
 import {TextField} from "@material-ui/core";
-import Link from '@material-ui/core/Link'
 import logo from "../images/logoPng.png";
 
 class Login extends React.Component {
@@ -93,8 +92,8 @@ class Login extends React.Component {
                         </div>
                         <Button variant='contained' color='primary' onClick={this.onClickButton}>Continue</Button>
                         <div className={s.forgot}>
-                                <Link underline='none'>Forgot password?</Link>
-                                <Link underline='none'>SignUp</Link>
+                                <Link to='#'underline='none'>Forgot password?</Link>
+                                <Link to='/registration' underline='none'>sign Up</Link>
                         </div>
                     </div>
                 </div>

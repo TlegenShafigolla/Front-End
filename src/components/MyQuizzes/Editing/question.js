@@ -8,7 +8,6 @@ import Snackbar from "@material-ui/core/Snackbar";
 import s from './css/editQuestion.module.css'
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import Typography from "@material-ui/core/Typography";
-
 class Question extends React.Component {
     constructor(props) {
         super(props);
@@ -27,7 +26,7 @@ class Question extends React.Component {
             addNewAnswerButton: false,
             dialogOpenAnswer: false,
             errorQuestion: false,
-            errorAnswer: false
+            errorAnswer: false,
         };
     }
 
@@ -104,6 +103,8 @@ class Question extends React.Component {
             return;
         }
         this.setState({disableSaveButton: true});
+        console.log(this.state.answerType)
+
         const answer = this.state.answers;
         let wrong = 0;
         let empty = 0;
