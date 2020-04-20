@@ -25,3 +25,24 @@ export function getReport(report_id) {
         return res.json();
     });
 }
+export function postReport(id, correct, points) {
+    const authToken = `Bearer ${getSession()}`;
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            Authorization: authToken,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            id: id,
+            correct: correct,
+            points: points
+
+        })
+    };
+    const api = 'http://35.228.95.87:7000';
+    return fetch(`${api}/quiz/report`, requestOptions).then(res => {
+        return res.json();
+    });
+}
