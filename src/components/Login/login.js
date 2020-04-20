@@ -1,14 +1,20 @@
 import React from "react";
 import s from "../../css/Login.module.css";
 import {TextField} from "@material-ui/core";
+import {login} from "../../services/serverlog";
+import logo from "../../images/logoPng.png";
+import Button from "@material-ui/core/Button";
+import {Link, Redirect} from "react-router-dom";
 
 class SignIn extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: this.props.email,
-            password: this.props.password,
-            error: this.props.error
+            email: '',
+            password: '',
+            loggedIn: false,
+            disabledButton: false,
+            error:false
         }
     }
         onChangePassword = (event) => {
@@ -20,10 +26,38 @@ class SignIn extends React.Component {
             this.setState({email: event.target.value});
             this.setState({error: false})
         };
+    onClickButton = async () => {
+        if (this.state.disabledButton) {
+            return;
+        }
+        this.setState({disabledButton: true});
+        await login(this.state.email, this.state.password).then(data => {
+            localStorage.setItem('refresh_token',data['refresh_token']);
+            localStorage.setItem("access_token", data["access_token"]);
+            localStorage.setItem("status", data["type"]);
+            localStorage.setItem('access_time', Date())
+            if(data.Status==='Failed') {
+                this.setState({error: true})
+            }
+        });
 
+        this.setState({loggedIn: true});
+        this.setState({disabledButton: false});
+
+    };
     render() {
+        const status = localStorage.getItem('status');
+
+        if (status === 'admin') {
+            return <Redirect to='/admin/profile'/>;
+        }
+        if (status === 'user') {
+            return <Redirect to="/user"/>;
+        }
+
         return (
-            <div>
+            <div className={s.SignIn}>
+                <img className={s.logo} src={logo} alt="Logo"/>
                 <div className={s.input}>
                     <TextField
                         type="email"
@@ -49,6 +83,11 @@ class SignIn extends React.Component {
                         name="password"
                         onChange={this.onChangePassword}
                     />
+                </div>
+                <Button variant='contained' color='primary' onClick={this.onClickButton}>Continue</Button>
+                <div className={s.forgot}>
+                    <Link to='#'underline='none'>Forgot password?</Link>
+                    <Link to='/registration' underline='none'>sign Up</Link>
                 </div>
             </div>
         );

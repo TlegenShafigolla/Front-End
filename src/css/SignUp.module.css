@@ -2,13 +2,14 @@
     display: flex;
     height: 100vh;
     background: url('../images/homeBackground.jpg') no-repeat fixed center/cover;
+    justify-content: center;
+    align-items: center;
 }
 .SignUp {
     padding: 25px;
     width: 400px;
     height: 460px;
     background: rgba(255, 255, 255, 0.75);
-    margin: auto;
     box-shadow: 1px 1px 4px rgba(14, 14, 14, .3);
     display: flex;
     flex-direction: column;
@@ -23,26 +24,4 @@
 .logo {
     height: 110px;
     width: 110px;
-}
-.snackbar{
-     width: 450px;
-     height: 50px;
-     background: #F44336;
-     color: white;
-     padding: 10px;
-     display: flex;
-     justify-content: space-around;
-     align-items: center;
-     border-radius: 20px;
- }
-.success{
-    width: 450px;
-    height: 50px;
-    background: #F44336;
-    color: white;
-    padding: 10px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border-radius: 20px;
 }

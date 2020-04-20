@@ -8,6 +8,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import s from './css/editQuestion.module.css'
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import Typography from "@material-ui/core/Typography";
+import Alert from "@material-ui/lab/Alert";
 class Question extends React.Component {
     constructor(props) {
         super(props);
@@ -222,10 +223,7 @@ class Question extends React.Component {
                     autoHideDuration={6000}
                     onClose={this.onClose}
                 >
-                    <div className={s.snackbar} color={'secondary'}>
-                        <div><ErrorOutlineIcon/></div>
-                        <Typography>There must be at least 1 correct and incorrect answer</Typography>
-                    </div>
+                    <Alert variant='filled' severity="error"><Typography>There must be at least 1 correct and incorrect answer</Typography></Alert>
                 </Snackbar>
             </div>
         } else {
