@@ -3,7 +3,8 @@ import s from '../css/SignUp.module.css'
 import logo from "../images/logoPng.png";
 import {TextField, Button, Snackbar} from "@material-ui/core";
 import {registration} from "../services/userAPI/registration";
-import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
+import Alert from "@material-ui/lab/Alert";
+import {Redirect} from "react-router-dom"
 
 class SignUp extends React.Component {
     constructor(props) {
@@ -22,40 +23,46 @@ class SignUp extends React.Component {
             errorOccupation: false,
             openErrorSnackbar: false,
             openSnackbar: false,
-            openErrorSnackbarPassword:false
+            openErrorSnackbarPassword: false,
+            Register:false,
+            disabledButton:false,
         }
     }
 
     onChangeEmail = (event) => {
-        this.setState({email: event.target.value})
+        this.setState({email: event.target.value});
         this.setState({errorEmail: false})
     };
     onChangeName = (event) => {
-        this.setState({name: event.target.value})
-        this.setState({errorName: false})
+        this.setState({name: event.target.value});
+        this.setState({errorName: false});
     };
     onChangeSurname = (event) => {
-        this.setState({surname: event.target.value})
+        this.setState({surname: event.target.value});
         this.setState({errorSurname: false})
     };
     onChangeOccupation = (event) => {
-        this.setState({occupation: event.target.value})
+        this.setState({occupation: event.target.value});
         this.setState({errorOccupation: false})
     };
     onChangePassword = (event) => {
-        this.setState({password: event.target.value})
+        this.setState({password: event.target.value});
         this.setState({errorPassword: false})
     };
     onChangeConfirmPassword = (event) => {
-        this.setState({confirmPassword: event.target.value})
+        this.setState({confirmPassword: event.target.value});
         this.setState({errorPassword: false})
     };
     onClose = () => {
         this.setState({openErrorSnackbar: false})
-        this.setState({openErrorSnackbarPassword: false})
+        this.setState({openErrorSnackbarPassword: false});
         this.setState({openSnackbar: false})
     };
     onClickSubmitButton = async () => {
+        if(this.state.disabledButton){
+            return
+        }
+        this.setState({disabledButton:true});
         let email = this.state.email;
         let name = this.state.name.trim();
         let surname = this.state.surname.trim();
@@ -75,8 +82,8 @@ class SignUp extends React.Component {
         if (password === '' || password !== confirmPassword) {
             this.setState({errorPassword: true})
         }
-        if(password !== confirmPassword){
-            this.setState({openErrorSnackbarPassword:true})
+        if (password !== confirmPassword) {
+            this.setState({openErrorSnackbarPassword: true})
         }
         if (occupation === '') {
             this.setState({errorOccupation: true})
@@ -84,16 +91,23 @@ class SignUp extends React.Component {
 
         if (emailTest.test(email) && name !== '' && surname !== '' && occupation !== '' && password === confirmPassword && password !== '') {
             await registration(name, surname, password, occupation, email).then(val => {
-                if (val.status !== 'Success') {
+                console.log(val)
+                if (val.Status !== 'Success') {
                     this.setState({openErrorSnackbar: true})
+                } else {
+                    this.setState({openSnackbar: true});
+                    this.setState({Register:true})
                 }
             })
         }
-        ;
-    }
+        this.setState({disabledButton:false});
+
+    };
 
     render() {
-
+if(this.state.Register){
+    return <Redirect to='/admin/profile'/>
+}
         return (
             <div className={s.registrationPage}>
                 <div className={s.SignUp}>
@@ -171,28 +185,26 @@ class SignUp extends React.Component {
                     open={this.state.openErrorSnackbar}
                     autoHideDuration={6000}
                     onClose={this.onClose}>
-                    <div className={s.snackbar} color={'secondary'}>
-                        <div><ErrorOutlineIcon/></div>
+                    <Alert variant="filled" severity="error">
                         Admin with such email {this.state.email} already exists
-                    </div>
+                    </Alert>
                 </Snackbar>
+
                 <Snackbar
                     open={this.state.openErrorSnackbarPassword}
                     autoHideDuration={6000}
                     onClose={this.onClose}>
-                    <div className={s.snackbar} color={'secondary'}>
-                        <div><ErrorOutlineIcon/></div>
-                        Password
-                    </div>
+                    <Alert variant="filled" severity="error">
+                       Password do not match
+                    </Alert>
                 </Snackbar>
                 <Snackbar
                     open={this.state.openSnackbar}
                     autoHideDuration={6000}
                     onClose={this.onClose}>
-                    <div className={s.success} color={'secondary'}>
-                        <div><ErrorOutlineIcon/></div>
+                    <Alert variant="filled" severity="success">
                         Success
-                    </div>
+                    </Alert>
                 </Snackbar>
             </div>
         );
