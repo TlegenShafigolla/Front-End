@@ -9,7 +9,7 @@ import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import {Tooltip} from "@material-ui/core";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import ShareIcon from '@material-ui/icons/Share';
+import SendIcon from '@material-ui/icons/Send';
 import DeleteQuizDialog from "./deleteQuizDialog";
 import InviteDialog from "./inviteDialog";
 
@@ -67,7 +67,7 @@ class ShowQuiz extends React.Component {
                 <div className={s.ButtonPanel}>
                     <Tooltip title='Invite'>
                         <IconButton color="primary" onClick={this.inviteDialog}>
-                           <ShareIcon />
+                           <SendIcon />
                         </IconButton>
                     </Tooltip>
                     <Tooltip title='Edit'>

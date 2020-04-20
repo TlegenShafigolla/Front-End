@@ -4,13 +4,14 @@ import Quiz from "./quiz";
 import s from '../listQuizPreview.module.css'
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from '@material-ui/icons/Add';
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 class ListQuizPreview extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            quizzes: [],
-            editMode: false
+            quizzes: null,
+            editMode: false,
         };
     }
 
@@ -39,6 +40,13 @@ class ListQuizPreview extends React.Component {
     };
 
     render() {
+        if(this.state.quizzes === null){
+            return (
+                <div className={s.CircularProgress}>
+                    <CircularProgress size={70}/>
+                </div>
+            );
+        }
         return (
             <div className={s.Container}>
                 <div className={s.Box}>

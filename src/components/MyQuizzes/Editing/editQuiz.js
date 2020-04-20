@@ -11,6 +11,7 @@ import EditQuizSettings from "./editQuizSettings";
 import $ from "jquery";
 import {postQuiz} from "../../../services/adminAPI/quiz";
 import Typography from "@material-ui/core/Typography";
+import {CircularProgress} from "@material-ui/core";
 
 class editQuiz extends React.Component {
     constructor(props) {
@@ -100,7 +101,11 @@ class editQuiz extends React.Component {
 
     render() {
         if(this.state.questions === null){
-            return '';
+            return (
+                <div className={s.CircularProgress}>
+                    <CircularProgress size={70}/>
+                </div>
+            );
         }
         return (
             <div className={s.body}>

@@ -2,6 +2,7 @@ import React from "react";
 import getReportList from "../../services/adminAPI/reports";
 import ReportPreview from "./ReportPreview";
 import s from './ListReportPreview.module.css'
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 
 class ListReportPreview extends React.Component{
@@ -14,7 +15,11 @@ class ListReportPreview extends React.Component{
 
     render() {
         if(this.state.report === []){
-            return '';
+            return (
+                <div className={s.CircularProgress}>
+                    <CircularProgress size={70}/>
+                </div>
+            );
         }
         return(
             <div className={s.Container}>

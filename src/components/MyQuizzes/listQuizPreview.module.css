@@ -1,6 +1,12 @@
 /*@media (min-height:500px) {*/
 /*    .Box{}*/
 /*}*/
+.CircularProgress{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
 
 .Container {
     height: 91vh;
