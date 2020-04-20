@@ -1,5 +1,5 @@
-import React from 'react'
-import s from "../../css/SignUp.module.css";
+        import React from 'react'
+import s     from "../../css/SignUp.module.css";
 import logo from "../../images/logoPng.png";
 import {Button, Snackbar, TextField} from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
