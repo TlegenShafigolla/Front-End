@@ -4,17 +4,18 @@ import {Checkbox, InputBase, Typography} from "@material-ui/core";
 import {green} from "@material-ui/core/colors";
 import red from "@material-ui/core/colors/red";
 import Button from "@material-ui/core/Button";
-import {postReport} from "../../services/adminAPI/reports";
-
+import {getReport, postReport} from "../../services/adminAPI/reports";
+import $ from 'jquery'
 class ReportQuestion extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            points: null,
-            correct: 0,
+            points: 0,
+            correct: false,
             disabledButton: false,
-            id: null
+            id: null,
         }
+
     }
 
     onClickSaveButton = async () => {
@@ -24,31 +25,33 @@ class ReportQuestion extends React.Component {
         this.setState({disabledButton: true});
         let id=this.state.id;
         let points=this.state.points;
-        let correct=this.state.correct
-        await postReport(id, correct, points,).then(val => console.log(val))
+        let correct=Number(this.state.correct);
+        await postReport(id, correct, points).then(val=>{
+           console.log(val)
+        });
+        let count=1;
+        this.props.newState(count);
+
+        $('#ButtonSave').hide(500);
         this.setState({disabledButton: false})
     };
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.val !== this.props.val) {
-            this.setState({id: this.props.val.session[0].id})
-            console.log(this.props.val)
-        }
-    }
     onChangeCheckbox=(event)=>{
-        if(event.target.checked) {
-            this.setState({correct: 1})
-        }
-        this.setState({correct: 0})
+        this.setState({id:Number(event.target.id)})
+            this.setState({correct: event.target.checked});
+        $('#ButtonSave').show(500)
+
     };
     onChangeInputBase = (event) => {
-        this.setState({point: Number(event.target.value)})
+        this.setState({points: event.target.value})
+        this.setState({id: Number(event.target.id)})
+        $('#ButtonSave').show(500)
+
     };
 
     render() {
-        console.log(this.state.point)
-        console.log(this.state.val)
-
+console.log(this.state.correct)
+console.log(this.state.id)
         if (this.props.val === null) {
             return '';
         }
@@ -60,8 +63,7 @@ class ReportQuestion extends React.Component {
         }
         const correct = green.A700;
         const wrong = red.A700;
-        console.log(this.props.val.answers[0].id)
-        console.log(this.state.id)
+        console.log(this.props.val)
         return (
             <div>
                 <div className={s.question} id={this.props.val.question_id.toString()}>
@@ -101,7 +103,7 @@ class ReportQuestion extends React.Component {
                 {this.props.val.type !== "FILL THE BLANK" ? null :
                     <div className={s.question}>
                         <p>Answers: </p>
-                        {this.props.val.session === null ? '' : this.props.val.session.map(val =>
+                        {this.props.val.session === null ? '' : this.props.val.session.map((val, index) =>
                             <div className={s.answers} key={val.id}>
                                 <Typography
                                     className={s.typography}
@@ -109,13 +111,16 @@ class ReportQuestion extends React.Component {
                                     key={val.id}>
                                     {val.answer}
                                 </Typography>
-                                {this.props.points ? <InputBase defaultValue={val.points}
+                                {this.props.points ? (<InputBase id={val.id.toString()} className={s.InputBase} defaultValue={val.points}
                                                                 type={'number'}
                                                                 onChange={this.onChangeInputBase}
-                                /> : <Checkbox onChange={this.onChangeCheckbox}/>}
+                                /> ): <Checkbox style={val.correct===1||this.state.correct ? {color:correct}:
+                                    {color:'#3333'}} defaultChecked={val.correct===1} id={val.id.toString()} onChange={this.onChangeCheckbox}/>}
                             </div>
                         )}
-                        <Button onClick={this.onClickSaveButton}>Save</Button>
+                        <div className={s.SaveButton} id='ButtonSave'>
+                        <Button  onClick={this.onClickSaveButton}>Save</Button>
+                        </div>
                     </div>
                 }
             </div>

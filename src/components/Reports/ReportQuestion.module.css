@@ -3,11 +3,21 @@
     box-shadow: 5px 5px 10px #333333;
     padding: 10px;
 }
+.InputBase{
+    width: 50px;
+}
+.InputBase:hover{
+    border: 0.5px solid #301131;
+
+}
+.InputBase:focus        {
+    border: 0.5px solid #301131;
+
+}
 .answers{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid red;
 }
 .questioninfo {
     display: flex;
@@ -29,6 +39,11 @@
 .Button {
     display: flex;
     flex-direction: row-reverse;
+}
+.SaveButton{
+    padding: 0;
+    margin-top: 20px;
+    display: none;
 }
 
 .formControll {

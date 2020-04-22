@@ -22,12 +22,24 @@ class Report extends React.Component {
             report: null,
             question: null,
             correctQuestions: null,
+            count:false
         };
     }
-
+newState=(count)=>{
+        this.setState({count:!this.state.count})
+}
     scrollTabHandleChange = (event, newValue) => {
         this.setState({question: this.state.report.questions[newValue], tab: newValue});
     };
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevState.count!==this.state.count){
+            getReport(this.state.report_id).then(val => {
+                console.log(val);
+                this.setState({report: val});
+                this.correctAnswersList()
+            })
+        }
+    }
 
     render() {
         if (this.state.report === null) {
@@ -70,13 +82,12 @@ class Report extends React.Component {
                         </AppBar>
                     </div>
                     <div>
-                        <ReportQuestion val={this.state.question} points={this.state.report.points}/>
+                        <ReportQuestion val={this.state.question} newState={this.newState} points={this.state.report.points}/>
                     </div>
                 </div>
             </div>
         );
     }
-
     correctAnswersList = () => {
         let arr = [];
         for (let i = 0; i < this.state.report.questions.length; i++) {
