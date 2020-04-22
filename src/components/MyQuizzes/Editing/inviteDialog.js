@@ -17,7 +17,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import s from "../listQuizPreview.module.css";
 import {postInvitations} from "../../../services/adminAPI/invitations";
 import Alert from "@material-ui/lab/Alert";
-
+import Checkbox from "@material-ui/core/Checkbox";
 class InviteDialog extends React.Component {
     constructor(props) {
         super(props);
@@ -99,14 +99,18 @@ class InviteDialog extends React.Component {
         this.setState({surname: null});
         this.props.onClose()
     }
+onChangeTime=()=>{
 
+}
     render() {
+        const selectedDate =  Date();
         console.log(this.state.name)
         return (
             <div>
                 <Dialog open={this.props.openDialog}
                         aria-labelledby="Invite"
                         onClose={this.handleCancel}
+
                 >
                     <DialogActions>
                         <IconButton size='small' onClick={this.onClose}
@@ -159,6 +163,39 @@ class InviteDialog extends React.Component {
                             variant='outlined'
                             onChange={this.onChangeEmail}
                         />
+                        Time Limit<Checkbox color={"primary"}/>
+                        <div className={s.time_limit}>
+                            <TextField
+                                id="date"
+                                label="Start date"
+                                type="date"
+                                defaultValue="2017-05-24"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                            <TextField
+                                id="date"
+                                label="End date"
+                                type="date"
+                                defaultValue="2017-05-24"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                            <TextField
+                                id="time"
+                                label="Time limit"
+                                type="time"
+                                defaultValue="07:30"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                inputProps={{
+                                    step: 300,
+                                }}
+                            />
+                        </div>
                     </DialogContent>
                     <DialogActions>
                         <Button color="primary" onClick={this.onClickInviteInDialog}>

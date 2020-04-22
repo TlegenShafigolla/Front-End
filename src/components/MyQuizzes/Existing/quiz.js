@@ -2,6 +2,9 @@ import React from "react";
 import ShowQuiz from "../Editing/showQuiz";
 import EditDescription from "../Editing/editDescription";
 import {deleteQuiz, postQuiz} from "../../../services/adminAPI/quiz";
+import {dark} from "@material-ui/core/styles/createPalette";
+import home from "../../../pages/home";
+import {TimeZone} from "../../../function/TimeZone";
 
 class Quiz extends React.Component {
     constructor(props) {
@@ -16,7 +19,7 @@ class Quiz extends React.Component {
             points: this.props.value.points,
             showResults: this.props.value.showResults,
             disabledSaveButton: false,
-            last_edited_date: this.props.value.last_edited_date,
+            last_edited_date: null
         }
     }
 
@@ -56,22 +59,28 @@ class Quiz extends React.Component {
                 last_edited_date: this.state.last_edited_date,
             };
                 await postQuiz(quiz).then(val => {console.log(val);
-                    this.setState({last_edited_date:val.last_edited_date})
+
+                    let dates =  new Date(val.last_edited_date);
+                    TimeZone(dates);
+                    this.setState({last_edited_date:dates.toLocaleString()})
                 });
             this.setState({quizChange: false})
         }
         this.setState({disabledSaveButton:false});
     };
 componentDidMount() {
-    let date =this.props.value.last_edited_date;
-   // let newDate=date.getDate();
-   //  console.log(newDate)
 
+    let date =  new Date(this.props.value.last_edited_date);
+    TimeZone(date);
+   this.setState({last_edited_date:date.toLocaleString() })
 }
 
 
     render() {
-        console.log(Date.UTC())
+        console.log(this.state.last_edited_date)
+        if(this.state.last_edited_date===null){
+            return ''
+        }
         if (!this.state.editMode) {
             return (<div>
                     <ShowQuiz

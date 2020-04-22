@@ -45,11 +45,7 @@ class ShowQuiz extends React.Component {
         this.setState({openInviteDialog: !this.state.openInviteDialog})
     };
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.last_edited_date !== this.props.last_edited_date) {
-            this.setState({last_edited_date: Date})
-        }
-    }
+
 
     render() {
         return (<div className={s.root}>
@@ -61,7 +57,7 @@ class ShowQuiz extends React.Component {
                 <Typography variant="body2"
                             component="p"
                             color="textSecondary"
-                            >Version: {this.state.last_edited_date.toString()} </Typography>
+                            >Version: {this.props.last_edited_date.toString()} </Typography>
             </CardContent>
             <CardActions className={s.CardActions}>
                 <div className={s.ButtonPanel}>
