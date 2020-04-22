@@ -66,7 +66,6 @@ class ListQuizPreview extends React.Component {
         );
     }
 
-//quiz_name description mixed showResult points
     componentDidMount() {
         getQuiz().then(json => {
             this.setState({quizzes: json.quizzes})

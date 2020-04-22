@@ -1,22 +1,25 @@
 import React from "react";
-import DialogActions from "@material-ui/core/DialogActions";
-import IconButton from "@material-ui/core/IconButton";
-import HighlightOffIcon from "@material-ui/core/SvgIcon/SvgIcon";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import FormControl from "@material-ui/core/FormControl";
-import RadioGroup from "@material-ui/core/RadioGroup";
+import {
+    IconButton,
+    DialogActions,
+    DialogTitle,
+    FormControl,
+    RadioGroup,
+    FormControlLabel,
+    Radio,
+    DialogContent,
+    TextField,
+    Button,
+    Dialog,
+    Snackbar
+} from "@material-ui/core";
+import CloseIcon from '@material-ui/icons/Close';
 import s from "../listQuizPreview.module.css";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Radio from "@material-ui/core/Radio";
-import DialogContent from "@material-ui/core/DialogContent";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
 import {postInvitations} from "../../../services/adminAPI/invitations";
-import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "@material-ui/lab/Alert";
 
-class InviteDialog extends React.Component{
-    constructor(props){
+class InviteDialog extends React.Component {
+    constructor(props) {
         super(props);
         this.state = {
             quiz_id: this.props.quiz_id,
@@ -27,10 +30,16 @@ class InviteDialog extends React.Component{
             errorSurname: false,
             errorEmail: false,
             openSnackbar: false,
+            start_date: null,
+            end_date: null,
+            time_limit: null
         };
     }
 
     handleCancel = () => {
+        this.setState({email: null});
+        this.setState({name: null});
+        this.setState({surname: null});
         this.props.onClose();
     };
 
@@ -41,7 +50,10 @@ class InviteDialog extends React.Component{
                 name: this.state.name,
                 surname: this.state.surname,
                 email: this.state.email,
-                quiz_id: this.state.quiz_id
+                quiz_id: this.state.quiz_id,
+                start_date: this.state.start_date,
+                end_date: this.state.end_date,
+                time_limit: this.state.time_limit,
             };
             await postInvitations(invite).then((val) => {
                 console.log(val);
@@ -81,8 +93,15 @@ class InviteDialog extends React.Component{
         this.setState({email: event.target.value});
         this.setState({errorEmail: false})
     };
+    onClose = () => {
+        this.setState({email: null});
+        this.setState({name: null});
+        this.setState({surname: null});
+        this.props.onClose()
+    }
 
     render() {
+        console.log(this.state.name)
         return (
             <div>
                 <Dialog open={this.props.openDialog}
@@ -90,14 +109,10 @@ class InviteDialog extends React.Component{
                         onClose={this.handleCancel}
                 >
                     <DialogActions>
-                        <IconButton size='small' onClick={() => {
-                            this.setState({open: false});
-                            this.setState({email: null});
-                            this.setState({name: null});
-                            this.setState({surname: null})
-                        }}
-                                    aria-label='delete'>
-                            <HighlightOffIcon fontSize='small' color='secondary'/>
+                        <IconButton size='small' onClick={this.onClose}
+                                    aria-label='delete'
+                                    color='secondary'>
+                            <CloseIcon fontSize='small' color='secondary'/>
                         </IconButton>
                     </DialogActions>
                     <DialogTitle id="Invite">Invite: {this.state.quiz_name}</DialogTitle>
@@ -153,9 +168,12 @@ class InviteDialog extends React.Component{
                 </Dialog>
                 <Snackbar
                     open={this.state.openSnackbar}
-                    message="Success"
                     onClose={this.snackClose}
-                />
+                >
+                    <Alert variant="filled" severity="success">
+                        Success
+                    </Alert>
+                </Snackbar>
             </div>
         );
     }

@@ -62,9 +62,16 @@ class Quiz extends React.Component {
         }
         this.setState({disabledSaveButton:false});
     };
+componentDidMount() {
+    let date =this.props.value.last_edited_date;
+   // let newDate=date.getDate();
+   //  console.log(newDate)
+
+}
 
 
     render() {
+        console.log(Date.UTC())
         if (!this.state.editMode) {
             return (<div>
                     <ShowQuiz
