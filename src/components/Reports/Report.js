@@ -108,7 +108,6 @@ newState=(count)=>{
 
     componentDidMount() {
         getReport(this.state.report_id).then(val => {
-            console.log(val);
             this.setState({report: val});
             this.setState({question: this.state.report.questions[0]});
             this.correctAnswersList()

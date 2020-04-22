@@ -4,7 +4,7 @@ import {Checkbox, InputBase, Typography} from "@material-ui/core";
 import {green} from "@material-ui/core/colors";
 import red from "@material-ui/core/colors/red";
 import Button from "@material-ui/core/Button";
-import {getReport, postReport} from "../../services/adminAPI/reports";
+import {postReport} from "../../services/adminAPI/reports";
 import $ from 'jquery'
 class ReportQuestion extends React.Component {
     constructor(props) {
@@ -37,21 +37,19 @@ class ReportQuestion extends React.Component {
     };
 
     onChangeCheckbox=(event)=>{
-        this.setState({id:Number(event.target.id)})
+        this.setState({id:Number(event.target.id)});
             this.setState({correct: event.target.checked});
         $('#ButtonSave').show(500)
 
     };
     onChangeInputBase = (event) => {
-        this.setState({points: event.target.value})
-        this.setState({id: Number(event.target.id)})
+        this.setState({points: event.target.value});
+        this.setState({id: Number(event.target.id)});
         $('#ButtonSave').show(500)
 
     };
 
     render() {
-console.log(this.state.correct)
-console.log(this.state.id)
         if (this.props.val === null) {
             return '';
         }
@@ -63,7 +61,6 @@ console.log(this.state.id)
         }
         const correct = green.A700;
         const wrong = red.A700;
-        console.log(this.props.val)
         return (
             <div>
                 <div className={s.question} id={this.props.val.question_id.toString()}>
