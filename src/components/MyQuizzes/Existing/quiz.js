@@ -4,7 +4,7 @@ import EditDescription from "../Editing/editDescription";
 import {deleteQuiz, postQuiz} from "../../../services/adminAPI/quiz";
 import {dark} from "@material-ui/core/styles/createPalette";
 import home from "../../../pages/home";
-import {TimeZone} from "../../../function/TimeZone";
+import {ServerTimeToUserTime} from "../../../function/ServerTimeToUserTime";
 
 class Quiz extends React.Component {
     constructor(props) {
@@ -61,7 +61,7 @@ class Quiz extends React.Component {
                 await postQuiz(quiz).then(val => {console.log(val);
 
                     let dates =  new Date(val.last_edited_date);
-                    TimeZone(dates);
+                    ServerTimeToUserTime(dates);
                     this.setState({last_edited_date:dates.toLocaleString()})
                 });
             this.setState({quizChange: false})
@@ -71,7 +71,7 @@ class Quiz extends React.Component {
 componentDidMount() {
 
     let date =  new Date(this.props.value.last_edited_date);
-    TimeZone(date);
+    ServerTimeToUserTime(date);
    this.setState({last_edited_date:date.toLocaleString() })
 }
 
