@@ -132,24 +132,15 @@ class StartQuiz extends React.Component {
             return <Slide direction="up" ref={ref} {...props} />;
         });
         return (
-            <div>
+            <div className={s.quizPage}>
                 <AppBar>
                     <Toolbar className={s.header}>
-                        <Typography variant='h6'> {this.state.quiz_name}</Typography>
+                        <Typography variant='h5'> {this.state.quiz_name}</Typography>
                         <Button onClick={this.onClickSubmit}>End Test</Button>
                     </Toolbar>
                 </AppBar>
+
                 <div className={s.quiz}>
-                    <div
-                        className={s.questions}> {this.state.questions === undefined || this.state.questions === null ? ' ' :
-                        this.state.questions.map((val, index) => <Question
-                            onChangeCheck={this.onChangeCheck}
-                            onChangeAnswer={this.onChangeAnswer}
-                            key={val.id}
-                            index={index}
-                            value={val}
-                        />)}
-                    </div>
                     <div className={s.info}>
 
                         {this.state.questions === undefined || this.state.questions === null ? ' ' :
@@ -160,7 +151,7 @@ class StartQuiz extends React.Component {
                                     to={index.toString()}
                                     spy={true}
                                     smooth={true}
-                                    offset={-70}
+                                    offset={-130}
                                     duration={500}
                                 >
                                     <Button key={index}>{index+1}
@@ -168,19 +159,30 @@ class StartQuiz extends React.Component {
                                     </Button></Link>)}
 
                     </div>
+                    <div
+                        className={s.questions}> {this.state.questions === undefined || this.state.questions === null ? ' ' :
+                        this.state.questions.map((val, index) => <Question
+                            onChangeCheck={this.onChangeCheck}
+                            onChangeAnswer={this.onChangeAnswer}
+                            key={val.id}
+                            index={index}
+                            value={val}
+                        />)}
+                    </div>
+
                 </div>
                 <Dialog open={this.state.startTestDialog} className={s.dialog} fullScreen>
 
                     <div className={s.dialogActions}>
-                        <div className={s.typography}><Typography
-                            variant='h4'> {this.state.quiz_name}</Typography>
+                        <div className={s.typography}>
+                           {this.state.quiz_name}
                         </div>
-                        <Button color='primary' variant='contained' onClick={this.startTest}>Start test</Button>
                     </div>
                     <DialogContent className={s.dialogContent}>
                         <Typography variant='h6' color='textSecondary'>There are {this.state.questions_count} questions</Typography>
-                        <Typography className={s.description} variant='h3'>{this.state.description}</Typography>
+                        <Typography className={s.description} variant='h4'>{this.state.description}</Typography>
                     </DialogContent>
+                    <Button color='primary' variant='contained' onClick={this.startTest}>Start test</Button>
                 </Dialog>
                 <Dialog open={this.state.endTestDialog} fullScreen TransitionComponent={Transition}>
                     <DialogContent>
