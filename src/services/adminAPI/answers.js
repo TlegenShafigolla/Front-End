@@ -1,19 +1,19 @@
 import {getSession} from "../GetSession";
 
-export default function getAnswers(question_id) {
+export function getAnswers(question_id) {
     const authToken = `Bearer ${getSession()}`;
     const requestOptions = {
         method: 'GET',
         headers: {Authorization: authToken},
     };
 
-    const api = 'http://35.228.95.87:7000';
+    const api = 'http://localhost:3000';
     return fetch(`${api}/quiz/answer/${question_id}`, requestOptions).then(res => {
         return res.json();
     });
 }
 
-export  function postAnswers(question_id, answers) {
+export function postAnswers(question_id, answer) {
     const authToken = `Bearer ${getSession()}`;
     const requestOptions = {
         method: 'POST',
@@ -22,12 +22,28 @@ export  function postAnswers(question_id, answers) {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-            "answers": answers,
-        }),
+        body: JSON.stringify(answer),
     };
 
-    const api = 'http://35.228.95.87:7000';
+    const api = 'http://localhost:3000';
+    return fetch(`${api}/quiz/answer/${question_id}`, requestOptions).then(res => {
+        return res.json();
+    });
+}
+
+export  function putAnswers(question_id, answer) {
+    const authToken = `Bearer ${getSession()}`;
+    const requestOptions = {
+        method: 'PUT',
+        headers: {
+            Authorization: authToken,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({answer}),
+    };
+
+    const api = 'http://localhost:3000';
     return fetch(`${api}/quiz/answer/${question_id}`, requestOptions).then(res => {
         return res.json();
     });
@@ -43,11 +59,11 @@ export function deleteAnswers(question_id, answer_id) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            id: answer_id,
+            _id: answer_id,
         }),
     };
 
-    const api = 'http://35.228.95.87:7000';
+    const api = 'http://localhost:3000';
     return fetch(`${api}/quiz/answer/${question_id}`, requestOptions).then(res => {
         return res.json();
     });

@@ -13,7 +13,7 @@ export  function registration(name,surname,password,occupation,email) {
             surname:surname
         }),
     };
-    const api = 'http://35.228.95.87:7000';
+    const api = 'http://localhost:3000';
     return fetch(`${api}/registration`, requestOptions).then(res => {
         return res.json();
     })

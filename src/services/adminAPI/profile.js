@@ -7,7 +7,7 @@ export default function getProfile() {
         headers: {Authorization: authToken},
     };
 
-    const api = 'http://35.228.95.87:7000';
+    const api = 'http://localhost:3000';
     const json = fetch(`${api}/profile`, requestOptions).then(res => {
         return res.json();
 

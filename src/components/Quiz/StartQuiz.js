@@ -93,15 +93,14 @@ class StartQuiz extends React.Component {
 
 
     componentDidMount = async () => {
-        let path = await window.location.pathname.split('/');
-        let session_id = await localStorage.getItem('session_id');
-        await postTakeQuestion(path[2], session_id).then(json => {
-            this.setState({questions: json.questions});
-            this.setState({quiz_name: json.quiz_name});
-            this.setState({questions_count: json.questions_count});
-            this.setState({description: json.description});
-            this.setState({showResults: json.showResults});
+        let session_id = localStorage.getItem('session_id');
+        await postTakeQuestion(session_id).then(json => {
             console.log(json);
+            this.setState({questions: json.questions});
+            this.setState({quiz_name: json.quiz.quiz_name});
+            this.setState({questions_count: json.quiz.questions_count});
+            this.setState({description: json.quiz.description});
+            this.setState({showResults: json.quiz.showResults});
         });
     };
 

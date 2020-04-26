@@ -28,7 +28,7 @@ class Quiz extends React.Component {
         const path = window.location.pathname.split('/');
         const email = this.state.email;
         await postInvitation(path[2], email).then(json => {
-            this.setState({statusEmail: 'Success' === json.Status})
+            this.setState({statusEmail: 'Success' === json.Status});
             if(json.Status==='Success'){
                 this.setState({session_id: json['session_id']});
                 localStorage.setItem('session_id', json['session_id']);
@@ -42,7 +42,6 @@ class Quiz extends React.Component {
     UNSAFE_componentWillMount = async () => {
         const path = window.location.pathname.split('/');
         await getInvitation(path[2]).then(json => {
-            console.log(json)
             this.setState({status: "Success" === json.Status});
         });
     };

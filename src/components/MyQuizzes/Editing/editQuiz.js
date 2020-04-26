@@ -9,7 +9,7 @@ import Question from "./question";
 import Board from "../Existing/Board";
 import EditQuizSettings from "./editQuizSettings";
 import $ from "jquery";
-import {postQuiz} from "../../../services/adminAPI/quiz";
+import {putQuiz} from "../../../services/adminAPI/quiz";
 import Typography from "@material-ui/core/Typography";
 import {CircularProgress} from "@material-ui/core";
 
@@ -47,7 +47,7 @@ class editQuiz extends React.Component {
             order_id: this.state.questions.length + 1,
             quiz_id: this.state.quiz_id,
             image: null,
-            question: "",
+            question: "New question",
             type: "FILL THE BLANK"
         };
         postQuestions(this.state.quiz_id, [question]).then(ret => {
@@ -71,7 +71,7 @@ class editQuiz extends React.Component {
     saveButton = async () => {
         if (this.state.quizChanges) {
             const quiz = {
-                id: this.state.quiz_id,
+                _id: this.state.quiz_id,
                 quiz_name: this.state.quiz_name,
                 description: this.state.description,
                 mixed: this.state.mixed,
@@ -79,7 +79,7 @@ class editQuiz extends React.Component {
                 showResults: this.state.showResults,
                 last_edited_date: Date
             };
-            await postQuiz(quiz).then(value => {
+            await putQuiz(quiz).then(value => {
                 this.setState({quizChanges: false});
             });
         }
@@ -133,7 +133,7 @@ class editQuiz extends React.Component {
                     <div className={s.question}>
                         {this.state.questions === undefined || this.state.questions === null ? ' ' :
                             this.state.questions.map(val => <Question
-                                key={val.id}
+                                key={val._id}
                                 value={val}
                                 point={this.state.points}
                                 deleteQuestion={this.deleteQuestion}
@@ -168,7 +168,7 @@ class editQuiz extends React.Component {
                 description: json.description,
                 questions_count: json.questions_count,
                 last_edited_date: json.last_edited_date,
-                points:json.points
+                points: json.points
             });
         });
     }

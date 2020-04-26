@@ -1,5 +1,5 @@
 export async function login(email, password) {
-  return await fetch("http://35.228.95.87:7000/login", {
+  return await fetch("http://localhost:3000/login", {
     method: "POST",
     headers: {
       Accept: "application/json",

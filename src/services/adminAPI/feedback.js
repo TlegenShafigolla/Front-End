@@ -14,7 +14,7 @@ export default function postFeedback(feedback) {
         }),
     };
 
-    const api = 'http://35.228.95.87:7000';
+    const api = 'http://localhost:3000';
     return fetch(`${api}/feedback`, requestOptions).then(res => {
         return res.json();
     });

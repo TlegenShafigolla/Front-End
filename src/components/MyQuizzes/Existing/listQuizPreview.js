@@ -68,6 +68,7 @@ class ListQuizPreview extends React.Component {
 
     componentDidMount() {
         getQuiz().then(json => {
+            console.log(json);
             this.setState({quizzes: json.quizzes})
         });
     }

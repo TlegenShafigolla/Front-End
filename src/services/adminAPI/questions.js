@@ -7,7 +7,7 @@ export default function getQuestions(quiz_id) {
         headers: {Authorization: authToken},
     };
 
-    const api = 'http://35.228.95.87:7000';
+    const api = 'http://localhost:3000';
     return fetch(`${api}/quiz/question/${quiz_id}`, requestOptions).then(res => {
         return res.json();
     });
@@ -27,7 +27,7 @@ export function postQuestions(quiz_id, questions) {
         }),
     };
 
-    const api = 'http://35.228.95.87:7000';
+    const api = 'http://localhost:3000';
     return fetch(`${api}/quiz/question/${quiz_id}`, requestOptions).then(res => {
         return res.json();
     });
@@ -43,16 +43,33 @@ export function deleteQuestions(quiz_id, question_id) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            id: question_id,
+            _id: question_id,
         }),
     };
 
-    const api = 'http://35.228.95.87:7000';
+    const api = 'http://localhost:3000';
     return fetch(`${api}/quiz/question/${quiz_id}`, requestOptions).then(res => {
         return res.json();
     });
 }
 
+export function putQuestions(quiz_id, question) {
+    const authToken = `Bearer ${getSession()}`;
+    const requestOptions = {
+        method: 'PUT',
+        headers: {
+            Authorization: authToken,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(question),
+    };
+
+    const api = 'http://localhost:3000';
+    return fetch(`${api}/quiz/question/${quiz_id}`, requestOptions).then(res => {
+        return res.json();
+    });
+}
 /*
 * "questions": [
         {

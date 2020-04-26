@@ -32,12 +32,15 @@ class SignIn extends React.Component {
         }
         this.setState({disabledButton: true});
         await login(this.state.email, this.state.password).then(data => {
-            localStorage.setItem('refresh_token',data['refresh_token']);
-            localStorage.setItem("access_token", data["access_token"]);
-            localStorage.setItem("status", data["type"]);
-            localStorage.setItem('access_time', Date())
-            if(data.Status==='Failed') {
+            console.log(data);
+            if(data.message === "Auth failed") {
                 this.setState({error: true})
+            } else{
+                //localStorage.setItem('refresh_token',data['refresh_token']);
+                localStorage.setItem("access_token", data["access_token"]);
+                //localStorage.setItem("status", data["type"]); TODO add type to Node
+                localStorage.setItem("status", 'admin');
+                localStorage.setItem('access_time', Date());
             }
         });
 

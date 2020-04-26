@@ -79,7 +79,7 @@ class ShowQuiz extends React.Component {
                         </IconButton>
                     </Tooltip>
                 </div>
-                <Link to={'/admin/quizzes/edit/' + this.props.value.id.toString()}>
+                <Link to={'/admin/quizzes/edit/' + this.props.value._id.toString()}>
                     <IconButton color="primary" className={s.ArrowButton} onClick={this.handleClick}>
                         <ArrowForwardIosIcon fontSize='large'/>
                     </IconButton>

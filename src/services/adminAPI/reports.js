@@ -7,7 +7,7 @@ export default function getReportList() {
         headers: {Authorization: authToken},
     };
 
-    const api = 'http://35.228.95.87:7000';
+    const api = 'http://localhost:3000';
     return fetch(`${api}/quiz/report/0`, requestOptions).then(res => {
         return res.json();
     });
@@ -20,7 +20,7 @@ export function getReport(report_id) {
         headers: {Authorization: authToken},
     };
 
-    const api = 'http://35.228.95.87:7000';
+    const api = 'http://localhost:3000';
     return fetch(`${api}/quiz/report/${report_id}`, requestOptions).then(res => {
         return res.json();
     });
@@ -41,7 +41,7 @@ export function postReport(id, correct, points) {
 
         })
     };
-    const api = 'http://35.228.95.87:7000';
+    const api = 'http://localhost:3000';
     return fetch(`${api}/quiz/report`, requestOptions).then(res => {
         return res.json();
     });
