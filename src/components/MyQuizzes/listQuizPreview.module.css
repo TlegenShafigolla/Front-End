@@ -82,49 +82,26 @@
     margin-top: 50px;
     display: flex;
 }
-/*.root {*/
-/*    padding: 2px 4px;*/
-/*    display: flex;*/
-/*    alignItems: center;*/
-/*    right: 0;*/
-/*}*/
-/*.input {*/
-/*    marginLeft: 20px;*/
-/*    flex: 1;*/
-/*}*/
-/*.iconButton {*/
-/*    padding: 10px;*/
-/*}*/
+.time_limit{
+    display: flex;
+    flex-direction: column;
+}
+.checkbox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.time{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.startDate{
 
-/*MyQuizRoute*/
-/*.fade{*/
-/*    transition: 0.5s;*/
-/*}*/
-/*.fadeEnter {*/
-/*    opacity: 0.01;*/
-/*    transition: 0.5s;*/
-/*    transform: translateX(100%)*/
-/*}*/
-/*.fadeEnter.fadeEnterActive {*/
-/*    opacity: 1;*/
-/*    transition: 0.5s;*/
-/*    transform: translateX(0%)*/
-
-/*}*/
-/*.fadeExit {*/
-/*    transition: 0.5s;*/
-/*    transform: translateX(-100%)*/
-/*}*/
-/*.fadeExit.fadeExitActive {*/
-/*    opacity: 1;*/
-/*    transition: 1s ;*/
-/*}*/
-/*div.transitiongroup {*/
-/*    position: relative;*/
-/*}*/
-/*section.routesection {*/
-/*    position: absolute;*/
-/*    width: 100%;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*}*/
+}
+.endDate{
+    display: none;
+}
+.timer{
+    display: none;
+}

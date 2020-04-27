@@ -35,6 +35,7 @@ class Quiz extends React.Component {
             }if (json.Status==='Failed'){
                 this.setState({error:true})
             }
+
         });
     };
 
