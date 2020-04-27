@@ -23,7 +23,7 @@ class Question extends React.Component {
                 <div>
                     <Answers
                         onChangeAnswer={this.props.onChangeAnswer}
-                        key={this.props.value.question_id}
+                        key={this.props.value._id}
                         onChangeCheck={this.props.onChangeCheck}
                         value={this.props.value}
                     />

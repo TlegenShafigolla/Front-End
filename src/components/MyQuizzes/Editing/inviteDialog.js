@@ -156,9 +156,7 @@ onChangeTimeLimit=(event)=>{
     console.log(t)
 }
     render() {
-
-    console.log(this.state.end_date)
-        return (
+     return (
             <div>
                 <Dialog open={this.props.openDialog}
                         aria-labelledby="Invite"

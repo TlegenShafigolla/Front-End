@@ -7,14 +7,12 @@ export function postQuizAnswer(link, session_id, finished, answers) {
         },
         body: JSON.stringify({
             link: link,
-            session_id: session_id,
-            finished:finished,
+            finished: finished,
             answers:answers,
-
         }),
     };
     const api = 'http://localhost:3000';
-    return fetch(`${api}/quiz/take/answer`, requestOptions).then(res => {
+    return fetch(`${api}/quiz/take/${session_id}`, requestOptions).then(res => {
         return res.json();
     });
 }

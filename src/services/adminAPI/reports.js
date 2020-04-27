@@ -25,7 +25,7 @@ export function getReport(report_id) {
         return res.json();
     });
 }
-export function postReport(id, correct, points) {
+export function postReport(id, correct, points, session_id) {
     const authToken = `Bearer ${getSession()}`;
     const requestOptions = {
         method: 'POST',
@@ -35,10 +35,10 @@ export function postReport(id, correct, points) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            id: id,
+            _id: id,
             correct: correct,
-            points: points
-
+            points: points,
+            session_id: session_id,
         })
     };
     const api = 'http://localhost:3000';

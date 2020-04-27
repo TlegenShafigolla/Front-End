@@ -15,7 +15,6 @@ class ReportQuestion extends React.Component {
             disabledButton: false,
             id: null,
         }
-
     }
 
     onClickSaveButton = async () => {
@@ -23,10 +22,11 @@ class ReportQuestion extends React.Component {
             return;
         }
         this.setState({disabledButton: true});
-        let id=this.state.id;
-        let points=this.state.points;
-        let correct=Number(this.state.correct);
-        await postReport(id, correct, points).then(val=>{
+        let id = this.state.id;
+        let points = this.state.points;
+        let correct = Number(this.state.correct);
+        let session_id = this.props.session._id;
+        await postReport(id, correct, points, session_id).then(val=>{
            console.log(val)
         });
         let count=1;
@@ -37,23 +37,20 @@ class ReportQuestion extends React.Component {
     };
 
     onChangeCheckbox=(event)=>{
-        this.setState({id:Number(event.target.id)});
-            this.setState({correct: event.target.checked});
+        this.setState({id: event.target.id});
+        this.setState({correct: event.target.checked});
         $('#ButtonSave').show(500)
-
     };
     onChangeInputBase = (event) => {
         this.setState({points: event.target.value});
-        this.setState({id: Number(event.target.id)});
+        this.setState({id: event.target.id});
         $('#ButtonSave').show(500)
-
     };
 
     render() {
         if (this.props.val === null) {
             return '';
         }
-
         let map = {};
         let key = this.props.points ? "points" : "correct";
         for (let i = 0; i < this.props.val.session.length; i++) {
@@ -63,7 +60,7 @@ class ReportQuestion extends React.Component {
         const wrong = red.A700;
         return (
             <div>
-                <div className={s.question} id={this.props.val.question_id.toString()}>
+                <div className={s.question} id={this.props.val._id.toString()}>
                     <div className={s.questioninfo}>
                         <div className={s.questionOrder}>{this.props.val.order_id}.</div>
                         <div className={s.questionField}>
@@ -108,11 +105,11 @@ class ReportQuestion extends React.Component {
                                     key={val.id}>
                                     {val.answer}
                                 </Typography>
-                                {this.props.points ? (<InputBase id={val.id.toString()} className={s.InputBase} defaultValue={val.points}
+                                {this.props.points ? (<InputBase id={val._id.toString()} className={s.InputBase} defaultValue={val.points}
                                                                 type={'number'}
                                                                 onChange={this.onChangeInputBase}
                                 /> ): <Checkbox style={val.correct===1||this.state.correct ? {color:correct}:
-                                    {color:'#3333'}} defaultChecked={val.correct===1} id={val.id.toString()} onChange={this.onChangeCheckbox}/>}
+                                    {color:'#3333'}} defaultChecked={val.correct===1} id={val._id.toString()} onChange={this.onChangeCheckbox}/>}
                             </div>
                         )}
                         <div className={s.SaveButton} id='ButtonSave'>

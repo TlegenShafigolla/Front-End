@@ -71,10 +71,10 @@ class Question extends React.Component {
         this.setState({editMode: true});
     };
 
-    deleteAnswerOnClick = async (index) => {
+    deleteAnswerOnClick = (index) => {
         let answers = this.state.answers;
         if (this.state.id !== undefined && answers[index]._id !== undefined) {
-           await deleteAnswers(this.state.id, answers[index]._id);
+            deleteAnswers(this.state.id, answers[index]._id);
         }
         let index_key = this.state.index_key;
         for (let i = index; i < answers.length - 1; i++) {
@@ -104,8 +104,6 @@ class Question extends React.Component {
             return;
         }
         this.setState({disableSaveButton: true});
-        console.log(this.state.answerType)
-
         const answer = this.state.answers;
         let wrong = 0;
         let empty = 0;
@@ -123,7 +121,6 @@ class Question extends React.Component {
                 }
             }
         }
-
         let corrects = answer.length - wrong;
         if (this.state.question !== '') {
             if (empty === 0) {
@@ -133,14 +130,16 @@ class Question extends React.Component {
                         for (let i in answers) {
                             answers[i].question_id = this.state.id.toString();
                         }
-                        await this.state.answers.map((value, index) => {
+                        await Promise.all(this.state.answers.map(async value => {
                             if('_id' in value){
-                                putAnswers(this.state.id, value);
+                                await putAnswers(this.state.id, value);
                             } else{
-                                postAnswers(this.state.id, value);
+                                await postAnswers(this.state.id, value);
                             }
+                        })).then((ret) => {
+                            getAnswers(this.state.id).then(val => {
+                                this.setState({answers: val.answers})});
                         });
-                        await getAnswers(this.state.id).then(val => {this.setState({answers: val.answers}); console.log(val)});
                         this.setState({answersChanged: false});
                     }
                     if (this.state.questionChanged) {
@@ -169,6 +168,7 @@ class Question extends React.Component {
 
         this.setState({disableSaveButton: false});
     };
+
     onChangeAnswer = (event) => {
         let answers = this.state.answers;
         answers[Number(event.target.id)].answer = event.target.value;
@@ -176,9 +176,11 @@ class Question extends React.Component {
         this.setState({answersChanged: true});
         this.setState({errorAnswer: false});
     };
+
     onClose = () => {
         this.setState({dialogOpenAnswer: false})
     };
+
     onChangeQuestion = (event) => {
         this.setState({question: event.target.value});
         this.setState({questionChanged: true});

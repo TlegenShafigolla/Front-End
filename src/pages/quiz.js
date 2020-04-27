@@ -42,6 +42,7 @@ class Quiz extends React.Component {
     UNSAFE_componentWillMount = async () => {
         const path = window.location.pathname.split('/');
         await getInvitation(path[2]).then(json => {
+            console.log(json);
             this.setState({status: "Success" === json.Status});
         });
     };
@@ -50,7 +51,7 @@ class Quiz extends React.Component {
         if (this.state.status === null) {
             return '';
         }
-        if (this.state.status === true && (this.state.session_id === null || this.state.session_id === undefined)) {
+        if (this.state.status && (this.state.session_id === null || this.state.session_id === undefined)) {
             return (
                 <CheckEmail
                     error={this.state.error}

@@ -29,7 +29,7 @@ class ReportCard extends React.Component {
                     </div>
                     <div>
                         <Typography >
-                            {"No of questions: " + this.props.report.questions_count.toString()}
+                            {"No of questions: " + this.props.report.quiz.questions_count.toString()}
                         </Typography>
                         <Typography variant="body2" component="p">
                             Show Results: {this.props.report.showResults ? 'Yes' : 'No'}

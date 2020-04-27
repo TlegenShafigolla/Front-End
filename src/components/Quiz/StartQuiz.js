@@ -44,8 +44,8 @@ class StartQuiz extends React.Component {
                 }
             }
             let newQuestion = {
-                "question_id": Number(event.target.id),
-                "answer_ids": [Number(event.target.value)]
+                "question_id": event.target.id,
+                "answer_ids": [event.target.value]
             };
             answers.push(newQuestion);
             this.setState({answers: answers});
@@ -73,7 +73,7 @@ class StartQuiz extends React.Component {
     onChangeAnswer = (event) => {
         let answers = this.state.answers;
         for (let i = 0; i < answers.length; i++) {
-            if (answers[i].question_id === Number(event.target.id)) {
+            if (answers[i].question_id === event.target.id) {
                 answers[i].answer = event.target.value;
                 if (answers[i].answer === null || answers[i].answer === '') {
                     answers.splice(i, 1)
@@ -83,19 +83,16 @@ class StartQuiz extends React.Component {
             }
         }
         let newQuestion = {
-            "question_id": Number(event.target.id),
-            "answer": [event.target.value]
+            "question_id": event.target.id,
+            "answer": event.target.value
         };
         answers.push(newQuestion);
         this.setState({answers: answers});
-
     };
 
 
     componentDidMount = async () => {
-        let session_id = localStorage.getItem('session_id');
-        await postTakeQuestion(session_id).then(json => {
-            console.log(json);
+        await postTakeQuestion(localStorage.getItem('session_id')).then(async json => {
             this.setState({questions: json.questions});
             this.setState({quiz_name: json.quiz.quiz_name});
             this.setState({questions_count: json.quiz.questions_count});
@@ -108,20 +105,21 @@ class StartQuiz extends React.Component {
         const finished = 1;
         const path = window.location.pathname.split('/');
         const session_id = localStorage.getItem('session_id');
-        let answer = this.state.answers;
-        postQuizAnswer(path[2], session_id, finished, answer).then(val => {
+        const answers = this.state.answers;
+        postQuizAnswer(path[2], session_id, finished, answers).then(val => {
+            console.log(val);
             this.setState({corrects: val.corrects});
             this.setState({points: val.points});
-            console.log(val);
             localStorage.removeItem('session_id');
             this.setState({endTestDialog: true});
             localStorage.removeItem('start_test');
         })
     };
+
     startTest = () => {
         if (this.state.questions !== null || this.state.questions !== []) {
             this.setState({startTestDialog: false});
-            localStorage.setItem('start_test', 'true')
+            localStorage.setItem('start_test', 'true');
             localStorage.removeItem('endTest')
         }
     };
@@ -144,7 +142,7 @@ class StartQuiz extends React.Component {
                         this.state.questions.map((val, index) => <Question
                             onChangeCheck={this.onChangeCheck}
                             onChangeAnswer={this.onChangeAnswer}
-                            key={val.id}
+                            key={val._id.toString()}
                             index={index}
                             value={val}
                         />)}
@@ -185,7 +183,7 @@ class StartQuiz extends React.Component {
                     <DialogContent>
                         <Typography variant='h5'>
                             Thank you for passing the test
-                            {this.state.showResults ?  ' You result: '+(this.state.corrects === undefined ? this.state.points :this.state.corrects)+' points' : ''}
+                            {this.state.showResults ?  ' You result: '+ (this.state.corrects === undefined ? this.state.points :this.state.corrects)+' points' : ''}
                         </Typography>
                     </DialogContent>
 
