@@ -58,8 +58,8 @@ class Quiz extends React.Component {
                 showResults: this.state.showResults,
             };
             await putQuiz(quiz).then(val => {
+                console.log(val)
                 let dates =  new Date(val.last_edited_date);
-                ServerTimeToUserTime(dates);
                 this.setState({last_edited_date:dates.toLocaleString()})
             });
             this.setState({quizChange: false})
@@ -67,15 +67,14 @@ class Quiz extends React.Component {
         this.setState({disabledSaveButton:false});
     };
 componentDidMount() {
-
+    console.log(this.props.value.last_edited_date)
     let date =  new Date(this.props.value.last_edited_date);
-    ServerTimeToUserTime(date);
-   this.setState({last_edited_date:date.toLocaleString() })
+   this.setState({last_edited_date:date.toLocaleString()})
 }
 
 
     render() {
-        console.log(this.state.last_edited_date)
+        console.log(this.state.last_edited_date);
         if(this.state.last_edited_date===null){
             return ''
         }

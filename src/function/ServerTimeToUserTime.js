@@ -1,8 +1,8 @@
 export function ServerTimeToUserTime(dates) {
     let time=new Date().getTimezoneOffset()/60
-    let s=dates.getHours()-time;
-    let t=dates.setHours(s);
-    console.log(dates)
+    // let s=dates.getHours()-time;
+    // let t=dates.setHours(s);
+    // console.log(dates)
     return dates;
 }
 export function UserTimeToServerTime(date) {

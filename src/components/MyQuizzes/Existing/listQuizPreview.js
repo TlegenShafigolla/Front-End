@@ -5,6 +5,7 @@ import s from '../listQuizPreview.module.css'
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from '@material-ui/icons/Add';
 import CircularProgress from "@material-ui/core/CircularProgress";
+import {Redirect} from "react-router-dom";
 
 class ListQuizPreview extends React.Component {
     constructor(props) {
@@ -12,6 +13,7 @@ class ListQuizPreview extends React.Component {
         this.state = {
             quizzes: null,
             editMode: false,
+            id:null,
         };
     }
 
@@ -24,7 +26,9 @@ class ListQuizPreview extends React.Component {
             showResults: null,
             points: null,
         };
-        await postQuiz(newQuiz).then(val => quizzes.push(val));
+        await postQuiz(newQuiz).then(val => {quizzes.push(val);
+                     this.setState({id:val._id})
+        });
         this.setState({quizzes: quizzes})
     };
 
@@ -46,6 +50,9 @@ class ListQuizPreview extends React.Component {
                     <CircularProgress size={70}/>
                 </div>
             );
+        }
+        if(this.state.id!==null) {
+            return (<Redirect to={`/admin/quizzes/edit/${this.state.id}`}/>);
         }
         return (
             <div className={s.Container}>
