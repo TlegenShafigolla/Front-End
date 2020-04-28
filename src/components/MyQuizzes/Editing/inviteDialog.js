@@ -81,7 +81,6 @@ class InviteDialog extends React.Component {
         {
             this.state.checkTime ? time = this.state.time_limit : time = null
         }
-        console.log(time)
         if (this.state.name !== null && this.state.name !== '' && this.state.surname !== null && this.state.surname !== '' && email.test(this.state.email)) {
             const invite = {
                 name: this.state.name,
