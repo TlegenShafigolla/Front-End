@@ -38,8 +38,8 @@ class editQuiz extends React.Component {
         this.setState({questions: questions});
     };
 
-     addNewQuestion = () => {
-        if(this.state.disableAddButton){
+    addNewQuestion = () => {
+        if (this.state.disableAddButton) {
             return;
         }
         this.setState({disableAddButton: true});
@@ -56,7 +56,7 @@ class editQuiz extends React.Component {
             this.setState({questions: questions});
         });
         this.setState({disableAddButton: false});
-     };
+    };
 
     deleteQuestion = (order_id) => {
         let questions = this.state.questions;
@@ -68,8 +68,8 @@ class editQuiz extends React.Component {
         this.setState({questions: questions});
     };
 
-    saveButton = async () => {
-        if (this.state.quizChanges) {
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevState.quizChanges !== this.state.quizChanges) {
             const quiz = {
                 _id: this.state.quiz_id,
                 quiz_name: this.state.quiz_name,
@@ -79,28 +79,27 @@ class editQuiz extends React.Component {
                 showResults: this.state.showResults,
                 last_edited_date: Date
             };
-            await putQuiz(quiz).then(value => {
+            putQuiz(quiz).then(value => {
                 this.setState({quizChanges: false});
+                console.log(value)
             });
         }
-        $('#saveButton').hide(500)
-
-    };
+    }
     pointsChecked = (event) => {
         this.setState({points: event});
-        this.setState({quizChanges:true})
+        this.setState({quizChanges: true});
     };
     mixedChecked = (event) => {
         this.setState({mixed: event});
-        this.setState({quizChanges:true})
+        this.setState({quizChanges: true})
     };
     showResultsChecked = (event) => {
         this.setState({showResults: event});
-        this.setState({quizChanges:true})
+        this.setState({quizChanges: true})
     };
 
     render() {
-        if(this.state.questions === null){
+        if (this.state.questions === null) {
             return (
                 <div className={s.CircularProgress}>
                     <CircularProgress size={70}/>
@@ -141,12 +140,12 @@ class editQuiz extends React.Component {
                             />)}
                     </div>
                     <div>
-                    <IconButton color='primary' size='medium' className={s.addbutton} onClick={this.addNewQuestion}>
-                        <AddIcon fontSize='large'/>
-                    </IconButton>
+                        <IconButton color='primary' size='medium' className={s.addbutton} onClick={this.addNewQuestion}>
+                            <AddIcon fontSize='large'/>
+                        </IconButton>
                     </div>
                 </div>
-                <div className={s.board}>
+                <div className={this.state.questions.length === 0 ? s.display : s.board}>
 
                     <div className={s.boardRows}>
                         {this.state.questions === undefined || this.state.questions === null ? null :

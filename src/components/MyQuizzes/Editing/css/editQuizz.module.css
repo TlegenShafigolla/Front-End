@@ -30,7 +30,9 @@
     float: right;
     display: none;
 }
-
+.display{
+    display: none;
+}
 .board {
     right: 10%;
     box-shadow: 0px 0px 5px #333333;
@@ -77,8 +79,12 @@
 }
 
 .QuizName {
+    width: 100%;
+    padding: 5px;
+    box-shadow: 5px 5px 10px #333333;
     margin-top: 10px;
     margin-bottom: 15px;
+    text-align: center;
 }
 .switchLine{
     display: flex;

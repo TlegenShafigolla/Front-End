@@ -52,7 +52,7 @@ class ShowQuiz extends React.Component {
             <CardContent className={s.CardContent}>
                 <Typography variant="h5" component="h2">
                     {this.props.quiz_name}  </Typography>
-                <Typography className={s.title} gutterBottom> {this.props.description} </Typography>
+                <Typography className={s.title}  gutterBottom> {this.props.description} </Typography>
                 <Typography className={s.pos} > {this.props.value.questions_count.toString()} </Typography>
                 <Typography variant="body2"
                             component="p"

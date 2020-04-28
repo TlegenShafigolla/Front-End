@@ -6,7 +6,6 @@ import $ from 'jquery'
 import Switch from "@material-ui/core/Switch";
 import Typography from "@material-ui/core/Typography";
 import {Tooltip} from "@material-ui/core";
-import HelpIcon from '@material-ui/icons/Help';
 
 class EditQuizSettings extends React.Component {
     constructor(props){
@@ -90,7 +89,7 @@ class EditQuizSettings extends React.Component {
                         </Tooltip>
                     </div>
                 </div>
-                <Button id='saveButton' onClick={this.props.saveButton} color='primary'>Save</Button>
+                {/*<Button id='saveButton' onClick={this.props.saveButton} color='primary'>Save</Button>*/}
             </div>
         );
     }

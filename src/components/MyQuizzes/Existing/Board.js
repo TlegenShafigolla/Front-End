@@ -20,7 +20,7 @@ class board extends React.Component {
                 duration= {500}
             >
             <div className={s.Board}>
-                <div className={s.orderid}>
+                <div className={s.orderId}>
                     {this.props.value.order_id}
                 </div>
                 {this.props.value.type==='FILL THE BLANK'?'FB':'MC'}
