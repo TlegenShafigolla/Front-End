@@ -1,15 +1,17 @@
 .quiz {
-    display: flex;
-    width: 100%;
     margin-top: 30px;
     padding: 20px;
-    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    width: 600px;
 }
-
+.quizPage{
+display: flex;
+}
 .questions {
+    margin-top: 60px;
     display: flex;
     flex-direction: column;
-    width: 40%;
 }
 
 .error {
@@ -21,13 +23,15 @@
 }
 
 .info {
-    margin-top: 60px;
-    right: 50px;
-    width: 20%;
+    display: flex;
+    top: 70px;
     position: fixed;
-    display: inline-flex;
-    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.67);
+    border-radius: 10px;
+    background: #3F51B5;
     box-shadow: 3px 3px 10px #333333;
+    right: auto;
+    left: auto;
 }
 
 .question {
@@ -40,7 +44,6 @@
 .questionInfo {
     display: flex;
     width: 100%;
-    padding: 0;
 }
 
 .questionField {
@@ -69,15 +72,12 @@
 }
 
 .info Button {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
+    color: white;
     cursor: pointer;
     width: 100%;
 }
 
 .dialog {
-    flex-direction: column;
 }
 
 .dialogActions {
@@ -85,12 +85,16 @@
 }
 
 .dialogActions Button {
+    font-size: 2em;
     float: right;
-    top: -30px;
+    bottom: 0;
+    height: 60px;
+    width: 60px;
     margin-right: 5px;
 }
 
 .typography {
+    font-size: 3em;
     display: flex;
     justify-content: center;
     margin-top: 5px;
