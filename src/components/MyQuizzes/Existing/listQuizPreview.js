@@ -34,7 +34,7 @@ class ListQuizPreview extends React.Component {
     deleteQuiz = (quiz_id) => {
         let quizzes = this.state.quizzes;
         for (let i = 0; i < quizzes.length; i++) {
-            if(quiz_id === quizzes[i].id){
+            if(quiz_id === quizzes[i]._id){
                 quizzes.splice(i, 1);
                 break;
             }

@@ -9,6 +9,7 @@ import {ServerTimeToUserTime} from "../../../function/ServerTimeToUserTime";
 class Quiz extends React.Component {
     constructor(props) {
         super(props);
+        let date = new Date(this.props.value.last_edited_date);
         this.state = {
             editMode: false,
             id: this.props.value._id,
@@ -19,15 +20,17 @@ class Quiz extends React.Component {
             points: this.props.value.points,
             showResults: this.props.value.showResults,
             disabledSaveButton: false,
-            last_edited_date: null,
+            last_edited_date: date.toLocaleString(),
         }
     }
 
     deleteQuizOnClick = async () => {
         if (this.state.id !== undefined) {
             await deleteQuiz(this.state.id)
+            console.log(this.state.id)
         }
         this.props.deleteQuiz(this.props.value._id)
+        console.log(this.props.value._id)
     };
     changeDescription = (event) => {
         this.setState({description: event.target.value});
@@ -57,7 +60,6 @@ class Quiz extends React.Component {
                 showResults: this.state.showResults,
             };
             await putQuiz(quiz).then(val => {
-                console.log(val)
                 let dates = new Date(val.last_edited_date);
                 this.setState({last_edited_date: dates.toLocaleString()})
             });
@@ -65,17 +67,8 @@ class Quiz extends React.Component {
         }
         this.setState({disabledSaveButton: false});
     };
+        render() {
 
-    componentDidMount() {
-        let date = new Date(this.props.value.last_edited_date);
-        this.setState({last_edited_date: date.toLocaleString()})
-    }
-
-
-    render() {
-        if (this.state.last_edited_date === null) {
-            return ''
-        }
         if (!this.state.editMode) {
             return (<div>
                     <ShowQuiz
