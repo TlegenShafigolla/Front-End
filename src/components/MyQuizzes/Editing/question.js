@@ -6,14 +6,13 @@ import {deleteQuestions, putQuestions} from "../../../services/adminAPI/question
 import makeID from "../../../services/utils";
 import Snackbar from "@material-ui/core/Snackbar";
 import s from './css/editQuestion.module.css'
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import Typography from "@material-ui/core/Typography";
 import Alert from "@material-ui/lab/Alert";
 class Question extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            editMode: this.props.value.question === "New question",
+            editMode: this.props.value.question === " ",
             id: this.props.value._id,
             quiz_id: this.props.value.quiz_id,
             answerType: this.props.value.type,

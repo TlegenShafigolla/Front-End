@@ -47,7 +47,7 @@ class editQuiz extends React.Component {
             order_id: this.state.questions.length + 1,
             quiz_id: this.state.quiz_id,
             image: null,
-            question: "New question",
+            question: " ",
             type: "FILL THE BLANK"
         };
         postQuestions(this.state.quiz_id, [question]).then(ret => {
@@ -81,7 +81,6 @@ class editQuiz extends React.Component {
             };
             putQuiz(quiz).then(value => {
                 this.setState({quizChanges: false});
-                console.log(value)
             });
         }
     }

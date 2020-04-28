@@ -14,7 +14,7 @@ class ShowQuestion extends React.Component {
                     <div className={s.questionOrder}>{this.props.value.order_id}.</div>
                     <div className={s.questionField}>
                         <Typography variant="body1" gutterBottom>
-                            {this.props.question === '' ? 'New question' : this.props.question}
+                            {this.props.question === ' ' ? 'New question' : this.props.question}
                         </Typography>
                     </div>
                 </div>
