@@ -6,7 +6,6 @@ import IconButton from "@material-ui/core/IconButton";
 import AddIcon from '@material-ui/icons/Add';
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-
 class ListQuizPreview extends React.Component {
     constructor(props) {
         super(props);
@@ -27,7 +26,7 @@ class ListQuizPreview extends React.Component {
         };
         await postQuiz(newQuiz).then(val => {
             quizzes.push(val);
-            window.open(`/admin/quizzes/edit/${val._id}`);
+            this.props.history.push(`/admin/quizzes/edit/${val._id}`);
         });
         this.setState({quizzes: quizzes})
     };
