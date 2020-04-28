@@ -6,6 +6,7 @@ import IconButton from "@material-ui/core/IconButton";
 import AddIcon from '@material-ui/icons/Add';
 import CircularProgress from "@material-ui/core/CircularProgress";
 
+
 class ListQuizPreview extends React.Component {
     constructor(props) {
         super(props);
@@ -24,7 +25,10 @@ class ListQuizPreview extends React.Component {
             showResults: null,
             points: null,
         };
-        await postQuiz(newQuiz).then(val => quizzes.push(val));
+        await postQuiz(newQuiz).then(val => {
+            quizzes.push(val);
+            window.open(`/admin/quizzes/edit/${val._id}`);
+        });
         this.setState({quizzes: quizzes})
     };
 
@@ -68,7 +72,6 @@ class ListQuizPreview extends React.Component {
 
     componentDidMount() {
         getQuiz().then(json => {
-            console.log(json);
             this.setState({quizzes: json.quizzes})
         });
     }

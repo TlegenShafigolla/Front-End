@@ -7,9 +7,9 @@ export function ServerTimeToUserTime(dates) {
 }
 export function UserTimeToServerTime(date) {
     let time=new Date().getTimezoneOffset()/60
-    let s=date.getHours()+time;
-    let t=date.setHours(s);
+    let s =date.getHours()+time;
+    let t =date.setHours(s);
     let dateTimeFormat=date.toISOString().replace('T',' ').replace('Z',' ')
-    console.log( dateTimeFormat)
+    console.log( dateTimeFormat);
     return dateTimeFormat;
 }

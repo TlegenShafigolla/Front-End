@@ -42,7 +42,6 @@ class Quiz extends React.Component {
     UNSAFE_componentWillMount = async () => {
         const path = window.location.pathname.split('/');
         await getInvitation(path[2]).then(json => {
-            console.log(json);
             this.setState({status: "Success" === json.Status});
         });
     };

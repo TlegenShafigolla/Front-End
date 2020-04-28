@@ -75,7 +75,6 @@ componentDidMount() {
 
 
     render() {
-        console.log(this.state.last_edited_date)
         if(this.state.last_edited_date===null){
             return ''
         }

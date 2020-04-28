@@ -38,7 +38,6 @@ class EditQuizSettings extends React.Component {
     };
 
     render() {
-        console.log(this.state);
         return (
             <div className={s.quizSettings} onClick={this.hideSaveButton}>
                 <div className={s.radio}>
