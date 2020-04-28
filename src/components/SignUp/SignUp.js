@@ -91,7 +91,6 @@ class Registration extends React.Component {
 
         if (emailTest.test(email) && name !== '' && surname !== '' && occupation !== '' && password === confirmPassword && password !== '') {
             await registration(name, surname, password, occupation, email).then(val => {
-                console.log(val)
                 if (val.Status !== 'Success') {
                     this.setState({openErrorSnackbar: true})
                 } else {

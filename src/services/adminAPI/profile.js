@@ -1,4 +1,6 @@
 import {getSession} from "../GetSession";
+import {api} from "../../App"
+
 
 export default function getProfile() {
     const authToken = `Bearer ${getSession()}`;
@@ -7,10 +9,8 @@ export default function getProfile() {
         headers: {Authorization: authToken},
     };
 
-    const api = 'http://localhost:3000';
     const json = fetch(`${api}/profile`, requestOptions).then(res => {
         return res.json();
-
     });
     return json;
 }

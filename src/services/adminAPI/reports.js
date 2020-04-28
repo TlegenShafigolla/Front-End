@@ -1,4 +1,5 @@
 import {getSession} from "../GetSession";
+import {api} from "../../App"
 
 export default function getReportList() {
     const authToken = `Bearer ${getSession()}`;
@@ -7,7 +8,6 @@ export default function getReportList() {
         headers: {Authorization: authToken},
     };
 
-    const api = 'http://localhost:3000';
     return fetch(`${api}/quiz/report/0`, requestOptions).then(res => {
         return res.json();
     });
@@ -20,7 +20,6 @@ export function getReport(report_id) {
         headers: {Authorization: authToken},
     };
 
-    const api = 'http://localhost:3000';
     return fetch(`${api}/quiz/report/${report_id}`, requestOptions).then(res => {
         return res.json();
     });
@@ -41,7 +40,6 @@ export function postReport(id, correct, points, session_id) {
             session_id: session_id,
         })
     };
-    const api = 'http://localhost:3000';
     return fetch(`${api}/quiz/report`, requestOptions).then(res => {
         return res.json();
     });

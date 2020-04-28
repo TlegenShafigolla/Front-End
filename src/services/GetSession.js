@@ -1,3 +1,5 @@
+import {api} from "../App"
+
 export function getSession() {
     try {
         if (localStorage.getItem('access_token') === null) {
@@ -6,7 +8,7 @@ export function getSession() {
         const timeout = Date.parse(localStorage.getItem('access_time'));
         const diff = new Date() - timeout;
         if (Math.round(diff) > 3000000) {
-            refreshSession();
+            //refreshSession();
         }
         return localStorage.getItem('access_token');
     } catch (e) {
@@ -21,7 +23,6 @@ function refreshSession() {
         headers: {Authorization: authToken},
     };
 
-    const api = 'http://35.228.95.87:7000';
     fetch(`${api}/token/refresh`, requestOptions).then(
         response => response.json()
     ).then(data => {

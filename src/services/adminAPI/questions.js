@@ -1,4 +1,5 @@
 import {getSession} from "../GetSession";
+import {api} from "../../App"
 
 export default function getQuestions(quiz_id) {
     const authToken = `Bearer ${getSession()}`;
@@ -7,7 +8,6 @@ export default function getQuestions(quiz_id) {
         headers: {Authorization: authToken},
     };
 
-    const api = 'http://localhost:3000';
     return fetch(`${api}/quiz/question/${quiz_id}`, requestOptions).then(res => {
         return res.json();
     });
@@ -27,7 +27,6 @@ export function postQuestions(quiz_id, questions) {
         }),
     };
 
-    const api = 'http://localhost:3000';
     return fetch(`${api}/quiz/question/${quiz_id}`, requestOptions).then(res => {
         return res.json();
     });
@@ -47,7 +46,6 @@ export function deleteQuestions(quiz_id, question_id) {
         }),
     };
 
-    const api = 'http://localhost:3000';
     return fetch(`${api}/quiz/question/${quiz_id}`, requestOptions).then(res => {
         return res.json();
     });
@@ -65,7 +63,6 @@ export function putQuestions(quiz_id, question) {
         body: JSON.stringify(question),
     };
 
-    const api = 'http://localhost:3000';
     return fetch(`${api}/quiz/question/${quiz_id}`, requestOptions).then(res => {
         return res.json();
     });

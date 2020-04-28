@@ -1,3 +1,5 @@
+import {api} from "../../App"
+
 export function postQuizAnswer(link, session_id, finished, answers) {
     const requestOptions = {
         method: 'POST',
@@ -11,7 +13,6 @@ export function postQuizAnswer(link, session_id, finished, answers) {
             answers:answers,
         }),
     };
-    const api = 'http://localhost:3000';
     return fetch(`${api}/quiz/take/${session_id}`, requestOptions).then(res => {
         return res.json();
     });

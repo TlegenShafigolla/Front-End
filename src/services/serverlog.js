@@ -1,5 +1,7 @@
+import {api} from "../App"
+
 export async function login(email, password) {
-  return await fetch("http://localhost:3000/login", {
+  return await fetch(`${api}/login`, {
     method: "POST",
     headers: {
       Accept: "application/json",
