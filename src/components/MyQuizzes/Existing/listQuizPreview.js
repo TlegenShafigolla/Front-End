@@ -35,7 +35,7 @@ class ListQuizPreview extends React.Component {
     deleteQuiz = (quiz_id) => {
         let quizzes = this.state.quizzes;
         for (let i = 0; i < quizzes.length; i++) {
-            if(quiz_id === quizzes[i].id){
+            if(quiz_id === quizzes[i]._id){
                 quizzes.splice(i, 1);
                 break;
             }
@@ -59,7 +59,7 @@ class ListQuizPreview extends React.Component {
                 <div className={s.Box}>
                     <div className={s.Quizz}>
                         {this.state.quizzes !== undefined ? this.state.quizzes.map((val, index) =>
-                            <Quiz key={index} id={index}
+                            <Quiz key={val._id} id={index}
                                   value={val}
                                   deleteQuiz={this.deleteQuiz}
                                    />) : ' '}
@@ -75,7 +75,6 @@ class ListQuizPreview extends React.Component {
 
     componentDidMount() {
         getQuiz().then(json => {
-            console.log(json);
             this.setState({quizzes: json.quizzes})
         });
     }

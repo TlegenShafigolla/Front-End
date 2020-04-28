@@ -19,17 +19,16 @@ class Quiz extends React.Component {
             points: this.props.value.points,
             showResults: this.props.value.showResults,
             disabledSaveButton: false,
-            last_edited_date: null
+            last_edited_date: null,
         }
     }
 
-    deleteQuizOnClick = () => {
+    deleteQuizOnClick = async () => {
         if (this.state.id !== undefined) {
-            deleteQuiz(this.state.id)
+            await deleteQuiz(this.state.id)
         }
-        this.props.deleteQuiz(this.props.value.id)
+        this.props.deleteQuiz(this.props.value._id)
     };
-
     changeDescription = (event) => {
         this.setState({description: event.target.value});
         this.setState({quizChange: true})
@@ -43,10 +42,10 @@ class Quiz extends React.Component {
         this.setState({editMode: true})
     };
     saveButton = async () => {
-        if(this.state.disabledSaveButton){
+        if (this.state.disabledSaveButton) {
             return;
         }
-        this.setState({disabledSaveButton:true});
+        this.setState({disabledSaveButton: true});
         this.setState({editMode: false});
         if (this.state.quizChange) {
             const quiz = {
@@ -59,23 +58,22 @@ class Quiz extends React.Component {
             };
             await putQuiz(quiz).then(val => {
                 console.log(val)
-                let dates =  new Date(val.last_edited_date);
-                this.setState({last_edited_date:dates.toLocaleString()})
+                let dates = new Date(val.last_edited_date);
+                this.setState({last_edited_date: dates.toLocaleString()})
             });
             this.setState({quizChange: false})
         }
-        this.setState({disabledSaveButton:false});
+        this.setState({disabledSaveButton: false});
     };
-componentDidMount() {
-    console.log(this.props.value.last_edited_date)
-    let date =  new Date(this.props.value.last_edited_date);
-   this.setState({last_edited_date:date.toLocaleString()})
-}
+
+    componentDidMount() {
+        let date = new Date(this.props.value.last_edited_date);
+        this.setState({last_edited_date: date.toLocaleString()})
+    }
 
 
     render() {
-        console.log(this.state.last_edited_date);
-        if(this.state.last_edited_date===null){
+        if (this.state.last_edited_date === null) {
             return ''
         }
         if (!this.state.editMode) {

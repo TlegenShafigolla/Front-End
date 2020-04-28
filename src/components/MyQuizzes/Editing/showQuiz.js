@@ -48,7 +48,6 @@ class ShowQuiz extends React.Component {
 
 
     render() {
-        console.log(this.props.last_edited_date)
         return (<div className={s.root}>
             <CardContent className={s.CardContent}>
                 <Typography variant="h5" component="h2">
