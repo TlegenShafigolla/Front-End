@@ -1,4 +1,6 @@
-export  function registration(name,surname,password,occupation,email) {
+import {api} from "../../App"
+
+export function registration(name,surname,password,occupation,email) {
     const requestOptions = {
         method: 'POST',
         headers: {
@@ -7,14 +9,13 @@ export  function registration(name,surname,password,occupation,email) {
         },
         body: JSON.stringify({
             email: email,
-            name:name,
-            password:password,
-            occupation:occupation,
-            surname:surname
+            name: name,
+            password: password,
+            occupation: occupation,
+            surname: surname
         }),
     };
-    const api = 'http://35.228.95.87:7000';
-    return fetch(`${api}/registration`, requestOptions).then(res => {
+    return fetch(`${api}/register`, requestOptions).then(res => {
         return res.json();
     })
 }

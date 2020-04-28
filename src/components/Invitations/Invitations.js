@@ -38,7 +38,7 @@ class Invitations extends React.Component{
         let pendingInvitation = this.state.pending;
         pendingInvitation.splice(index, 1);
         this.setState({pending: pendingInvitation});
-        deleteInvitations(invitation.id);
+        deleteInvitations(invitation._id);
     };
 
     render() {

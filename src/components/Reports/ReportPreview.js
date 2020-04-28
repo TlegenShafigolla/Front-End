@@ -12,13 +12,13 @@ class ReportPreview extends React.Component{
             <div className={s.root}>
                 <CardContent className={s.CardContent}>
                     <Typography variant="h5" component="h2" >
-                        {this.props.val.quiz_name}  </Typography>
-                    <Typography className={s.title} color="textSecondary" gutterBottom> {this.props.val.description} </Typography>
+                        {this.props.val.quiz.quiz_name}  </Typography>
+                    <Typography className={s.title} color="textSecondary" gutterBottom> {this.props.val.quiz.description} </Typography>
                     <Typography className={s.pos}
                                 color="textSecondary"> {this.props.val.email} </Typography>
                     <Typography variant="body2"
-                                component="p"> {this.props.val.end_date} </Typography>
-                    <Link to={'/admin/reports/' + this.props.val.id.toString()}>
+                                component="p"> {this.props.val.session.end_date} </Typography>
+                    <Link to={'/admin/reports/' + this.props.val._id.toString()}>
                         <Button color="primary">
                             Check
                         </Button>

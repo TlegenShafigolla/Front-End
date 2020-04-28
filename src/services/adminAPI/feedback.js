@@ -1,4 +1,5 @@
 import {getSession} from "../GetSession";
+import {api} from "../../App"
 
 export default function postFeedback(feedback) {
     const authToken = `Bearer ${getSession()}`;
@@ -14,7 +15,6 @@ export default function postFeedback(feedback) {
         }),
     };
 
-    const api = 'http://35.228.95.87:7000';
     return fetch(`${api}/feedback`, requestOptions).then(res => {
         return res.json();
     });

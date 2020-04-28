@@ -1,7 +1,7 @@
 import React from "react";
 import ShowQuiz from "../Editing/showQuiz";
 import EditDescription from "../Editing/editDescription";
-import {deleteQuiz, postQuiz} from "../../../services/adminAPI/quiz";
+import {deleteQuiz, putQuiz} from "../../../services/adminAPI/quiz";
 import {dark} from "@material-ui/core/styles/createPalette";
 import home from "../../../pages/home";
 import {ServerTimeToUserTime} from "../../../function/ServerTimeToUserTime";
@@ -11,7 +11,7 @@ class Quiz extends React.Component {
         super(props);
         this.state = {
             editMode: false,
-            id: this.props.value.id,
+            id: this.props.value._id,
             description: this.props.value.description,
             quiz_name: this.props.value.quiz_name,
             quizChange: false,
@@ -50,20 +50,18 @@ class Quiz extends React.Component {
         this.setState({editMode: false});
         if (this.state.quizChange) {
             const quiz = {
-                id: this.state.id,
+                _id: this.state.id,
                 quiz_name: this.state.quiz_name,
                 description: this.state.description,
                 mixed: this.state.mixed,
                 points: this.state.points,
                 showResults: this.state.showResults,
-                last_edited_date: this.state.last_edited_date,
             };
-                await postQuiz(quiz).then(val => {console.log(val);
-
-                    let dates =  new Date(val.last_edited_date);
-                    ServerTimeToUserTime(dates);
-                    this.setState({last_edited_date:dates.toLocaleString()})
-                });
+            await putQuiz(quiz).then(val => {
+                let dates =  new Date(val.last_edited_date);
+                ServerTimeToUserTime(dates);
+                this.setState({last_edited_date:dates.toLocaleString()})
+            });
             this.setState({quizChange: false})
         }
         this.setState({disabledSaveButton:false});

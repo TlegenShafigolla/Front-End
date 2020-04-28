@@ -1,12 +1,10 @@
-//
-
+import {api} from "../../App"
 
 export function getInvitation(link) {
     const requestOptions = {
         method: 'GET',
     };
-    const api = 'http://35.228.95.87:7000';
-    const json = fetch(`${api}/invitation/${link}`, requestOptions).then(res => {
+    const json = fetch(`${api}/quiz/invitation/${link}`, requestOptions).then(res => {
         return res.json();
     });
     return json;
@@ -23,8 +21,7 @@ export  function postInvitation(link, email) {
             email: email
         }),
     };
-    const api = 'http://35.228.95.87:7000';
-    return fetch(`${api}/invitation/${link}`, requestOptions).then(res => {
+    return fetch(`${api}/quiz/invitation/${link}`, requestOptions).then(res => {
         return res.json();
     })
 }

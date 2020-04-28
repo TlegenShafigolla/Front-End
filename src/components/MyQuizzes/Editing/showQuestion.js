@@ -8,6 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 
 class ShowQuestion extends React.Component {
     render() {
+        console.log(this.props.answers);
         return (
             <div className={s.question} id={this.props.value.order_id.toString()}>
                 <div className={s.questioninfo}>

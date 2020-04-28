@@ -1,8 +1,8 @@
 import React from "react";
 import ShowQuestion from "./showQuestion";
 import EditQuestion from "./editQuestion";
-import getAnswers, {deleteAnswers, postAnswers} from "../../../services/adminAPI/answers";
-import {deleteQuestions, postQuestions} from "../../../services/adminAPI/questions";
+import {getAnswers, deleteAnswers, postAnswers, putAnswers} from "../../../services/adminAPI/answers";
+import {deleteQuestions, putQuestions} from "../../../services/adminAPI/questions";
 import makeID from "../../../services/utils";
 import Snackbar from "@material-ui/core/Snackbar";
 import s from './css/editQuestion.module.css'
@@ -13,8 +13,8 @@ class Question extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            editMode: this.props.value.question === '',
-            id: this.props.value.id,
+            editMode: this.props.value.question === "New question",
+            id: this.props.value._id,
             quiz_id: this.props.value.quiz_id,
             answerType: this.props.value.type,
             question: this.props.value.question,
@@ -71,10 +71,10 @@ class Question extends React.Component {
         this.setState({editMode: true});
     };
 
-    deleteAnswerOnClick =async (index) => {
+    deleteAnswerOnClick = (index) => {
         let answers = this.state.answers;
-        if (this.state.id !== undefined && answers[index].id !== undefined) {
-           await deleteAnswers(this.state.id, answers[index].id);
+        if (this.state.id !== undefined && answers[index]._id !== undefined) {
+            deleteAnswers(this.state.id, answers[index]._id);
         }
         let index_key = this.state.index_key;
         for (let i = index; i < answers.length - 1; i++) {
@@ -89,7 +89,7 @@ class Question extends React.Component {
     deleteQuestionOnClick = () => {
         if (this.state.id !== undefined) {
             deleteQuestions(this.state.quiz_id, this.state.id).then(val => {
-                    if (val.Status === 'Success') {
+                    if (val._id !== undefined) {
                         this.props.deleteQuestion(this.props.value.order_id);
                     }
                 }
@@ -104,8 +104,6 @@ class Question extends React.Component {
             return;
         }
         this.setState({disableSaveButton: true});
-        console.log(this.state.answerType)
-
         const answer = this.state.answers;
         let wrong = 0;
         let empty = 0;
@@ -123,7 +121,6 @@ class Question extends React.Component {
                 }
             }
         }
-
         let corrects = answer.length - wrong;
         if (this.state.question !== '') {
             if (empty === 0) {
@@ -133,20 +130,28 @@ class Question extends React.Component {
                         for (let i in answers) {
                             answers[i].question_id = this.state.id.toString();
                         }
-                        await postAnswers(this.state.id, this.state.answers).then(json => console.log(json));
-                        await getAnswers(this.state.id).then(val => this.setState({answers: val.answers}));
+                        await Promise.all(this.state.answers.map(async value => {
+                            if('_id' in value){
+                                await putAnswers(this.state.id, value);
+                            } else{
+                                await postAnswers(this.state.id, value);
+                            }
+                        })).then((ret) => {
+                            getAnswers(this.state.id).then(val => {
+                                this.setState({answers: val.answers})});
+                        });
                         this.setState({answersChanged: false});
                     }
                     if (this.state.questionChanged) {
                         const question = {
-                            id: this.state.id,
+                            _id: this.state.id,
                             quiz_id: this.state.quiz_id,
                             order_id: this.props.value.order_id,
                             type: this.state.answerType,
                             question: this.state.question,
                             image: this.state.image,
                         };
-                        await postQuestions(this.state.quiz_id, [question]);
+                        await putQuestions(this.state.quiz_id, question);
                         this.setState({questionChanged: false});
                         this.props.setQuestion(this.props.value.order_id, question);
                     }
@@ -163,6 +168,7 @@ class Question extends React.Component {
 
         this.setState({disableSaveButton: false});
     };
+
     onChangeAnswer = (event) => {
         let answers = this.state.answers;
         answers[Number(event.target.id)].answer = event.target.value;
@@ -170,9 +176,11 @@ class Question extends React.Component {
         this.setState({answersChanged: true});
         this.setState({errorAnswer: false});
     };
+
     onClose = () => {
         this.setState({dialogOpenAnswer: false})
     };
+
     onChangeQuestion = (event) => {
         this.setState({question: event.target.value});
         this.setState({questionChanged: true});
@@ -191,7 +199,6 @@ class Question extends React.Component {
         let index_key = this.state.index_key;
         index_key[answers.length - 1] = makeID(8);
         this.setState({index_key: index_key});
-        console.log(answers)
     };
     onClick = () => {
         this.setState({dialogOpenAnswer: false})
