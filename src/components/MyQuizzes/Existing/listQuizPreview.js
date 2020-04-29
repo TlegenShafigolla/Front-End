@@ -12,15 +12,15 @@ class ListQuizPreview extends React.Component {
         this.state = {
             quizzes: null,
             editMode: false,
-            disabledButton:false
+            disabledButton: false
         };
     }
 
     addNewQuizz = async () => {
-        if(this.state.disabledButton){
+        if (this.state.disabledButton) {
             return '';
         }
-        this.setState({disabledButton:true})
+        this.setState({disabledButton: true})
         const quizzes = this.state.quizzes;
         const newQuiz = {
             quiz_name: "Quizname",
@@ -34,13 +34,13 @@ class ListQuizPreview extends React.Component {
             this.props.history.push(`/admin/quizzes/edit/${val._id}`);
         });
         this.setState({quizzes: quizzes})
-        this.setState({disabledButton:false})
+        this.setState({disabledButton: false})
     };
 
     deleteQuiz = (quiz_id) => {
         let quizzes = this.state.quizzes;
         for (let i = 0; i < quizzes.length; i++) {
-            if(quiz_id === quizzes[i]._id){
+            if (quiz_id === quizzes[i]._id) {
                 quizzes.splice(i, 1);
                 break;
             }
@@ -49,7 +49,7 @@ class ListQuizPreview extends React.Component {
     };
 
     render() {
-        if(this.state.quizzes === null){
+        if (this.state.quizzes === null) {
             return (
                 <div className={s.CircularProgress}>
                     <CircularProgress size={70}/>
@@ -64,7 +64,7 @@ class ListQuizPreview extends React.Component {
                             <Quiz key={val._id} id={index}
                                   value={val}
                                   deleteQuiz={this.deleteQuiz}
-                                   />) : ' '}
+                            />) : ' '}
                     </div>
                     <IconButton color="primary" onClick={this.addNewQuizz}>
                         <AddIcon fontSize='large'/>

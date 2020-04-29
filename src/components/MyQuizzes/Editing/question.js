@@ -8,6 +8,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import s from './css/editQuestion.module.css'
 import Typography from "@material-ui/core/Typography";
 import Alert from "@material-ui/lab/Alert";
+
 class Question extends React.Component {
     constructor(props) {
         super(props);
@@ -121,7 +122,7 @@ class Question extends React.Component {
             }
         }
         let corrects = answer.length - wrong;
-        if (this.state.question !== ''&& this.state.question !== ' ') {
+        if (this.state.question !== '' && this.state.question !== ' ') {
             if (empty === 0) {
                 if (this.state.answerType === 'MULTIPLE CHOICE' ? corrects > 0 && wrong > 0 : wrong === 0) {
                     if (this.state.answersChanged) {
@@ -130,14 +131,15 @@ class Question extends React.Component {
                             answers[i].question_id = this.state.id.toString();
                         }
                         await Promise.all(this.state.answers.map(async value => {
-                            if('_id' in value){
+                            if ('_id' in value) {
                                 await putAnswers(this.state.id, value);
-                            } else{
+                            } else {
                                 await postAnswers(this.state.id, value);
                             }
                         })).then((ret) => {
                             getAnswers(this.state.id).then(val => {
-                                this.setState({answers: val.answers})});
+                                this.setState({answers: val.answers})
+                            });
                         });
                         this.setState({answersChanged: false});
                     }
@@ -230,7 +232,8 @@ class Question extends React.Component {
                     autoHideDuration={6000}
                     onClose={this.onClose}
                 >
-                    <Alert variant='filled' severity="error"><Typography>There must be at least 1 correct and incorrect answer</Typography></Alert>
+                    <Alert variant='filled' severity="error"><Typography>There must be at least 1 correct and incorrect
+                        answer</Typography></Alert>
                 </Snackbar>
             </div>
         } else {

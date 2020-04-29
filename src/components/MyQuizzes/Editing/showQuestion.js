@@ -10,23 +10,24 @@ class ShowQuestion extends React.Component {
     render() {
         return (
             <div className={s.question} id={this.props.value.order_id.toString()}>
-                <div className={s.questioninfo}  >
-                    <div className={s.questionOrder} onClick={this.props.editOnClick}>{this.props.value.order_id}.</div>
-                    <div className={s.questionField}>
-                        <Typography onClick={this.props.editOnClick} variant="body1" gutterBottom>
-                            {this.props.question === ' ' ? 'New question' : this.props.question}
-                        </Typography>
+                <div onClick={this.props.editOnClick}>
+                    <div className={s.questioninfo}>
+                        <div className={s.questionOrder}>{this.props.value.order_id}.</div>
+                        <div className={s.questionField}>
+                            <Typography variant="body1" gutterBottom>
+                                {this.props.question === ' ' ? 'New question' : this.props.question}
+                            </Typography>
+                        </div>
+                    </div>
+
+                    <div className={s.answerType}>
+                        <ShowAnswer
+                            key={this.props.question_id}
+                            question_id={this.props.question_id}
+                            {...this.props}
+                        />
                     </div>
                 </div>
-
-                <div className={s.answerType} onClick={this.props.editOnClick}>
-                    <ShowAnswer
-                        key={this.props.question_id}
-                        question_id={this.props.question_id}
-                        {...this.props}
-                    />
-                </div>
-
                 <div className={s.Button}>
                     <IconButton aria-label="delete" onClick={this.props.deleteQuestionOnClick}>
                         <DeleteIcon/>

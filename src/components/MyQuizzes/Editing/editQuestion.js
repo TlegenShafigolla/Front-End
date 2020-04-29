@@ -8,6 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import ChangeTypeDialog from "./AnswerTypes/changeTypeDialog";
+import $ from "jquery";
 
 class EditQuestion extends React.Component {
     constructor(props) {
@@ -30,7 +31,7 @@ class EditQuestion extends React.Component {
         }
         this.setState({isMultipleChoice: !this.state.isMultipleChoice});
         let newType = this.state.answerType === 'MULTIPLE CHOICE' ? 'FILL THE BLANK' : 'MULTIPLE CHOICE';
-        this.setState({answerType:newType})
+        this.setState({answerType: newType})
         this.props.changeType(newType);
 
     };
@@ -44,6 +45,18 @@ class EditQuestion extends React.Component {
     };
 
     render() {
+        let order = this.state.order;
+        const Save = this.props.saveOnClick;
+        $(function ($) {
+            $(document).mouseup(function (e) {
+                let div = $("#" + order);
+                if (!div.is(e.target)
+                    && div.has(e.target).length === 0) {
+                    onclick = Save
+                }
+            });
+
+        });
         return (<div>
                 <div className={s.question} id={this.state.order}>
                     <div className={s.questioninfo}>

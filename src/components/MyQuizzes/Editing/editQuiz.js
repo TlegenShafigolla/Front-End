@@ -38,12 +38,13 @@ class editQuiz extends React.Component {
         this.setState({questions: questions});
     };
 
+
     addNewQuestion = async () => {
         if (this.state.disableAddButton) {
             return;
         }
         this.setState({disableAddButton: true});
-       const  question = {
+        const question = {
             order_id: this.state.questions.length + 1,
             quiz_id: this.state.quiz_id,
             image: null,
@@ -84,6 +85,7 @@ class editQuiz extends React.Component {
             });
         }
     }
+
     pointsChecked = (event) => {
         this.setState({points: event});
         this.setState({quizChanges: true});
@@ -98,6 +100,7 @@ class editQuiz extends React.Component {
     };
 
     render() {
+
         if (this.state.questions === null) {
             return (
                 <div className={s.CircularProgress}>
@@ -105,6 +108,7 @@ class editQuiz extends React.Component {
                 </div>
             );
         }
+
         return (
             <div className={s.body}>
                 <div className={s.ArrowButton}>
@@ -130,7 +134,7 @@ class editQuiz extends React.Component {
                     </div>
                     <div className={s.question}>
                         {this.state.questions === undefined || this.state.questions === null ? ' ' :
-                            this.state.questions.map(val => <Question
+                            this.state.questions.map((val, index) => <Question
                                 key={val._id}
                                 value={val}
                                 point={this.state.points}

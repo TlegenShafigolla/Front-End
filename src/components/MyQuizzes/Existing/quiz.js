@@ -64,7 +64,8 @@ class Quiz extends React.Component {
         }
         this.setState({disabledSaveButton: false});
     };
-        render() {
+
+    render() {
 
         if (!this.state.editMode) {
             return (<div>
