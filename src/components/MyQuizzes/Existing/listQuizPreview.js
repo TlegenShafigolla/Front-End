@@ -12,10 +12,15 @@ class ListQuizPreview extends React.Component {
         this.state = {
             quizzes: null,
             editMode: false,
+            disabledButton:false
         };
     }
 
     addNewQuizz = async () => {
+        if(this.state.disabledButton){
+            return '';
+        }
+        this.setState({disabledButton:true})
         const quizzes = this.state.quizzes;
         const newQuiz = {
             quiz_name: "Quizname",
@@ -29,6 +34,7 @@ class ListQuizPreview extends React.Component {
             this.props.history.push(`/admin/quizzes/edit/${val._id}`);
         });
         this.setState({quizzes: quizzes})
+        this.setState({disabledButton:false})
     };
 
     deleteQuiz = (quiz_id) => {

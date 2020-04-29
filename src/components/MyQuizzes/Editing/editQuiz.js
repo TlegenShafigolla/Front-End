@@ -42,7 +42,7 @@ class editQuiz extends React.Component {
         if (this.state.disableAddButton) {
             return;
         }
-        await this.setState({disableAddButton: true});
+        this.setState({disableAddButton: true});
        const  question = {
             order_id: this.state.questions.length + 1,
             quiz_id: this.state.quiz_id,

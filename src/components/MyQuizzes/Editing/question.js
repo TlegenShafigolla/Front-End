@@ -121,7 +121,7 @@ class Question extends React.Component {
             }
         }
         let corrects = answer.length - wrong;
-        if (this.state.question !== '') {
+        if (this.state.question !== ''&& this.state.question !== ' ') {
             if (empty === 0) {
                 if (this.state.answerType === 'MULTIPLE CHOICE' ? corrects > 0 && wrong > 0 : wrong === 0) {
                     if (this.state.answersChanged) {
