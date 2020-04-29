@@ -27,15 +27,12 @@ class Quiz extends React.Component {
     deleteQuizOnClick = async () => {
         if (this.state.id !== undefined) {
             await deleteQuiz(this.state.id)
-            console.log(this.state.id)
         }
         this.props.deleteQuiz(this.props.value._id)
-        console.log(this.props.value._id)
     };
     changeDescription = (event) => {
         this.setState({description: event.target.value});
         this.setState({quizChange: true})
-
     };
     changeQuizName = (event) => {
         this.setState({quiz_name: event.target.value});

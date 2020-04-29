@@ -38,19 +38,19 @@ class editQuiz extends React.Component {
         this.setState({questions: questions});
     };
 
-    addNewQuestion = () => {
+    addNewQuestion = async () => {
         if (this.state.disableAddButton) {
             return;
         }
-        this.setState({disableAddButton: true});
-        const question = {
+        await this.setState({disableAddButton: true});
+       const  question = {
             order_id: this.state.questions.length + 1,
             quiz_id: this.state.quiz_id,
             image: null,
             question: " ",
             type: "FILL THE BLANK"
         };
-        postQuestions(this.state.quiz_id, [question]).then(ret => {
+        await postQuestions(this.state.quiz_id, [question]).then(ret => {
             const questions = this.state.questions;
             questions.push(ret.created[0]);
             this.setState({questions: questions});
