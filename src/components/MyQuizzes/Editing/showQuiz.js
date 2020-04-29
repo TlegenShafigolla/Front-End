@@ -66,11 +66,6 @@ class ShowQuiz extends React.Component {
                            <SendIcon />
                         </IconButton>
                     </Tooltip>
-                    <Tooltip title='Edit'>
-                        <IconButton color="primary" onClick={this.props.editMode}>
-                            <EditIcon />
-                        </IconButton>
-                    </Tooltip>
                     <Tooltip title='Delete'>
                         <IconButton size='small'
                                     onClick={this.state.quiz_id === undefined ? this.props.deleteQuizOnClick : this.openDeleteDialog}

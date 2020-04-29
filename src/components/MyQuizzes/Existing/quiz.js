@@ -1,17 +1,12 @@
 import React from "react";
 import ShowQuiz from "../Editing/showQuiz";
-import EditDescription from "../Editing/editDescription";
 import {deleteQuiz, putQuiz} from "../../../services/adminAPI/quiz";
-import {dark} from "@material-ui/core/styles/createPalette";
-import home from "../../../pages/home";
-import {ServerTimeToUserTime} from "../../../function/ServerTimeToUserTime";
 
 class Quiz extends React.Component {
     constructor(props) {
         super(props);
         let date = new Date(this.props.value.last_edited_date);
         this.state = {
-            editMode: false,
             id: this.props.value._id,
             description: this.props.value.description,
             quiz_name: this.props.value.quiz_name,
@@ -30,69 +25,20 @@ class Quiz extends React.Component {
         }
         this.props.deleteQuiz(this.props.value._id)
     };
-    changeDescription = (event) => {
-        this.setState({description: event.target.value});
-        this.setState({quizChange: true})
-    };
-    changeQuizName = (event) => {
-        this.setState({quiz_name: event.target.value});
-        this.setState({quizChange: true})
-    };
-    editMode = () => {
-        this.setState({editMode: true})
-    };
-    saveButton = async () => {
-        if (this.state.disabledSaveButton) {
-            return;
-        }
-        this.setState({disabledSaveButton: true});
-        this.setState({editMode: false});
-        if (this.state.quizChange) {
-            const quiz = {
-                _id: this.state.id,
-                quiz_name: this.state.quiz_name,
-                description: this.state.description,
-                mixed: this.state.mixed,
-                points: this.state.points,
-                showResults: this.state.showResults,
-            };
-            await putQuiz(quiz).then(val => {
-                let dates = new Date(val.last_edited_date);
-                this.setState({last_edited_date: dates.toLocaleString()})
-            });
-            this.setState({quizChange: false})
-        }
-        this.setState({disabledSaveButton: false});
-    };
+
 
     render() {
 
-        if (!this.state.editMode) {
-            return (<div>
-                    <ShowQuiz
-                        quiz_id={this.state.id}
-                        deleteQuizOnClick={this.deleteQuizOnClick}
-                        editMode={this.editMode}
-                        quiz_name={this.state.quiz_name}
-                        description={this.state.description}
-                        last_edited_date={this.state.last_edited_date}
-                        {...this.props}
-                    />
-                </div>
-            );
-        } else {
-            return (
-                <EditDescription
-                    quiz_name={this.state.quiz_name}
-                    description={this.state.description}
-                    changeDescription={this.changeDescription}
-                    changeQuizName={this.changeQuizName}
-                    saveButton={this.saveButton}
-                    last_edited_date={this.state.last_edited_date}
-                    {...this.props}
-                />
-            )
-        }
+        return (
+            <ShowQuiz
+                quiz_id={this.state.id}
+                deleteQuizOnClick={this.deleteQuizOnClick}
+                quiz_name={this.state.quiz_name}
+                description={this.state.description}
+                last_edited_date={this.state.last_edited_date}
+                {...this.props}
+            />
+        );
     }
 }
 

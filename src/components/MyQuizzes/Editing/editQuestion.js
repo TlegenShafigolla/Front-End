@@ -9,6 +9,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import ChangeTypeDialog from "./AnswerTypes/changeTypeDialog";
 import $ from "jquery";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 class EditQuestion extends React.Component {
     constructor(props) {
@@ -109,6 +110,9 @@ class EditQuestion extends React.Component {
                         <Button color="primary" className={s.saveButton} onClick={this.props.saveOnClick}>
                             Save
                         </Button>
+                        <IconButton aria-label="delete" onClick={this.props.deleteQuestionOnClick}>
+                            <DeleteIcon/>
+                        </IconButton>
                     </div>
                     <ChangeTypeDialog openDialog={this.state.openChangeTypeDialog} onClose={this.dialog}/>
                 </div>

@@ -226,6 +226,7 @@ class Question extends React.Component {
                     question={this.state.question}
                     question_id={this.state.id}
                     index_key={this.state.index_key}
+                    deleteQuestionOnClick={this.deleteQuestionOnClick}
                     {...this.props}/>
                 <Snackbar
                     open={this.state.dialogOpenAnswer}

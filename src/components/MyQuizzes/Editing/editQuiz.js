@@ -12,6 +12,7 @@ import $ from "jquery";
 import {putQuiz} from "../../../services/adminAPI/quiz";
 import Typography from "@material-ui/core/Typography";
 import {CircularProgress} from "@material-ui/core";
+import TextField from "@material-ui/core/TextField";
 
 class editQuiz extends React.Component {
     constructor(props) {
@@ -29,6 +30,9 @@ class editQuiz extends React.Component {
             points: null,
             quizChanges: false,
             disableAddButton: false,
+            editDescription: false,
+            editQuestion: false,
+            quizChange: false
         };
     }
 
@@ -68,6 +72,14 @@ class editQuiz extends React.Component {
         postQuestions(this.state.quiz_id, questions)
         this.setState({questions: questions});
     };
+    changeDescription = (event) => {
+        this.setState({description: event.target.value.trim()});
+        this.setState({quizChange: true})
+    };
+    changeQuizName = (event) => {
+        this.setState({quiz_name: event.target.value.trim()});
+        this.setState({quizChange: true})
+    };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevState.quizChanges !== this.state.quizChanges) {
@@ -80,10 +92,11 @@ class editQuiz extends React.Component {
                 showResults: this.state.showResults,
                 last_edited_date: Date
             };
-            putQuiz(quiz).then(value => {
+            putQuiz(quiz).then(() => {
                 this.setState({quizChanges: false});
             });
         }
+
     }
 
     pointsChecked = (event) => {
@@ -98,6 +111,41 @@ class editQuiz extends React.Component {
         this.setState({showResults: event});
         this.setState({quizChanges: true})
     };
+    editQuestion = () => {
+        this.setState({editQuestion: true})
+    };
+    onblur = async () => {
+        if (this.state.quizChange) {
+            const quiz = {
+                _id: this.state.quiz_id,
+                quiz_name: this.state.quiz_name,
+                description: this.state.description,
+                mixed: this.state.mixed,
+                points: this.state.points,
+                showResults: this.state.showResults,
+                last_edited_date: Date
+            };
+            await putQuiz(quiz);
+            this.setState({quizChange: false});
+        }
+        this.setState({editQuestion: false})
+    };
+    onBlurDescription = async () => {
+        if (this.state.quizChange) {
+            const quiz = {
+                _id: this.state.quiz_id,
+                quiz_name: this.state.quiz_name,
+                description: this.state.description,
+                mixed: this.state.mixed,
+                points: this.state.points,
+                showResults: this.state.showResults,
+                last_edited_date: Date
+            };
+            await putQuiz(quiz);
+            this.setState({quizChange: false});
+        }
+        this.setState({editDescription: false})
+    };
 
     render() {
 
@@ -108,7 +156,6 @@ class editQuiz extends React.Component {
                 </div>
             );
         }
-
         return (
             <div className={s.body}>
                 <div className={s.ArrowButton}>
@@ -120,7 +167,18 @@ class editQuiz extends React.Component {
                 </div>
                 <div className={s.edit}>
                     <div className={s.QuizName}>
-                        <Typography variant='h4'> {this.state.quiz_name}</Typography>
+                        {this.state.editQuestion ?
+                            <TextField onBlur={this.onblur} onChange={this.changeQuizName} autoFocus
+                                       variant='outlined' margin='dense'
+                                       defaultValue={this.state.quiz_name}/> :
+                            <Typography onClick={this.editQuestion}
+                                        variant='h4'> {this.state.quiz_name}</Typography>}
+                        {this.state.editDescription ?
+                            <TextField onChange={this.changeDescription} onBlur={this.onBlurDescription}
+                                       defaultValue={this.state.description} autoFocus variant='outlined'
+                                       margin='dense'/> :
+                            <Typography onClick={() => this.setState({editDescription: true})}
+                                        variant='h5'>{this.state.description}</Typography>}
                     </div>
                     <div className={s.settings}>
                         <EditQuizSettings pointsChecked={this.pointsChecked}
@@ -143,7 +201,8 @@ class editQuiz extends React.Component {
                             />)}
                     </div>
                     <div>
-                        <IconButton color='primary' size='medium' className={s.addbutton} onClick={this.addNewQuestion}>
+                        <IconButton color='primary' size='medium' className={s.addbutton}
+                                    onClick={this.addNewQuestion}>
                             <AddIcon fontSize='large'/>
                         </IconButton>
                     </div>
