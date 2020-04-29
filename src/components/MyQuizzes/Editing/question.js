@@ -170,7 +170,7 @@ class Question extends React.Component {
 
     onChangeAnswer = (event) => {
         let answers = this.state.answers;
-        answers[Number(event.target.id)].answer = event.target.value;
+        answers[Number(event.target.id)].answer = event.target.value.trim();
         this.setState({answers: answers});
         this.setState({answersChanged: true});
         this.setState({errorAnswer: false});
@@ -181,7 +181,8 @@ class Question extends React.Component {
     };
 
     onChangeQuestion = (event) => {
-        this.setState({question: event.target.value});
+
+        this.setState({question: event.target.value.trim()});
         this.setState({questionChanged: true});
         this.setState({errorQuestion: false})
     };

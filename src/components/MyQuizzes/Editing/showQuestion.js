@@ -10,16 +10,16 @@ class ShowQuestion extends React.Component {
     render() {
         return (
             <div className={s.question} id={this.props.value.order_id.toString()}>
-                <div className={s.questioninfo}  onClick={this.props.editOnClick}>
-                    <div className={s.questionOrder}>{this.props.value.order_id}.</div>
+                <div className={s.questioninfo}  >
+                    <div className={s.questionOrder} onClick={this.props.editOnClick}>{this.props.value.order_id}.</div>
                     <div className={s.questionField}>
-                        <Typography variant="body1" gutterBottom>
+                        <Typography onClick={this.props.editOnClick} variant="body1" gutterBottom>
                             {this.props.question === ' ' ? 'New question' : this.props.question}
                         </Typography>
                     </div>
                 </div>
 
-                <div className={s.answerType}>
+                <div className={s.answerType} onClick={this.props.editOnClick}>
                     <ShowAnswer
                         key={this.props.question_id}
                         question_id={this.props.question_id}
@@ -28,9 +28,6 @@ class ShowQuestion extends React.Component {
                 </div>
 
                 <div className={s.Button}>
-                    <IconButton color="primary" onClick={this.props.editOnClick}>
-                        <EditIcon/>
-                    </IconButton>
                     <IconButton aria-label="delete" onClick={this.props.deleteQuestionOnClick}>
                         <DeleteIcon/>
                     </IconButton>
