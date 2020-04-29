@@ -27,7 +27,7 @@ class ShowQuiz extends React.Component {
 
     onClickDelete = (action) => {
         this.setState({openDeleteQuizDialog: false});
-        if(!action){
+        if (!action) {
             return;
         }
         this.props.deleteQuizOnClick();
@@ -46,24 +46,23 @@ class ShowQuiz extends React.Component {
     };
 
 
-
     render() {
         return (<div className={s.root}>
             <CardContent className={s.CardContent}>
                 <Typography variant="h5" component="h2">
                     {this.props.quiz_name}  </Typography>
-                <Typography className={s.title}  gutterBottom> {this.props.description} </Typography>
-                <Typography className={s.pos} > {this.props.value.questions_count.toString()} </Typography>
+                <Typography className={s.title} gutterBottom> {this.props.description} </Typography>
+                <Typography className={s.pos}> {this.props.value.questions_count.toString()} </Typography>
                 <Typography variant="body2"
                             component="p"
                             color="textSecondary"
-                            >Version: {this.props.last_edited_date} </Typography>
+                >Version: {this.props.last_edited_date} </Typography>
             </CardContent>
             <CardActions className={s.CardActions}>
                 <div className={s.ButtonPanel}>
                     <Tooltip title='Invite'>
                         <IconButton color="primary" onClick={this.inviteDialog}>
-                           <SendIcon />
+                            <SendIcon/>
                         </IconButton>
                     </Tooltip>
                     <Tooltip title='Delete'>
@@ -80,7 +79,8 @@ class ShowQuiz extends React.Component {
                     </IconButton>
                 </Link>
             </CardActions>
-            <InviteDialog openDialog={this.state.openInviteDialog} onClose={this.onClickInvite} quiz_id={this.state.quiz_id}/>
+            <InviteDialog openDialog={this.state.openInviteDialog} onClose={this.onClickInvite}
+                          quiz_id={this.state.quiz_id}/>
             <DeleteQuizDialog openDialog={this.state.openDeleteQuizDialog} onClose={this.onClickDelete}/>
         </div>);
     }

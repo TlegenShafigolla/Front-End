@@ -28,6 +28,7 @@ class Question extends React.Component {
             dialogOpenAnswer: false,
             errorQuestion: false,
             errorAnswer: false,
+            disabledDelete: false
         };
     }
 
@@ -86,9 +87,13 @@ class Question extends React.Component {
         this.setState({index_key: index_key});
     };
 
-    deleteQuestionOnClick = () => {
+    deleteQuestionOnClick = async () => {
+        if (this.state.disabledDelete) {
+            return ''
+        }
+        this.setState({disabledDelete: true});
         if (this.state.id !== undefined) {
-            deleteQuestions(this.state.quiz_id, this.state.id).then(val => {
+            await deleteQuestions(this.state.quiz_id, this.state.id).then(val => {
                     if (val._id !== undefined) {
                         this.props.deleteQuestion(this.props.value.order_id);
                     }
@@ -97,6 +102,8 @@ class Question extends React.Component {
         } else {
             this.props.deleteQuestion(this.props.value.order_id);
         }
+        this.setState({disabledDelete: false})
+
     };
 
     saveOnClick = async () => {

@@ -8,7 +8,6 @@ import {Link} from "react-router-dom";
 import Question from "./question";
 import Board from "../Existing/Board";
 import EditQuizSettings from "./editQuizSettings";
-import $ from "jquery";
 import {putQuiz} from "../../../services/adminAPI/quiz";
 import Typography from "@material-ui/core/Typography";
 import {CircularProgress} from "@material-ui/core";
@@ -32,7 +31,8 @@ class editQuiz extends React.Component {
             disableAddButton: false,
             editDescription: false,
             editQuestion: false,
-            quizChange: false
+            quizChange: false,
+            error: false,
         };
     }
 
@@ -69,15 +69,17 @@ class editQuiz extends React.Component {
         for (let i = order_id - 1; i < questions.length; i++) {
             questions[i].order_id = i + 1;
         }
-        postQuestions(this.state.quiz_id, questions)
+        postQuestions(this.state.quiz_id, questions);
         this.setState({questions: questions});
     };
     changeDescription = (event) => {
         this.setState({description: event.target.value.trim()});
+        this.setState({error: false});
         this.setState({quizChange: true})
     };
     changeQuizName = (event) => {
         this.setState({quiz_name: event.target.value.trim()});
+        this.setState({error: false});
         this.setState({quizChange: true})
     };
 
@@ -114,37 +116,43 @@ class editQuiz extends React.Component {
     editQuestion = () => {
         this.setState({editQuestion: true})
     };
-    onblur = async () => {
-        if (this.state.quizChange) {
-            const quiz = {
-                _id: this.state.quiz_id,
-                quiz_name: this.state.quiz_name,
-                description: this.state.description,
-                mixed: this.state.mixed,
-                points: this.state.points,
-                showResults: this.state.showResults,
-                last_edited_date: Date
-            };
-            await putQuiz(quiz);
-            this.setState({quizChange: false});
-        }
-        this.setState({editQuestion: false})
+    onblur = () => {
+        if (this.state.quiz_name !== '') {
+            this.setState({editQuestion: false});
+            if (this.state.quizChange) {
+                const quiz = {
+                    _id: this.state.quiz_id,
+                    quiz_name: this.state.quiz_name,
+                    description: this.state.description,
+                    mixed: this.state.mixed,
+                    points: this.state.points,
+                    showResults: this.state.showResults,
+                    last_edited_date: Date
+                };
+                putQuiz(quiz);
+                this.setState({quizChange: false});
+            }
+        } else
+            this.setState({error: true});
     };
-    onBlurDescription = async () => {
-        if (this.state.quizChange) {
-            const quiz = {
-                _id: this.state.quiz_id,
-                quiz_name: this.state.quiz_name,
-                description: this.state.description,
-                mixed: this.state.mixed,
-                points: this.state.points,
-                showResults: this.state.showResults,
-                last_edited_date: Date
-            };
-            await putQuiz(quiz);
-            this.setState({quizChange: false});
+    onBlurDescription = () => {
+        if (this.state.description !== '') {
+            this.setState({editDescription: false});
+            if (this.state.quizChange) {
+                const quiz = {
+                    _id: this.state.quiz_id,
+                    quiz_name: this.state.quiz_name,
+                    description: this.state.description,
+                    mixed: this.state.mixed,
+                    points: this.state.points,
+                    showResults: this.state.showResults,
+                    last_edited_date: Date
+                };
+                putQuiz(quiz);
+                this.setState({quizChange: false});
+            }
         }
-        this.setState({editDescription: false})
+        this.setState({error: true})
     };
 
     render() {
@@ -168,31 +176,33 @@ class editQuiz extends React.Component {
                 <div className={s.edit}>
                     <div className={s.QuizName}>
                         {this.state.editQuestion ?
-                            <TextField onBlur={this.onblur} onChange={this.changeQuizName} autoFocus
+                            <TextField error={this.state.error} onBlur={this.onblur} onChange={this.changeQuizName}
+                                       autoFocus
                                        variant='outlined' margin='dense'
                                        defaultValue={this.state.quiz_name}/> :
                             <Typography onClick={this.editQuestion}
                                         variant='h4'> {this.state.quiz_name}</Typography>}
                         {this.state.editDescription ?
-                            <TextField onChange={this.changeDescription} onBlur={this.onBlurDescription}
+                            <TextField error={this.state.error} onChange={this.changeDescription}
+                                       onBlur={this.onBlurDescription}
                                        defaultValue={this.state.description} autoFocus variant='outlined'
                                        margin='dense'/> :
                             <Typography onClick={() => this.setState({editDescription: true})}
-                                        variant='h5'>{this.state.description}</Typography>}
+                                        variant='h6'>{this.state.description}</Typography>}
                     </div>
                     <div className={s.settings}>
                         <EditQuizSettings pointsChecked={this.pointsChecked}
-                                          saveButton={this.saveButton}
                                           mixedChecked={this.mixedChecked}
                                           showResultsChecked={this.showResultsChecked}
                                           showResults={this.state.showResults}
                                           mixed={this.state.mixed}
                                           points={this.state.points}
+                                          lastedit={this.state.last_edited_date}
                         />
                     </div>
                     <div className={s.question}>
                         {this.state.questions === undefined || this.state.questions === null ? ' ' :
-                            this.state.questions.map((val, index) => <Question
+                            this.state.questions.map(val => <Question
                                 key={val._id}
                                 value={val}
                                 point={this.state.points}
@@ -221,6 +231,7 @@ class editQuiz extends React.Component {
 
     componentDidMount() {
         getQuestions(this.state.quiz_id).then(json => {
+            let date = new Date(json.last_edited_date);
             this.setState({
                 mixed: json.mixed,
                 showResults: json.showResults,
@@ -228,7 +239,7 @@ class editQuiz extends React.Component {
                 quiz_name: json.quiz_name,
                 description: json.description,
                 questions_count: json.questions_count,
-                last_edited_date: json.last_edited_date,
+                last_edited_date: date.toLocaleString(),
                 points: json.points
             });
         });

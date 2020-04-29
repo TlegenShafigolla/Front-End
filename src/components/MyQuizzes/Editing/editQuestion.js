@@ -114,7 +114,7 @@ class EditQuestion extends React.Component {
                             <DeleteIcon/>
                         </IconButton>
                     </div>
-                    <ChangeTypeDialog openDialog={this.state.openChangeTypeDialog} onClose={this.dialog}/>
+                    <ChangeTypeDialog openDialog={this.state.openChangeTypeDialog}  onClose={this.dialog}/>
                 </div>
 
             </div>
