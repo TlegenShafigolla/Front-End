@@ -22,7 +22,7 @@ export function postAnswers(question_id, answer) {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({answer}),
+        body: JSON.stringify(answer),
     };
 
     return fetch(`${api}/quiz/answer/${question_id}`, requestOptions).then(res => {
