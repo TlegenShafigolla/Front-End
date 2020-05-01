@@ -45,16 +45,28 @@ class InviteDialog extends React.Component {
     }
 
     checkTime = (event) => {
-        this.setState({checkTime: event.target.checked})
+        this.setState({checkTime: event.target.checked});
+        if (event.target.checked) {
+            $('.'+s.timer).show(500)
+        }else {
+            $('.'+s.timer).hide(500)
+        }
     };
     checkStart = (event) => {
         this.setState({checkStart: event.target.checked});
-        if(event.target.checked) {
-            $("startDate").show(500)
+        if (event.target.checked) {
+            $('.'+s.startDate).show(500)
+        }else {
+            $('.'+s.startDate).hide(500)
         }
     };
     checkEnd = (event) => {
-        this.setState({checkEnd: event.target.checked})
+        this.setState({checkEnd: event.target.checked});
+        if (event.target.checked) {
+            $('.'+s.endDate).show(500)
+        }else {
+            $('.'+s.endDate).hide(500)
+        }
     };
     handleCancel = () => {
         this.setState({email: null});
@@ -72,15 +84,9 @@ class InviteDialog extends React.Component {
         let time;
         let start;
         let end;
-        {
-            this.state.checkEnd ? end = this.state.end_date : end = null
-        }
-        {
-            this.state.checkStart ? start = this.state.start_date : start = null
-        }
-        {
-            this.state.checkTime ? time = this.state.time_limit : time = null
-        }
+        {this.state.checkEnd ? end = this.state.end_date : end = null};
+        {this.state.checkStart ? start = this.state.start_date : start = null};
+        {this.state.checkTime ? time = this.state.time_limit : time = null};
         if (this.state.name !== null && this.state.name !== '' && this.state.surname !== null && this.state.surname !== '' && email.test(this.state.email)) {
             const invite = {
                 name: this.state.name,
@@ -129,9 +135,9 @@ class InviteDialog extends React.Component {
     };
 
     componentDidMount() {
-        let date = new Date().toISOString().replace('Z', '');
-        this.setState({date: date})
-        this.setState({end_date: date})
+        let date = new Date().toISOString().replace('Z', '').split('.');
+        this.setState({date: date[0]});
+        this.setState({end_date: date[0]})
     }
 
     onChangeSurname = (event) => {
@@ -151,14 +157,14 @@ class InviteDialog extends React.Component {
     };
     onChangeStartDate = (event) => {
         let StartDate = new Date(event.target.value);
-        let newTime = UserTimeToServerTime(StartDate);
-        this.setState({start_date: newTime})
+        // let newTime = UserTimeToServerTime(StartDate);
+        // this.setState({start_date: newTime})
     };
 
     onChangeEndDate = (event) => {
-        let EndDate = new Date(event.target.value);
-        let newTime = UserTimeToServerTime(EndDate);
-        this.setState({end_date: newTime})
+        let EndDate = event.target.value.replace('T',' ');
+        console.log(EndDate)
+        // this.setState({end_date: newTime})
 
     };
     onChangeTimeLimit = (event) => {
@@ -266,7 +272,6 @@ class InviteDialog extends React.Component {
                                 <div id="time" className={s.timer}>
                                     <TextField
                                         fullWidth
-
                                         label="Time limit"
                                         type="time"
                                         defaultValue="00:00"

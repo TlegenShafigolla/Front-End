@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import s from '../components/Quiz/Quiz.module.css'
 import Button from "@material-ui/core/Button";
 import {NavLink} from "react-router-dom";
+
 class Quiz extends React.Component {
     constructor(props) {
         super(props);
@@ -15,13 +16,14 @@ class Quiz extends React.Component {
             statusEmail: null,
             session_id: localStorage.getItem('session_id'),
             questions: [],
-            error:false
+            error: false,
+            startTest: null
         }
     }
 
     onChangeEmail = (event) => {
         this.setState({email: event.target.value});
-        this.setState({error:false})
+        this.setState({error: false})
     };
 
     onClickContinue = async () => {
@@ -29,11 +31,12 @@ class Quiz extends React.Component {
         const email = this.state.email;
         await postInvitation(path[2], email).then(json => {
             this.setState({statusEmail: 'Success' === json.Status});
-            if(json.Status==='Success'){
+            if (json.Status === 'Success') {
                 this.setState({session_id: json['session_id']});
                 localStorage.setItem('session_id', json['session_id']);
-            }if (json.Status==='Failed'){
-                this.setState({error:true})
+            }
+            if (json.Status === 'Failed') {
+                this.setState({error: true})
             }
 
         });
@@ -43,6 +46,8 @@ class Quiz extends React.Component {
     UNSAFE_componentWillMount = async () => {
         const path = window.location.pathname.split('/');
         await getInvitation(path[2]).then(json => {
+            console.log(json)
+            this.setState({startTest: json.error})
             this.setState({status: "Success" === json.Status});
         });
     };
@@ -50,6 +55,12 @@ class Quiz extends React.Component {
     render() {
         if (this.state.status === null) {
             return '';
+        }
+        if (this.state.startTest === 'Error: Invitation will be available later.') {
+            return <div>Error: Invitation will be available later.</div>
+        }
+        if (this.state.startTest === 'Error: Time for this session has passed.') {
+            return <div>Time for this session has passed.</div>
         }
         if (this.state.status && (this.state.session_id === null || this.state.session_id === undefined)) {
             return (
@@ -60,7 +71,7 @@ class Quiz extends React.Component {
                 />
             );
         }
-        if (this.state.status && this.state.session_id !== null  ) {
+        if (this.state.status && this.state.session_id !== null) {
             return (
                 <StartQuiz/>
             )
@@ -68,8 +79,9 @@ class Quiz extends React.Component {
             return (
                 <div className={s.error}>
                     <NavLink to='/'><Button color='primary'>Back to home page</Button></NavLink>
-                    <Typography variant='h6'> Sorry, this page does not exist or has been deleted. Try another link</Typography>
-                <Typography variant='h1' color='textSecondary'>404</Typography>
+                    <Typography variant='h6'> Sorry, this page does not exist or has been deleted. Try another
+                        link</Typography>
+                    <Typography variant='h1' color='textSecondary'>404</Typography>
                 </div>
 
             )

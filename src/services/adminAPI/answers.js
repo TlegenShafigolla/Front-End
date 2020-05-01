@@ -30,7 +30,7 @@ export function postAnswers(question_id, answer) {
     });
 }
 
-export  function putAnswers(question_id, answer) {
+export function putAnswers(question_id, answer) {
     const authToken = `Bearer ${getSession()}`;
     const requestOptions = {
         method: 'PUT',
