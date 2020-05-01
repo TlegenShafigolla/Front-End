@@ -5,8 +5,9 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
+import s from "../css/editQuestion.module.css";
 
-class ChangeTypeDialog extends React.Component{
+class ChangeTypeDialog extends React.Component {
     handleAgree = () => {
         this.props.onClose(true);
     };
@@ -16,8 +17,9 @@ class ChangeTypeDialog extends React.Component{
     };
 
     render() {
-        return(
+        return (
             <Dialog
+                className={s.question}
                 open={this.props.openDialog}
                 onClose={this.handleCancel}
                 aria-labelledby="responsive-dialog-title"

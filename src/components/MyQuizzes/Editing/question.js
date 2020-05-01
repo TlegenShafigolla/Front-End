@@ -8,29 +8,28 @@ import Snackbar from "@material-ui/core/Snackbar";
 import s from './css/editQuestion.module.css'
 import Typography from "@material-ui/core/Typography";
 import Alert from "@material-ui/lab/Alert";
+import $ from "jquery";
 
 class Question extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            editMode: this.props.value.question === " ",
-            id: this.props.value._id,
-            quiz_id: this.props.value.quiz_id,
-            answerType: this.props.value.type,
-            question: this.props.value.question,
-            questionChanged: false,
-            answersChanged: false,
-            answers: [],
-            image: this.props.value.image,
-            disableSaveButton: false,
-            index_key: {},
-            addNewAnswerButton: false,
-            dialogOpenAnswer: false,
-            errorQuestion: false,
-            errorAnswer: false,
-            disabledDelete: false
-        };
-    }
+    state = {
+        editMode: this.props.value.question === " ",
+        id: this.props.value._id,
+        quiz_id: this.props.value.quiz_id,
+        answerType: this.props.value.type,
+        question: this.props.value.question,
+        questionChanged: false,
+        answersChanged: false,
+        answers: [],
+        image: this.props.value.image,
+        disableSaveButton: false,
+        index_key: {},
+        addNewAnswerButton: false,
+        dialogOpenAnswer: false,
+        errorQuestion: false,
+        errorAnswer: false,
+        disabledDelete: false
+    };
+
 
     componentDidMount() {
         if (this.state.id !== undefined) {
@@ -70,6 +69,7 @@ class Question extends React.Component {
 
     editOnClick = () => {
         this.setState({editMode: true});
+        console.log('Mode')
     };
 
     deleteAnswerOnClick = (index) => {
@@ -110,6 +110,9 @@ class Question extends React.Component {
         if (this.state.disableSaveButton) {
             return;
         }
+        if (!this.state.editMode) {
+            return;
+        }
         this.setState({disableSaveButton: true});
         const answer = this.state.answers;
         let wrong = 0;
@@ -132,6 +135,8 @@ class Question extends React.Component {
         if (this.state.question !== '' && this.state.question !== ' ') {
             if (empty === 0) {
                 if (this.state.answerType === 'MULTIPLE CHOICE' ? corrects > 0 && wrong > 0 : wrong === 0) {
+                    this.setState({editMode: false});
+                    console.log(1)
                     if (this.state.answersChanged) {
                         let answers = this.state.answers;
                         for (let i in answers) {
@@ -139,7 +144,7 @@ class Question extends React.Component {
                         }
                         await Promise.all(this.state.answers.map(async value => {
                             if ('_id' in value) {
-                                await putAnswers(this.state.id, value);
+                                await putAnswers(this.state.id, value).then(val => console.log(val));
                             } else {
                                 await postAnswers(this.state.id, value);
                             }
@@ -163,7 +168,6 @@ class Question extends React.Component {
                         this.setState({questionChanged: false});
                         this.props.setQuestion(this.props.value.order_id, question);
                     }
-                    this.setState({editMode: false});
                 } else {
                     this.setState({dialogOpenAnswer: true})
                 }
@@ -244,16 +248,17 @@ class Question extends React.Component {
                         answer</Typography></Alert>
                 </Snackbar>
             </div>
-        } else {
-            return <ShowQuestion editOnClick={this.editOnClick}
-                                 deleteQuestionOnClick={this.deleteQuestionOnClick}
-                                 editMode={this.state.editMode}
-                                 answerType={this.state.answerType}
-                                 answers={this.state.answers}
-                                 question={this.state.question}
-                                 question_id={this.state.id}
-                                 {...this.props}/>
         }
+        return (
+            <ShowQuestion editOnClick={this.editOnClick}
+                          deleteQuestionOnClick={this.deleteQuestionOnClick}
+                          editMode={this.state.editMode}
+                          answerType={this.state.answerType}
+                          answers={this.state.answers}
+                          question={this.state.question}
+                          question_id={this.state.id}
+                          {...this.props}/>
+        )
     }
 }
 
