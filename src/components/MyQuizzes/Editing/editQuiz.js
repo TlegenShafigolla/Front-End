@@ -120,17 +120,8 @@ class editQuiz extends React.Component {
         if (this.state.quiz_name !== '') {
             this.setState({editQuestion: false});
             if (this.state.quizChange) {
-                const quiz = {
-                    _id: this.state.quiz_id,
-                    quiz_name: this.state.quiz_name,
-                    description: this.state.description,
-                    mixed: this.state.mixed,
-                    points: this.state.points,
-                    showResults: this.state.showResults,
-                    last_edited_date: Date
-                };
-                putQuiz(quiz);
-                this.setState({quizChange: false});
+               this.setState({quizChanges:true})
+                this.setState({quizChange:false})
             }
         } else
             this.setState({error: true});
@@ -139,17 +130,8 @@ class editQuiz extends React.Component {
         if (this.state.description !== '') {
             this.setState({editDescription: false});
             if (this.state.quizChange) {
-                const quiz = {
-                    _id: this.state.quiz_id,
-                    quiz_name: this.state.quiz_name,
-                    description: this.state.description,
-                    mixed: this.state.mixed,
-                    points: this.state.points,
-                    showResults: this.state.showResults,
-                    last_edited_date: Date
-                };
-                putQuiz(quiz);
-                this.setState({quizChange: false});
+                this.setState({quizChanges:true})
+                this.setState({quizChange:false})
             }
         }
         this.setState({error: true})
