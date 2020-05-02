@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+ import React, {Component} from "react";
 import AdminHeader from "../components/AdminHeader/AdminHeader";
 import SideBar from "../components/SideBar/SideBar";
 import "../css/App.css";

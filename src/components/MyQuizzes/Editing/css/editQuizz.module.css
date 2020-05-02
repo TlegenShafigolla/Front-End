@@ -1,7 +1,6 @@
 .body {
-    width: 100%;
     margin: 10px;
-    display: inline-flex;
+    display: flex;
     justify-content: center;
     align-items: flex-start;
 
