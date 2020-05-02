@@ -120,8 +120,8 @@ class editQuiz extends React.Component {
         if (this.state.quiz_name !== '') {
             this.setState({editQuestion: false});
             if (this.state.quizChange) {
-               this.setState({quizChanges:true})
-                this.setState({quizChange:false})
+               this.setState({quizChanges:true});
+                this.setState({quizChange:false});
             }
         } else
             this.setState({error: true});
@@ -130,8 +130,8 @@ class editQuiz extends React.Component {
         if (this.state.description !== '') {
             this.setState({editDescription: false});
             if (this.state.quizChange) {
-                this.setState({quizChanges:true})
-                this.setState({quizChange:false})
+                this.setState({quizChanges:true});
+                this.setState({quizChange:false});
             }
         }
         this.setState({error: true})

@@ -58,8 +58,7 @@ class ListQuizPreview extends React.Component {
         }
         return (
             <div className={s.Container}>
-                <div className={s.Box}>
-                    <div className={s.Quizz}>
+                    <div>
                         {this.state.quizzes !== undefined ? this.state.quizzes.map((val, index) =>
                             <Quiz key={val._id} id={index}
                                   value={val}
@@ -70,7 +69,6 @@ class ListQuizPreview extends React.Component {
                         <AddIcon fontSize='large'/>
                     </IconButton>
 
-                </div>
             </div>
         );
     }
