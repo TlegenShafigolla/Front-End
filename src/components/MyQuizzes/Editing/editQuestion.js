@@ -10,19 +10,22 @@ import Radio from "@material-ui/core/Radio";
 import ChangeTypeDialog from "./AnswerTypes/changeTypeDialog";
 import $ from "jquery";
 import DeleteIcon from "@material-ui/icons/Delete";
-import t from "./css/showQuestion.module.css";
 
 class EditQuestion extends React.Component {
-    state = {
-        editMode: this.props.editMode,
-        question_id: this.props.question_id,
-        order: this.props.value.order_id,
-        answerType: this.props.answerType,
-        isMultipleChoice: this.props.answerType === 'MULTIPLE CHOICE',
-        openChangeTypeDialog: false,
-        openDialogAnswer: this.props.openDialogAnswer,
-        change: null,
-    };
+    constructor(props) {
+        super(props);
+        document.addEventListener('click', this.onClickOuterModal, false);
+        this.state={
+            editMode: this.props.editMode,
+            question_id: this.props.question_id,
+            order: this.props.value.order_id,
+            answerType: this.props.answerType,
+            isMultipleChoice: this.props.answerType === 'MULTIPLE CHOICE',
+            openChangeTypeDialog: false,
+            openDialogAnswer: this.props.openDialogAnswer,
+        }
+
+    }
 
 
     dialog = (action) => {
@@ -45,19 +48,19 @@ class EditQuestion extends React.Component {
         this.setState({openChangeTypeDialog: true});
     };
 
-    render() {
-        const save = this.props.saveOnClick;
-        $(function ($) {
-            $(document).mouseup(function (e) {
-                let div = $("." + s.question);
-                if (!div.is(e.target)
-                    && div.has(e.target).length === 0) {
-                    save();
-                    console.log((2))
-                }
+    componentWillUnmount() {
+        document.removeEventListener('click', this.onClickOuterModal, false);
+    }
 
-            });
-        });
+    onClickOuterModal = (e) => {
+        const save = this.props.saveOnClick;
+        let div = $("." + s.question);
+        if (!div.is(e.target)
+            && div.has(e.target).length === 0) {
+            save();
+        }
+    };
+    render() {
         return (
             <div className={s.question} id={this.state.order}>
                 <div className={s.questioninfo}>

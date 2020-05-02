@@ -44,19 +44,26 @@ class ShowQuiz extends React.Component {
     inviteDialog = () => {
         this.setState({openInviteDialog: !this.state.openInviteDialog})
     };
-
+    onClickQuiz = () => {
+        console.log('ok')
+        // this.history.push(`/admin/quizzes/edit/${this.props.value._id}`)
+    };
 
     render() {
-        return (<div className={s.root}>
+        return (<div className={s.root} onKeyDown={this.onClickQuiz}>
             <CardContent className={s.CardContent}>
-                <Typography variant="h5" component="h2">
-                    {this.props.quiz_name}  </Typography>
-                <Typography className={s.title} gutterBottom> {this.props.description} </Typography>
+                <Typography variant="h5" component="h2" noWrap>
+                    {this.props.quiz_name}
+                </Typography>
+                < Typography noWrap
+                    className={s.title}
+                    gutterBottom> {this.props.description}
+                </Typography>
                 <Typography className={s.pos}> {this.props.value.questions_count.toString()} </Typography>
                 <Typography variant="body2"
                             component="p"
-                            color="textSecondary"
-                >Version: {this.props.last_edited_date} </Typography>
+                            color="textSecondary">
+                    Version: {this.props.last_edited_date} </Typography>
             </CardContent>
             <CardActions className={s.CardActions}>
                 <div className={s.ButtonPanel}>

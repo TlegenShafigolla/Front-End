@@ -69,7 +69,6 @@ class Question extends React.Component {
 
     editOnClick = () => {
         this.setState({editMode: true});
-        console.log('Mode')
     };
 
     deleteAnswerOnClick = (index) => {
@@ -110,9 +109,6 @@ class Question extends React.Component {
         if (this.state.disableSaveButton) {
             return;
         }
-        if (!this.state.editMode) {
-            return;
-        }
         this.setState({disableSaveButton: true});
         const answer = this.state.answers;
         let wrong = 0;
@@ -136,7 +132,6 @@ class Question extends React.Component {
             if (empty === 0) {
                 if (this.state.answerType === 'MULTIPLE CHOICE' ? corrects > 0 && wrong > 0 : wrong === 0) {
                     this.setState({editMode: false});
-                    console.log(1)
                     if (this.state.answersChanged) {
                         let answers = this.state.answers;
                         for (let i in answers) {

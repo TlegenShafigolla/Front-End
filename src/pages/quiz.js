@@ -30,6 +30,7 @@ class Quiz extends React.Component {
         const path = window.location.pathname.split('/');
         const email = this.state.email;
         await postInvitation(path[2], email).then(json => {
+            console.log(json)
             this.setState({statusEmail: 'Success' === json.Status});
             if (json.Status === 'Success') {
                 this.setState({session_id: json['session_id']});

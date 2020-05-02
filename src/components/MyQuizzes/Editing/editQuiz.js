@@ -60,6 +60,8 @@ class editQuiz extends React.Component {
             questions.push(ret.created[0]);
             this.setState({questions: questions});
         });
+        let height = document.documentElement.scrollHeight;
+        window.scrollTo({top: height, behavior: "smooth"})
         this.setState({disableAddButton: false});
     };
 
@@ -120,8 +122,8 @@ class editQuiz extends React.Component {
         if (this.state.quiz_name !== '') {
             this.setState({editQuestion: false});
             if (this.state.quizChange) {
-               this.setState({quizChanges:true});
-                this.setState({quizChange:false});
+                this.setState({quizChanges: true});
+                this.setState({quizChange: false});
             }
         } else
             this.setState({error: true});
@@ -130,8 +132,8 @@ class editQuiz extends React.Component {
         if (this.state.description !== '') {
             this.setState({editDescription: false});
             if (this.state.quizChange) {
-                this.setState({quizChanges:true});
-                this.setState({quizChange:false});
+                this.setState({quizChanges: true});
+                this.setState({quizChange: false});
             }
         }
         this.setState({error: true})
@@ -162,7 +164,7 @@ class editQuiz extends React.Component {
                                        autoFocus
                                        variant='outlined' margin='dense'
                                        defaultValue={this.state.quiz_name}/> :
-                            <Typography onClick={this.editQuestion}
+                            <Typography onClick={this.editQuestion} noWrap
                                         variant='h4'> {this.state.quiz_name}</Typography>}
                         {this.state.editDescription ?
                             <TextField error={this.state.error} onChange={this.changeDescription}
@@ -170,6 +172,7 @@ class editQuiz extends React.Component {
                                        defaultValue={this.state.description} autoFocus variant='outlined'
                                        margin='dense'/> :
                             <Typography onClick={() => this.setState({editDescription: true})}
+                                        noWrap
                                         variant='h6'>{this.state.description}</Typography>}
                     </div>
                     <div className={s.settings}>

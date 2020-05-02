@@ -29,7 +29,7 @@ class StartQuiz extends React.Component {
             description: '',
             questions_count: '',
             points: null,
-            maxPoint:null,
+            maxPoint: null,
         }
     }
 
@@ -91,13 +91,14 @@ class StartQuiz extends React.Component {
     };
 
 
-    componentDidMount = async () => {
-        await postTakeQuestion(localStorage.getItem('session_id')).then(async json => {
-            this.setState({questions: json.questions});
-            this.setState({quiz_name: json.quiz.quiz_name});
-            this.setState({questions_count: json.quiz.questions_count});
-            this.setState({description: json.quiz.description});
-            this.setState({showResults: json.quiz.showResults});
+    componentDidMount = () => {
+            postTakeQuestion(localStorage.getItem('session_id')).then(async json => {
+            console.log(json);
+            await this.setState({questions: json.questions});
+            await this.setState({quiz_name: json.quiz.quiz_name});
+            await this.setState({questions_count: json.quiz.questions_count});
+            await this.setState({description: json.quiz.description});
+            await this.setState({showResults: json.quiz.showResults});
         });
     };
 
@@ -150,7 +151,7 @@ class StartQuiz extends React.Component {
                                     offset={-130}
                                     duration={500}
                                 >
-                                    <Button key={index}>{index+1}
+                                    <Button key={index}>{index + 1}
 
                                     </Button></Link>)}
 
@@ -171,11 +172,12 @@ class StartQuiz extends React.Component {
 
                     <div className={s.dialogActions}>
                         <div className={s.typography}>
-                           {this.state.quiz_name}
+                            {this.state.quiz_name}
                         </div>
                     </div>
                     <DialogContent className={s.dialogContent}>
-                        <Typography variant='h6' color='textSecondary'>There are {this.state.questions_count} questions</Typography>
+                        <Typography variant='h6' color='textSecondary'>There
+                            are {this.state.questions_count} questions</Typography>
                         <Typography className={s.description} variant='h4'>{this.state.description}</Typography>
                     </DialogContent>
                     <Button color='primary' variant='contained' onClick={this.startTest}>Start test</Button>
@@ -184,7 +186,7 @@ class StartQuiz extends React.Component {
                     <DialogContent>
                         <Typography variant='h5'>
                             Thank you for passing the test
-                            {this.state.showResults ?  ' You result: '+ (this.state.corrects === undefined ? this.state.points :this.state.corrects)+' points' : ''}
+                            {this.state.showResults ? ' You result: ' + (this.state.corrects === undefined ? this.state.points : this.state.corrects) + ' points' : ''}
                         </Typography>
                     </DialogContent>
 

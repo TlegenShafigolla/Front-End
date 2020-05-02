@@ -58,16 +58,16 @@ class ListQuizPreview extends React.Component {
         }
         return (
             <div className={s.Container}>
-                    <div>
-                        {this.state.quizzes !== undefined ? this.state.quizzes.map((val, index) =>
-                            <Quiz key={val._id} id={index}
-                                  value={val}
-                                  deleteQuiz={this.deleteQuiz}
-                            />) : ' '}
-                    </div>
-                    <IconButton color="primary" onClick={this.addNewQuizz}>
-                        <AddIcon fontSize='large'/>
-                    </IconButton>
+                <div>
+                    {this.state.quizzes !== undefined ? this.state.quizzes.map((val, index) =>
+                        <Quiz key={val._id} id={index}
+                              value={val}
+                              deleteQuiz={this.deleteQuiz}
+                        />) : ' '}
+                </div>
+                <IconButton color="primary" onClick={this.addNewQuizz}>
+                    <AddIcon fontSize='large'/>
+                </IconButton>
 
             </div>
         );
