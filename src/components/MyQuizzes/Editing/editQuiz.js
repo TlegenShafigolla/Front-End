@@ -61,7 +61,7 @@ class editQuiz extends React.Component {
             this.setState({questions: questions});
         });
         let height = document.documentElement.scrollHeight;
-        window.scrollTo({top: height, behavior: "smooth"})
+        window.scrollTo({top: height, behavior: "smooth"});
         this.setState({disableAddButton: false});
     };
 
@@ -217,6 +217,7 @@ class editQuiz extends React.Component {
     componentDidMount() {
         getQuestions(this.state.quiz_id).then(json => {
             let date = new Date(json.last_edited_date);
+            console.log(json)
             this.setState({
                 mixed: json.mixed,
                 showResults: json.showResults,

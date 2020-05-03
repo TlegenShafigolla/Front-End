@@ -47,25 +47,25 @@ class InviteDialog extends React.Component {
     checkTime = (event) => {
         this.setState({checkTime: event.target.checked});
         if (event.target.checked) {
-            $('.'+s.timer).show(500)
-        }else {
-            $('.'+s.timer).hide(500)
+            $('.' + s.timer).show(500)
+        } else {
+            $('.' + s.timer).hide(500)
         }
     };
     checkStart = (event) => {
         this.setState({checkStart: event.target.checked});
         if (event.target.checked) {
-            $('.'+s.startDate).show(500)
-        }else {
-            $('.'+s.startDate).hide(500)
+            $('.' + s.startDate).show(500)
+        } else {
+            $('.' + s.startDate).hide(500)
         }
     };
     checkEnd = (event) => {
         this.setState({checkEnd: event.target.checked});
         if (event.target.checked) {
-            $('.'+s.endDate).show(500)
-        }else {
-            $('.'+s.endDate).hide(500)
+            $('.' + s.endDate).show(500)
+        } else {
+            $('.' + s.endDate).hide(500)
         }
     };
     handleCancel = () => {
@@ -84,9 +84,18 @@ class InviteDialog extends React.Component {
         let time;
         let start;
         let end;
-        {this.state.checkEnd ? end = this.state.end_date : end = null};
-        {this.state.checkStart ? start = this.state.start_date : start = null};
-        {this.state.checkTime ? time = this.state.time_limit : time = null};
+        {
+            this.state.checkEnd ? end = this.state.end_date : end = null
+        }
+        ;
+        {
+            this.state.checkStart ? start = this.state.start_date : start = null
+        }
+        ;
+        {
+            this.state.checkTime ? time = this.state.time_limit : time = null
+        }
+        ;
         if (this.state.name !== null && this.state.name !== '' && this.state.surname !== null && this.state.surname !== '' && email.test(this.state.email)) {
             const invite = {
                 name: this.state.name,
@@ -156,16 +165,13 @@ class InviteDialog extends React.Component {
         this.props.onClose()
     };
     onChangeStartDate = (event) => {
-        let StartDate = new Date(event.target.value);
-        // let newTime = UserTimeToServerTime(StartDate);
-        // this.setState({start_date: newTime})
+        let StartDate = event.target.value.replace('T', ' ');
+        this.setState({start_date: StartDate})
     };
 
     onChangeEndDate = (event) => {
-        let EndDate = event.target.value.replace('T',' ');
-        console.log(EndDate)
-        // this.setState({end_date: newTime})
-
+        let EndDate = event.target.value.replace('T', ' ');
+        this.setState({end_date: EndDate})
     };
     onChangeTimeLimit = (event) => {
         let time = event.target.value;
@@ -234,6 +240,8 @@ class InviteDialog extends React.Component {
                             variant='outlined'
                             onChange={this.onChangeEmail}
                         />
+                        <FormControlLabel control={<Checkbox color={"primary"}/>}
+                                          label={"More options"}/>
                         <div className={s.time}>
                             <div className={s.checkbox}>
                                 <FormControlLabel control={<Checkbox onChange={this.checkStart} color={"primary"}/>}
@@ -290,6 +298,7 @@ class InviteDialog extends React.Component {
                             Invite
                         </Button>
                     </DialogActions>
+
                 </Dialog>
                 <Snackbar
                     open={this.state.openSnackbar}
