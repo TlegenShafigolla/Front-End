@@ -189,7 +189,6 @@ class Question extends React.Component {
     };
 
     onChangeQuestion = (event) => {
-
         this.setState({question: event.target.value.trim()});
         this.setState({questionChanged: true});
         this.setState({errorQuestion: false})

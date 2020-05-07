@@ -12,6 +12,10 @@ import {putQuiz} from "../../../services/adminAPI/quiz";
 import Typography from "@material-ui/core/Typography";
 import {CircularProgress} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import Button from "@material-ui/core/Button";
+import PDFpreview from "../../../services/pdfFactory/preview";
+import GeneratePdfDialog from "./generatePdfDialog";
 
 class editQuiz extends React.Component {
     constructor(props) {
@@ -33,6 +37,7 @@ class editQuiz extends React.Component {
             editQuestion: false,
             quizChange: false,
             error: false,
+            generatePdfDialog: false,
         };
     }
 
@@ -111,13 +116,16 @@ class editQuiz extends React.Component {
         this.setState({mixed: event});
         this.setState({quizChanges: true})
     };
+
     showResultsChecked = (event) => {
         this.setState({showResults: event});
         this.setState({quizChanges: true})
     };
+
     editQuestion = () => {
         this.setState({editQuestion: true})
     };
+
     onblur = () => {
         if (this.state.quiz_name !== '') {
             this.setState({editQuestion: false});
@@ -128,6 +136,7 @@ class editQuiz extends React.Component {
         } else
             this.setState({error: true});
     };
+
     onBlurDescription = () => {
         if (this.state.description !== '') {
             this.setState({editDescription: false});
@@ -137,6 +146,14 @@ class editQuiz extends React.Component {
             }
         }
         this.setState({error: true})
+    };
+
+    openPdfDialog = () => {
+        this.setState({generatePdfDialog: true});
+    };
+
+    closePdfDialog = () => {
+        this.setState({generatePdfDialog: false});
     };
 
     render() {
@@ -203,12 +220,21 @@ class editQuiz extends React.Component {
                     </div>
                 </div>
                 <div className={this.state.questions.length === 0 ? s.display : s.board}>
-
                     <div className={s.boardRows}>
                         {this.state.questions === undefined || this.state.questions === null ? null :
                             this.state.questions.map(val => <Board key={val.order_id} value={val}/>)}
                     </div>
                 </div>
+                <Button variant="outlined" color="primary" onClick={this.openPdfDialog}>
+                    Open simple dialog
+                </Button>
+                <GeneratePdfDialog
+                    open={this.state.generatePdfDialog}
+                    onClose={this.closePdfDialog}
+                    quiz_name={this.state.quiz_name}
+                    description={this.state.description}
+                    questions={this.state.questions}
+                />
             </div>
 
         );
@@ -217,7 +243,7 @@ class editQuiz extends React.Component {
     componentDidMount() {
         getQuestions(this.state.quiz_id).then(json => {
             let date = new Date(json.last_edited_date);
-            console.log(json)
+            console.log(json);
             this.setState({
                 mixed: json.mixed,
                 showResults: json.showResults,

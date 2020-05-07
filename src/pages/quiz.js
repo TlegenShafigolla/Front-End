@@ -22,6 +22,7 @@ class Quiz extends React.Component {
             start: false,
         };
         const path = window.location.pathname.split('/');
+        // TODO this is not good
         getInvitation(path[2]).then(json => {
             console.log(json);
             this.setState({startTest: json.error});
@@ -41,6 +42,7 @@ class Quiz extends React.Component {
         const path = window.location.pathname.split('/');
         const email = this.state.email;
         await postInvitation(path[2], email).then(json => {
+            console.log(json);
             this.setState({statusEmail: 'Success' === json.Status});
             if (json.Status === 'Success') {
                 this.setState({session_id: json['session_id']});
@@ -49,7 +51,6 @@ class Quiz extends React.Component {
             if (json.Status === 'Failed') {
                 this.setState({error: true})
             }
-
         });
     };
 
