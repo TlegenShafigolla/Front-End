@@ -17,11 +17,12 @@ export const styles = StyleSheet.create({
         flexGrow: 1
     },
     quiz_name: {
-        fontSize: 24,
+        fontSize: 16,
         textAlign: 'center',
         fontFamily: 'Oswald'
     },
     description: {
+        marginTop: 10,
         fontSize: 12,
         textAlign: 'center',
     },

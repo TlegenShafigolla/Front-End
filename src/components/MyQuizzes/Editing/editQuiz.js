@@ -185,7 +185,7 @@ class editQuiz extends React.Component {
                     <div className={s.QuizName}>
                         {this.state.editQuestion ?
                             <TextField error={this.state.error} onBlur={this.onblur} onChange={this.changeQuizName}
-                                       autoFocus
+                                       autoFocus fullWidth
                                        variant='outlined' margin='dense'
                                        defaultValue={this.state.quiz_name}/> :
                             <Typography onClick={this.editQuestion} noWrap
@@ -194,10 +194,9 @@ class editQuiz extends React.Component {
                             <TextField error={this.state.error} onChange={this.changeDescription}
                                        onBlur={this.onBlurDescription}
                                        defaultValue={this.state.description} autoFocus variant='outlined'
-                                       margin='dense'/> :
+                                       margin='dense' fullWidth multiline rows={2} rowsMax={5}/> :
                             <Typography onClick={() => this.setState({editDescription: true})}
-                                        noWrap
-                                        variant='h6'>{this.state.description}</Typography>}
+                                        variant='body1'>{this.state.description}</Typography>}
                     </div>
                     <div className={s.settings}>
                         <EditQuizSettings pointsChecked={this.pointsChecked}
@@ -234,7 +233,7 @@ class editQuiz extends React.Component {
                     </div>
                 </div>
                 <Button variant="outlined" color="primary" onClick={this.openPdfDialog}>
-                    Open simple dialog
+                    Export to PDF
                 </Button>
                 <GeneratePdfDialog
                     open={this.state.generatePdfDialog}
