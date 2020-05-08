@@ -1,8 +1,11 @@
 import React from 'react';
 import { Page, Text, View, Document, StyleSheet, Font } from '@react-pdf/renderer';
+import {getChar} from "../../function/AnswerChar";
+import Quiz from "./Quiz";
+import QuizWithAnswers from "./QuizWithAnswers";
 
 // Create styles
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
     page: {
         paddingTop: 35,
         paddingBottom: 65,
@@ -33,7 +36,17 @@ const styles = StyleSheet.create({
         color: 'grey',
     },
     question: {
-
+        margin: 12,
+        fontSize: 14,
+        textAlign: 'justify',
+        fontFamily: 'Times-Roman'
+    },
+    answer: {
+        margin: 3,
+        marginLeft: 25,
+        fontSize: 12,
+        textAlign: 'justify',
+        fontFamily: 'Times-Roman'
     }
 });
 
@@ -45,21 +58,9 @@ Font.register({
 // Create Document Component
 const QuizDocument = (props) => (
     <Document>
-        <Page size="A4" style={styles.page}>
-            <Text style={styles.quiz_name}>{props.quiz_name}</Text>
-            <Text style={styles.description}>{props.description}</Text>
-            {props.questions.map((val,index) => {
-                return QuizQuestion(val, index);
-            })}
-            <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
-                `${pageNumber} / ${totalPages}`
-            )} fixed />
-        </Page>
+        {props.showAnswers ? QuizWithAnswers(props) : Quiz(props)}
     </Document>
 );
 
-const QuizQuestion = (val, index) => (
-    <Text break>{index + ". " + val.question}</Text>
-);
 
 export default QuizDocument;

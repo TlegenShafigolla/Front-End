@@ -4,12 +4,21 @@ import Dialog from "@material-ui/core/Dialog/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import s from "./css/generatePdfDialog.module.css";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
 
 class GeneratePdfDialog extends React.Component{
     constructor(props){
         super(props);
-        this.state = {};
+        this.state = {
+            showAnswers: false,
+        };
+        console.log(this.props.answers);
     }
+
+    setShowAnswer = (event) => {
+        this.setState({showAnswers: event.target.checked});
+    };
 
     render() {
         return (
@@ -25,12 +34,23 @@ class GeneratePdfDialog extends React.Component{
                         <PDFpreview
                             width={500}
                             height={700}
+                            showAnswers={this.state.showAnswers}
                             quiz_name={this.props.quiz_name}
                             description={this.props.description}
                             questions={this.props.questions}
+                            answers={this.props.answers}
                         />
                         <div>
-                            Settings asdnas bdabsdhasdasdasdasdasdasdasdasdasdasd
+                            <FormControlLabel
+                                control={
+                                    <Switch
+                                        checked={this.state.showAnswers}
+                                        onChange={this.setShowAnswer}
+                                        color="primary"
+                                    />
+                                }
+                                label="Show Answers"
+                            />
                         </div>
                     </div>
                 </DialogContent>

@@ -35,6 +35,7 @@ class Question extends React.Component {
         if (this.state.id !== undefined) {
             getAnswers(this.state.id).then(val => {
                 this.setState({answers: val.answers});
+                this.props.setAnswers(this.state.id, val.answers);
                 let index_key = this.state.index_key;
                 for (let i = 0; i < this.state.answers.length; i++) {
                     index_key[i] = makeID(8);
@@ -145,7 +146,8 @@ class Question extends React.Component {
                             }
                         })).then((ret) => {
                             getAnswers(this.state.id).then(val => {
-                                this.setState({answers: val.answers})
+                                this.setState({answers: val.answers});
+                                this.props.setAnswers(this.state.id, val.answers);
                             });
                         });
                         this.setState({answersChanged: false});

@@ -38,6 +38,7 @@ class editQuiz extends React.Component {
             quizChange: false,
             error: false,
             generatePdfDialog: false,
+            answers: {},
         };
     }
 
@@ -156,6 +157,12 @@ class editQuiz extends React.Component {
         this.setState({generatePdfDialog: false});
     };
 
+    setAnswers = (question_id, ans) => {
+        const answers = this.state.answers;
+        answers[question_id] = ans;
+        this.setState({answers: answers})
+    };
+
     render() {
 
         if (this.state.questions === null) {
@@ -210,6 +217,7 @@ class editQuiz extends React.Component {
                                 point={this.state.points}
                                 deleteQuestion={this.deleteQuestion}
                                 setQuestion={this.setQuestion}
+                                setAnswers={this.setAnswers}
                             />)}
                     </div>
                     <div>
@@ -234,6 +242,7 @@ class editQuiz extends React.Component {
                     quiz_name={this.state.quiz_name}
                     description={this.state.description}
                     questions={this.state.questions}
+                    answers={this.state.answers}
                 />
             </div>
 
@@ -243,7 +252,6 @@ class editQuiz extends React.Component {
     componentDidMount() {
         getQuestions(this.state.quiz_id).then(json => {
             let date = new Date(json.last_edited_date);
-            console.log(json);
             this.setState({
                 mixed: json.mixed,
                 showResults: json.showResults,
