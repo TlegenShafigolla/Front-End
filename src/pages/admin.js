@@ -4,7 +4,7 @@ import SideBar from "../components/SideBar/SideBar";
 import "../css/App.css";
 import {Routes} from "../function/Routes";
 import {Redirect} from "react-router-dom";
-import getProfile from "../services/adminAPI/profile";
+import getProfile from "../services/API/adminAPI/profile";
 
 class admin extends Component {
 

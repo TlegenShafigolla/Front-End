@@ -1,5 +1,5 @@
 import React from 'react'
-import {getInvitation, postInvitation} from "../services/userAPI/invitation";
+import {getInvitation, postInvitation} from "../services/API/userAPI/invitation";
 import StartQuiz from "../components/Quiz/StartQuiz";
 import CheckEmail from "../components/Quiz/CheckEmail";
 import Typography from "@material-ui/core/Typography";
@@ -55,6 +55,8 @@ class Quiz extends React.Component {
         const path = window.location.pathname.split('/');
         const email = this.state.email;
         await postInvitation(path[2], email).then(json => {
+            console.log(json);
+            this.setState({statusEmail: 'Success' === json.Status});
             if (json.Status === 'Success') {
                 localStorage.setItem(`session_id${path[2]}`, json['session_id']);
                 this.continue()
@@ -62,6 +64,7 @@ class Quiz extends React.Component {
             if (json.Status === 'Failed') {
                 this.setState({error: true})
             }
+
         });
     };
 
@@ -97,7 +100,6 @@ class Quiz extends React.Component {
         } else {
             return (
                 <div className={s.error}>
-
                     <NavLink to='/'><Button color='primary'>Back to home page</Button></NavLink>
                     <Typography variant='h6'> Sorry, this page does not exist or has been deleted. Try another
                         link</Typography>

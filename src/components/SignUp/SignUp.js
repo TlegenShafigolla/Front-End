@@ -3,8 +3,8 @@ import s     from "../../css/SignUp.module.css";
 import logo from "../../images/logoPng.png";
 import {Button, Snackbar, TextField} from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
-import {registration} from "../../services/userAPI/registration";
-import {Redirect} from "react-router-dom";
+import {registration} from "../../services/API/userAPI/registration";
+import {Link, Redirect} from "react-router-dom";
 
 class Registration extends React.Component {
     constructor(props) {
@@ -176,6 +176,9 @@ class Registration extends React.Component {
                         onChange={this.onChangeConfirmPassword}
                     />
                     <div className={s.Button}>
+                        <div className={s.Link}>
+                            <Link to='/login' underline='none'>Already have an account?</Link>
+                        </div>
                         <Button onClick={this.onClickSubmitButton} variant='contained' color='primary'>Submit</Button>
                     </div>
                 </div>
@@ -193,7 +196,7 @@ class Registration extends React.Component {
                     autoHideDuration={6000}
                     onClose={this.onClose}>
                     <Alert variant="filled" severity="error">
-                        Password do not match
+                        Passwords do not match
                     </Alert>
                 </Snackbar>
                 <Snackbar

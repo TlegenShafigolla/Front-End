@@ -1,5 +1,5 @@
 import React from "react";
-import {getReport} from "../../services/adminAPI/reports";
+import {getReport} from "../../services/API/adminAPI/reports";
 import s from "./Report.module.css";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
