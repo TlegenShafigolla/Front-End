@@ -1,11 +1,11 @@
 import React from "react";
 import s from './Profile.module.css'
-import getProfile from "../../services/adminAPI/profile";
+import getProfile from "../../services/API/adminAPI/profile";
 import Typography from "@material-ui/core/Typography";
 import {TextareaAutosize} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import FaceIcon from '@material-ui/icons/Face';
-import postFeedback from "../../services/adminAPI/feedback";
+import postFeedback from "../../services/API/adminAPI/feedback";
 import Snackbar from "@material-ui/core/Snackbar";
 class Profile extends React.Component {
     constructor(props) {

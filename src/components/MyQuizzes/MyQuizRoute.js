@@ -1,6 +1,6 @@
 import React from "react";
-import listQuizPreview from "./Existing/listQuizPreview";
-import editQuiz from "./Editing/editQuiz";
+import listQuizPreview from "./Preview/listQuizPreview";
+import editQuiz from "./Edition/editQuiz";
 import {Route} from "react-router-dom";
 
 const MyQuizRoute = () => {

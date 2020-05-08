@@ -4,7 +4,7 @@ import {Checkbox, InputBase, Typography} from "@material-ui/core";
 import {green} from "@material-ui/core/colors";
 import red from "@material-ui/core/colors/red";
 import Button from "@material-ui/core/Button";
-import {postReport} from "../../services/adminAPI/reports";
+import {postReport} from "../../services/API/adminAPI/reports";
 import $ from 'jquery'
 class ReportQuestion extends React.Component {
     constructor(props) {

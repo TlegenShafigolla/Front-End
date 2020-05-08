@@ -1,5 +1,5 @@
 import React from 'react'
-import {getInvitation, postInvitation} from "../services/userAPI/invitation";
+import {getInvitation, postInvitation} from "../services/API/userAPI/invitation";
 import StartQuiz from "../components/Quiz/StartQuiz";
 import CheckEmail from "../components/Quiz/CheckEmail";
 import Typography from "@material-ui/core/Typography";
