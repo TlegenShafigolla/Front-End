@@ -19,9 +19,9 @@ const QuizWithAnswers = (props) => (
 const QuizQuestion = (val, index, answers) => (
     <View>
         <Text style={styles.question}>{(index + 1) + ". " + val.question}</Text>
-        {answers.map((val, index) => {
+        {val.type === "MULTIPLE CHOICE" ? answers.map((val, index) => {
             return <Text key={val._id} style={styles.answer}>{getChar(index) + ") " + val.answer}</Text>
-        })}
+        }): <Text key={answers[0]._id} style={styles.answer}>{answers[0].answer}</Text>}
     </View>
 );
 

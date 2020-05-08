@@ -7,11 +7,12 @@ const PDFpreview = (props) => {
     return (
         <PDFViewer width={props.width} height={props.height}>
             <QuizDocument
-                showAnswers={props.showAnswers}
                 quiz_name={props.quiz_name}
                 description={props.description}
                 questions={props.questions}
-                answers={props.answers}/>
+                answers={props.answers}
+                settings={props.settings}
+            />
         </PDFViewer>);
 };
 

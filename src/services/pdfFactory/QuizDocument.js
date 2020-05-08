@@ -24,7 +24,6 @@ export const styles = StyleSheet.create({
     description: {
         fontSize: 12,
         textAlign: 'center',
-        marginBottom: 40,
     },
     pageNumber: {
         position: 'absolute',
@@ -47,6 +46,26 @@ export const styles = StyleSheet.create({
         fontSize: 12,
         textAlign: 'justify',
         fontFamily: 'Times-Roman'
+    },
+    blank_space: {
+        marginLeft: 12,
+        marginRight: 12,
+        border: 1,
+        borderWidth: 1,
+        borderColor: '#000000',
+        borderRadius: 5
+    },
+    top_left_corner_text: {
+        fontSize: 10,
+        position: 'absolute',
+        top: 15,
+        left: 15,
+    },
+    top_right_corner_text: {
+        fontSize: 10,
+        position: 'absolute',
+        top: 15,
+        right: 15
     }
 });
 
@@ -58,7 +77,7 @@ Font.register({
 // Create Document Component
 const QuizDocument = (props) => (
     <Document>
-        {props.showAnswers ? QuizWithAnswers(props) : Quiz(props)}
+        {props.settings.showAnswers ? QuizWithAnswers(props) : Quiz(props)}
     </Document>
 );
 
