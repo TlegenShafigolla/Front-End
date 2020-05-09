@@ -18,6 +18,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 class StartQuiz extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
             startTestDialog: localStorage.getItem('start_test') === null,
             endTestDialog: false,
@@ -30,8 +31,12 @@ class StartQuiz extends React.Component {
             questions_count: '',
             points: null,
             maxPoint: null,
+            time_limit: null,
+            time_left: null,
+            time: null
         }
     }
+
 
     onChangeCheck = (event) => {
         let answers = this.state.answers;
@@ -92,41 +97,92 @@ class StartQuiz extends React.Component {
 
 
     onClickSubmit = () => {
+        this.setState({time_limit:null})
         const finished = 1;
         const path = window.location.pathname.split('/');
-        const session_id = localStorage.getItem('session_id');
+        const session_id = localStorage.getItem(`session_id${path[2]}`);
         const answers = this.state.answers;
         postQuizAnswer(path[2], session_id, finished, answers).then(val => {
-            console.log(val);
             this.setState({corrects: val.corrects});
             this.setState({points: val.points});
-            localStorage.removeItem('session_id');
+            localStorage.removeItem(`session_id${path[2]}`);
             localStorage.removeItem('start_test');
+            localStorage.removeItem('time_limit');
             this.setState({endTestDialog: true});
         })
     };
 
 
     componentDidMount() {
-        postTakeQuestion(this.props.id).then(json => {
+        let path = window.location.pathname.split('/');
+        postTakeQuestion(localStorage.getItem(`session_id${path[2]}`)).then(json => {
             console.log(json);
-            this.setState({questions: json.questions});
-            this.setState({quiz_name: json.quiz.quiz_name});
-            this.setState({questions_count: json.quiz.questions_count});
-            this.setState({description: json.quiz.description});
-            this.setState({showResults: json.quiz.showResults});
+            if (json.time_limit !== null) {
+                this.setState({time_limit: json.time_limit * 60})
+            }
+            this.setState({
+                questions: json.questions,
+                quiz_name: json.quiz.quiz_name,
+                questions_count: json.quiz.questions_count,
+                description: json.quiz.description,
+                showResults: json.quiz.showResults,
+            });
+            const lastTime = Number(new Date(localStorage.getItem('date')));
+            console.log(lastTime)
+            if (lastTime !== 0 && lastTime !== undefined) {
+                console.log('ok')
+                let newTime = Number(new Date());
+                let time = Math.round((newTime - lastTime) / 1000);
+                console.log(time)
+                let time_limit = Number(localStorage.getItem('time_limit'));
+                localStorage.setItem('time_limit', (time_limit + time).toString())
+            }
+            this.startTime()
         });
+
+
     }
 
+    startTime = () => {
+        if (this.state.time_limit !== null) {
+            let timer = setInterval(() => {
+                let timeLeft = Number(localStorage.getItem('time_limit')) + 1;
+                if (timeLeft >= this.state.time_limit) {
+                    clearInterval(timer)
+                }
+                localStorage.setItem('time_limit', timeLeft.toString());
+                let sec = this.state.time_limit - timeLeft;
+                let h = sec / 3600 ^ 0;
+                let m = (sec - h * 3600) / 60 ^ 0;
+                let s = sec - h * 3600 - m * 60;
+                let time_left = (h < 10 ? "0" + h : h) + " h.  " + (m < 10 ? "0" + m : m) + " min. " + (s < 10 ? "0" + s : s) + " sec.";
+                this.setState({time_left: time_left});
+                this.setState({time: this.state.time_limit - timeLeft})
+            }, 1000);
+        }
+    };
+
     render() {
+        if (this.state.time_limit !== null) {
+            window.onbeforeunload = function () {
+                let date = new Date();
+                localStorage.setItem('date', date)
+            };
+        }
+        if (this.state.time === 0) {
+            this.onClickSubmit();
+            this.setState({time:null})
+        }
         const Transition = React.forwardRef(function Transition(props, ref) {
             return <Slide direction="up" ref={ref} {...props} />;
         });
+
         return (
             <div className={s.quizPage}>
                 <AppBar>
                     <Toolbar className={s.header}>
                         <Typography variant='h5'> {this.state.quiz_name}</Typography>
+                        {this.state.time_left === null ? '' : "Time left: " + this.state.time_left}
                         <Button onClick={this.onClickSubmit}>End Test</Button>
                     </Toolbar>
                 </AppBar>

@@ -71,13 +71,13 @@ class editQuiz extends React.Component {
         this.setState({disableAddButton: false});
     };
 
-    deleteQuestion = (order_id) => {
+    deleteQuestion = async (order_id) => {
         let questions = this.state.questions;
         questions.splice(order_id - 1, 1);
         for (let i = order_id - 1; i < questions.length; i++) {
             questions[i].order_id = i + 1;
         }
-        postQuestions(this.state.quiz_id, questions);
+        await postQuestions(this.state.quiz_id, questions);
         this.setState({questions: questions});
     };
     changeDescription = (event) => {
