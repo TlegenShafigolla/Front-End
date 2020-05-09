@@ -27,6 +27,10 @@ const AdminHeader = (props) => {
             path: '/admin/reports',
             name: 'Quiz - Reports'
         },
+        {
+            path: '/admin/surveys',
+            name: 'Surveys'
+        },
     ];
 
     const PageName = () => {

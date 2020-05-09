@@ -6,6 +6,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import MyQuizRoute from "../components/MyQuizzes/MyQuizRoute";
 import Invitations from "../components/Invitations/Invitations";
 import ReportRoute from "../components/Reports/ReportRoute";
+import MySurveyRoute from "../components/MySurveys/MySurveysRoute";
 
 const drawerWidth = 240;
 const styles = makeStyles(theme => ({
@@ -53,6 +54,7 @@ export const Routes = (props) => {
                 <Route path="/admin/quizzes" component={MyQuizRoute}/>
                 <Route path="/admin/invitations" component={Invitations}/>
                 <Route path="/admin/reports" component={ReportRoute}/>
+                <Route path="/admin/surveys" component={MySurveyRoute}/>
             </main>
         </div>
     );

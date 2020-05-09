@@ -89,7 +89,7 @@ class SignIn extends React.Component {
                 <Button variant='contained' color='primary' onClick={this.onClickButton}>Continue</Button>
                 <div className={s.forgot}>
                     <Link to='#'underline='none'>Forgot password?</Link>
-                    <Link to='/registration' underline='none'>Sign up</Link>
+                    <Link to='/registration' underline='none'>Register</Link>
                 </div>
             </div>
         );
