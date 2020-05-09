@@ -14,8 +14,8 @@ import {
     Snackbar
 } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
-import s from "../listQuizPreview.module.css";
-import {postInvitations} from "../../../services/API/adminAPI/invitations";
+import s from "../Preview/listQuizPreview.module.css";
+import {postInvitations} from "../../../services/API/adminAPI/Quiz/invitations";
 import Alert from "@material-ui/lab/Alert";
 import Checkbox from "@material-ui/core/Checkbox";
 import {UserTimeToServerTime, ServerTomeZone} from "../../../function/ServerTimeToUserTime";

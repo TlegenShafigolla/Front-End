@@ -1,5 +1,5 @@
-import {session} from "../session";
-import {api} from "../../../App"
+import {session} from "../../session";
+import {api} from "../../../../App"
 
 export function getAnswers(question_id) {
     const authToken = `Bearer ${session()}`;

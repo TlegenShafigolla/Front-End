@@ -4,7 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import Tab from "@material-ui/core/Tab";
 import classes from './invitations.module.css'
 import ListInvitationPreview from "./listInvitationPreview";
-import getInvitations, {deleteInvitations} from "../../services/API/adminAPI/invitations";
+import getInvitations, {deleteInvitations} from "../../services/API/adminAPI/Quiz/invitations";
 
 class Invitations extends React.Component{
     constructor(props){

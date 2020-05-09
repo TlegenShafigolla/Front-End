@@ -1,14 +1,14 @@
 import React from 'react'
 import s from './css/editQuizz.module.css'
-import getQuestions, {postQuestions} from "../../../services/API/adminAPI/questions";
+import getQuestions, {postQuestions} from "../../../services/API/adminAPI/Quiz/questions";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import {Link} from "react-router-dom";
 import Question from "./Question/question";
-import Board from "../Preview/Board";
+import Board from "./Board";
 import EditQuizSettings from "./editQuizSettings";
-import {putQuiz} from "../../../services/API/adminAPI/quiz";
+import {putQuiz} from "../../../services/API/adminAPI/Quiz/quiz";
 import Typography from "@material-ui/core/Typography";
 import {CircularProgress} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";

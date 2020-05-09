@@ -1,5 +1,5 @@
 import React from "react";
-import s from "../MyQuizzes/listQuizPreview.module.css";
+import s from "../MyQuizzes/Preview/listQuizPreview.module.css";
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
 import {Link} from "react-router-dom";
