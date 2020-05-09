@@ -6,6 +6,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
  class CheckEmail  extends React.Component{
      render() {
+         localStorage.removeItem('start_test')
          return (
              <div>
                  <Dialog open={true} fullWidth={true} maxWidth='xs'>

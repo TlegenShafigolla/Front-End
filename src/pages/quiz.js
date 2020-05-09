@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import s from '../components/Quiz/Quiz.module.css'
 import Button from "@material-ui/core/Button";
 import {NavLink} from "react-router-dom";
-import StartTest from "../components/Quiz/StartTesrt";
+import StartTest from "../components/Quiz/QuizDescriptionDialog";
 
 class Quiz extends React.Component {
     constructor(props) {
@@ -51,7 +51,7 @@ class Quiz extends React.Component {
         localStorage.setItem('start_test', 'true')
     };
     onClickContinue = async () => {
-        localStorage.setItem('time_limit', 0)
+        localStorage.setItem('time_limit', '0')
         const path = window.location.pathname.split('/');
         const email = this.state.email;
         await postInvitation(path[2], email).then(json => {
@@ -98,6 +98,7 @@ class Quiz extends React.Component {
             );
 
         } else {
+            localStorage.removeItem(`session_id${path[2]}`)
             return (
                 <div className={s.error}>
                     <NavLink to='/'><Button color='primary'>Back to home page</Button></NavLink>

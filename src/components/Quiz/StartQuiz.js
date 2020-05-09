@@ -32,7 +32,8 @@ class StartQuiz extends React.Component {
             points: null,
             maxPoint: null,
             time_limit: null,
-            timers: null,
+            time_left: null,
+            time: null
         }
     }
 
@@ -96,7 +97,7 @@ class StartQuiz extends React.Component {
 
 
     onClickSubmit = () => {
-        this.setState({timers: null})
+        this.setState({time_limit:null})
         const finished = 1;
         const path = window.location.pathname.split('/');
         const session_id = localStorage.getItem(`session_id${path[2]}`);
@@ -113,7 +114,7 @@ class StartQuiz extends React.Component {
 
 
     componentDidMount() {
-        let path = window.location.pathname.split('/')
+        let path = window.location.pathname.split('/');
         postTakeQuestion(localStorage.getItem(`session_id${path[2]}`)).then(json => {
             console.log(json);
             if (json.time_limit !== null) {
@@ -126,6 +127,16 @@ class StartQuiz extends React.Component {
                 description: json.quiz.description,
                 showResults: json.quiz.showResults,
             });
+            const lastTime = Number(new Date(localStorage.getItem('date')));
+            console.log(lastTime)
+            if (lastTime !== 0 && lastTime !== undefined) {
+                console.log('ok')
+                let newTime = Number(new Date());
+                let time = Math.round((newTime - lastTime) / 1000);
+                console.log(time)
+                let time_limit = Number(localStorage.getItem('time_limit'));
+                localStorage.setItem('time_limit', (time_limit + time).toString())
+            }
             this.startTime()
         });
 
@@ -134,15 +145,19 @@ class StartQuiz extends React.Component {
 
     startTime = () => {
         if (this.state.time_limit !== null) {
-            let newDate = Number(new Date())
-            let timers = Number(new Date(localStorage.getItem('date')))
             let timer = setInterval(() => {
                 let timeLeft = Number(localStorage.getItem('time_limit')) + 1;
                 if (timeLeft >= this.state.time_limit) {
                     clearInterval(timer)
                 }
-                localStorage.setItem('time_limit', timeLeft)
-                this.setState({timers: this.state.time_limit - timeLeft})
+                localStorage.setItem('time_limit', timeLeft.toString());
+                let sec = this.state.time_limit - timeLeft;
+                let h = sec / 3600 ^ 0;
+                let m = (sec - h * 3600) / 60 ^ 0;
+                let s = sec - h * 3600 - m * 60;
+                let time_left = (h < 10 ? "0" + h : h) + " h.  " + (m < 10 ? "0" + m : m) + " min. " + (s < 10 ? "0" + s : s) + " sec.";
+                this.setState({time_left: time_left});
+                this.setState({time: this.state.time_limit - timeLeft})
             }, 1000);
         }
     };
@@ -150,24 +165,24 @@ class StartQuiz extends React.Component {
     render() {
         if (this.state.time_limit !== null) {
             window.onbeforeunload = function () {
-                let date = new Date()
+                let date = new Date();
                 localStorage.setItem('date', date)
             };
         }
-        console.log(this.state.time_limit)
-        if (this.state.timers === 0) {
-            // this.onClickSubmit()
+        if (this.state.time === 0) {
+            this.onClickSubmit();
+            this.setState({time:null})
         }
-        console.log(this.state.time_limit)
         const Transition = React.forwardRef(function Transition(props, ref) {
             return <Slide direction="up" ref={ref} {...props} />;
         });
+
         return (
             <div className={s.quizPage}>
                 <AppBar>
                     <Toolbar className={s.header}>
                         <Typography variant='h5'> {this.state.quiz_name}</Typography>
-                        {this.state.timers === null ? '' : "Time:" + this.state.timers}
+                        {this.state.time_left === null ? '' : "Time left: " + this.state.time_left}
                         <Button onClick={this.onClickSubmit}>End Test</Button>
                     </Toolbar>
                 </AppBar>
