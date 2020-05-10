@@ -37,7 +37,7 @@ class EditQuiz extends React.Component {
             disableAddButton: false,
             editDescription: false,
             editQuestion: false,
-            quizChange: false,
+            quizNameDescriptionChange: false,
             error: false,
             generatePdfDialog: false,
             answers: {},
@@ -87,7 +87,7 @@ class EditQuiz extends React.Component {
         for (let i = 0; i < this.state.questions.length; i++) {
             if (questions[i].order_id !== i + 1) {
                 questions[i].order_id = i + 1;
-                 putQuestions(this.state.quiz_id, questions[i]).then(val => console.log(val));
+                putQuestions(this.state.quiz_id, questions[i]).then(val => console.log(val));
             }
         }
 
@@ -102,14 +102,18 @@ class EditQuiz extends React.Component {
         this.setState({questions: questions});
     };
     changeDescription = (event) => {
-        this.setState({description: event.target.value.trim()});
-        this.setState({error: false});
-        this.setState({quizChange: true})
+        this.setState({
+            description: event.target.value.trim(),
+            error: false,
+            quizNameDescriptionChange: true
+        });
     };
     changeQuizName = (event) => {
-        this.setState({quiz_name: event.target.value.trim()});
-        this.setState({error: false});
-        this.setState({quizChange: true})
+        this.setState({
+            quiz_name: event.target.value.trim(),
+            error: false,
+            quizNameDescriptionChange: true
+        });
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -151,9 +155,9 @@ class EditQuiz extends React.Component {
     onblur = () => {
         if (this.state.quiz_name !== '') {
             this.setState({editQuestion: false});
-            if (this.state.quizChange) {
+            if (this.state.quizNameDescriptionChange) {
                 this.setState({quizChanges: true});
-                this.setState({quizChange: false});
+                this.setState({quizNameDescriptionChange: false});
             }
         } else
             this.setState({error: true});
@@ -162,9 +166,9 @@ class EditQuiz extends React.Component {
     onBlurDescription = () => {
         if (this.state.description !== '') {
             this.setState({editDescription: false});
-            if (this.state.quizChange) {
+            if (this.state.quizNameDescriptionChange) {
                 this.setState({quizChanges: true});
-                this.setState({quizChange: false});
+                this.setState({quizNameDescriptionChange: false});
             }
         }
         this.setState({error: true})
