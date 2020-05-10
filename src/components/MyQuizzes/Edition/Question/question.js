@@ -217,25 +217,31 @@ class Question extends React.Component {
     render() {
         if (this.state.editMode) {
             return <div>
-                <EditQuestion
-                    errorAnswer={this.state.errorAnswer}
-                    errorQuestion={this.state.errorQuestion}
-                    changeCheck={this.changeCheck}
-                    changePoint={this.onChangePoint}
-                    deleteAnswerOnClick={this.deleteAnswerOnClick}
-                    onChangeAnswer={this.onChangeAnswer}
-                    addNewAnswer={this.addNewAnswer}
-                    onChangeQuestion={this.onChangeQuestion}
-                    saveOnClick={this.saveOnClick}
-                    changeType={this.changeType}
-                    editMode={this.state.editMode}
-                    answerType={this.state.answerType}
-                    answers={this.state.answers}
-                    question={this.state.question}
-                    question_id={this.state.id}
-                    index_key={this.state.index_key}
-                    deleteQuestionOnClick={this.deleteQuestionOnClick}
-                    {...this.props}/>
+                <Draggable draggableId={this.props.value._id} index={this.props.index}>
+                    {provided => (
+                        <div {...provided.draggableProps}
+                             {...provided.dragHandleProps}
+                             ref={provided.innerRef}
+                        >
+                            <EditQuestion
+                                errorAnswer={this.state.errorAnswer}
+                                errorQuestion={this.state.errorQuestion}
+                                changeCheck={this.changeCheck}
+                                changePoint={this.onChangePoint}
+                                deleteAnswerOnClick={this.deleteAnswerOnClick}
+                                onChangeAnswer={this.onChangeAnswer}
+                                addNewAnswer={this.addNewAnswer}
+                                onChangeQuestion={this.onChangeQuestion}
+                                saveOnClick={this.saveOnClick}
+                                changeType={this.changeType}
+                                editMode={this.state.editMode}
+                                answerType={this.state.answerType}
+                                answers={this.state.answers}
+                                question={this.state.question}
+                                question_id={this.state.id}
+                                index_key={this.state.index_key}
+                                deleteQuestionOnClick={this.deleteQuestionOnClick}
+                                {...this.props}/></div>)}</Draggable>
                 <Snackbar
                     open={this.state.dialogOpenAnswer}
                     autoHideDuration={6000}
@@ -253,14 +259,14 @@ class Question extends React.Component {
                          {...provided.dragHandleProps}
                          ref={provided.innerRef}
                     >
-            <ShowQuestion editOnClick={this.editOnClick}
-                          deleteQuestionOnClick={this.deleteQuestionOnClick}
-                          editMode={this.state.editMode}
-                          answerType={this.state.answerType}
-                          answers={this.state.answers}
-                          question={this.state.question}
-                          question_id={this.state.id}
-                          {...this.props}/>
+                        <ShowQuestion editOnClick={this.editOnClick}
+                                      deleteQuestionOnClick={this.deleteQuestionOnClick}
+                                      editMode={this.state.editMode}
+                                      answerType={this.state.answerType}
+                                      answers={this.state.answers}
+                                      question={this.state.question}
+                                      question_id={this.state.id}
+                                      {...this.props}/>
                     </div>)}</Draggable>
         )
     }

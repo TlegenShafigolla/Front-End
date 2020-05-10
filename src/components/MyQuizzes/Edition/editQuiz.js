@@ -1,5 +1,6 @@
 import React from 'react'
 import s from './css/editQuizz.module.css'
+import getQuestions, {postQuestions, putQuestions} from "../../../services/API/adminAPI/Quiz/questions";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
@@ -17,7 +18,6 @@ import PDFpreview from "../../../services/Factories/QuizPdf/preview";
 import GeneratePdfDialog from "./generatePdfDialog";
 import {DragDropContext, Droppable} from "react-beautiful-dnd";
 import index from "styled-components/dist/styled-components-macro.esm";
-import getQuestions, {postQuestions, putQuestions} from "../../../services/API/adminAPI/Quiz/questions";
 
 class EditQuiz extends React.Component {
     constructor(props) {
@@ -87,9 +87,10 @@ class EditQuiz extends React.Component {
         for (let i = 0; i < this.state.questions.length; i++) {
             if (questions[i].order_id !== i + 1) {
                 questions[i].order_id = i + 1;
-                putQuestions(this.state.quiz_id, questions[i]).then(val => console.log(val));
+                 putQuestions(this.state.quiz_id, questions[i]).then(val => console.log(val));
             }
         }
+
     };
     deleteQuestion = async (order_id) => {
         let questions = this.state.questions;
