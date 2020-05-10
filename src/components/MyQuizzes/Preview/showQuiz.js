@@ -55,9 +55,7 @@ class ShowQuiz extends React.Component {
                         <Typography variant="h5" component="h2" noWrap>
                             {this.props.quiz_name}
                         </Typography>
-                        < Typography noWrap
-                                     className={s.title}
-                                     gutterBottom> {this.props.description}
+                        < Typography className={s.title}> {this.props.description}
                         </Typography>
                         <Typography className={s.pos}> {this.props.value.questions_count.toString()} </Typography>
                         <Typography variant="body2"
