@@ -1,5 +1,5 @@
 import React from "react";
-import EditQuiz from "./Edition/editQuiz";
+import EditQuiz from "./Editing/editQuiz";
 import {Route} from "react-router-dom";
 import ListQuizPreview from "./Preview/listQuizPreview";
 

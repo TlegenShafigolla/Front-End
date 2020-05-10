@@ -1,6 +1,5 @@
 import React from 'react'
 import s from './css/editQuizz.module.css'
-import getQuestions, {postQuestions, putQuestions} from "../../../services/API/adminAPI/Quiz/questions";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
@@ -12,12 +11,10 @@ import {putQuiz} from "../../../services/API/adminAPI/Quiz/quiz";
 import Typography from "@material-ui/core/Typography";
 import {CircularProgress} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
-import PDFpreview from "../../../services/Factories/QuizPdf/preview";
 import GeneratePdfDialog from "./generatePdfDialog";
 import {DragDropContext, Droppable} from "react-beautiful-dnd";
-import index from "styled-components/dist/styled-components-macro.esm";
+import getQuestions, {postQuestions, putQuestions} from "../../../services/API/adminAPI/Quiz/questions";
 
 class EditQuiz extends React.Component {
     constructor(props) {
@@ -36,8 +33,8 @@ class EditQuiz extends React.Component {
             quizChanges: false,
             disableAddButton: false,
             editDescription: false,
-            editQuestion: false,
             quizNameDescriptionChange: false,
+            editQuizName: false,
             error: false,
             generatePdfDialog: false,
             answers: {},
@@ -90,7 +87,6 @@ class EditQuiz extends React.Component {
                 putQuestions(this.state.quiz_id, questions[i]).then(val => console.log(val));
             }
         }
-
     };
     deleteQuestion = async (order_id) => {
         let questions = this.state.questions;
@@ -148,13 +144,13 @@ class EditQuiz extends React.Component {
         this.setState({quizChanges: true})
     };
 
-    editQuestion = () => {
-        this.setState({editQuestion: true})
+    editQuizName = () => {
+        this.setState({editQuizName: true})
     };
 
-    onblur = () => {
+    onBlurQuizName = () => { //TODO Tlegen, che za function
         if (this.state.quiz_name !== '') {
-            this.setState({editQuestion: false});
+            this.setState({editQuizName: false});
             if (this.state.quizNameDescriptionChange) {
                 this.setState({quizChanges: true});
                 this.setState({quizNameDescriptionChange: false});
@@ -163,7 +159,7 @@ class EditQuiz extends React.Component {
             this.setState({error: true});
     };
 
-    onBlurDescription = () => {
+    onBlurDescription = () => { //TODO Tlegen, che za function - 2
         if (this.state.description !== '') {
             this.setState({editDescription: false});
             if (this.state.quizNameDescriptionChange) {
@@ -198,7 +194,7 @@ class EditQuiz extends React.Component {
             );
         }
         return (
-            <div className={s.body}>
+            <div className={s.Body}>
                 <div className={s.ArrowButton}>
                     <Link to='/admin/quizzes/'>
                         <IconButton className={s.ArrowBackIosIcon} color="primary">
@@ -206,14 +202,14 @@ class EditQuiz extends React.Component {
                         </IconButton>
                     </Link>
                 </div>
-                <div className={s.edit}>
+                <div className={s.Edit}>
                     <div className={s.QuizName}>
-                        {this.state.editQuestion ?
-                            <TextField error={this.state.error} onBlur={this.onblur} onChange={this.changeQuizName}
+                        {this.state.editQuizName ?
+                            <TextField error={this.state.error} onBlur={this.onBlurQuizName} onChange={this.changeQuizName}
                                        autoFocus fullWidth
                                        variant='outlined' margin='dense'
                                        defaultValue={this.state.quiz_name}/> :
-                            <Typography onClick={this.editQuestion} noWrap
+                            <Typography onClick={this.editQuizName} noWrap
                                         variant='h4'> {this.state.quiz_name}</Typography>}
                         {this.state.editDescription ?
                             <TextField error={this.state.error} onChange={this.changeDescription}
@@ -223,7 +219,7 @@ class EditQuiz extends React.Component {
                             <Typography onClick={() => this.setState({editDescription: true})}
                                         variant='body1'>{this.state.description}</Typography>}
                     </div>
-                    <div className={s.settings}>
+                    <div className={s.Settings}>
                         <EditQuizSettings pointsChecked={this.pointsChecked}
                                           mixedChecked={this.mixedChecked}
                                           showResultsChecked={this.showResultsChecked}
@@ -234,7 +230,7 @@ class EditQuiz extends React.Component {
                         />
                     </div>
                     <DragDropContext onDragEnd={this.onDragEnd}>
-                        <div className={s.question}>
+                        <div className={s.Question}>
                             <Droppable droppableId={this.state.quiz_id.toString()}>
                                 {provided => (
                                     <div
@@ -256,14 +252,14 @@ class EditQuiz extends React.Component {
                         </div>
                     </DragDropContext>
                     <div>
-                        <IconButton color='primary' size='medium' className={s.addButton}
+                        <IconButton color='primary' size='medium' className={s.AddButton}
                                     onClick={this.addNewQuestion}>
                             <AddIcon fontSize='large'/>
                         </IconButton>
                     </div>
                 </div>
                 <div className={this.state.questions.length === 0 ? s.display : s.board}>
-                    <div className={s.boardRows}>
+                    <div className={s.BoardRows}>
                         {this.state.questions === undefined || this.state.questions === null ? null :
                             this.state.questions.map((val, index) =>
                                 <Board value={val} index={index} key={val.order_id}/>

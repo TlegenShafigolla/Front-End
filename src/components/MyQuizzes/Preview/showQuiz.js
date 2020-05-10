@@ -10,7 +10,7 @@ import {Tooltip} from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import SendIcon from '@material-ui/icons/Send';
 import DeleteQuizDialog from "./deleteQuizDialog";
-import InviteDialog from "../Edition/Invite/inviteDialog";
+import InviteDialog from "../Editing/Invite/inviteDialog";
 
 class ShowQuiz extends React.Component {
     constructor(props) {
