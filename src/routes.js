@@ -1,22 +1,22 @@
 import React from "react";
-import admin from "./pages/admin";
-import users from "./pages/user";
+import Admin from "./pages/admin";
+import Users from "./pages/user";
 import Login from "./pages/login";
 import {Route, Switch} from "react-router-dom";
 import {PrivateAdminRoute, PrivateUserRoute} from "./function/PrivateRoute";
-import home from "./pages/home";
+import Home from "./pages/home";
 import Quiz from "./pages/quiz";
-import Signup from "./pages/signup";
+import SignUp from "./pages/signUp";
 
 const Routes = () => {
     return (
         <Switch>
-            <Route exact path="/" component={home}/>
-            <Route path="/login" component={Login}/>
-            <Route path='/registration' component={Signup}/>
-            <Route path='/quiz/:link' component={Quiz}/>
-            <PrivateAdminRoute  path="/admin/" component={admin}/>
-            <PrivateUserRoute path="/user" component={users}/>
+            <Route exact path="/" render={() => <Home/>}/>
+            <Route path="/login" render={() => <Login/>}/>
+            <Route path='/registration' render={() => <SignUp/>}/>
+            <Route path='/quiz/:link' render={() => <Quiz/>}/>
+            <PrivateAdminRoute path="/admin/" render={() => <Admin/>}/>
+            <PrivateUserRoute path="/user" render={() => <Users/>}/>
         </Switch>
     );
 };

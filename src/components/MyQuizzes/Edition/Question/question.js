@@ -9,6 +9,7 @@ import s from '../css/editQuestion.module.css'
 import Typography from "@material-ui/core/Typography";
 import Alert from "@material-ui/lab/Alert";
 import $ from "jquery";
+import {Draggable} from "react-beautiful-dnd";
 
 class Question extends React.Component {
     state = {
@@ -246,6 +247,12 @@ class Question extends React.Component {
             </div>
         }
         return (
+            <Draggable draggableId={this.props.value._id} index={this.props.index}>
+                {provided => (
+                    <div {...provided.draggableProps}
+                         {...provided.dragHandleProps}
+                         ref={provided.innerRef}
+                    >
             <ShowQuestion editOnClick={this.editOnClick}
                           deleteQuestionOnClick={this.deleteQuestionOnClick}
                           editMode={this.state.editMode}
@@ -254,6 +261,7 @@ class Question extends React.Component {
                           question={this.state.question}
                           question_id={this.state.id}
                           {...this.props}/>
+                    </div>)}</Draggable>
         )
     }
 }

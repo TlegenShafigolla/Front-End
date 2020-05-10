@@ -7,11 +7,11 @@ import {Link} from "react-router-dom";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import {Tooltip} from "@material-ui/core";
-import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SendIcon from '@material-ui/icons/Send';
 import DeleteQuizDialog from "./deleteQuizDialog";
-import InviteDialog from "../Edition/inviteDialog";
+import InviteDialog from "../Edition/Invite/inviteDialog";
+import {DragDropContext, Droppable} from "react-beautiful-dnd";
 
 class ShowQuiz extends React.Component {
     constructor(props) {

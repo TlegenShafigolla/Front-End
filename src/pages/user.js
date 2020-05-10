@@ -1,6 +1,6 @@
 import React from 'react'
 
-class users extends React.Component{
+class Users extends React.Component{
 render(){
 return(
     <form>
@@ -8,4 +8,4 @@ return(
     </form>
 );
 }
-}export default users;
+}export default Users;

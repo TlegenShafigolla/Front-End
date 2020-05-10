@@ -11,10 +11,12 @@ class FillTheBlank extends React.Component {
         };
     }
     render() {
+
         if(this.props.answers[0] === undefined){
             this.props.addNewAnswer(1,1);
             return null;
         }
+
         return (
             <div className={s.SaveAnswer}>
                 <TextField

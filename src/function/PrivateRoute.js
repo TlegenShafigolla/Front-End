@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
-export const PrivateAdminRoute = ({ component: Component, ...rest }) => (
+export const PrivateAdminRoute = ({ render: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
@@ -14,7 +14,7 @@ export const PrivateAdminRoute = ({ component: Component, ...rest }) => (
     }
   />
   );
-    export const PrivateUserRoute = ({ component: Component, ...rest }) => (
+    export const PrivateUserRoute = ({ render: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>

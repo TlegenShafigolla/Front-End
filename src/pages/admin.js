@@ -6,7 +6,7 @@ import {Routes} from "../function/Routes";
 import {Redirect} from "react-router-dom";
 import getProfile from "../services/API/adminAPI/profile";
 
-class admin extends Component {
+class Admin extends Component {
 
     constructor(props) {
         super(props);
@@ -61,4 +61,4 @@ class admin extends Component {
 
 }
 
-export default admin;
+export default Admin;

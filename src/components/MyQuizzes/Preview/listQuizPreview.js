@@ -47,7 +47,6 @@ class ListQuizPreview extends React.Component {
         }
         this.setState({quizzes: quizzes});
     };
-
     render() {
         if (this.state.quizzes === null) {
             return (
@@ -57,19 +56,19 @@ class ListQuizPreview extends React.Component {
             );
         }
         return (
-            <div className={s.Container}>
-                <div>
+                <div className={s.Container}>
                     {this.state.quizzes !== undefined ? this.state.quizzes.map((val, index) =>
                         <Quiz key={val._id} id={index}
+                              index={index}
                               value={val}
                               deleteQuiz={this.deleteQuiz}
-                        />) : ' '}
+                        />
+                    ) : ' '}
+                    <IconButton color="primary" onClick={this.addNewQuizz}>
+                        <AddIcon fontSize='large'/>
+                    </IconButton>
                 </div>
-                <IconButton color="primary" onClick={this.addNewQuizz}>
-                    <AddIcon fontSize='large'/>
-                </IconButton>
 
-            </div>
         );
     }
 

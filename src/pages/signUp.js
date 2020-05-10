@@ -2,7 +2,7 @@ import React from "react";
 import s from '../css/SignUp.module.css'
 import Registration from "../components/SignUp/SignUp";
 
-class Signup extends React.Component {
+class SignUp extends React.Component {
 
 
     render() {
@@ -14,4 +14,4 @@ class Signup extends React.Component {
     }
 }
 
-export default Signup;
+export default SignUp;

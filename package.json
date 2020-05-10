@@ -13,6 +13,7 @@
     "clsx": "^1.1.0",
     "jquery": "^3.5.0",
     "react": "^16.13.1",
+    "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^16.13.1",
     "react-pdf": "4.1.0",
     "react-router-dom": "^5.1.2",

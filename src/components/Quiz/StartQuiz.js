@@ -97,7 +97,7 @@ class StartQuiz extends React.Component {
 
 
     onClickSubmit = () => {
-        this.setState({time_limit:null})
+        this.setState({time_limit:null});
         const finished = 1;
         const path = window.location.pathname.split('/');
         const session_id = localStorage.getItem(`session_id${path[2]}`);
@@ -128,12 +128,9 @@ class StartQuiz extends React.Component {
                 showResults: json.quiz.showResults,
             });
             const lastTime = Number(new Date(localStorage.getItem('date')));
-            console.log(lastTime)
             if (lastTime !== 0 && lastTime !== undefined) {
-                console.log('ok')
                 let newTime = Number(new Date());
                 let time = Math.round((newTime - lastTime) / 1000);
-                console.log(time)
                 let time_limit = Number(localStorage.getItem('time_limit'));
                 localStorage.setItem('time_limit', (time_limit + time).toString())
             }

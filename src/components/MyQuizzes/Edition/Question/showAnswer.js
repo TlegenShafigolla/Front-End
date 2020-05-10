@@ -13,7 +13,6 @@ class ShowAnswer extends React.Component {
             multiple_choice: this.props.answerType === 'MULTIPLE CHOICE',
             fill_the_blank: this.props.answerType === 'FILL THE BLANK',
         };
-
     }
 
     render() {
@@ -36,8 +35,8 @@ class ShowAnswer extends React.Component {
 
                 </div>
                 <div>
-                    {this.props.answers === null ? '' : this.props.answers.map(val =>
-                        <div className={s.answer} key={val._id}>
+                    {this.props.answers === null ? '' : this.props.answers.map((val,index) =>
+                        <div className={s.answer} key={val._id+index}>
                             <Typography variant="body1" noWrap>
                                 {val.answer}
                             </Typography>

@@ -1,6 +1,6 @@
 import React from 'react'
 import s from './css/editQuizz.module.css'
-import getQuestions, {postQuestions} from "../../../services/API/adminAPI/questions";
+import getQuestions, {postQuestions, putQuestions} from "../../../services/API/adminAPI/questions";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
@@ -12,17 +12,18 @@ import {putQuiz} from "../../../services/API/adminAPI/quiz";
 import Typography from "@material-ui/core/Typography";
 import {CircularProgress} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
 import PDFpreview from "../../../services/Factories/QuizPdf/preview";
 import GeneratePdfDialog from "./generatePdfDialog";
+import {DragDropContext, Droppable} from "react-beautiful-dnd";
+import index from "styled-components/dist/styled-components-macro.esm";
 
-class editQuiz extends React.Component {
+class EditQuiz extends React.Component {
     constructor(props) {
         super(props);
-        const {id} = this.props.match.params;
+        const id = window.location.pathname.split('/');
         this.state = {
-            quiz_id: id,
+            quiz_id: id[4],
             questions: null,
             mixed: null,
             showResults: null,
@@ -70,7 +71,25 @@ class editQuiz extends React.Component {
         window.scrollTo({top: height, behavior: "smooth"});
         this.setState({disableAddButton: false});
     };
-
+    onDragEnd = result => {
+        const {destination, source, draggableId} = result;
+        if (!destination) {
+            return;
+        }
+        if (destination.droppableId === source.droppableId && destination.index === source.index) {
+            return;
+        }
+        let questions = this.state.questions;
+        let draggableQuestion = this.state.questions[source.index];
+        questions.splice(source.index, 1);
+        questions.splice(destination.index, 0, draggableQuestion)
+        for (let i = 0; i < this.state.questions.length; i++) {
+            if (questions[i].order_id !== i + 1) {
+                questions[i].order_id = i + 1;
+                putQuestions(this.state.quiz_id, questions[i]).then(val => console.log(val));
+            }
+        }
+    };
     deleteQuestion = async (order_id) => {
         let questions = this.state.questions;
         questions.splice(order_id - 1, 1);
@@ -164,6 +183,7 @@ class editQuiz extends React.Component {
     };
 
     render() {
+        console.log(this.state.questions)
 
         if (this.state.questions === null) {
             return (
@@ -208,19 +228,30 @@ class editQuiz extends React.Component {
                                           lastedit={this.state.last_edited_date}
                         />
                     </div>
-                    <div className={s.question}>
-                        {this.state.questions === undefined || this.state.questions === null ? ' ' :
-                            this.state.questions.map(val => <Question
-                                key={val._id}
-                                value={val}
-                                point={this.state.points}
-                                deleteQuestion={this.deleteQuestion}
-                                setQuestion={this.setQuestion}
-                                setAnswers={this.setAnswers}
-                            />)}
-                    </div>
+                    <DragDropContext onDragEnd={this.onDragEnd}>
+                        <div className={s.question}>
+                            <Droppable droppableId={this.state.quiz_id.toString()}>
+                                {provided => (
+                                    <div
+                                        {...provided.droppableProps}
+                                        ref={provided.innerRef}
+                                    >
+                                        {this.state.questions === undefined || this.state.questions === null ? ' ' :
+                                            this.state.questions.map((val, index) =>
+                                                <Question
+                                                    index={index}
+                                                    key={val._id}
+                                                    value={val}
+                                                    point={this.state.points}
+                                                    deleteQuestion={this.deleteQuestion}
+                                                    setQuestion={this.setQuestion}
+                                                    setAnswers={this.setAnswers}
+                                                />)}
+                                        {provided.placeholder}</div>)}</Droppable>
+                        </div>
+                    </DragDropContext>
                     <div>
-                        <IconButton color='primary' size='medium' className={s.addbutton}
+                        <IconButton color='primary' size='medium' className={s.addButton}
                                     onClick={this.addNewQuestion}>
                             <AddIcon fontSize='large'/>
                         </IconButton>
@@ -229,7 +260,10 @@ class editQuiz extends React.Component {
                 <div className={this.state.questions.length === 0 ? s.display : s.board}>
                     <div className={s.boardRows}>
                         {this.state.questions === undefined || this.state.questions === null ? null :
-                            this.state.questions.map(val => <Board key={val.order_id} value={val}/>)}
+                            this.state.questions.map((val, index) =>
+                                <Board value={val} index={index} key={val.order_id}/>
+                            )}
+
                     </div>
                 </div>
                 <Button variant="outlined" color="primary" onClick={this.openPdfDialog}>
@@ -251,6 +285,7 @@ class editQuiz extends React.Component {
     componentDidMount() {
         getQuestions(this.state.quiz_id).then(json => {
             let date = new Date(json.last_edited_date);
+            console.log(json.questions)
             this.setState({
                 mixed: json.mixed,
                 showResults: json.showResults,
@@ -265,4 +300,4 @@ class editQuiz extends React.Component {
     }
 }
 
-export default editQuiz;
+export default EditQuiz;

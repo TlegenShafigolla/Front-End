@@ -14,12 +14,13 @@ import {
     Snackbar
 } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
-import s from "../listQuizPreview.module.css";
-import {postInvitations} from "../../../services/API/adminAPI/invitations";
+import s from "../../listQuizPreview.module.css";
+import {postInvitations} from "../../../../services/API/adminAPI/invitations";
 import Alert from "@material-ui/lab/Alert";
 import Checkbox from "@material-ui/core/Checkbox";
-import {UserTimeToServerTime, ServerTomeZone} from "../../../function/ServerTimeToUserTime";
 import $ from 'jquery'
+import Person from "./person";
+import Group from "./group";
 
 class InviteDialog extends React.Component {
     constructor(props) {
@@ -29,6 +30,7 @@ class InviteDialog extends React.Component {
             name: null,
             surname: null,
             email: null,
+            person: true,
             errorName: false,
             errorSurname: false,
             errorEmail: false,
@@ -84,18 +86,9 @@ class InviteDialog extends React.Component {
         let time;
         let start;
         let end;
-        {
-            this.state.checkEnd ? end = this.state.end_date : end = null
-        }
-        ;
-        {
-            this.state.checkStart ? start = this.state.start_date : start = null
-        }
-        ;
-        {
-            this.state.checkTime ? time = this.state.time_limit : time = null
-        }
-        ;
+        this.state.checkEnd ? end = this.state.end_date : end = null;
+        this.state.checkStart ? start = this.state.start_date : start = null;
+        this.state.checkTime ? time = this.state.time_limit : time = null;
         if (this.state.name !== null && this.state.name !== '' && this.state.surname !== null && this.state.surname !== '' && email.test(this.state.email)) {
             const invite = {
                 name: this.state.name,
@@ -137,7 +130,12 @@ class InviteDialog extends React.Component {
     snackClose = () => {
         this.setState({openSnackbar: false})
     };
-
+    onChangePerson = () => {
+        this.setState({person: true})
+    };
+    onChangeGroup = () => {
+        this.setState({person: false})
+    };
     onChangeName = (event) => {
         this.setState({name: event.target.value});
         this.setState({errorName: false})
@@ -145,13 +143,11 @@ class InviteDialog extends React.Component {
 
     componentDidMount() {
         let date = new Date().toISOString().replace('Z', '').split('.');
-        this.setState({date: date[0]});
-        this.setState({end_date: date[0]})
+        this.setState({date: date[0], end_date: date[0]});
     }
 
     onChangeSurname = (event) => {
-        this.setState({surname: event.target.value});
-        this.setState({errorSurname: false})
+        this.setState({surname: event.target.value, errorSurname: false});
     };
 
     onChangeEmail = (event) => {
@@ -202,44 +198,26 @@ class InviteDialog extends React.Component {
                             <div className={s.radioButton}>
 
                                 <FormControlLabel value="person" control={<Radio color="primary"/>}
-                                                  checked={true}
+                                                  checked={this.state.person}
+                                                  onChange={this.onChangePerson}
                                                   label="Person"/>
                                 <FormControlLabel value="Class" control={<Radio color="primary"/>}
-                                                  checked={true}
-                                                  disabled={true} label='Class'/>
+                                                  checked={!this.state.person}
+                                                  onChange={this.onChangeGroup}
+                                                  label='Group'/>
                             </div>
 
                         </RadioGroup>
                     </FormControl>
                     <DialogContent>
-                        <TextField
-                            error={this.state.errorName}
-                            autoFocus
-                            margin="dense"
-                            id="name"
-                            label="Name"
-                            fullWidth
-                            variant='outlined'
-                            onChange={this.onChangeName}
-                        /> <TextField
-                        error={this.state.errorSurname}
-                        margin="dense"
-                        id="Surname"
-                        label="Surname"
-                        fullWidth
-                        variant='outlined'
-                        onChange={this.onChangeSurname}
-                    />
-                        <TextField
-                            error={this.state.errorEmail}
-                            margin="dense"
-                            id="Email"
-                            label="Email Address"
-                            type="email"
-                            fullWidth
-                            variant='outlined'
-                            onChange={this.onChangeEmail}
-                        />
+                        {this.state.person ?
+                            <Person errorName={this.state.errorName}
+                                    errorSurname={this.state.errorSurname}
+                                    errorEmail={this.state.errorEmail}
+                                    onChangeName={this.onChangeName}
+                                    onChangeSurname={this.onChangeSurname}
+                                    onChangeEmail={this.onChangeEmail}
+                            /> : <Group/>}
                         <FormControlLabel control={<Checkbox color={"primary"}/>}
                                           label={"More options"}/>
                         <div className={s.time}>

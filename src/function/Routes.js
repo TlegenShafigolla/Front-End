@@ -49,10 +49,10 @@ export const Routes = (props) => {
                 [classes.contentShift]: props.open,
             })}>
                 <div className={classes.drawerHeader}/>
-                <Route path="/admin/profile" component={Profile}/>
-                <Route path="/admin/quizzes" component={MyQuizRoute}/>
-                <Route path="/admin/invitations" component={Invitations}/>
-                <Route path="/admin/reports" component={ReportRoute}/>
+                <Route path="/admin/profile" render={() => <Profile/>}/>
+                <Route path="/admin/quizzes" render={() => <MyQuizRoute/>}/>
+                <Route path="/admin/invitations" render={() => <Invitations/>}/>
+                <Route path="/admin/reports" render={() => <ReportRoute/>}/>
             </main>
         </div>
     );

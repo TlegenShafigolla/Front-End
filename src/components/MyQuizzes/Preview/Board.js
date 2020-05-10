@@ -1,32 +1,26 @@
 import React from "react";
 import s from './Board.module.css'
-import { Link} from 'react-scroll'
-class board extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            question_id: props.id,
+import {Link} from 'react-scroll'
+import {Draggable} from "react-beautiful-dnd";
 
-        };
-    }
-    render() {
-        return (
-            <Link
-                activeClass="active"
-                to={this.props.value.order_id.toString()}
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration= {500}
-            >
+const board = (props) => {
+    return (
+        <Link
+            activeClass="active"
+            to={props.value.order_id.toString()}
+            spy={true}
+            smooth={true}
+            offset={-70}
+            duration={500}
+        >
             <div className={s.Board}>
                 <div className={s.orderId}>
-                    {this.props.value.order_id}
+                    {props.value.order_id}
                 </div>
-                {this.props.value.type==='FILL THE BLANK'?'FB':'MC'}
+                {props.value.type === 'FILL THE BLANK' ? 'FB' : 'MC'}
             </div>
-            </Link>
-        );
-    };
-}
+        </Link>
+    );
+};
+
 export default board;
