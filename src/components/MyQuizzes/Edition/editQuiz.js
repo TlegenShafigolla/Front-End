@@ -1,6 +1,5 @@
 import React from 'react'
 import s from './css/editQuizz.module.css'
-import getQuestions, {postQuestions, putQuestions} from "../../../services/API/adminAPI/questions";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
@@ -18,6 +17,7 @@ import PDFpreview from "../../../services/Factories/QuizPdf/preview";
 import GeneratePdfDialog from "./generatePdfDialog";
 import {DragDropContext, Droppable} from "react-beautiful-dnd";
 import index from "styled-components/dist/styled-components-macro.esm";
+import getQuestions, {postQuestions, putQuestions} from "../../../services/API/adminAPI/Quiz/questions";
 
 class EditQuiz extends React.Component {
     constructor(props) {

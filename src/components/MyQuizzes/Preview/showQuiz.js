@@ -11,7 +11,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import SendIcon from '@material-ui/icons/Send';
 import DeleteQuizDialog from "./deleteQuizDialog";
 import InviteDialog from "../Edition/Invite/inviteDialog";
-import {DragDropContext, Droppable} from "react-beautiful-dnd";
 
 class ShowQuiz extends React.Component {
     constructor(props) {

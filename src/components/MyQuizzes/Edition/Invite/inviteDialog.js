@@ -14,13 +14,13 @@ import {
     Snackbar
 } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
-import s from "../Preview/listQuizPreview.module.css";
-import {postInvitations} from "../../../services/API/adminAPI/Quiz/invitations";
+import s from "../../Preview/listQuizPreview.module.css";
 import Alert from "@material-ui/lab/Alert";
 import Checkbox from "@material-ui/core/Checkbox";
 import $ from 'jquery'
 import Person from "./person";
 import Group from "./group";
+import {postInvitations} from "../../../../services/API/adminAPI/Quiz/invitations";
 
 class InviteDialog extends React.Component {
     constructor(props) {

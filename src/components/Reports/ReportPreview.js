@@ -17,7 +17,7 @@ class ReportPreview extends React.Component{
                     <Typography className={s.pos}
                                 color="textSecondary"> {this.props.val.email} </Typography>
                     <Typography variant="body2"
-                                component="p"> {this.props.val.session.end_date} </Typography>
+                                component="p"> {this.props.val.end_date} </Typography>
                     <Link to={'/admin/reports/' + this.props.val._id.toString()}>
                         <Button color="primary">
                             Check
