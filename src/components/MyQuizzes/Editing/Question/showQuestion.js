@@ -8,7 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 
 const ShowQuestion = (props) => {
         return (
-            <div className={s.question} id={props.value.order_id.toString()}>
+            <div className={s.Question} id={props.value.order_id.toString()}>
                 <div onClick={props.editOnClick}>
                     <div className={s.questioninfo}>
                         <div className={s.questionOrder}>{props.value.order_id}.</div>
