@@ -1,20 +1,20 @@
-import {session} from "../session";
-import {api} from "../../../App"
+import {session} from "../../session";
+import {api} from "../../../../App"
 
-export default function getQuiz() {
+export default function getSurvey() {
     const authToken = `Bearer ${session()}`;
     const requestOptions = {
         method: 'GET',
         headers: {Authorization: authToken},
     };
 
-    const json = fetch(`${api}/quiz`, requestOptions).then(res => {
+    const json = fetch(`${api}/survey`, requestOptions).then(res => {
         return res.json();
     });
     return json;
 }
 
-export function postQuiz(quiz) {
+export function postSurvey(survey) {
     const authToken = `Bearer ${session()}`;
     const requestOptions = {
         method: 'POST',
@@ -23,14 +23,14 @@ export function postQuiz(quiz) {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(quiz),
+        body: JSON.stringify(survey),
     };
-    return fetch(`${api}/quiz`, requestOptions).then(res => {
+    return fetch(`${api}/survey`, requestOptions).then(res => {
         return res.json();
     })
 }
 
-export function putQuiz(quiz) {
+export function putSurvey(survey) {
     const authToken = `Bearer ${session()}`;
     const requestOptions = {
         method: 'PUT',
@@ -39,14 +39,14 @@ export function putQuiz(quiz) {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(quiz),
+        body: JSON.stringify(survey),
     };
     return fetch(`${api}/quiz`, requestOptions).then(res => {
         return res.json();
     })
 }
 
-export function deleteQuiz(quiz_id) {
+export function deleteSurvey(survey_id) {
     const authToken = `Bearer ${session()}`;
     const requestOptions = {
         method: 'DELETE',
@@ -56,7 +56,7 @@ export function deleteQuiz(quiz_id) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            _id: quiz_id
+            _id: survey_id
         })
     };
 

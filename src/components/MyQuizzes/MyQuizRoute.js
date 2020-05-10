@@ -10,5 +10,5 @@ const MyQuizRoute = () => {
             <Route path='/admin/quizzes/edit/:id' render={()=><EditQuiz/>}/>
         </div>
     )
-}
+};
 export default MyQuizRoute;

@@ -6,12 +6,13 @@ import AddIcon from "@material-ui/icons/Add";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import {Link} from "react-router-dom";
 import Question from "./Question/question";
-import Board from "../Preview/Board";
+import Board from "./Board";
 import EditQuizSettings from "./editQuizSettings";
-import {putQuiz} from "../../../services/API/adminAPI/quiz";
+import {putQuiz} from "../../../services/API/adminAPI/Quiz/quiz";
 import Typography from "@material-ui/core/Typography";
 import {CircularProgress} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
 import PDFpreview from "../../../services/Factories/QuizPdf/preview";
 import GeneratePdfDialog from "./generatePdfDialog";
@@ -183,7 +184,6 @@ class EditQuiz extends React.Component {
     };
 
     render() {
-        console.log(this.state.questions)
 
         if (this.state.questions === null) {
             return (
@@ -285,7 +285,6 @@ class EditQuiz extends React.Component {
     componentDidMount() {
         getQuestions(this.state.quiz_id).then(json => {
             let date = new Date(json.last_edited_date);
-            console.log(json.questions)
             this.setState({
                 mixed: json.mixed,
                 showResults: json.showResults,

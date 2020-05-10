@@ -1,6 +1,6 @@
 import React from "react";
 import ShowQuiz from "./showQuiz";
-import {deleteQuiz, putQuiz} from "../../../services/API/adminAPI/quiz";
+import {deleteQuiz, putQuiz} from "../../../services/API/adminAPI/Quiz/quiz";
 
 class Quiz extends React.Component {
     constructor(props) {

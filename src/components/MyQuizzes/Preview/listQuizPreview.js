@@ -1,7 +1,7 @@
 import React from "react";
-import getQuiz, {postQuiz} from "../../../services/API/adminAPI/quiz";
+import getQuiz, {postQuiz} from "../../../services/API/adminAPI/Quiz/quiz";
 import Quiz from "./quiz";
-import s from '../listQuizPreview.module.css'
+import s from './listQuizPreview.module.css'
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from '@material-ui/icons/Add';
 import CircularProgress from "@material-ui/core/CircularProgress";

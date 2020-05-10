@@ -1,5 +1,5 @@
-import {session} from "../session";
-import {api} from "../../../App"
+import {session} from "../../session";
+import {api} from "../../../../App"
 
 export default function getQuestions(quiz_id) {
     const authToken = `Bearer ${session()}`;

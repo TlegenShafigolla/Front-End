@@ -1,8 +1,8 @@
 import React from "react";
 import ShowQuestion from "./showQuestion";
 import EditQuestion from "./editQuestion";
-import {getAnswers, deleteAnswers, postAnswers, putAnswers} from "../../../../services/API/adminAPI/answers";
-import {deleteQuestions, putQuestions} from "../../../../services/API/adminAPI/questions";
+import {getAnswers, deleteAnswers, postAnswers, putAnswers} from "../../../../services/API/adminAPI/Quiz/answers";
+import {deleteQuestions, putQuestions} from "../../../../services/API/adminAPI/Quiz/questions";
 import makeID from "../../../../services/utils";
 import Snackbar from "@material-ui/core/Snackbar";
 import s from '../css/editQuestion.module.css'

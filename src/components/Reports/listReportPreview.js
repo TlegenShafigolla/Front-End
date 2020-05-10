@@ -1,5 +1,5 @@
 import React from "react";
-import getReportList from "../../services/API/adminAPI/reports";
+import getReportList from "../../services/API/adminAPI/Quiz/reports";
 import ReportPreview from "./ReportPreview";
 import s from './ListReportPreview.module.css'
 import CircularProgress from "@material-ui/core/CircularProgress";

@@ -1,5 +1,5 @@
 import React from "react";
-import s from "../listQuizPreview.module.css";
+import s from "./listQuizPreview.module.css";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
