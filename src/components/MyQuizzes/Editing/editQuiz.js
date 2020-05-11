@@ -230,10 +230,10 @@ class EditQuiz extends React.Component {
                         />
                     </div>
                     <DragDropContext onDragEnd={this.onDragEnd}>
-                        <div className={s.Question}>
                             <Droppable droppableId={this.state.quiz_id.toString()}>
                                 {provided => (
                                     <div
+                                        className={s.Question}
                                         {...provided.droppableProps}
                                         ref={provided.innerRef}
                                     >
@@ -249,7 +249,6 @@ class EditQuiz extends React.Component {
                                                     setAnswers={this.setAnswers}
                                                 />)}
                                         {provided.placeholder}</div>)}</Droppable>
-                        </div>
                     </DragDropContext>
                     <div>
                         <IconButton color='primary' size='medium' className={s.AddButton}

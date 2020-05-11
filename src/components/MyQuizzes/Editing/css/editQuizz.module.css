@@ -8,18 +8,18 @@
 }
 
 .Edit {
-    width: 50%;
+    width: 700px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
 }
 
 .Settings {
     width: 100%;
     box-shadow: 5px 5px 10px #333333;
     padding: 10px;
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
 }
 
@@ -40,7 +40,7 @@
     box-shadow: 0px 0px 5px #333333;
     position: fixed;
     padding: 5px;
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;

@@ -258,6 +258,7 @@ class Question extends React.Component {
                     <div {...provided.draggableProps}
                          {...provided.dragHandleProps}
                          ref={provided.innerRef}
+                         className={s.Question}
                     >
                         <ShowQuestion editOnClick={this.editOnClick}
                                       deleteQuestionOnClick={this.deleteQuestionOnClick}

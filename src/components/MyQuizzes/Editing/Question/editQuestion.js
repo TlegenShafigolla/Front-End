@@ -62,7 +62,7 @@ class EditQuestion extends React.Component {
     };
     render() {
         return (
-            <div className={s.question} id={this.state.order}>
+            <div className={s.Question} id={this.state.order}>
                 <div className={s.questioninfo}>
                     <div className={s.questionOrder}>{this.state.order}.</div>
                     <div className={s.questionField}>
