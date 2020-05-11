@@ -7,17 +7,21 @@ import Snackbar from "@material-ui/core/Snackbar/Snackbar";
 import Alert from "@material-ui/lab/Alert/Alert";
 import Typography from "@material-ui/core/Typography";
 import EditQuestion from "./editQuestion";
+import makeID from "../../../src/services/utils";
+import {deleteAnswers} from "../../services/API/adminAPI/Survey/answers";
 
 class Question extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            editMode: true,
+            editMode: false,
             id: this.props.value._id,
             survey_id: this.props.value.survey_id,
             answerType: this.props.value.type,
             question: this.props.value.question,
             image: this.props.value.image,
+            answers: [],
+            index_key: {},
             disabledDelete: false,
         };
     }
@@ -44,28 +48,61 @@ class Question extends React.Component{
         this.setState({disabledDelete: false})
     };
 
-    deleteAnswerOnClick = () => {
-
+    deleteAnswerOnClick = (index) => {
+        let answers = this.state.answers;
+        if (this.state.id !== undefined && answers[index]._id !== undefined) {
+            deleteAnswers(this.state.id, answers[index]._id);
+        }
+        let index_key = this.state.index_key;
+        for (let i = index; i < answers.length - 1; i++) {
+            index_key[i] = this.state.index_key[i + 1];
+        }
+        delete index_key[answers.length - 1];
+        answers.splice(index, 1);
+        this.setState({answers: answers});
+        this.setState({index_key: index_key});
     };
 
-    onChangeAnswer = () => {
-
+    onChangeAnswer = (event) => {
+        let answers = this.state.answers;
+        answers[Number(event.target.id)].answer = event.target.value.trim();
+        this.setState({answers: answers});
+        this.setState({answersChanged: true});
+        this.setState({errorAnswer: false});
     };
 
-    addNewAnswer = () => {
-
+    addNewAnswer = (correct = 0, points = 0) => {
+        const answers = this.state.answers;
+        answers.push({
+            question_id: this.state.id,
+            correct: correct,
+            points: points,
+            answer: '',
+        });
+        this.setState({answers: answers});
+        let index_key = this.state.index_key;
+        index_key[answers.length - 1] = makeID(8);
+        this.setState({index_key: index_key});
     };
 
-    onChangeQuestion = () => {
-
+    onChangeQuestion = (event) => {
+        this.setState({question: event.target.value.trim()});
+        this.setState({questionChanged: true});
+        this.setState({errorQuestion: false})
     };
 
     saveOnClick = () => {
 
     };
 
-    changeType = () => {
-
+    changeType = (newType) => {
+        this.setState({answerType: newType});
+        this.setState({questionChanged: true});
+        this.setState({answersChanged: true});
+        /*
+        for (let i = 0; i < this.state.answers.length; i++) {
+            this.deleteAnswerOnClick(i);
+        }*/
     };
 
     render() {
