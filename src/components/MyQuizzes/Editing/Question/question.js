@@ -187,7 +187,7 @@ class Question extends React.Component {
         this.setState({errorAnswer: false});
     };
 
-    onClose = () => {
+    onCloseDialogAnswer = () => {
         this.setState({dialogOpenAnswer: false})
     };
 
@@ -245,10 +245,10 @@ class Question extends React.Component {
                 <Snackbar
                     open={this.state.dialogOpenAnswer}
                     autoHideDuration={6000}
-                    onClose={this.onClose}
-                >
-                    <Alert variant='filled' severity="error"><Typography>There must be at least 1 correct and incorrect
-                        answer</Typography></Alert>
+                    onClose={this.onCloseDialogAnswer}>
+                    <Alert variant='filled' severity="error">
+                        <Typography>There must be at least 1 correct and 1 incorrect answer</Typography>
+                    </Alert>
                 </Snackbar>
             </div>
         }
