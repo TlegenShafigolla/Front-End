@@ -8,7 +8,6 @@ import Snackbar from "@material-ui/core/Snackbar";
 import s from '../css/editQuestion.module.css'
 import Typography from "@material-ui/core/Typography";
 import Alert from "@material-ui/lab/Alert";
-import $ from "jquery";
 import {Draggable} from "react-beautiful-dnd";
 
 class Question extends React.Component {
@@ -101,7 +100,7 @@ class Question extends React.Component {
                 }
             );
         } else {
-            this.props.deleteQuestion(this.props.value.order_id);
+            await this.props.deleteQuestion(this.props.value.order_id);
         }
         this.setState({disabledDelete: false})
 
@@ -258,8 +257,7 @@ class Question extends React.Component {
                     <div {...provided.draggableProps}
                          {...provided.dragHandleProps}
                          ref={provided.innerRef}
-                         className={s.Question}
-                    >
+                         className={s.Question}>
                         <ShowQuestion editOnClick={this.editOnClick}
                                       deleteQuestionOnClick={this.deleteQuestionOnClick}
                                       editMode={this.state.editMode}

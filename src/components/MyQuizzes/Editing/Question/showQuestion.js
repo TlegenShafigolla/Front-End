@@ -17,7 +17,6 @@ const ShowQuestion = (props) => {
                         </Typography>
                     </div>
                 </div>
-
                 <div className={s.answerType}>
                     <ShowAnswer
                         key={props.question_id}

@@ -20,7 +20,7 @@ const EditAnswer =(props)=> {
                 </div>
 
         );
-}
+};
 export default EditAnswer;
 
 /* {this.props.answers === [] ? '555' : this.props.answers.map((val, index) =>

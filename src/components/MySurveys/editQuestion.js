@@ -1,67 +1,35 @@
 import React from "react";
-import s from '../css/editQuestion.module.css'
-import TextField from '@material-ui/core/TextField';
-import EditAnswer from "./editAnswer";
-import Button from "@material-ui/core/Button";
-import AddIcon from '@material-ui/icons/Add';
+import s from "../MyQuizzes/Editing/css/editQuestion.module.css";
+import TextField from "@material-ui/core/TextField/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabel";
+import Radio from "@material-ui/core/Radio/Radio";
 import IconButton from "@material-ui/core/IconButton";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Radio from "@material-ui/core/Radio";
-import ChangeTypeDialog from "./AnswerTypes/changeTypeDialog";
-import $ from "jquery";
+import AddIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
+import EditAnswer from "./editAnswer";
 
-class EditQuestion extends React.Component {
-    constructor(props) {
+class EditQuestion extends React.Component{
+    constructor(props){
         super(props);
-        document.addEventListener('click', this.onClickOuterModal, false);
-        this.state={
-            editMode: this.props.editMode,
+        this.state = {
             question_id: this.props.question_id,
             order: this.props.value.order_id,
             answerType: this.props.answerType,
             isMultipleChoice: this.props.answerType === 'MULTIPLE CHOICE',
-            openChangeTypeDialog: false,
-            openDialogAnswer: this.props.openDialogAnswer,
         }
-
     }
 
-
-    dialog = (action) => {
-        this.setState({openChangeTypeDialog: false});
-        if (!action) {
-            return this.setState({change: 1});
-        }
-        this.setState({isMultipleChoice: !this.state.isMultipleChoice});
-        let newType = this.state.answerType === 'MULTIPLE CHOICE' ? 'FILL THE BLANK' : 'MULTIPLE CHOICE';
-        this.setState({answerType: newType});
-        this.props.changeType(newType);
-        this.setState({change: 1});
-    };
-
     multipleChoiceChecked = () => {
-        this.setState({openChangeTypeDialog: true});
+        this.setState({isMultipleChoice: true});
     };
 
     fillTheBlankChecked = () => {
-        this.setState({openChangeTypeDialog: true});
+        this.setState({isMultipleChoice: false});
     };
 
-    componentWillUnmount() {
-        document.removeEventListener('click', this.onClickOuterModal, false);
-    }
-
-    onClickOuterModal = (e) => {
-        const save = this.props.saveOnClick;
-        let div = $("." + s.question);
-        if (!div.is(e.target)
-            && div.has(e.target).length === 0) {
-            save();
-        }
-    };
     render() {
-        return (
+        return(
             <div className={s.Question} id={this.state.order}>
                 <div className={s.questionInfo}>
                     <div className={s.questionOrder}>{this.state.order}.</div>
@@ -107,7 +75,7 @@ class EditQuestion extends React.Component {
                 <div className={s.Buttons}>
                     {this.state.isMultipleChoice ?
                         <IconButton className={s.AddButton} color="primary"
-                                    onClick={event => this.props.addNewAnswer()}>
+                                    onClick={() => this.props.addNewAnswer()}>
                             <AddIcon/>
                         </IconButton> : ''}
                     <Button color="primary" className={s.saveButton} onClick={this.props.saveOnClick}>
@@ -117,10 +85,7 @@ class EditQuestion extends React.Component {
                         <DeleteIcon/>
                     </IconButton>
                 </div>
-                <ChangeTypeDialog openDialog={this.state.openChangeTypeDialog}
-                                  onClose={this.dialog}/>
             </div>
-
         );
     }
 }

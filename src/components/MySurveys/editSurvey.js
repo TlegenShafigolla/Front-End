@@ -48,8 +48,14 @@ class EditSurvey extends React.Component{
 
     };
 
-    deleteQuestion = () => {
-
+    deleteQuestion = async (order_id) => {
+        let questions = this.state.questions;
+        questions.splice(order_id - 1, 1);
+        for (let i = order_id - 1; i < questions.length; i++) {
+            questions[i].order_id = i + 1;
+        }
+        await postQuestions(this.state.survey_id, questions);
+        this.setState({questions: questions});
     };
 
     setQuestion = () => {
