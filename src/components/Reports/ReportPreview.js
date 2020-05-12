@@ -9,11 +9,11 @@ import Button from "@material-ui/core/Button";
 class ReportPreview extends React.Component{
     render() {
         return(
-            <div className={s.root}>
+            <div className={s.Root}>
                 <CardContent className={s.CardContent}>
                     <Typography variant="h5" component="h2" >
                         {this.props.val.quiz.quiz_name}  </Typography>
-                    <Typography className={s.title} color="textSecondary" gutterBottom> {this.props.val.quiz.description} </Typography>
+                    <Typography className={s.Title} color="textSecondary" gutterBottom> {this.props.val.quiz.description} </Typography>
                     <Typography className={s.pos}
                                 color="textSecondary"> {this.props.val.email} </Typography>
                     <Typography variant="body2"
