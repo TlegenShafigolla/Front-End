@@ -56,7 +56,9 @@ export const Routes = (props) => {
                 <Route path="/admin/invitations" render={() => <Invitations/>}/>
                 <Route path="/admin/reports" render={() => <ReportRoute/>}/>
                 <Route path="/admin/surveys" render={() => <MySurveyRoute/>}/>
-                <Route path='/admin/group' render={()=><GroupRoutes/>}/>
+                <Route path='/admin/group' component={GroupRoutes}/>
+
+
             </main>
         </div>
     );

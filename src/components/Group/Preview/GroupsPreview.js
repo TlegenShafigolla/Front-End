@@ -6,7 +6,10 @@ import s from './GroupPreview.module.css'
 const GroupsPreview = (props) => {
 
     return (<div className={s.Groups}>
-        {props.groups.map(val => <Group deleteGroup={props.deleteGroup} key={val._id} val={val}/>)}
+        {props.groups.map(val => <Group onClickGroup={props.onClickGroup}
+                                        deleteGroup={props.deleteGroup}
+                                        key={val._id}
+                                        val={val}/>)}
         <Button color='primary' size='medium'
                 onClick={props.addNewGroup}>
             Create group

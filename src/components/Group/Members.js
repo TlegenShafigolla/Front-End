@@ -4,7 +4,7 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import s from './EditGroup.module.css'
 const Members = (props) => {
     return (
-        <div className={s.Members} >
+        <div className={s.Members}  >
             {props.val.email}
             <IconButton size='small' onClick={()=>props.onDeleteMember(props.val._id,props.path)}><HighlightOffIcon fontSize='small'/></IconButton>
         </div>
