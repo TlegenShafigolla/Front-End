@@ -1,4 +1,3 @@
-import {api} from "../../App"
 
 export function session() {
     try {

@@ -84,7 +84,7 @@ class EditQuiz extends React.Component {
         for (let i = 0; i < this.state.questions.length; i++) {
             if (questions[i].order_id !== i + 1) {
                 questions[i].order_id = i + 1;
-                putQuestions(this.state.quiz_id, questions[i]).then(val => console.log(val));
+                putQuestions(this.state.quiz_id, questions[i])
             }
         }
     };

@@ -3,7 +3,7 @@ import EditQuiz from "./Editing/editQuiz";
 import {Route} from "react-router-dom";
 import ListQuizPreview from "./Preview/listQuizPreview";
 
-const MyQuizRoute = () => {
+const MyQuizRoute = (props) => {
     return (
         <div>
             <Route exact path='/admin/quizzes' component={ListQuizPreview}/>
