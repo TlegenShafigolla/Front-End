@@ -43,6 +43,7 @@ class ShowQuiz extends React.Component {
     inviteDialog = () => {
         this.setState({openInviteDialog: !this.state.openInviteDialog})
     };
+
     onClickQuiz = () => {
         console.log('ok')
         // this.history.push(`/admin/quizzes/edit/${this.props.value._id}`)
@@ -50,12 +51,12 @@ class ShowQuiz extends React.Component {
 
     render() {
         return (
-                <div className={s.root} onKeyDown={this.onClickQuiz}>
+                <div className={s.Root} onKeyDown={this.onClickQuiz}>
                     <CardContent className={s.CardContent}>
                         <Typography variant="h5" component="h2" noWrap>
                             {this.props.quiz_name}
                         </Typography>
-                        < Typography className={s.title}> {this.props.description}
+                        < Typography className={s.Title}> {this.props.description}
                         </Typography>
                         <Typography className={s.pos}> {this.props.value.questions_count.toString()} </Typography>
                         <Typography variant="body2"

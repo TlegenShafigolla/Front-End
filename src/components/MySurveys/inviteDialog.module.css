@@ -1,0 +1,30 @@
+.RadioButton {
+    display: flex;
+    justify-content: space-around;
+}
+
+.Time {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Checkbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.Time_limit {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.StartDate {
+    display: none;
+}
+
+.EndDate {
+    display: none;
+}

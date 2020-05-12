@@ -98,7 +98,7 @@ class Quiz extends React.Component {
             );
 
         } else {
-            localStorage.removeItem(`session_id${path[2]}`)
+            localStorage.removeItem(`session_id${path[2]}`);
             return (
                 <div className={s.error}>
                     <NavLink to='/'><Button color='primary'>Back to home page</Button></NavLink>

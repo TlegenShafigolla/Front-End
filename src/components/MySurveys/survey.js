@@ -9,21 +9,32 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import {Link} from "react-router-dom";
 import s from "./survey.module.css";
+import InviteDialog from "./inviteDialog";
 
 class Survey extends React.Component{
     constructor(props){
         super(props);
-        this.state = {};
+        this.state = {
+            openInviteDialog: false,
+        };
     }
+
+    inviteDialog = () => {
+        this.setState({openInviteDialog: !this.state.openInviteDialog})
+    };
+
+    onClickInvite = () => {
+        this.setState({openInviteDialog: false});
+    };
 
     render() {
         return(
-            <div className={s.root} onKeyDown={this.onClickQuiz}>
+            <div className={s.Root} onKeyDown={this.onClickQuiz}>
                 <CardContent className={s.CardContent}>
                     <Typography variant="h5" component="h2" noWrap>
                         {this.props.value.survey_name}
                     </Typography>
-                    <Typography className={s.title}> {this.props.value.description}
+                    <Typography className={s.Title}> {this.props.value.description}
                     </Typography>
                     <Typography className={s.pos}> {this.props.value.questions_count.toString()} </Typography>
                     <Typography variant="body2"
@@ -34,7 +45,7 @@ class Survey extends React.Component{
                 <CardActions className={s.CardActions}>
                     <div className={s.ButtonPanel}>
                         <Tooltip title='Invite'>
-                            <IconButton color="primary">
+                            <IconButton color="primary" onClick={this.inviteDialog}>
                                 <SendIcon/>
                             </IconButton>
                         </Tooltip>
@@ -51,6 +62,8 @@ class Survey extends React.Component{
                         </IconButton>
                     </Link>
                 </CardActions>
+                <InviteDialog openDialog={this.state.openInviteDialog} onClose={this.onClickInvite}
+                              survey_id={this.props.value._id}/>
             </div>
         );
     }

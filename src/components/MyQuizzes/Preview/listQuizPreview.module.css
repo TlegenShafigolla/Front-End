@@ -18,7 +18,7 @@
 
 
 /*existingQuizPreview */
-.root {
+.Root {
     padding: 10px;
     margin-top: 10px;
     box-shadow: 3px 3px 10px #333333;
@@ -33,7 +33,7 @@
     transform: scale(0.8);
 }
 
-.title {
+.Title {
     fontSize: 14;
 }
 
