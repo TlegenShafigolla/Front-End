@@ -10,12 +10,13 @@ import Radio from "@material-ui/core/Radio";
 import ChangeTypeDialog from "./AnswerTypes/changeTypeDialog";
 import $ from "jquery";
 import DeleteIcon from "@material-ui/icons/Delete";
+import {Draggable} from "react-beautiful-dnd";
 
 class EditQuestion extends React.Component {
     constructor(props) {
         super(props);
-        document.addEventListener('click', this.onClickOuterModal, false);
-        this.state={
+        document.addEventListener('mousedown', this.onClickOuterModal, false);
+        this.state = {
             editMode: this.props.editMode,
             question_id: this.props.question_id,
             order: this.props.value.order_id,
@@ -48,76 +49,88 @@ class EditQuestion extends React.Component {
     };
 
     componentWillUnmount() {
-        document.removeEventListener('click', this.onClickOuterModal, false);
+        document.removeEventListener('mousedown', this.onClickOuterModal, false);
     }
 
     onClickOuterModal = (e) => {
         const save = this.props.saveOnClick;
-        let div = $("." + s.Question);
+        let div = $("." + s.EditQuestion);
         if (!div.is(e.target)
             && div.has(e.target).length === 0) {
+            console.log('ok')
             save();
         }
     };
+
     render() {
         return (
-            <div className={s.Question} id={this.state.order}>
-                <div className={s.QuestionInfo}>
-                    <div className={s.QuestionOrder}>{this.state.order}.</div>
-                    <div className={s.QuestionField}>
-                        <TextField
-                            autoFocus
-                            error={this.props.errorQuestion}
-                            placeholder="Question"
-                            fullWidth
-                            size='small'
-                            defaultValue={this.props.question}
-                            onChange={this.props.onChangeQuestion}
-                            multiline={true}
-                            rows={4}
-                            rowsMax={6}
-                            label="Question"
-                            variant="outlined"
-                        />
-                    </div>
-                </div>
-                <div className={s.FormControl}>
-                    <FormControlLabel value="Type question"
-                                      control={
-                                          <Radio
-                                              checked={this.state.isMultipleChoice}
-                                              onChange={this.multipleChoiceChecked}
-                                              color="primary"
-                                          />} label='Multiple Choice'/>
-                    <FormControlLabel value="Type question"
-                                      control={
-                                          <Radio
-                                              color="primary"
-                                              onChange={this.fillTheBlankChecked}
-                                              checked={!this.state.isMultipleChoice}
-                                          />} label='Fill the blank '/>
-                </div>
-                <div className={s.AnswerType}>
-                    <EditAnswer
-                        isMultipleChoice={this.state.isMultipleChoice}
-                        {...this.props}
-                    />
-                </div>
-                <div className={s.Buttons}>
-                    {this.state.isMultipleChoice ?
-                        <IconButton className={s.AddButton} color="primary"
-                                    onClick={event => this.props.addNewAnswer()}>
-                            <AddIcon/>
-                        </IconButton> : ''}
-                    <Button color="primary" className={s.SaveButton} onClick={this.props.saveOnClick}>
-                        Save
-                    </Button>
-                    <IconButton aria-label="delete" onClick={this.props.deleteQuestionOnClick}>
-                        <DeleteIcon/>
-                    </IconButton>
-                </div>
-                <ChangeTypeDialog openDialog={this.state.openChangeTypeDialog}
-                                  onClose={this.dialog}/>
+            <div className={s.EditQuestion}>
+                <Draggable draggableId={this.props.value._id} index={this.props.index}>
+                    {provided => (
+                        <div className={s.Question} id={this.state.order}
+                             {...provided.draggableProps}
+                             {...provided.dragHandleProps}
+                             ref={provided.innerRef}
+                        >
+                            <div className={s.QuestionInfo}>
+                                <div className={s.QuestionOrder}>{this.props.value.order_id}.</div>
+                                <div className={s.QuestionField}>
+                                    <TextField
+                                        autoFocus
+                                        error={this.props.errorQuestion}
+                                        placeholder="Question"
+                                        fullWidth
+                                        size='small'
+                                        defaultValue={this.props.question}
+                                        onChange={this.props.onChangeQuestion}
+                                        multiline={true}
+                                        rows={4}
+                                        rowsMax={6}
+                                        label="Question"
+                                        variant="outlined"
+                                    />
+                                </div>
+                            </div>
+                            <div className={s.FormControl}>
+                                <FormControlLabel value="Type question"
+                                                  control={
+                                                      <Radio
+                                                          checked={this.state.isMultipleChoice}
+                                                          onChange={this.multipleChoiceChecked}
+                                                          color="primary"
+                                                      />} label='Multiple Choice'/>
+                                <FormControlLabel value="Type question"
+                                                  control={
+                                                      <Radio
+                                                          color="primary"
+                                                          onChange={this.fillTheBlankChecked}
+                                                          checked={!this.state.isMultipleChoice}
+                                                      />} label='Fill the blank '/>
+                            </div>
+                            <div className={s.AnswerType}>
+                                <EditAnswer
+                                    isMultipleChoice={this.state.isMultipleChoice}
+                                    {...this.props}
+                                />
+                            </div>
+                            <div className={s.Buttons}>
+                                {this.state.isMultipleChoice ?
+                                    <IconButton className={s.AddButton} color="primary"
+                                                onClick={event => this.props.addNewAnswer()}>
+                                        <AddIcon/>
+                                    </IconButton> : ''}
+                                <Button color="primary" className={s.SaveButton} onClick={this.props.saveOnClick}>
+                                    Save
+                                </Button>
+                                <IconButton aria-label="delete" onClick={this.props.deleteQuestionOnClick}>
+                                    <DeleteIcon/>
+                                </IconButton>
+                            </div>
+                            <ChangeTypeDialog openDialog={this.state.openChangeTypeDialog}
+                                              onClose={this.dialog}/>
+                        </div>)}</Draggable>
+
+
             </div>
 
         );

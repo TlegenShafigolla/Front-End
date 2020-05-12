@@ -215,14 +215,7 @@ class Question extends React.Component {
 
     render() {
         if (this.state.editMode) {
-            return <div>
-                <Draggable draggableId={this.props.value._id} index={this.props.index}>
-                    {provided => (
-                        <div {...provided.draggableProps}
-                             {...provided.dragHandleProps}
-                             ref={provided.innerRef}
-                        >
-                            <EditQuestion
+            return <div > <EditQuestion
                                 errorAnswer={this.state.errorAnswer}
                                 errorQuestion={this.state.errorQuestion}
                                 changeCheck={this.changeCheck}
@@ -240,7 +233,7 @@ class Question extends React.Component {
                                 question_id={this.state.id}
                                 index_key={this.state.index_key}
                                 deleteQuestionOnClick={this.deleteQuestionOnClick}
-                                {...this.props}/></div>)}</Draggable>
+                                {...this.props}/>
                 <Snackbar
                     open={this.state.dialogOpenAnswer}
                     autoHideDuration={6000}
