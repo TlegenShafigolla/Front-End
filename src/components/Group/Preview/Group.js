@@ -7,10 +7,12 @@ import DeleteIcon from "@material-ui/icons/Delete";
 const Group = (props) => {
     return (
         <div className={s.GroupsPreview}>
-            <Typography>{props.val.group_name}</Typography>
-            <Typography>Members: {props.val.members.length}</Typography>
+            <div onClick={() => props.onClickGroup(props.val._id)}>
+                <Typography>{props.val.group_name}</Typography>
+                <Typography>Members: {props.val.members.length}</Typography>
+            </div>
             <IconButton size='small'
-                        onClick={()=>props.deleteGroup(props.val._id)}
+                        onClick={() => props.deleteGroup(props.val._id)}
                         aria-label='delete'>
                 <DeleteIcon color='primary'/>
             </IconButton>

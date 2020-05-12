@@ -1,7 +1,6 @@
 .Members {
     color: #a01818;
     font-size: 1em;
-    border-bottom: 1px solid #333333;
 }
 
 .email {
@@ -16,7 +15,7 @@
 }
 
 .MembersBoard {
-    padding: 10px;
+    padding-bottom: 10px;
     box-shadow: 3px 3px 5px #333333;
     position: fixed;
     display: flex;

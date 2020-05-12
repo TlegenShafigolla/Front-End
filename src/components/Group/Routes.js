@@ -25,35 +25,28 @@ class GroupRoutes extends React.Component {
             this.setState({groups: groups})
         })
     }
-
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState.groupChanged !== this.state.groupChanged) {
-            getListGroup().then(json => {
-                this.setState({groups: json.groups})
-            })
-            this.setState({groupChanged: false})
-        }
-    }
-
-
     addNewGroup = () => {
         let groups = this.state.groups
         let group = 'New Group'
         createGroup(group).then(val => {
             groups.push(val)
+            this.props.history.push(`/admin/group/${val._id}`)
             this.setState({groups: groups})
         })
+    }
+    onClickGroup = (id) => {
+    this.props.history.push(`/admin/group/${id}`)
     }
 
     render() {
         return (
             <div>
                 <Route exact path='/admin/group'
-                       render={() => <GroupsPreview deleteGroup={this.deleteGroup}
+                       render={() => <GroupsPreview onClickGroup={this.onClickGroup}
+                                                    deleteGroup={this.deleteGroup}
                                                     groups={this.state.groups}
                                                     addNewGroup={this.addNewGroup}/>}/>
-                <Route path='/admin/group/:id' component={EditGroup}/>
+                <Route path='/admin/group/:id' render={()=><EditGroup/>}/>
             </div>
         )
     }

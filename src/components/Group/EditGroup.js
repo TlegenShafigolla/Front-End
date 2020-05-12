@@ -18,7 +18,8 @@ class EditGroup extends React.Component {
             editGroupName: false,
             group_name: null,
             email: null,
-            addMember: false
+            addMember: false,
+            group_name_change: false
         }
     }
 
@@ -34,33 +35,52 @@ class EditGroup extends React.Component {
 
     }
 
-    addMembers = () => {
-        this.setState({addMember:false})
-        addMembers(this.state.path, this.state.email).then(json => {
-                console.log(json)
-                if (json.ok === 1) {
-                    console.log('ok')
+    addMembers = (e) => {
+        e.preventDefault();
+        let email = /[0-9a-z_-]+@[0-9a-z_-]+\.[a-z]{2,5}$/i;
+        if (email.test(this.state.email)) {
+            let members = this.state.members;
+            addMembers(this.state.path, this.state.email).then(json => {
+                    if (json.Error === undefined) {
+                        members.push(json);
+                        this.setState({
+                            members: members,
+                            addMember: false
+                        })
+                    }
                 }
-            }
-        )
+            )
+        }
+        if (this.state.email === '') {
+            this.setState({
+                addMember: false
+            })
+        }
     }
     onBlurGroupName = () => {
-        this.setState({editGroupName: false});
-        putGroupName(this.state.path, this.state.group_name).then(json => console.log(json))
+        if (this.state.group_name !== '') {
+            this.setState({editGroupName: false});
+            if (this.state.group_name_change) {
+                putGroupName(this.state.path, this.state.group_name).then(() =>
+                    this.setState({group_name_change: false}))
+            }
+
+        }
     }
     onChangeGroupName = (e) => {
-        let group_name = e.target.value;
-        this.setState({group_name: group_name})
+        let group_name = this.state.group_name
+        if (group_name !== e.target.value.trim()) {
+            this.setState({group_name_change: true})
+        }
+        this.setState({group_name: e.target.value.trim()})
     }
     onDeleteMember = (id) => {
         deleteMember(id, this.state.path).then(json => {
             console.log(json)
             let members = this.state.members
-            if (json.ok === 1) {
-                for (let i = 0; i < members.length; i++) {
-                    if (members[i]._id === id) {
-                        members.splice(i, 1)
-                    }
+            for (let i = 0; i < members.length; i++) {
+                if (members[i]._id === json._id) {
+                    members.splice(i, 1)
                 }
                 this.setState({members: members})
             }
@@ -71,7 +91,6 @@ class EditGroup extends React.Component {
     }
 
     render() {
-        console.log('ok')
         return (
             <div className={s.EditGroup}>
                 <div className={s.GroupName} onClick={() => this.setState({editGroupName: true})}>
@@ -84,10 +103,13 @@ class EditGroup extends React.Component {
                     accusantium alias facere officia praesentium. Quia.
                 </div>
                 <div className={s.MembersBoard}>
-                    {this.state.members.map(val => <Members path={this.state.path}
-                                                            onDeleteMember={this.onDeleteMember} key={val._id}
-                                                            val={val}/>)}
-                    {this.state.addMember ? <TextField onBlur={this.addMembers} onChange={this.onChangeEmail}/> :
+                    <ol type='1'>{this.state.members.map(val => <li key={val._id}><Members path={this.state.path}
+                                                                                           onDeleteMember={this.onDeleteMember}
+                                                                                           val={val}/></li>)}</ol>
+                    {this.state.addMember ?
+                        <form onSubmit={this.addMembers}>
+                            <TextField autoFocus={true} onBlur={this.addMembers} onChange={this.onChangeEmail}/>
+                        </form> :
                         <IconButton color="primary" size='small' onClick={() => this.setState({addMember: true})}>
                             <AddIcon fontSize='small'/>
                         </IconButton>}
