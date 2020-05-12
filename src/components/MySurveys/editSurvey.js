@@ -10,7 +10,7 @@ import getQuestions from "../../services/API/adminAPI/Survey/questions";
 import {DragDropContext, Droppable} from "react-beautiful-dnd";
 import AddIcon from "@material-ui/icons/Add";
 import Question from "./question";
-import {postQuestions} from "../../services/API/adminAPI/Survey/questions";
+import {postQuestions, putQuestions} from "../../services/API/adminAPI/Survey/questions";
 
 class EditSurvey extends React.Component{
     constructor(props){
@@ -25,27 +25,69 @@ class EditSurvey extends React.Component{
             description: "",
             questions: [],
             disableAddButton: false,
+            surveyNameDescriptionChange: true,
+            surveyChanges: false,
         };
     }
 
-    changeSurveyName = () => {
-
+    changeSurveyName = (event) => {
+        this.setState({
+            survey_name: event.target.value.trim(),
+            error: false,
+            surveyNameDescriptionChange: true
+        });
     };
 
-    changeDescription = () => {
-
+    changeDescription = (event) => {
+        this.setState({
+            description: event.target.value.trim(),
+            error: false,
+            surveyNameDescriptionChange: true
+        });
     };
 
     onBlurSurveyName = () => {
-
+        if (this.state.survey_name !== '') {
+            this.setState({editSurveyName: false});
+            if (this.state.surveyNameDescriptionChange) {
+                this.setState({surveyChanges: true});
+                this.setState({surveyNameDescriptionChange: false});
+            }
+        } else {
+            this.setState({error: true});
+        }
     };
 
     onBlurDescription = () => {
-
+        if (this.state.description !== '') {
+            this.setState({editDescription: false});
+            if (this.state.surveyNameDescriptionChange) {
+                this.setState({surveyChanges: true});
+                this.setState({surveyNameDescriptionChange: false});
+            }
+        }
+        this.setState({error: true})
     };
 
-    onDragEnd = () => {
-
+    onDragEnd = (result) => {
+        console.log("End");
+        const {destination, source, draggableId} = result;
+        if (!destination) {
+            return;
+        }
+        if (destination.droppableId === source.droppableId && destination.index === source.index) {
+            return;
+        }
+        let questions = this.state.questions;
+        let draggableQuestion = this.state.questions[source.index];
+        questions.splice(source.index, 1);
+        questions.splice(destination.index, 0, draggableQuestion);
+        for (let i = 0; i < this.state.questions.length; i++) {
+            if (questions[i].order_id !== i + 1) {
+                questions[i].order_id = i + 1;
+                putQuestions(this.state.survey_id, questions[i]).then(res => console.log(res));
+            }
+        }
     };
 
     deleteQuestion = async (order_id) => {
@@ -58,12 +100,16 @@ class EditSurvey extends React.Component{
         this.setState({questions: questions});
     };
 
-    setQuestion = () => {
-
+    setQuestion = (order_id, question) => {
+        let questions = this.state.questions;
+        questions[order_id - 1] = question;
+        this.setState({questions: questions});
     };
 
-    setAnswers = () => {
-
+    setAnswers = (question_id, ans) => {
+        const answers = this.state.answers;
+        answers[question_id] = ans;
+        this.setState({answers: answers})
     };
 
     addNewQuestion = async () => {
@@ -154,7 +200,6 @@ class EditSurvey extends React.Component{
 
     componentDidMount() {
         getQuestions(this.state.survey_id).then(json => {
-            console.log(json);
             this.setState({
                 survey_name: json.survey_name,
                 description: json.description,

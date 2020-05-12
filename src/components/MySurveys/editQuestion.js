@@ -1,5 +1,5 @@
 import React from "react";
-import s from "../MyQuizzes/Editing/css/editQuestion.module.css";
+import s from "./editQuestion.module.css";
 import TextField from "@material-ui/core/TextField/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabel";
 import Radio from "@material-ui/core/Radio/Radio";
@@ -8,6 +8,7 @@ import AddIcon from "@material-ui/core/SvgIcon/SvgIcon";
 import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditAnswer from "./editAnswer";
+import $ from "jquery";
 
 class EditQuestion extends React.Component{
     constructor(props){
@@ -22,18 +23,35 @@ class EditQuestion extends React.Component{
 
     multipleChoiceChecked = () => {
         this.setState({isMultipleChoice: true});
+        this.setState({answerType: "MULTIPLE CHOICE"});
+        this.props.changeType("MULTIPLE CHOICE");
     };
 
     fillTheBlankChecked = () => {
         this.setState({isMultipleChoice: false});
+        this.setState({answerType: "FILL THE BLANK"});
+        this.props.changeType("FILL THE BLANK");
+    };
+
+    componentWillUnmount() {
+        document.removeEventListener('click', this.onClickOuterModal, false);
+    }
+
+    onClickOuterModal = (e) => {
+        const save = this.props.saveOnClick;
+        let div = $("." + s.Question);
+        if (!div.is(e.target)
+            && div.has(e.target).length === 0) {
+            save();
+        }
     };
 
     render() {
         return(
             <div className={s.Question} id={this.state.order}>
-                <div className={s.questionInfo}>
-                    <div className={s.questionOrder}>{this.state.order}.</div>
-                    <div className={s.questionField}>
+                <div className={s.QuestionInfo}>
+                    <div className={s.QuestionOrder}>{this.state.order}.</div>
+                    <div className={s.QuestionField}>
                         <TextField
                             autoFocus
                             error={this.props.errorQuestion}
@@ -50,7 +68,7 @@ class EditQuestion extends React.Component{
                         />
                     </div>
                 </div>
-                <div className={s.formControll}>
+                <div className={s.FormControl}>
                     <FormControlLabel value="Type question"
                                       control={
                                           <Radio
@@ -66,7 +84,7 @@ class EditQuestion extends React.Component{
                                               checked={!this.state.isMultipleChoice}
                                           />} label='Fill the blank '/>
                 </div>
-                <div className={s.answerType}>
+                <div className={s.AnswerType}>
                     <EditAnswer
                         isMultipleChoice={this.state.isMultipleChoice}
                         {...this.props}
@@ -78,7 +96,7 @@ class EditQuestion extends React.Component{
                                     onClick={() => this.props.addNewAnswer()}>
                             <AddIcon/>
                         </IconButton> : ''}
-                    <Button color="primary" className={s.saveButton} onClick={this.props.saveOnClick}>
+                    <Button color="primary" className={s.SaveButton} onClick={this.props.saveOnClick}>
                         Save
                     </Button>
                     <IconButton aria-label="delete" onClick={this.props.deleteQuestionOnClick}>

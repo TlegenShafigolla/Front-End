@@ -7,6 +7,7 @@ import {PrivateAdminRoute, PrivateUserRoute} from "./function/PrivateRoute";
 import Home from "./pages/home";
 import Quiz from "./pages/quiz";
 import SignUp from "./pages/signUp";
+import Survey from "./pages/survey";
 
 const Routes = () => {
     return (
@@ -15,6 +16,7 @@ const Routes = () => {
             <Route path="/login" render={() => <Login/>}/>
             <Route path='/registration' render={() => <SignUp/>}/>
             <Route path='/quiz/:link' render={() => <Quiz/>}/>
+            <Route path='/survey/:link' render={() => <Survey/>}/>
             <PrivateAdminRoute path="/admin/" render={() => <Admin/>}/>
             <PrivateUserRoute path="/user" render={() => <Users/>}/>
         </Switch>

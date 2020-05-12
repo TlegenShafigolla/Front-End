@@ -18,7 +18,7 @@ class ShowAnswer extends React.Component {
     render() {
         return (
             <div>
-                <div className={s.formControll}>
+                <div className={s.FormControl}>
 
                     <FormControlLabel value="Type question"
                                       control={
@@ -36,7 +36,7 @@ class ShowAnswer extends React.Component {
                 </div>
                 <div>
                     {this.props.answers === null ? '' : this.props.answers.map((val,index) =>
-                        <div className={s.answer} key={val._id+index}>
+                        <div className={s.Answer} key={val._id+index}>
                             <Typography variant="body1" noWrap>
                                 {val.answer}
                             </Typography>

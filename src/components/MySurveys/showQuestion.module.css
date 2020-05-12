@@ -1,17 +1,17 @@
-.questionInfo {
+.QuestionInfo {
     display: flex;
 }
 
-.questionOrder {
+.QuestionOrder {
     margin-top: 2px;
 }
 
-.questionField {
+.QuestionField {
     padding: 0;
     margin-left: 5px;
 }
 
-.answerType {
+.AnswerType {
 }
 
 .Button {

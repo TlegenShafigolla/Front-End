@@ -69,7 +69,8 @@ class EditQuiz extends React.Component {
         window.scrollTo({top: height, behavior: "smooth"});
         this.setState({disableAddButton: false});
     };
-    onDragEnd = result => {
+
+    onDragEnd = (result) => {
         const {destination, source, draggableId} = result;
         if (!destination) {
             return;
@@ -88,6 +89,7 @@ class EditQuiz extends React.Component {
             }
         }
     };
+
     deleteQuestion = async (order_id) => {
         let questions = this.state.questions;
         questions.splice(order_id - 1, 1);
@@ -148,18 +150,19 @@ class EditQuiz extends React.Component {
         this.setState({editQuizName: true})
     };
 
-    onBlurQuizName = () => { //TODO Tlegen, che za function
+    onBlurQuizName = () => {
         if (this.state.quiz_name !== '') {
             this.setState({editQuizName: false});
             if (this.state.quizNameDescriptionChange) {
                 this.setState({quizChanges: true});
                 this.setState({quizNameDescriptionChange: false});
             }
-        } else
+        } else{
             this.setState({error: true});
+        }
     };
 
-    onBlurDescription = () => { //TODO Tlegen, che za function - 2
+    onBlurDescription = () => {
         if (this.state.description !== '') {
             this.setState({editDescription: false});
             if (this.state.quizNameDescriptionChange) {
@@ -167,7 +170,6 @@ class EditQuiz extends React.Component {
                 this.setState({quizNameDescriptionChange: false});
             }
         }
-        this.setState({error: true})
     };
 
     openPdfDialog = () => {

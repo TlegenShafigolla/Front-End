@@ -1,32 +1,28 @@
 import React from "react";
 import {
-    IconButton,
-    DialogActions,
-    DialogTitle,
-    FormControl,
-    RadioGroup,
-    FormControlLabel,
-    Radio,
-    DialogContent,
-    TextField,
     Button,
     Dialog,
-    Snackbar
+    DialogActions, DialogContent,
+    DialogTitle,
+    FormControl,
+    FormControlLabel,
+    IconButton, Radio,
+    RadioGroup, Snackbar, TextField
 } from "@material-ui/core";
-import CloseIcon from '@material-ui/icons/Close';
-import s from "../../Preview/listQuizPreview.module.css";
-import Alert from "@material-ui/lab/Alert";
-import Checkbox from "@material-ui/core/Checkbox";
-import $ from 'jquery'
-import Person from "./person";
-import Group from "./group";
-import {postInvitations} from "../../../../services/API/adminAPI/Quiz/invitations";
+import CloseIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import Checkbox from "@material-ui/core/Checkbox/Checkbox";
+import Alert from "@material-ui/lab/Alert/Alert";
+import $ from "jquery";
+import s from './inviteDialog.module.css';
+import {postInvitations} from "../../services/API/adminAPI/Survey/invitations";
 
-class InviteDialog extends React.Component {
+import Group from "../MyQuizzes/Editing/Invite/group";
+
+class InviteDialog extends React.Component{
+
     constructor(props) {
         super(props);
         this.state = {
-            quiz_id: this.props.quiz_id,
             name: null,
             surname: null,
             email: null,
@@ -38,22 +34,58 @@ class InviteDialog extends React.Component {
             start_date: null,
             end_date: null,
             date: '2017-05-24T10:30',
-            time_limit: null,
-            checkTime: false,
             checkStart: false,
             checkEnd: false,
             disabledInviteButton: false
         };
     }
 
-    checkTime = (event) => {
-        this.setState({checkTime: event.target.checked});
-        if (event.target.checked) {
-            $('.' + s.timer).show(500)
-        } else {
-            $('.' + s.timer).hide(500)
-        }
+    handleCancel = () => {
+        this.setState({email: null});
+        this.setState({name: null});
+        this.setState({surname: null});
+        this.props.onClose();
     };
+
+    onClose = () => {
+        this.setState({email: null});
+        this.setState({name: null});
+        this.setState({surname: null});
+        this.props.onClose()
+    };
+
+    onChangePerson = () => {
+        this.setState({person: true})
+    };
+
+    onChangeGroup = () => {
+        this.setState({person: false})
+    };
+
+    onChangeName = (event) => {
+        this.setState({name: event.target.value});
+        this.setState({errorName: false})
+    };
+
+    onChangeSurname = (event) => {
+        this.setState({surname: event.target.value, errorSurname: false});
+    };
+
+    onChangeEmail = (event) => {
+        this.setState({email: event.target.value});
+        this.setState({errorEmail: false})
+    };
+
+    onChangeStartDate = (event) => {
+        let StartDate = event.target.value.replace('T', ' ');
+        this.setState({start_date: StartDate})
+    };
+
+    onChangeEndDate = (event) => {
+        let EndDate = event.target.value.replace('T', ' ');
+        this.setState({end_date: EndDate})
+    };
+
     checkStart = (event) => {
         this.setState({checkStart: event.target.checked});
         if (event.target.checked) {
@@ -70,12 +102,6 @@ class InviteDialog extends React.Component {
             $('.' + s.endDate).hide(500)
         }
     };
-    handleCancel = () => {
-        this.setState({email: null});
-        this.setState({name: null});
-        this.setState({surname: null});
-        this.props.onClose();
-    };
 
     onClickInviteInDialog = async () => {
         if (this.state.disabledInviteButton) {
@@ -83,21 +109,18 @@ class InviteDialog extends React.Component {
         }
         this.setState({disabledInviteButton: true});
         let email = /[0-9a-z_-]+@[0-9a-z_-]+\.[a-z]{2,5}$/i;
-        let time;
         let start;
         let end;
         this.state.checkEnd ? end = this.state.end_date : end = null;
         this.state.checkStart ? start = this.state.start_date : start = null;
-        this.state.checkTime ? time = this.state.time_limit : time = null;
         if (this.state.name !== null && this.state.name !== '' && this.state.surname !== null && this.state.surname !== '' && email.test(this.state.email)) {
             const invite = {
                 name: this.state.name,
                 surname: this.state.surname,
                 email: this.state.email,
-                quiz_id: this.state.quiz_id,
+                survey_id: this.props.survey_id,
                 start_date: start,
                 end_date: end,
-                time_limit: time,
             };
             await postInvitations(invite).then((val) => {
                 console.log(val);
@@ -107,8 +130,6 @@ class InviteDialog extends React.Component {
                     this.setState({email: null});
                     this.setState({name: null});
                     this.setState({surname: null});
-
-
                 }
             });
             this.setState({open: false});
@@ -130,54 +151,9 @@ class InviteDialog extends React.Component {
     snackClose = () => {
         this.setState({openSnackbar: false})
     };
-    onChangePerson = () => {
-        this.setState({person: true})
-    };
-    onChangeGroup = () => {
-        this.setState({person: false})
-    };
-    onChangeName = (event) => {
-        this.setState({name: event.target.value});
-        this.setState({errorName: false})
-    };
-
-    componentDidMount() {
-        let date = new Date().toISOString().replace('Z', '').split('.');
-        this.setState({date: date[0], end_date: date[0]});
-    }
-
-    onChangeSurname = (event) => {
-        this.setState({surname: event.target.value, errorSurname: false});
-    };
-
-    onChangeEmail = (event) => {
-        this.setState({email: event.target.value});
-        this.setState({errorEmail: false})
-    };
-    onClose = () => {
-        this.setState({email: null});
-        this.setState({name: null});
-        this.setState({surname: null});
-        this.props.onClose()
-    };
-    onChangeStartDate = (event) => {
-        let StartDate = event.target.value.replace('T', ' ');
-        this.setState({start_date: StartDate})
-    };
-
-    onChangeEndDate = (event) => {
-        let EndDate = event.target.value.replace('T', ' ');
-        this.setState({end_date: EndDate})
-    };
-    onChangeTimeLimit = (event) => {
-        let time = event.target.value;
-        let s = time.split(':');
-        let t = Number(s[0]) * 60 + Number(s[1]);
-        this.setState({time_limit: t});
-    };
 
     render() {
-        return (
+        return(
             <div>
                 <Dialog open={this.props.openDialog}
                         aria-labelledby="Invite"
@@ -192,7 +168,7 @@ class InviteDialog extends React.Component {
                     <DialogTitle id="Invite">Invite: {this.state.quiz_name}</DialogTitle>
                     <FormControl component="fieldset">
                         <RadioGroup aria-label="type" name="Results">
-                            <div className={s.radioButton}>
+                            <div className={s.RadioButton}>
 
                                 <FormControlLabel value="person" control={<Radio color="primary"/>}
                                                   checked={this.state.person}
@@ -217,18 +193,15 @@ class InviteDialog extends React.Component {
                             /> : <Group/>}
                         <FormControlLabel control={<Checkbox color={"primary"}/>}
                                           label={"More options"}/>
-                        <div className={s.time}>
-                            <div className={s.checkbox}>
+                        <div className={s.Time}>
+                            <div className={s.Checkbox}>
                                 <FormControlLabel control={<Checkbox onChange={this.checkStart} color={"primary"}/>}
                                                   label={"Start date"}/>
                                 <FormControlLabel control={<Checkbox onChange={this.checkEnd} color={"primary"}/>}
                                                   label={"End date"}/>
-                                <FormControlLabel control={<Checkbox onChange={this.checkTime} color={"primary"}/>}
-                                                  label={'Time Limit'}/>
-
                             </div>
-                            <div className={s.time_limit}>
-                                <div id="startDate" className={s.startDate}>
+                            <div className={s.Time_limit}>
+                                <div id="startDate" className={s.StartDate}>
                                     <TextField
                                         label="Start date"
                                         type="datetime-local"
@@ -240,7 +213,7 @@ class InviteDialog extends React.Component {
                                         fullWidth
                                     />
                                 </div>
-                                <div id="endDate" className={s.endDate}>
+                                <div id="endDate" className={s.EndDate}>
                                     <TextField
                                         fullWidth
                                         label="End date"
@@ -250,19 +223,6 @@ class InviteDialog extends React.Component {
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
-                                    />
-                                </div>
-                                <div id="time" className={s.timer}>
-                                    <TextField
-                                        fullWidth
-                                        label="Time limit"
-                                        type="time"
-                                        defaultValue="00:00"
-                                        onChange={this.onChangeTimeLimit}
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-
                                     />
                                 </div>
                             </div>
@@ -277,7 +237,8 @@ class InviteDialog extends React.Component {
                 </Dialog>
                 <Snackbar
                     open={this.state.openSnackbar}
-                    onClose={this.snackClose}>
+                    onClose={this.snackClose}
+                >
                     <Alert variant="filled" severity="success">
                         Success
                     </Alert>
@@ -286,5 +247,38 @@ class InviteDialog extends React.Component {
         );
     }
 }
+
+const Person = (props) => {
+    return(<div>
+        <TextField
+            error={props.errorName}
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Name"
+            fullWidth
+            variant='outlined'
+            onChange={props.onChangeName}
+        /> <TextField
+        error={props.errorSurname}
+        margin="dense"
+        id="Surname"
+        label="Surname"
+        fullWidth
+        variant='outlined'
+        onChange={props.onChangeSurname}
+    />
+        <TextField
+            error={props.errorEmail}
+            margin="dense"
+            id="Email"
+            label="Email Address"
+            type="email"
+            fullWidth
+            variant='outlined'
+            onChange={props.onChangeEmail}
+        />
+    </div>)
+};
 
 export default InviteDialog;

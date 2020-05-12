@@ -9,15 +9,15 @@ const ShowQuestion = (props) => {
     return (
         <div id={props.value.order_id.toString()}>
             <div onClick={props.editOnClick}>
-                <div className={s.questionInfo}>
-                    <div className={s.questionOrder}>{props.value.order_id}.</div>
-                    <div className={s.questionField}>
+                <div className={s.QuestionInfo}>
+                    <div className={s.QuestionOrder}>{props.value.order_id}.</div>
+                    <div className={s.QuestionField}>
                         <Typography variant="body1" gutterBottom>
                             {props.question === ' ' ? 'New question' : props.question}
                         </Typography>
                     </div>
                 </div>
-                <div className={s.answerType}>
+                <div className={s.AnswerType}>
                     <ShowAnswer
                         key={props.question_id}
                         question_id={props.question_id}

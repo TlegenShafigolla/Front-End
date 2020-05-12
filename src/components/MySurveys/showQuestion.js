@@ -10,16 +10,16 @@ class ShowQuestion extends React.Component{
         return (
             <div id={this.props.value.order_id.toString()}>
                 <div onClick={this.props.editOnClick}>
-                    <div className={s.questionInfo}>
-                        <div className={s.questionOrder}>{this.props.value.order_id}.</div>
-                        <div className={s.questionField}>
+                    <div className={s.QuestionInfo}>
+                        <div className={s.QuestionOrder}>{this.props.value.order_id}.</div>
+                        <div className={s.QuestionField}>
                             <Typography variant="body1" gutterBottom>
                                 {this.props.question === ' ' ? 'New question' : this.props.question}
                             </Typography>
                         </div>
                     </div>
 
-                    <div className={s.answerType}>
+                    <div className={s.AnswerType}>
                         <ShowAnswer
                             key={this.props.question_id}
                             question_id={this.props.question_id}
