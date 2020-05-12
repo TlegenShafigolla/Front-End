@@ -2,7 +2,7 @@ import React from "react";
 import {Route} from "react-router-dom";
 import EditGroup from "./EditGroup";
 import GroupsPreview from "./Preview/GroupsPreview";
-import {createGroup, deleteGroup, getListGroup, putGroupName} from "../../services/API/adminAPI/Group/group";
+import {createGroup, deleteGroup, getListGroup} from "../../services/API/adminAPI/Group/group";
 
 class GroupRoutes extends React.Component {
     constructor(props) {

@@ -71,7 +71,7 @@ class EditQuiz extends React.Component {
     };
 
     onDragEnd = (result) => {
-        const {destination, source, draggableId} = result;
+        const {destination, source} = result;
         if (!destination) {
             return;
         }
@@ -88,6 +88,7 @@ class EditQuiz extends React.Component {
                 putQuestions(this.state.quiz_id, questions[i])
             }
         }
+        this.setState({questions:questions})
     };
 
     deleteQuestion = async (order_id) => {

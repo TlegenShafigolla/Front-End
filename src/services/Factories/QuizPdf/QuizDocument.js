@@ -1,6 +1,5 @@
 import React from 'react';
-import { Page, Text, View, Document, StyleSheet, Font } from '@react-pdf/renderer';
-import {getChar} from "../../../function/AnswerChar";
+import {Document, StyleSheet, Font } from '@react-pdf/renderer';
 import Quiz from "./Quiz";
 import QuizWithAnswers from "./QuizWithAnswers";
 
