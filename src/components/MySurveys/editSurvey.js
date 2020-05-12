@@ -154,7 +154,6 @@ class EditSurvey extends React.Component{
 
     componentDidMount() {
         getQuestions(this.state.survey_id).then(json => {
-            console.log(json);
             this.setState({
                 survey_name: json.survey_name,
                 description: json.description,

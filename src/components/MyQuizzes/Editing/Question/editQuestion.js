@@ -31,13 +31,12 @@ class EditQuestion extends React.Component {
     dialog = (action) => {
         this.setState({openChangeTypeDialog: false});
         if (!action) {
-            return this.setState({change: 1});
+            return;
         }
         this.setState({isMultipleChoice: !this.state.isMultipleChoice});
         let newType = this.state.answerType === 'MULTIPLE CHOICE' ? 'FILL THE BLANK' : 'MULTIPLE CHOICE';
         this.setState({answerType: newType});
         this.props.changeType(newType);
-        this.setState({change: 1});
     };
 
     multipleChoiceChecked = () => {
@@ -54,7 +53,7 @@ class EditQuestion extends React.Component {
 
     onClickOuterModal = (e) => {
         const save = this.props.saveOnClick;
-        let div = $("." + s.question);
+        let div = $("." + s.Question);
         if (!div.is(e.target)
             && div.has(e.target).length === 0) {
             save();
@@ -63,9 +62,9 @@ class EditQuestion extends React.Component {
     render() {
         return (
             <div className={s.Question} id={this.state.order}>
-                <div className={s.questionInfo}>
-                    <div className={s.questionOrder}>{this.state.order}.</div>
-                    <div className={s.questionField}>
+                <div className={s.QuestionInfo}>
+                    <div className={s.QuestionOrder}>{this.state.order}.</div>
+                    <div className={s.QuestionField}>
                         <TextField
                             autoFocus
                             error={this.props.errorQuestion}
@@ -82,7 +81,7 @@ class EditQuestion extends React.Component {
                         />
                     </div>
                 </div>
-                <div className={s.formControll}>
+                <div className={s.FormControl}>
                     <FormControlLabel value="Type question"
                                       control={
                                           <Radio
@@ -98,7 +97,7 @@ class EditQuestion extends React.Component {
                                               checked={!this.state.isMultipleChoice}
                                           />} label='Fill the blank '/>
                 </div>
-                <div className={s.answerType}>
+                <div className={s.AnswerType}>
                     <EditAnswer
                         isMultipleChoice={this.state.isMultipleChoice}
                         {...this.props}
@@ -110,7 +109,7 @@ class EditQuestion extends React.Component {
                                     onClick={event => this.props.addNewAnswer()}>
                             <AddIcon/>
                         </IconButton> : ''}
-                    <Button color="primary" className={s.saveButton} onClick={this.props.saveOnClick}>
+                    <Button color="primary" className={s.SaveButton} onClick={this.props.saveOnClick}>
                         Save
                     </Button>
                     <IconButton aria-label="delete" onClick={this.props.deleteQuestionOnClick}>

@@ -41,12 +41,12 @@ display: flex;
     box-shadow: 5px 5px 10px #333333;
 }
 
-.questionInfo {
+.QuestionInfo {
     display: flex;
     width: 100%;
 }
 
-.questionField {
+.QuestionField {
     margin-left: 5px;
 }
 

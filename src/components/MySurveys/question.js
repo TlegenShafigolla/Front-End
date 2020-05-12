@@ -9,6 +9,8 @@ import Typography from "@material-ui/core/Typography";
 import EditQuestion from "./editQuestion";
 import makeID from "../../../src/services/utils";
 import {deleteAnswers} from "../../services/API/adminAPI/Survey/answers";
+import {getAnswers, postAnswers, putAnswers} from "../../services/API/adminAPI/Survey/answers";
+import {putQuestions} from "../../services/API/adminAPI/Survey/questions";
 
 class Question extends React.Component{
     constructor(props){
@@ -23,6 +25,10 @@ class Question extends React.Component{
             answers: [],
             index_key: {},
             disabledDelete: false,
+            questionChanged: false,
+            answersChanged: false,
+            errorAnswer: false,
+            errorQuestion: false,
         };
     }
 
@@ -91,8 +97,56 @@ class Question extends React.Component{
         this.setState({errorQuestion: false})
     };
 
-    saveOnClick = () => {
-
+    saveOnClick = async () => {
+        if (this.state.disableSaveButton) {
+            return;
+        }
+        this.setState({disableSaveButton: true});
+        const answer = this.state.answers;
+        let empty = 0;
+        for (let j = 0; j < answer.length; j++) {
+            if (answer[j].answer === '') {
+                empty = 1
+            }
+        }
+        if (this.state.question !== '' && this.state.question !== ' ') {
+                    this.setState({editMode: false});
+                    if (this.state.answersChanged) {
+                        let answers = this.state.answers;
+                        for (let i in answers) {
+                            answers[i].question_id = this.state.id.toString();
+                        }
+                        await Promise.all(this.state.answers.map(async value => {
+                            if ('_id' in value) {
+                                await putAnswers(this.state.id, value);
+                            } else {
+                                await postAnswers(this.state.id, value);
+                            }
+                        })).then((ret) => {
+                            getAnswers(this.state.id).then(val => {
+                                this.setState({answers: val.answers});
+                                this.props.setAnswers(this.state.id, val.answers);
+                            });
+                        });
+                        this.setState({answersChanged: false});
+                    }
+                    if (this.state.questionChanged) {
+                        const question = {
+                            _id: this.state.id,
+                            survey_id: this.state.survey_id,
+                            order_id: this.props.value.order_id,
+                            type: this.state.answerType,
+                            question: this.state.question,
+                            image: this.state.image,
+                        };
+                        await putQuestions(this.state.survey_id, question);
+                        this.setState({questionChanged: false});
+                        this.props.setQuestion(this.props.value.order_id, question);
+                    }
+        } else {
+            this.setState({errorQuestion: true})
+        }
+        this.setState({disableSaveButton: false});
     };
 
     changeType = (newType) => {

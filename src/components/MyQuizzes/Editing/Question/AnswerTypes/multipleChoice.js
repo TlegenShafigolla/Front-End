@@ -11,8 +11,8 @@ class MultipleChoice extends React.Component {
     render() {
         return (
             <div className={s.SaveAnswer}>
-                <div className={s.answer}>
-                    <div className={s.text} >
+                <div className={s.Answer}>
+                    <div className={s.Text} >
                         <TextField
                             error={this.props.errorAnswer}
                             id={this.props.id}
@@ -47,8 +47,8 @@ class MultipleChoice extends React.Component {
                         }
                     </div>
                 </div>
-                <div className={s.deleteButton}>
-                    <IconButton className={s.deleteButton}
+                <div className={s.DeleteButton}>
+                    <IconButton className={s.DeleteButton}
                                 size='small' color='inherit'
                                 onClick={event => this.props.deleteAnswerOnClick(this.props.id)}>
                         <HighlightOffIcon color='error' fontSize='small'/>
