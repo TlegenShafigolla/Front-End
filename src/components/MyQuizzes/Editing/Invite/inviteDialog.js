@@ -204,7 +204,7 @@ class InviteDialog extends React.Component {
                                 <FormControlLabel value="Class" control={<Radio color="primary"/>}
                                                   checked={!this.state.person}
                                                   onChange={this.onChangeGroup}
-                                                  label='Group'/>
+                                                  label='Groups'/>
                             </div>
 
                         </RadioGroup>

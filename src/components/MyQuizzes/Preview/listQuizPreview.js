@@ -31,9 +31,8 @@ class ListQuizPreview extends React.Component {
         };
         await postQuiz(newQuiz).then(val => {
             quizzes.push(val);
-            this.props.history.push(`/admin/quizzes/edit/${val._id}`);
+            this.props.history.push(`/admin/quizzes/edit/${val._id}`)
         });
-        this.setState({quizzes: quizzes})
         this.setState({disabledButton: false})
     };
 

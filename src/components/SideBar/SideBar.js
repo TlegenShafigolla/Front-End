@@ -8,6 +8,7 @@ import AssessmentSharpIcon from '@material-ui/icons/Assessment';
 import AssignmentSharpIcon from '@material-ui/icons/AssignmentSharp';
 import s from './SideBar.module.css'
 import logo from '../../images/192x192logoGray.png'
+
 const SideBar = (props) => {
     return (
         <Drawer
@@ -28,55 +29,62 @@ const SideBar = (props) => {
                 </Typography>
             </div>
             <div className={s.sidebar}>
-            <div className={s.buttongroup}>
-                <NavLink to="/admin/profile">
+                <div className={s.buttongroup}>
+                    <NavLink to="/admin/profile">
+                        <Button color='primary'
+                                className={s.main}
+                                startIcon={<AccountBoxSharpIcon/>}>
+                            Profile
+                        </Button>
+                    </NavLink>
+                    <NavLink to='/admin/group'>
+                        <Button color='primary'
+                                className={s.main}
+                                startIcon={<AssignmentSharpIcon/>}>
+                            Group
+                        </Button>
+                    </NavLink>
+                    <NavLink to='/admin/quizzes'>
+                        <Button color='primary'
+                                className={s.main}
+                                startIcon={<AssignmentSharpIcon/>}>
+                            Quizzes
+                        </Button>
+                    </NavLink>
+                    <NavLink to='/admin/invitations'>
+                        <Button color='primary'
+                                className={s.secondary}
+                                startIcon={<InsertInvitationSharpIcon/>}>
+                            Invitations
+                        </Button>
+                    </NavLink>
+                    <NavLink to='/admin/reports'>
+                        <Button color='primary'
+                                className={s.secondary}
+                                startIcon={<AssessmentSharpIcon/>}>
+                            Reports
+                        </Button>
+                    </NavLink>
+                    <NavLink to='/admin/surveys'>
+                        <Button color='primary'
+                                className={s.main}
+                                startIcon={<AssignmentSharpIcon/>}>
+                            Surveys
+                        </Button>
+                    </NavLink>
                     <Button color='primary'
-                            className={s.main}
-                            startIcon={<AccountBoxSharpIcon/>}>
-                        Profile
-                    </Button>
-                </NavLink>
-                <NavLink to='/admin/quizzes'>
-                    <Button color='primary'
-                            className={s.main}
-                            startIcon={<AssignmentSharpIcon/>}>
-                        Quizzes
-                    </Button>
-                </NavLink>
-                <NavLink to='/admin/invitations'>
-                    <Button color='primary'
+                            disabled={true}
                             className={s.secondary}
                             startIcon={<InsertInvitationSharpIcon/>}>
                         Invitations
                     </Button>
-                </NavLink>
-                <NavLink to='/admin/reports'>
                     <Button color='primary'
+                            disabled={true}
                             className={s.secondary}
                             startIcon={<AssessmentSharpIcon/>}>
                         Reports
                     </Button>
-                </NavLink>
-                <NavLink to='/admin/surveys'>
-                    <Button color='primary'
-                            className={s.main}
-                            startIcon={<AssignmentSharpIcon/>}>
-                        Surveys
-                    </Button>
-                </NavLink>
-                <Button color='primary'
-                        disabled={true}
-                        className={s.secondary}
-                        startIcon={<InsertInvitationSharpIcon/>}>
-                    Invitations
-                </Button>
-                <Button color='primary'
-                        disabled={true}
-                        className={s.secondary}
-                        startIcon={<AssessmentSharpIcon/>}>
-                    Reports
-                </Button>
-            </div>
+                </div>
             </div>
         </Drawer>
 

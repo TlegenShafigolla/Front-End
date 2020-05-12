@@ -1,19 +1,19 @@
 import {session} from "../../session";
-import {api} from "../../../../App"
+import {api} from "../../../../App";
 
-export default function getInvitations() {
+export function getMembers(group_id) {
     const authToken = `Bearer ${session()}`;
     const requestOptions = {
         method: 'GET',
         headers: {Authorization: authToken},
     };
 
-    return fetch(`${api}/quiz/invitation`, requestOptions).then(res => {
+    return fetch(`${api}/group/member/${group_id}`, requestOptions).then(res => {
         return res.json();
     });
 }
 
-export function postInvitations(invitation) {
+export function addMembers(group_id, email) {
     const authToken = `Bearer ${session()}`;
     const requestOptions = {
         method: 'POST',
@@ -22,15 +22,16 @@ export function postInvitations(invitation) {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(invitation),
+        body: JSON.stringify({
+            group_id: group_id,
+            email: email
+        }),
     };
-    return fetch(`${api}/quiz/invitation`, requestOptions).then(res => {
+    return fetch(`${api}/group/member/${group_id}`, requestOptions).then(res => {
         return res.json();
     });
-
 }
-
-export function deleteInvitations(invitation_id) {
+export function deleteMember(member_id,group_id) {
     const authToken = `Bearer ${session()}`;
     const requestOptions = {
         method: 'DELETE',
@@ -40,11 +41,11 @@ export function deleteInvitations(invitation_id) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            invitation_id: invitation_id,
+            _id: member_id
         }),
     };
 
-    return fetch(`${api}/quiz/invitation`, requestOptions).then(res => {
+    return fetch(`${api}/group/member/${group_id}`, requestOptions).then(res => {
         return res.json();
     });
 }
