@@ -8,7 +8,7 @@ class InvitationCard extends React.Component{
 
     render() {
         return(
-            <div className={s.root}>
+            <div className={s.Root}>
                 <CardContent className={s.CardContent}>
                     <div className={s.header}>
                         <div className={s.headerLeftColumn}>
@@ -20,10 +20,10 @@ class InvitationCard extends React.Component{
                             </Typography>
                         </div>
                         <div className={s.headerRightColumn}>
-                            <Typography className={s.title} gutterBottom>
+                            <Typography className={s.Title} gutterBottom>
                                 {"Email: " + this.props.invitation.email}
                             </Typography>
-                            <Typography className={s.title} gutterBottom>
+                            <Typography className={s.Title} gutterBottom>
                                 {"To: " + this.props.invitation.name + " " + this.props.invitation.surname}
                             </Typography>
                             <Typography variant="body2" component="p">
