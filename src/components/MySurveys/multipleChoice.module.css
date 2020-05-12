@@ -1,0 +1,20 @@
+.SaveAnswer {
+    display: flex;
+    margin: 7px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Answer {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.Text {
+    width: 100%;
+}
+
+.DeleteButton {
+
+}

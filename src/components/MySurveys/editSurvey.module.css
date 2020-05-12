@@ -42,3 +42,11 @@
     display: inline-flex;
     flex-direction: column;
 }
+
+.Question{
+    width: 100%;
+}
+
+.AddButton{
+    padding: 0px;
+}

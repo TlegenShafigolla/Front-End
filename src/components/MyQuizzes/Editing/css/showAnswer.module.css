@@ -3,7 +3,7 @@
         justify-content: center;
     flex-wrap: wrap;
 }
-.answer{
+.Answer{
     display: inline-flex;
     justify-content: space-between;
     width: 100%;
