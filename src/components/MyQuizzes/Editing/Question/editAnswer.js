@@ -5,8 +5,7 @@ import MultipleChoice from "./AnswerTypes/multipleChoice";
 const EditAnswer =(props)=> {
         return (
                 <div className={s.TextField}>
-                    {!props.isMultipleChoice ?
-                        <FillTheBlank
+                    {!props.isMultipleChoice ? <FillTheBlank
                             {...props}
                         /> : props.answers.map((val, index) =>
                                 <MultipleChoice

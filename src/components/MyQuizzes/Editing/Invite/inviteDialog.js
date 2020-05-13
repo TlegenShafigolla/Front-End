@@ -21,6 +21,7 @@ import $ from 'jquery'
 import Person from "./person";
 import Group from "./group";
 import {postInvitations} from "../../../../services/API/adminAPI/Quiz/invitations";
+import {getListGroup} from "../../../../services/API/adminAPI/Group/group";
 
 class InviteDialog extends React.Component {
     constructor(props) {
@@ -31,6 +32,7 @@ class InviteDialog extends React.Component {
             surname: null,
             email: null,
             person: true,
+            groups: null,
             errorName: false,
             errorSurname: false,
             errorEmail: false,
@@ -144,6 +146,7 @@ class InviteDialog extends React.Component {
     componentDidMount() {
         let date = new Date().toISOString().replace('Z', '').split('.');
         this.setState({date: date[0], end_date: date[0]});
+        getListGroup().then(json => this.setState({groups: json.groups}));
     }
 
     onChangeSurname = (event) => {
@@ -175,13 +178,18 @@ class InviteDialog extends React.Component {
         let t = Number(s[0]) * 60 + Number(s[1]);
         this.setState({time_limit: t});
     };
-
+    onSelectGroup=()=>{
+console.log('okey')
+    }
     render() {
+        console.log(this.state.groups)
         return (
             <div>
-                <Dialog open={this.props.openDialog}
-                        aria-labelledby="Invite"
-                        onClose={this.handleCancel}>
+                <Dialog
+                    maxWidth={'xl'}
+                    open={this.props.openDialog}
+                    aria-labelledby="Invite"
+                    onClose={this.handleCancel}>
                     <DialogActions>
                         <IconButton size='small' onClick={this.onClose}
                                     aria-label='delete'
@@ -214,7 +222,10 @@ class InviteDialog extends React.Component {
                                     onChangeName={this.onChangeName}
                                     onChangeSurname={this.onChangeSurname}
                                     onChangeEmail={this.onChangeEmail}
-                            /> : <Group/>}
+                            /> : <Group
+                                onSelectGroup={this.onSelectGroup}
+                                groups={this.state.groups}
+                            />}
                         <FormControlLabel control={<Checkbox color={"primary"}/>}
                                           label={"More options"}/>
                         <div className={s.time}>
