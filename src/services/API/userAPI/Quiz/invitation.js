@@ -1,4 +1,4 @@
-import {api} from "../../../App"
+import {api} from "../../../../App"
 
 export function getInvitation(link) {
     const requestOptions = {

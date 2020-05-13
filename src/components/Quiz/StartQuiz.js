@@ -2,8 +2,8 @@ import Question from "./Questions";
 import {Dialog} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import React from "react";
-import {postQuizAnswer} from "../../services/API/userAPI/answers";
-import {postTakeQuestion} from "../../services/API/userAPI/questions";
+import {postQuizAnswer} from "../../services/API/userAPI/Quiz/answers";
+import {postTakeQuestion} from "../../services/API/userAPI/Quiz/questions";
 import s from './Quiz.module.css'
 import Toolbar from "@material-ui/core/Toolbar";
 import AppBar from "@material-ui/core/AppBar";

@@ -1,4 +1,4 @@
-import {api} from "../../../App"
+import {api} from "../../../../App"
 
 export function postQuizAnswer(link, session_id, finished, answers) {
     const requestOptions = {

@@ -1,5 +1,5 @@
 import React from 'react'
-import {getInvitation, postInvitation} from "../services/API/userAPI/invitation";
+import {getInvitation, postInvitation} from "../services/API/userAPI/Quiz/invitation";
 import StartQuiz from "../components/Quiz/StartQuiz";
 import CheckEmail from "../components/Quiz/CheckEmail";
 import Typography from "@material-ui/core/Typography";
@@ -19,7 +19,6 @@ class Quiz extends React.Component {
             startTest: null,
             start: false,
         };
-
     }
 
 
@@ -29,7 +28,6 @@ class Quiz extends React.Component {
             this.setState({startTest: json.error});
             this.setState({status: "Success" === json.Status});
         });
-
     }
 
 
@@ -51,7 +49,7 @@ class Quiz extends React.Component {
         localStorage.setItem('start_test', 'true')
     };
     onClickContinue = async () => {
-        localStorage.setItem('time_limit', '0')
+        localStorage.setItem('time_limit', '0');
         const path = window.location.pathname.split('/');
         const email = this.state.email;
         await postInvitation(path[2], email).then(json => {
@@ -64,12 +62,11 @@ class Quiz extends React.Component {
             if (json.Status === 'Failed') {
                 this.setState({error: true})
             }
-
         });
     };
 
     render() {
-        const path = window.location.pathname.split(`/`)
+        const path = window.location.pathname.split(`/`);
         if (this.state.status === null) {
             return '';
         }
@@ -96,7 +93,6 @@ class Quiz extends React.Component {
             return (
                 <StartTest start={this.startTest}/>
             );
-
         } else {
             localStorage.removeItem(`session_id${path[2]}`);
             return (

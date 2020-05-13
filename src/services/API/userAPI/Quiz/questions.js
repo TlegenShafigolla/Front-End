@@ -1,4 +1,4 @@
-import {api} from "../../../App"
+import {api} from "../../../../App"
 
 export function postTakeQuestion(session_id) {
     const requestOptions = {
