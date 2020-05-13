@@ -18,7 +18,7 @@ class Quiz extends React.Component {
             error: false,
             startTest: null,
             start: false,
-            description:null
+            quiz: null
         };
 
     }
@@ -32,8 +32,6 @@ class Quiz extends React.Component {
         });
 
     }
-
-
 
 
     componentDidCatch(error, errorInfo) {
@@ -57,7 +55,7 @@ class Quiz extends React.Component {
             this.setState({statusEmail: 'Success' === json.Status});
             if (json.Status === 'Success') {
                 localStorage.setItem(`session_id${path[2]}`, json['session_id']);
-                this.setState({description:json.quiz.description})
+                this.setState({quiz: json.quiz})
             }
             if (json.Status === 'Failed') {
                 this.setState({error: true})
@@ -92,7 +90,7 @@ class Quiz extends React.Component {
                 return <StartQuiz/>
             }
             return (
-                <StartTest description={this.state.description} start={this.startTest}/>
+                <StartTest quiz={this.state.quiz} start={this.startTest}/>
             );
 
         } else {

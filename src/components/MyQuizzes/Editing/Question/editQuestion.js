@@ -57,7 +57,6 @@ class EditQuestion extends React.Component {
         let div = $("." + s.EditQuestion);
         if (!div.is(e.target)
             && div.has(e.target).length === 0) {
-            console.log('ok')
             save();
         }
     };

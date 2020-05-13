@@ -85,12 +85,12 @@ display: flex;
 }
 
 .dialogActions Button {
+    position: relative;
     font-size: 2em;
-    float: right;
+    right: 0;
     bottom: 0;
     height: 60px;
     width: 60px;
-    margin-right: 5px;
 }
 
 .typography {
