@@ -71,7 +71,7 @@ export function putQuestions(quiz_id, question) {
 * "questions": [
         {
             "quiz_id": 11,
-            "question": "Question 1",
+            "question": "Questions 1",
             "type": "MULTIPLE CHOICE",
             "image": null,
             "order_id": 2,
@@ -79,7 +79,7 @@ export function putQuestions(quiz_id, question) {
         },
         {
             "quiz_id": 11,
-            "question": "Question 2",
+            "question": "Questions 2",
             "type": "MULTIPLE CHOICE",
             "image": null,
             "order_id": 1,

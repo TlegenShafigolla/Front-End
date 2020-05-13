@@ -3,6 +3,9 @@ import {getInvitation, postInvitation} from "../services/API/userAPI/Survey/invi
 import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
 import s from "../css/Survey.module.css";
 import CheckEmail from "../components/Quiz/CheckEmail";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import TakeSurvey from "../components/Survey/TakeSurvey";
 
 class Survey extends React.Component{
     constructor(props) {
@@ -17,7 +20,7 @@ class Survey extends React.Component{
             email: '',
             emailError: false,
             session_id: session_id,
-            survey_started: localStorage.getItem(`survey_started${path[2]}`),
+            survey_started: localStorage.getItem(`survey_started${path[2]}`) === 'true',
         };
     }
 
@@ -31,11 +34,17 @@ class Survey extends React.Component{
             this.setState({statusEmail: 'Success' === json.Status});
             if (json.Status === 'Success') {
                 localStorage.setItem(`session_id${this.state.link}`, json['session_id']);
+                window.location.reload();
             }
             if (json.Status === 'Failed') {
                 this.setState({emailError: true})
             }
         });
+    };
+
+    onStartClicked = () => {
+        localStorage.setItem(`survey_started${this.state.link}`, 'true');
+        window.location.reload();
     };
 
     componentDidMount() {
@@ -47,7 +56,7 @@ class Survey extends React.Component{
 
     render() {
         if(this.state.correctLink !== true){
-            return <WrongLink correctLink={this.state.correctLink}/>
+            return <CheckLink correctLink={this.state.correctLink}/>
         } else if(this.state.error !== null){
             return <Error error={this.state.error}/>
         } else if(this.state.correctEmail !== true){
@@ -56,15 +65,15 @@ class Survey extends React.Component{
                 onChangeEmail={this.onChangeEmail}
                 onClickContinue={this.onClickContinue}/>
         } else if(this.state.session_id && !this.state.survey_started){
-            return(<div>Welcome page</div>);
+            return(<StartDialog start={this.onStartClicked}/>);
         } else if(this.state.session_id && this.state.survey_started){
-
+            return(<TakeSurvey />)
         }
         return(<div>Survey</div>);
     }
 }
 
-const WrongLink = (props) => {
+const CheckLink = (props) => {
     if(props.correctLink === null){
         return (
             <div className={s.CircularProgress}>
@@ -80,6 +89,14 @@ const WrongLink = (props) => {
 
 const Error = (props) => {
     return <div>{props.error}</div>
+};
+
+const StartDialog = (props) => {
+    return (
+        <div>
+            <Button color='primary' onClick={props.start} variant='contained'>Start Survey</Button>
+        </div>
+    )
 };
 
 export default Survey;

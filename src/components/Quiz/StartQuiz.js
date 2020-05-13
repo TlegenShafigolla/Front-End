@@ -136,8 +136,6 @@ class StartQuiz extends React.Component {
             }
             this.startTime()
         });
-
-
     }
 
     startTime = () => {
@@ -224,8 +222,7 @@ class StartQuiz extends React.Component {
 
                     <DialogActions>
                         <NavLink className={s.button} to='/'>
-                            <Button color='primary' variant='contained'>Back to home
-                                page</Button>
+                            <Button color='primary' variant='contained'>Back to home page</Button>
                         </NavLink>
                     </DialogActions>
                 </Dialog>

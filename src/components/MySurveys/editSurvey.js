@@ -27,6 +27,7 @@ class EditSurvey extends React.Component{
             disableAddButton: false,
             surveyNameDescriptionChange: true,
             surveyChanges: false,
+            answers: {},
         };
     }
 

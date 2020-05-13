@@ -32,6 +32,20 @@ class Question extends React.Component{
         };
     }
 
+    componentDidMount() {
+        if (this.state.id !== undefined) {
+            getAnswers(this.state.id).then(val => {
+                this.setState({answers: val.answers});
+                this.props.setAnswers(this.state.id, val.answers);
+                let index_key = this.state.index_key;
+                for (let i = 0; i < this.state.answers.length; i++) {
+                    index_key[i] = makeID(8);
+                }
+                this.setState({index_key: index_key});
+            })
+        }
+    }
+
     editOnClick = () => {
         this.setState({editMode: true});
     };
@@ -124,6 +138,7 @@ class Question extends React.Component{
                             }
                         })).then((ret) => {
                             getAnswers(this.state.id).then(val => {
+                                console.log(val);
                                 this.setState({answers: val.answers});
                                 this.props.setAnswers(this.state.id, val.answers);
                             });

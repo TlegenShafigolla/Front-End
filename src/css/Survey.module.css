@@ -4,3 +4,9 @@
     align-items: center;
     margin-top: 50px;
 }
+
+.DialogContent{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

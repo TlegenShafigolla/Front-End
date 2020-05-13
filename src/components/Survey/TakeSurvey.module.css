@@ -1,0 +1,33 @@
+.SurveyPage{
+    display: flex;
+}
+
+.Header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.Survey{
+    margin-top: 30px;
+    padding: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 600px;
+}
+
+.Info{
+    color: white;
+    cursor: pointer;
+    width: 100%;
+}
+
+.Questions{
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+.Button{
+    float: right;
+    bottom: 0;
+}
