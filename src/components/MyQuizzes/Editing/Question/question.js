@@ -63,7 +63,7 @@ class Question extends React.Component {
         this.setState({answerType: newType});
         this.setState({questionChanged: true});
         this.setState({answersChanged: true});
-        for (let i = 0; i < this.state.answers.length; i++) {
+        for (let i = this.state.answers.length - 1; i >= 0; i--) {
             this.deleteAnswerOnClick(i);
         }
     };

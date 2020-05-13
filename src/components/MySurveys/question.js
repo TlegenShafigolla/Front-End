@@ -91,12 +91,10 @@ class Question extends React.Component{
         this.setState({errorAnswer: false});
     };
 
-    addNewAnswer = (correct = 0, points = 0) => {
+    addNewAnswer = () => {
         const answers = this.state.answers;
         answers.push({
             question_id: this.state.id,
-            correct: correct,
-            points: points,
             answer: '',
         });
         this.setState({answers: answers});
@@ -120,11 +118,10 @@ class Question extends React.Component{
         let empty = 0;
         for (let j = 0; j < answer.length; j++) {
             if (answer[j].answer === '') {
-                empty = 1
+                empty = 1;
             }
         }
         if (this.state.question !== '' && this.state.question !== ' ') {
-                    this.setState({editMode: false});
                     if (this.state.answersChanged) {
                         let answers = this.state.answers;
                         for (let i in answers) {
@@ -136,9 +133,8 @@ class Question extends React.Component{
                             } else {
                                 await postAnswers(this.state.id, value);
                             }
-                        })).then((ret) => {
-                            getAnswers(this.state.id).then(val => {
-                                console.log(val);
+                        })).then(async (ret) => {
+                            await getAnswers(this.state.id).then(val => {
                                 this.setState({answers: val.answers});
                                 this.props.setAnswers(this.state.id, val.answers);
                             });
@@ -161,6 +157,7 @@ class Question extends React.Component{
         } else {
             this.setState({errorQuestion: true})
         }
+        this.setState({editMode: false});
         this.setState({disableSaveButton: false});
     };
 
@@ -168,13 +165,13 @@ class Question extends React.Component{
         this.setState({answerType: newType});
         this.setState({questionChanged: true});
         this.setState({answersChanged: true});
-        /*
-        for (let i = 0; i < this.state.answers.length; i++) {
+        for (let i = this.state.answers.length - 1; i >= 0; i--) {
             this.deleteAnswerOnClick(i);
-        }*/
+        }
     };
 
     render() {
+        console.log(this.state.answers);
         if(this.state.editMode){
             return (
                 <div>

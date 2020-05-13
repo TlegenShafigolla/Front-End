@@ -16,6 +16,7 @@ class ShowAnswer extends React.Component{
     }
 
     render(){
+        console.log(this.props.answers);
         return(
             <div>
                 <div className={s.FormControl}>

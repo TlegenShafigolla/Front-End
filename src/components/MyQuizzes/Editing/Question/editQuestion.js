@@ -15,7 +15,7 @@ import {Draggable} from "react-beautiful-dnd";
 class EditQuestion extends React.Component {
     constructor(props) {
         super(props);
-        document.addEventListener('mousedown', this.onClickOuterModal, false);
+        //document.addEventListener('mousedown', this.onClickOuterModal, false);
         this.state = {
             editMode: this.props.editMode,
             question_id: this.props.question_id,
@@ -27,7 +27,6 @@ class EditQuestion extends React.Component {
         }
 
     }
-
 
     dialog = (action) => {
         this.setState({openChangeTypeDialog: false});
@@ -49,7 +48,7 @@ class EditQuestion extends React.Component {
     };
 
     componentWillUnmount() {
-        document.removeEventListener('mousedown', this.onClickOuterModal, false);
+        //document.removeEventListener('mousedown', this.onClickOuterModal, false);
     }
 
     onClickOuterModal = (e) => {
@@ -57,7 +56,6 @@ class EditQuestion extends React.Component {
         let div = $("." + s.EditQuestion);
         if (!div.is(e.target)
             && div.has(e.target).length === 0) {
-            console.log('ok')
             save();
         }
     };
