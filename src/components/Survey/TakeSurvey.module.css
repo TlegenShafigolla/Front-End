@@ -16,9 +16,15 @@
 }
 
 .Info{
-    color: white;
-    cursor: pointer;
-    width: 100%;
+    display: flex;
+    top: 70px;
+    position: fixed;
+    border: 1px solid rgba(255, 255, 255, 0.67);
+    border-radius: 10px;
+    background: #3F51B5;
+    box-shadow: 3px 3px 10px #333333;
+    right: auto;
+    left: auto;
 }
 
 .Questions{

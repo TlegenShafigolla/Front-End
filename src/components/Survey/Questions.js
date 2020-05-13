@@ -8,12 +8,12 @@ import Divider from "@material-ui/core/Divider";
 class Questions extends React.Component {
     render() {
         return (
-            <div className={s.question} id={this.props.index.toString()}>
+            <div className={s.Question} id={this.props.index.toString()}>
 
-                <div className={s.questionInfo}>
+                <div className={s.QuestionInfo}>
                     <Typography variant="h6" component="h2">
                         {this.props.index+1}.</Typography>
-                    <div className={s.questionField}>
+                    <div className={s.QuestionField}>
                         <Typography variant="h6" component="h2">
                             {this.props.value.question}
                         </Typography>

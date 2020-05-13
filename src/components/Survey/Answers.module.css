@@ -1,0 +1,21 @@
+.Answer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    left: -15px;
+    height: 35px;
+}
+
+
+.Textarea {
+    margin-top: 5px;
+    width: 100%;
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    border-radius: 5px;
+    outline: none;
+    min-height: 100px;
+    border: 1px solid silver;
+    resize: none;
+}

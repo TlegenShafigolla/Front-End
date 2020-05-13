@@ -120,7 +120,6 @@ class TakeSurvey extends React.Component{
                 </AppBar>
                 <div className={s.Survey}>
                     <div className={s.Info}>
-
                         {this.state.questions === undefined || this.state.questions === null ? ' ' :
                             this.state.questions.map((val, index) =>
                                 <Link

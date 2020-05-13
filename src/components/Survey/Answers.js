@@ -15,11 +15,11 @@ class Answers extends React.Component {
     render() {
         if (this.state.type === 'MULTIPLE CHOICE') {
             return (
-                <div className={s.answers}>
+                <div className={s.Answers}>
                     <ol type='A' className={s.ol}>
                         {this.props.value.answers === null ? '' : this.props.value.answers.map((val, index) =>
                             <div key={index}>
-                                <div  className={s.answer}>
+                                <div  className={s.Answer}>
                                     <li>  {val.answer}</li>
                                     <Checkbox id={val.question_id.toString()}
                                               value={val._id.toString()}
@@ -35,8 +35,8 @@ class Answers extends React.Component {
         } else {
             return (
                 <div>
-                    {this.props.value.answers.length === 0 ? <TextareaAutosize className={s.textarea} id={this.props.value._id} onChange={this.props.onChangeAnswer} /> : this.props.value.answers.map((val, index) =>
-                        <TextareaAutosize id={val.question_id.toString()} className={s.textarea} key={index}
+                    {this.props.value.answers.length === 0 ? <TextareaAutosize className={s.Textarea} id={this.props.value._id} onChange={this.props.onChangeAnswer} /> : this.props.value.answers.map((val, index) =>
+                        <TextareaAutosize id={val.question_id.toString()} className={s.Textarea} key={index}
                                           onChange={this.props.onChangeAnswer}/>
                     )}
                 </div>

@@ -15,11 +15,11 @@ class Answers extends React.Component {
     render() {
         if (this.state.type === 'MULTIPLE CHOICE') {
             return (
-                <div className={s.answers}>
+                <div className={s.Answers}>
                     <ol type='A' className={s.ol}>
                         {this.props.value.answers === null ? '' : this.props.value.answers.map((val, index) =>
                             <div key={index}>
-                                <div  className={s.answer}>
+                                <div  className={s.Answer}>
                                     <li>  {val.answer}</li>
                                     <Checkbox id={val.question_id.toString()}
                                               value={val._id.toString()}
