@@ -19,7 +19,7 @@ class ChangeTypeDialog extends React.Component {
     render() {
         return (
             <Dialog
-                className={s.EditQuestionQuestion}
+                className={s.EditQuestion}
                 open={this.props.openDialog}
                 onClose={this.handleCancel}
                 aria-labelledby="responsive-dialog-title"

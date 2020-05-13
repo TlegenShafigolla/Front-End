@@ -1,19 +1,19 @@
 
 ::-webkit-scrollbar-button {
     width: 5px;
-    height: 0px
+    height: 0
 }
 
 /* Цвет дорожки, по которой двигается бегунок прокрутки. */
 ::-webkit-scrollbar-track {
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0);
 }
 
 /* Цвет бегунка полосы, а так же его закругление. */
 ::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 0px;
-    border-radius: 0px;
-    background-color: rgb(53, 115, 212);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background-color: rgba(226, 226, 226, 0);
 }
 
 /* Цвет бегунка при наведении на него курсора. */
@@ -24,7 +24,7 @@
 /* Основная ширина полосы прокрутки. */
 ::-webkit-resizer {
     width: 10px;
-    height: 100px
+    height: 0;
 }
 ::-webkit-scrollbar {
     width: 7px;

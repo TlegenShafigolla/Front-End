@@ -18,6 +18,7 @@ class Quiz extends React.Component {
             error: false,
             startTest: null,
             start: false,
+            quiz: null
         };
     }
 
@@ -31,11 +32,6 @@ class Quiz extends React.Component {
     }
 
 
-
-    continue = () => {
-       window.location.reload()
-    };
-
     componentDidCatch(error, errorInfo) {
         console.log(error)
     }
@@ -45,8 +41,8 @@ class Quiz extends React.Component {
         this.setState({error: false})
     };
     startTest = () => {
-        this.setState({start: true});
         localStorage.setItem('start_test', 'true')
+        this.setState({start: true});
     };
     onClickContinue = async () => {
         localStorage.setItem('time_limit', '0');
@@ -57,7 +53,7 @@ class Quiz extends React.Component {
             this.setState({statusEmail: 'Success' === json.Status});
             if (json.Status === 'Success') {
                 localStorage.setItem(`session_id${path[2]}`, json['session_id']);
-                this.continue()
+                this.setState({quiz: json.quiz})
             }
             if (json.Status === 'Failed') {
                 this.setState({error: true})
@@ -87,11 +83,11 @@ class Quiz extends React.Component {
             );
         }
         if (this.state.status && localStorage.getItem(`session_id${path[2]}`) !== null) {
-            if (this.state.start || localStorage.getItem('start_test') === 'true') {
+            if (localStorage.getItem('start_test') === 'true') {
                 return <StartQuiz/>
             }
             return (
-                <StartTest start={this.startTest}/>
+                <StartTest quiz={this.state.quiz} start={this.startTest}/>
             );
         } else {
             localStorage.removeItem(`session_id${path[2]}`);

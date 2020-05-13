@@ -36,7 +36,7 @@ class ShowAnswer extends React.Component {
                 </div>
                 <div>
                     {this.props.answers === null ? '' : this.props.answers.map((val,index) =>
-                        <div className={s.Answer} key={val._id+index}>
+                        <div className={s.Answer} key={val._id+index.toString()}>
                             <Typography variant="body1" noWrap>
                                 {val.answer}
                             </Typography>

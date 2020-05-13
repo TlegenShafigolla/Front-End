@@ -21,7 +21,8 @@ const ShowQuestion = (props) => {
                     <ShowAnswer
                         key={props.question_id}
                         question_id={props.question_id}
-                        {...props}
+                        answers={props.answers}
+                        answerType={props.answerType}
                     />
                 </div>
             </div>

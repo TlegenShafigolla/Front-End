@@ -1,7 +1,6 @@
 import React from "react";
 import s from './css/Board.module.css'
 import {Link} from 'react-scroll'
-import {Draggable} from "react-beautiful-dnd";
 
 const board = (props) => {
     return (

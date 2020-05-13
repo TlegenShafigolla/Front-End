@@ -7,7 +7,9 @@
     align-items: center;
     margin-top: 50px;
 }
-
+.Group{
+    width: 100%;
+}
 .Container {
     min-height: 100%;
     display: flex;
@@ -16,7 +18,10 @@
     margin: auto;
 }
 
-
+.group_name{
+    width: 500px;
+    margin: auto;
+}
 /*existingQuizPreview */
 .Root {
     padding: 10px;

@@ -31,6 +31,10 @@ const AdminHeader = (props) => {
             path: '/admin/surveys',
             name: 'Surveys'
         },
+        {
+            path: '/admin/group',
+            name: 'Group'
+        },
     ];
 
     const PageName = () => {
@@ -55,11 +59,10 @@ const AdminHeader = (props) => {
                     <IconButton className={classes.menuButton} onClick={props.OpenButton} color="primary">
                         <MenuIcon/>
                     </IconButton>
-                    <Typography variant="h6" className={classes.title} noWrap color="primary">
+                    <Typography variant="h6"   noWrap color="primary">
                         {PageName()}
                     </Typography>
                     <div className={classes.grow}/>
-                    <div className={classes.sectionDesktop}>
                         <Typography className={classes.title} noWrap color="primary">
                             {props.DisplayName}
                         </Typography>
@@ -73,7 +76,6 @@ const AdminHeader = (props) => {
                             <ExitToAppIcon/>
                         </IconButton>
 
-                    </div>
                 </Toolbar>
             </AppBar>
         </div>

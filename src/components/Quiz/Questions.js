@@ -5,33 +5,31 @@ import Answers from "./Answers";
 import Divider from "@material-ui/core/Divider";
 
 
-class Question extends React.Component {
-    render() {
+const Question =(props)=>{
         return (
-            <div className={s.question} id={this.props.index.toString()}>
+            <div className={s.Question} id={props.index.toString()}>
 
-                <div className={s.questionInfo}>
+                <div className={s.QuestionInfo}>
                     <Typography variant="h6" component="h2">
-                        {this.props.index+1}.</Typography>
-                    <div className={s.questionField}>
+                        {props.index+1}.</Typography>
+                    <div className={s.QuestionField}>
                         <Typography variant="h6" component="h2">
-                            {this.props.value.question}
+                            {props.value.question}
                         </Typography>
                     </div>
                 </div>
                 <Divider/>
                 <div>
                     <Answers
-                        onChangeAnswer={this.props.onChangeAnswer}
-                        key={this.props.value._id}
-                        onChangeCheck={this.props.onChangeCheck}
-                        value={this.props.value}
+                        onChangeAnswer={props.onChangeAnswer}
+                        key={props.value._id}
+                        onChangeCheck={props.onChangeCheck}
+                        value={props.value}
                     />
 
                 </div>
             </div>
         );
-    }
 }
 
 export default Question;
