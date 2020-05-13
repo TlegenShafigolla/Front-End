@@ -5,13 +5,6 @@ import CardContent from "@material-ui/core/CardContent";
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 
 class ReportCard extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state={
-        }
-    }
-
-
     render() {
         return (
             <div className={s.ReportCard}>
@@ -40,7 +33,7 @@ class ReportCard extends React.Component {
                     </div>
                 </CardContent>
                 <Typography className={s.version} variant="body2" color='textSecondary' component="p">
-                    {"Quiz version of: " + this.props.report.created_date}
+                    {"Quiz version of: " + this.props.report.quiz.created_date}
                 </Typography>
             </div>
         );

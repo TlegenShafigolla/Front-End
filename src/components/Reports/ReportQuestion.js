@@ -53,17 +53,18 @@ class ReportQuestion extends React.Component {
         }
         let map = {};
         let key = this.props.points ? "points" : "correct";
-        for (let i = 0; i < this.props.val.session.length; i++) {
+        let length = this.props.val.session !== undefined ? this.props.val.session.length : 0;
+        for (let i = 0; i < length; i++) {
             map[this.props.val.session[i].answer_id] = this.props.val.session[i][key];
         }
         const correct = green.A700;
         const wrong = red.A700;
         return (
             <div>
-                <div className={s.question} id={this.props.val._id.toString()}>
-                    <div className={s.questioninfo}>
-                        <div className={s.questionOrder}>{this.props.val.order_id}.</div>
-                        <div className={s.questionField}>
+                <div className={s.Question} id={this.props.val._id.toString()}>
+                    <div className={s.QuestionInfo}>
+                        <div className={s.QuestionOrder}>{this.props.val.order_id}.</div>
+                        <div className={s.QuestionField}>
                             <Typography variant="body1" gutterBottom>
                                 {this.props.val.question}
                             </Typography>
@@ -71,7 +72,7 @@ class ReportQuestion extends React.Component {
                     </div>
                     <div>
                         {this.props.val.answers === null ? '' : this.props.val.answers.map(val =>
-                            <div key={val.id + 'div'} className={s.answer}>
+                            <div key={val.id + 'div'} className={s.Answer}>
                                 <div className={s.answerForm}>
                                     <Checkbox
                                         disableRipple
@@ -95,12 +96,12 @@ class ReportQuestion extends React.Component {
                     </div>
                 </div>
                 {this.props.val.type !== "FILL THE BLANK" ? null :
-                    <div className={s.question}>
+                    <div className={s.Question}>
                         <p>Answers: </p>
-                        {this.props.val.session === null ? '' : this.props.val.session.map((val, index) =>
+                        {this.props.val.session === undefined ? '' : this.props.val.session.map((val, index) =>
                             <div className={s.answers} key={val.id}>
                                 <Typography
-                                    className={s.typography}
+                                    className={s.Typography}
                                     variant="body1"
                                     key={val.id}>
                                     {val.answer}

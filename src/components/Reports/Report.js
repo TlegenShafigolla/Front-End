@@ -57,7 +57,7 @@ class Report extends React.Component {
                     <Typography className={s.quizName} variant="h5" component="p" gutterBottom>
                         {this.state.report.quiz_name}
                     </Typography>
-                    <div className={s.root}>
+                    <div className={s.Root}>
                         <ReportCard report={this.state.report}/>
                     </div>
                     <div className={s.Tabs}>
@@ -92,7 +92,8 @@ class Report extends React.Component {
         for (let i = 0; i < this.state.report.questions.length; i++) {
             let correct = false;
             let points = 0;
-            for (let j = 0; j < this.state.report.questions[i].session.length; j++) {
+            let length = this.state.report.questions[i].session !== undefined ? this.state.report.questions[i].session.length : 0;
+            for (let j = 0; j < length; j++) {
                 correct = correct || this.state.report.questions[i].session[j].correct;
                 points += this.state.report.questions[i].session[j].points;
             }
