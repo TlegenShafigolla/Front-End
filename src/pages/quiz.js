@@ -43,8 +43,8 @@ class Quiz extends React.Component {
         this.setState({error: false})
     };
     startTest = () => {
-        this.setState({start: true});
         localStorage.setItem('start_test', 'true')
+        this.setState({start: true});
     };
     onClickContinue = async () => {
         localStorage.setItem('time_limit', '0')
@@ -86,7 +86,7 @@ class Quiz extends React.Component {
             );
         }
         if (this.state.status && localStorage.getItem(`session_id${path[2]}`) !== null) {
-            if (this.state.start || localStorage.getItem('start_test') === 'true') {
+            if (localStorage.getItem('start_test') === 'true') {
                 return <StartQuiz/>
             }
             return (
