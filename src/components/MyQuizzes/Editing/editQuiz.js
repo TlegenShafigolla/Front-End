@@ -88,7 +88,7 @@ class EditQuiz extends React.Component {
                 putQuestions(this.state.quiz_id, questions[i])
             }
         }
-        this.setState({questions:questions})
+        this.setState({questions: questions})
     };
 
     deleteQuestion = async (order_id) => {
@@ -158,7 +158,7 @@ class EditQuiz extends React.Component {
                 this.setState({quizChanges: true});
                 this.setState({quizNameDescriptionChange: false});
             }
-        } else{
+        } else {
             this.setState({error: true});
         }
     };
@@ -200,58 +200,60 @@ class EditQuiz extends React.Component {
             <div className={s.Body}>
                 <div className={s.ArrowButton}>
                     <Link to='/admin/quizzes/'>
-                        <IconButton className={s.ArrowBackIosIcon} color="primary">
+                        <IconButton color="primary">
                             <ArrowBackIosIcon/>
                         </IconButton>
                     </Link>
                 </div>
                 <div className={s.Edit}>
-                    <div className={s.QuizName}>
+                    <div className={s.QuizNameDescription}>
                         {this.state.editQuizName ?
-                            <TextField error={this.state.error} onBlur={this.onBlurQuizName} onChange={this.changeQuizName}
+                            <TextField error={this.state.error} onBlur={this.onBlurQuizName}
+                                       onChange={this.changeQuizName}
                                        autoFocus fullWidth
                                        variant='outlined' margin='dense'
-                                       defaultValue={this.state.quiz_name}/> :
+                                       defaultValue={this.state.quiz_name}
+                                       className={s.QuizInfo}/> :
                             <Typography onClick={this.editQuizName} noWrap
+                                        className={s.QuizInfo}
                                         variant='h4'> {this.state.quiz_name}</Typography>}
                         {this.state.editDescription ?
                             <TextField error={this.state.error} onChange={this.changeDescription}
                                        onBlur={this.onBlurDescription}
                                        defaultValue={this.state.description} autoFocus variant='outlined'
                                        margin='dense' fullWidth multiline rows={2} rowsMax={5}/> :
-                            <Typography onClick={() => this.setState({editDescription: true})}
+                            <Typography className={s.QuizInfo}
+                                        onClick={() => this.setState({editDescription: true})}
                                         variant='body1'>{this.state.description}</Typography>}
                     </div>
-                    <div className={s.Settings}>
-                        <EditQuizSettings pointsChecked={this.pointsChecked}
-                                          mixedChecked={this.mixedChecked}
-                                          showResultsChecked={this.showResultsChecked}
-                                          showResults={this.state.showResults}
-                                          mixed={this.state.mixed}
-                                          points={this.state.points}
-                                          lastedit={this.state.last_edited_date}
-                        />
-                    </div>
+                    <EditQuizSettings pointsChecked={this.pointsChecked}
+                                      mixedChecked={this.mixedChecked}
+                                      showResultsChecked={this.showResultsChecked}
+                                      showResults={this.state.showResults}
+                                      mixed={this.state.mixed}
+                                      points={this.state.points}
+                                      lastedit={this.state.last_edited_date}
+                    />
                     <DragDropContext onDragEnd={this.onDragEnd}>
-                            <Droppable droppableId={this.state.quiz_id.toString()}>
-                                {provided => (
-                                    <div
-                                        className={s.Question}
-                                        {...provided.droppableProps}
-                                        ref={provided.innerRef}
-                                    >
-                                        {this.state.questions === undefined || this.state.questions === null ? ' ' :
-                                            this.state.questions.map((val, index) =>
-                                                <Question
-                                                    index={index}
-                                                    key={val._id}
-                                                    value={val}
-                                                    point={this.state.points}
-                                                    deleteQuestion={this.deleteQuestion}
-                                                    setQuestion={this.setQuestion}
-                                                    setAnswers={this.setAnswers}
-                                                />)}
-                                        {provided.placeholder}</div>)}</Droppable>
+                        <Droppable droppableId={this.state.quiz_id.toString()}>
+                            {provided => (
+                                <div
+                                    className={s.Question}
+                                    {...provided.droppableProps}
+                                    ref={provided.innerRef}
+                                >
+                                    {this.state.questions === undefined || this.state.questions === null ? ' ' :
+                                        this.state.questions.map((val, index) =>
+                                            <Question
+                                                index={index}
+                                                key={val._id}
+                                                value={val}
+                                                point={this.state.points}
+                                                deleteQuestion={this.deleteQuestion}
+                                                setQuestion={this.setQuestion}
+                                                setAnswers={this.setAnswers}
+                                            />)}
+                                    {provided.placeholder}</div>)}</Droppable>
                     </DragDropContext>
                     <div>
                         <IconButton color='primary' size='medium' className={s.AddButton}
@@ -262,10 +264,10 @@ class EditQuiz extends React.Component {
                 </div>
                 <div className={this.state.questions.length === 0 ? s.display : s.board}>
                     <div className={s.BoardRows}>
-                        {this.state.questions === undefined || this.state.questions === null ? null :
+                        {this.state.questions !== null ?
                             this.state.questions.map((val, index) =>
                                 <Board value={val} index={index} key={val.order_id}/>
-                            )}
+                            ) : null}
 
                     </div>
                 </div>

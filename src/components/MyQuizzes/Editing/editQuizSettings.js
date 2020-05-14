@@ -32,59 +32,53 @@ class EditQuizSettings extends React.Component {
 
     render() {
         return (
-            <div className={s.quizSettings}>
-                <div className={s.radio}>
-                    <div className={s.switchLine}>
+            <div className={s.QuizSettings}>
+                <div className={s.Radio}>
+                    <div className={s.SwitchLine}>
                         <Tooltip
                             title={"During the quiz, your questions will be shown in the order in which you see them now."}>
-                            <Typography className={s.switchTextLeft}>In-order</Typography>
+                            <Typography className={s.SwitchTextLeft}>In-order</Typography>
                         </Tooltip>
-                        <div className={s.switch}>
-                            <FormControlLabel
-                                control={<Switch color="primary"
-                                                 value={"active"}
-                                                 checked={this.state.mixed}
-                                                 onChange={this.mixedChecked}/>}
-                                label={''}/>
-                        </div>
+
+                        <Switch className={s.Switch}
+                                color="primary"
+                                value={"active"}
+                                checked={this.state.mixed}
+                                onChange={this.mixedChecked}/>
+
                         <Tooltip title={"During the quiz, your questions will be shown in mixed order."}>
-                            <Typography className={s.switchTextRight}>Mixed</Typography>
+                            <Typography className={s.SwitchTextRight}>Mixed</Typography>
                         </Tooltip>
                     </div>
-                    <div className={s.switchLine}>
+                    <div className={s.SwitchLine}>
                         <Tooltip title={"After taking this quiz, results won't be shown."}>
-                            <Typography className={s.switchTextLeft}>Don't show results</Typography>
+                            <Typography className={s.SwitchTextLeft}>Don't show results</Typography>
                         </Tooltip>
-                        <div className={s.switch}>
-                            <FormControlLabel
-                                control={<Switch color="primary"
-                                                 value={"active"}
-                                                 checked={this.state.showResults}
-                                                 onChange={this.showResultsChecked}/>}
-                                label={''}/>
-                        </div>
+                        <Switch
+                            className={s.Switch}
+                            color="primary"
+                            value={"active"}
+                            checked={this.state.showResults}
+                            onChange={this.showResultsChecked}/>
                         <Tooltip title={"After taking this quiz, results will be shown."}>
-                            <Typography className={s.switchTextRight}>Show results</Typography>
+                            <Typography className={s.SwitchTextRight}>Show results</Typography>
                         </Tooltip>
                     </div>
-                    <div className={s.switchLine}>
+                    <div className={s.SwitchLine}>
                         <Tooltip title={"Grading system. Answers can be correct or wrong."}>
-                            <Typography className={s.switchTextLeft}>Use Correct/Wrong</Typography>
+                            <Typography className={s.SwitchTextLeft}>Use Correct/Wrong</Typography>
                         </Tooltip>
-                        <div className={s.switch}>
-                            <FormControlLabel
-                                control={<Switch color="primary"
-                                                 value={"active"}
-                                                 onChange={this.pointsChecked}
-                                                 checked={this.state.points}/>}
-                                label={''}/>
-                        </div>
+                        <Switch className={s.Switch}
+                                color="primary"
+                                value={"active"}
+                                onChange={this.pointsChecked}
+                                checked={this.state.points}/>
                         <Tooltip title={"Grading system. Any answer can have own weight."}>
-                            <Typography className={s.switchTextRight}>Use Points</Typography>
+                            <Typography className={s.SwitchTextRight}>Use Points</Typography>
                         </Tooltip>
                     </div>
                 </div>
-                <Typography color='textSecondary' variant={'body2'}>version: {this.props.lastedit}</Typography>
+                <Typography color='textSecondary' variant={'body2'}> version: {this.props.lastedit}</Typography>
             </div>
         );
     }

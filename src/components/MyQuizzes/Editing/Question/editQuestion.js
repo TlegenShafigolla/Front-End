@@ -15,11 +15,10 @@ import {Draggable} from "react-beautiful-dnd";
 class EditQuestion extends React.Component {
     constructor(props) {
         super(props);
-        //document.addEventListener('mousedown', this.onClickOuterModal, false);
+        document.addEventListener('mousedown', this.onClickOuterModal, false);
         this.state = {
             editMode: this.props.editMode,
             question_id: this.props.question_id,
-            order: this.props.value.order_id,
             answerType: this.props.answerType,
             isMultipleChoice: this.props.answerType === 'MULTIPLE CHOICE',
             openChangeTypeDialog: false,
@@ -48,7 +47,7 @@ class EditQuestion extends React.Component {
     };
 
     componentWillUnmount() {
-        //document.removeEventListener('mousedown', this.onClickOuterModal, false);
+        document.removeEventListener('mousedown', this.onClickOuterModal, false);
     }
 
     onClickOuterModal = (e) => {
@@ -65,7 +64,7 @@ class EditQuestion extends React.Component {
             <div className={s.EditQuestion}>
                 <Draggable draggableId={this.props.value._id} index={this.props.index}>
                     {provided => (
-                        <div className={s.Question} id={this.state.order}
+                        <div className={s.Question} id={this.props.value.order_id}
                              {...provided.draggableProps}
                              {...provided.dragHandleProps}
                              ref={provided.innerRef}

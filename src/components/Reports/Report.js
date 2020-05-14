@@ -44,6 +44,7 @@ class Report extends React.Component {
         if (this.state.report === null) {
             return '';
         }
+        console.log('ok')
         return (
             <div className={s.Container}>
                 <div className={s.ArrowButton}>

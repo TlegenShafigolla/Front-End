@@ -13,7 +13,7 @@ const board = (props) => {
             duration={500}
         >
             <div className={s.Board}>
-                <div className={s.orderId}>
+                <div className={s.OrderId}>
                     {props.value.order_id}
                 </div>
                 {props.value.type === 'FILL THE BLANK' ? 'FB' : 'MC'}

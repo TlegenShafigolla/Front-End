@@ -9,12 +9,12 @@ class ListReportPreview extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            reports : []
+            Reports : []
         };
     }
 
     render() {
-        if(this.state.report === []){
+        if(this.state.Reports === []){
             return (
                 <div className={s.CircularProgress}>
                     <CircularProgress size={70}/>
@@ -25,8 +25,8 @@ class ListReportPreview extends React.Component{
             <div className={s.Container}>
                 <div className={s.Box}>
                     <div>
-                        {this.state.reports !== [] ? this.state.reports.map((val, index) =>
-                            <ReportPreview id={index} key={val.id} val={val}/>) : ' '}
+                        {this.state.Reports !== [] ? this.state.Reports.map((val, index) =>
+                            <ReportPreview id={index} key={val._id} val={val}/>) : ' '}
                     </div>
                 </div>
             </div>
@@ -34,7 +34,9 @@ class ListReportPreview extends React.Component{
     }
 
     componentDidMount() {
-        getReportList().then(val => this.setState({reports: val['Reports']}));
+        getReportList().then(val => {
+            this.setState({Reports: val.Reports})
+        });
     }
 }
 

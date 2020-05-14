@@ -51,45 +51,46 @@ class ShowQuiz extends React.Component {
 
     render() {
         return (
-                <div className={s.Root} onKeyDown={this.onClickQuiz}>
-                    <CardContent className={s.CardContent}>
-                        <Typography variant="h5" component="h2" noWrap>
-                            {this.props.quiz_name}
-                        </Typography>
-                        < Typography className={s.Title}> {this.props.description}
-                        </Typography>
-                        <Typography className={s.pos}> {this.props.value.questions_count.toString()} </Typography>
-                        <Typography variant="body2"
-                                    component="p"
-                                    color="textSecondary">
-                            Version: {this.props.last_edited_date} </Typography>
-                    </CardContent>
-                    <CardActions className={s.CardActions}>
-                        <div className={s.ButtonPanel}>
-                            <Tooltip title='Invite'>
-                                <IconButton color="primary" onClick={this.inviteDialog}>
-                                    <SendIcon/>
-                                </IconButton>
-                            </Tooltip>
-                            <Tooltip title='Delete'>
-                                <IconButton size='small'
-                                            onClick={this.state.quiz_id === undefined ? this.props.deleteQuizOnClick : this.openDeleteDialog}
-                                            aria-label='delete'>
-                                    <DeleteIcon color='primary'/>
-                                </IconButton>
-                            </Tooltip>
-                        </div>
-                        <Link to={'/admin/quizzes/edit/' + this.props.value._id.toString()}>
-                            <IconButton color="primary" className={s.ArrowButton} onClick={this.handleClick}>
-                                <ArrowForwardIosIcon fontSize='large'/>
-                            </IconButton>
-                        </Link>
-                    </CardActions>
-                    <InviteDialog openDialog={this.state.openInviteDialog}
-                                  onClose={this.onClickInvite}
-                                  quiz_id={this.state.quiz_id}/>
-                    <DeleteQuizDialog openDialog={this.state.openDeleteQuizDialog} onClose={this.onClickDelete}/>
+            <div className={s.Root} onKeyDown={this.onClickQuiz}>
+                <div className={s.CardContent}>
+                    <Typography variant="h5" component="h2" noWrap>
+                        {this.props.quiz_name}
+                    </Typography>
+                    < Typography >
+                        {this.props.description}
+                    </Typography>
+                    <Typography>  {this.props.value.questions_count.toString()} </Typography>
+                    <Typography variant="body2"
+                                component="p"
+                                color="textSecondary">
+                        Version: {this.props.last_edited_date} </Typography>
                 </div>
+                <div className={s.CardActions}>
+                    <div className={s.DeleteAndInvite}>
+                        <Tooltip title='Invite'>
+                            <IconButton color="primary" onClick={this.inviteDialog}>
+                                <SendIcon/>
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title='Delete'>
+                            <IconButton size='small'
+                                        onClick={this.state.quiz_id === undefined ? this.props.deleteQuizOnClick : this.openDeleteDialog}
+                                        aria-label='delete'>
+                                <DeleteIcon color='primary'/>
+                            </IconButton>
+                        </Tooltip>
+                    </div>
+                    <Link to={'/admin/quizzes/edit/' + this.props.value._id.toString()}>
+                        <IconButton color="primary"  onClick={this.handleClick}>
+                            <ArrowForwardIosIcon fontSize='large'/>
+                        </IconButton>
+                    </Link>
+                </div>
+                <InviteDialog openDialog={this.state.openInviteDialog}
+                              onClose={this.onClickInvite}
+                              quiz_id={this.state.quiz_id}/>
+                <DeleteQuizDialog openDialog={this.state.openDeleteQuizDialog} onClose={this.onClickDelete}/>
+            </div>
         );
     }
 }

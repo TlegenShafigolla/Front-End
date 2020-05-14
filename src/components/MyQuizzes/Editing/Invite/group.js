@@ -1,7 +1,7 @@
 import React from "react";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
-import s from '../../Preview/listQuizPreview.module.css'
+import s from './invite.module.css'
 
 const Group = (props) => {
     if (props.groups.length === 0) {
@@ -13,7 +13,7 @@ const Group = (props) => {
     return (
         <div>
             <InputLabel htmlFor="grouped-native-select">Groups</InputLabel>
-            <Select className={s.group_name} native autoWidth={true} onChange={props.onSelectGroup}
+            <Select className={s.GroupName} native autoWidth={true}  variant='outlined' onChange={props.onSelectGroup}
                     defaultValue={props.groups[0].group_name.toString()}>
                 {props.groups.map((val, index) =>
                     <option key={val._id} value={index + 1}>{val.group_name}</option>

@@ -14,7 +14,7 @@ import {
     Snackbar
 } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
-import s from "../../Preview/listQuizPreview.module.css";
+import s from "./invite.module.css";
 import Alert from "@material-ui/lab/Alert";
 import Checkbox from "@material-ui/core/Checkbox";
 import $ from 'jquery'
@@ -51,25 +51,25 @@ class InviteDialog extends React.Component {
     checkTime = (event) => {
         this.setState({checkTime: event.target.checked});
         if (event.target.checked) {
-            $('.' + s.timer).show(500)
+            $('.' + s.Timer).show(500)
         } else {
-            $('.' + s.timer).hide(500)
+            $('.' + s.Timer).hide(500)
         }
     };
     checkStart = (event) => {
         this.setState({checkStart: event.target.checked});
         if (event.target.checked) {
-            $('.' + s.startDate).show(500)
+            $('.' + s.StartDate).show(500)
         } else {
-            $('.' + s.startDate).hide(500)
+            $('.' + s.StartDate).hide(500)
         }
     };
     checkEnd = (event) => {
         this.setState({checkEnd: event.target.checked});
         if (event.target.checked) {
-            $('.' + s.endDate).show(500)
+            $('.' + s.EndDate).show(500)
         } else {
-            $('.' + s.endDate).hide(500)
+            $('.' + s.EndDate).hide(500)
         }
     };
     handleCancel = () => {
@@ -182,7 +182,6 @@ class InviteDialog extends React.Component {
 console.log('okey')
     }
     render() {
-        console.log(this.state.groups)
         return (
             <div>
                 <Dialog
@@ -200,7 +199,7 @@ console.log('okey')
                     <DialogTitle id="Invite">Invite: {this.state.quiz_name}</DialogTitle>
                     <FormControl component="fieldset">
                         <RadioGroup aria-label="type" name="Results">
-                            <div className={s.radioButton}>
+                            <div className={s.RadioButton}>
 
                                 <FormControlLabel value="person" control={<Radio color="primary"/>}
                                                   checked={this.state.person}
@@ -228,8 +227,8 @@ console.log('okey')
                             />}
                         <FormControlLabel control={<Checkbox color={"primary"}/>}
                                           label={"More options"}/>
-                        <div className={s.time}>
-                            <div className={s.checkbox}>
+                        <div className={s.Time}>
+                            <div className={s.Checkbox}>
                                 <FormControlLabel control={<Checkbox onChange={this.checkStart} color={"primary"}/>}
                                                   label={"Start date"}/>
                                 <FormControlLabel control={<Checkbox onChange={this.checkEnd} color={"primary"}/>}
@@ -238,8 +237,8 @@ console.log('okey')
                                                   label={'Time Limit'}/>
 
                             </div>
-                            <div className={s.time_limit}>
-                                <div id="startDate" className={s.startDate}>
+                            <div className={s.TimeLimit}>
+                                <div id="startDate" className={s.StartDate}>
                                     <TextField
                                         label="Start date"
                                         type="datetime-local"
@@ -251,7 +250,7 @@ console.log('okey')
                                         fullWidth
                                     />
                                 </div>
-                                <div id="endDate" className={s.endDate}>
+                                <div id="endDate" className={s.EndDate}>
                                     <TextField
                                         fullWidth
                                         label="End date"
@@ -263,7 +262,7 @@ console.log('okey')
                                         }}
                                     />
                                 </div>
-                                <div id="time" className={s.timer}>
+                                <div id="time" className={s.Timer}>
                                     <TextField
                                         fullWidth
                                         label="Time limit"

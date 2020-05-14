@@ -114,7 +114,7 @@ class Question extends React.Component {
         const answer = this.state.answers;
         let wrong = 0;
         let empty = 0;
-        for (let j = 0; j < answer.length; j++) {
+        for (let j in answer) {
             if (answer[j].answer === '') {
                 empty = 1
             }
@@ -140,7 +140,7 @@ class Question extends React.Component {
                         }
                         await Promise.all(this.state.answers.map(async value => {
                             if ('_id' in value) {
-                                await putAnswers(this.state.id, value).then(val => console.log(val));
+                                await putAnswers(this.state.id, value);
                             } else {
                                 await postAnswers(this.state.id, value);
                             }

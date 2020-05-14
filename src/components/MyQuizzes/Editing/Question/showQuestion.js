@@ -17,12 +17,13 @@ const ShowQuestion = (props) => {
                         </Typography>
                     </div>
                 </div>
-                <div className={s.AnswerType}>
+                <div >
                     <ShowAnswer
                         key={props.question_id}
                         question_id={props.question_id}
                         answers={props.answers}
                         answerType={props.answerType}
+                        {...props}
                     />
                 </div>
             </div>

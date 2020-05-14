@@ -7,97 +7,35 @@
     align-items: center;
     margin-top: 50px;
 }
-.Group{
-    width: 100%;
-}
+
 .Container {
     min-height: 100%;
     display: flex;
     flex-direction: column;
     width: 640px;
-    margin: auto;
+    margin: 0 auto;
 }
 
-.group_name{
-    width: 500px;
-    margin: auto;
-}
+
 /*existingQuizPreview */
 .Root {
     padding: 10px;
     margin-top: 10px;
     box-shadow: 3px 3px 10px #333333;
     display: flex;
-    min-height: 100%;
-    justify-content: space-between;
-}
-
-.bullet {
-    display: inline-block;
-    margin: 0 2px;
-    transform: scale(0.8);
-}
-
-.Title {
-    fontSize: 14;
-}
-
-.pos {
-    marginBottom: 12;
 }
 
 .CardContent {
-    cursor: pointer;
+    overflow: hidden;
     flex-grow: 1;
 }
-
+.DeleteAndInvite{
+    display: flex;
+}
 .CardActions {
     display: flex;
     flex-direction: column-reverse;
-}
-
-.ArrowButton {
-    position: relative;
-    right: -25px;
-}
-
-.radioButton {
-    display: flex;
-    justify-content: space-around;
-}
-
-
-.ButtonPanel {
-    position: relative;
-    bottom: -10px;
-}
-
-.time_limit {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-}
-
-.checkbox {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.time {
-    display: flex;
     align-items: center;
-    justify-content: space-between;
 }
 
-.startDate {
-    display: none;
-}
 
-.endDate {
-    display: none;
-}
-
-.timer {
-    display: none;
-}
