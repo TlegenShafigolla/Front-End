@@ -22,20 +22,21 @@ class Report extends React.Component {
             report: null,
             question: null,
             correctQuestions: null,
-            count:false
+            count: false
         };
     }
-    newState=(count)=>{
-        this.setState({count:!this.state.count})
+
+    newState = (count) => {
+        this.setState({count: !this.state.count})
     };
     scrollTabHandleChange = (event, newValue) => {
         this.setState({question: this.state.report.questions[newValue], tab: newValue});
     };
+
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(prevState.count!==this.state.count){
+        if (prevState.count !== this.state.count) {
             getReport(this.state.report_id).then(val => {
                 this.setState({report: val});
-                this.correctAnswersList()
             })
         }
     }
@@ -44,7 +45,6 @@ class Report extends React.Component {
         if (this.state.report === null) {
             return '';
         }
-        console.log('ok')
         return (
             <div className={s.Container}>
                 <div className={s.ArrowButton}>
@@ -56,7 +56,7 @@ class Report extends React.Component {
                 </div>
                 <div className={s.Box}>
                     <Typography className={s.quizName} variant="h5" component="p" gutterBottom>
-                        {this.state.report.quiz_name}
+                        {this.state.report.quiz.quiz_name}
                     </Typography>
                     <div className={s.Root}>
                         <ReportCard report={this.state.report}/>
@@ -73,46 +73,33 @@ class Report extends React.Component {
                                 aria-label="scrollable force tabs example"
                             >
                                 {this.state.report.questions.map((val, index) =>
-                                    <Tab id={index} key={val.id}
+                                    <Tab id={index} key={val._id}
                                          fullWidth={false}
-                                         icon={<QuestionNumberIcon val={index + 1}
-                                                                   correct={this.state.correctQuestions === null ? false : this.state.correctQuestions[index]}/>}
+                                         icon={<QuestionNumberIcon points={this.state.report.quiz.points}
+                                                                    val={val}
+                                                                   index={index}
+                                                                />
+                                            }
                                     />)}
                             </Tabs>
                         </AppBar>
                     </div>
                     <div>
-                        <ReportQuestion val={this.state.question} session={this.state.report.session} newState={this.newState} points={this.state.report.quiz.points}/>
+                        <ReportQuestion val={this.state.question} session={this.state.report.session}
+                                        newState={this.newState} points={this.state.report.quiz.points}/>
                     </div>
                 </div>
             </div>
         );
     }
-    correctAnswersList = () => {
-        let arr = [];
-        for (let i = 0; i < this.state.report.questions.length; i++) {
-            let correct = false;
-            let points = 0;
-            let length = this.state.report.questions[i].session !== undefined ? this.state.report.questions[i].session.length : 0;
-            for (let j = 0; j < length; j++) {
-                correct = correct || this.state.report.questions[i].session[j].correct;
-                points += this.state.report.questions[i].session[j].points;
-            }
-            if (correct || points > 0) {
-                arr.push(true);
-            } else {
-                arr.push(false);
-            }
-        }
-        this.setState({correctQuestions: arr});
-    };
+
 
     componentDidMount() {
+        console.log('qwe')
         getReport(this.state.report_id).then(val => {
             console.log(val);
             this.setState({report: val});
-            this.setState({question: this.state.report.questions[0]});
-            this.correctAnswersList()
+            this.setState({question: val.questions[0]});
         })
 
     }

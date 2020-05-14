@@ -6,7 +6,7 @@ import red from "@material-ui/core/colors/red";
 import Button from "@material-ui/core/Button";
 import {postReport} from "../../services/API/adminAPI/Quiz/reports";
 import $ from 'jquery'
-class ReportQuestion extends React.Component {
+class  ReportQuestion extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -59,6 +59,7 @@ class ReportQuestion extends React.Component {
         }
         const correct = green.A700;
         const wrong = red.A700;
+        console.log(this.props.val)
         return (
             <div>
                 <div className={s.Question} id={this.props.val._id.toString()}>
@@ -72,17 +73,14 @@ class ReportQuestion extends React.Component {
                     </div>
                     <div>
                         {this.props.val.answers === null ? '' : this.props.val.answers.map(val =>
-                            <div key={val.id + 'div'} className={s.Answer}>
-                                <div className={s.answerForm}>
+                            <div key={val._id} className={s.Answer}>
+                                <div className={s.answerForm} >
                                     <Checkbox
                                         disableRipple
-                                        style={this.props.val.type !== "FILL THE BLANK" ? (map[val.id] > 0 ? {color: correct} : map[val.id] === 0 ? {color: wrong} : {color: 'primary'}) : {color: correct}}
-                                        key={val.id + 'Checkbox'}
-                                        checked={val.point > 0 || val.correct > 0 || map[val.id] > 0 ? true : map[val.id] === 0 ? true : false}
+                                        style={(val.point > 0 || val.correct > 0)?{color:correct}:{color:wrong}}
+                                        checked={val.point > 0 || val.correct > 0 }
                                     />
-                                    <Typography
-                                        variant="body1"
-                                        key={val.id}>
+                                    <Typography variant="body1">
                                         {val.answer}
                                     </Typography>
                                 </div>
@@ -97,22 +95,20 @@ class ReportQuestion extends React.Component {
                 </div>
                 {this.props.val.type !== "FILL THE BLANK" ? null :
                     <div className={s.Question}>
-                        <p>Answers: </p>
-                        {this.props.val.session === undefined ? '' : this.props.val.session.map((val, index) =>
-                            <div className={s.answers} key={val.id}>
+                        <p>Answer: </p>
+                        {this.props.val.session === undefined ? '' :
+                            <div className={s.answers} >
                                 <Typography
                                     className={s.Typography}
-                                    variant="body1"
-                                    key={val.id}>
-                                    {val.answer}
+                                    variant="body1">
+                                    {this.props.val.session[0].answer}
                                 </Typography>
-                                {this.props.points ? (<InputBase id={val._id.toString()} className={s.InputBase} defaultValue={val.points}
+                                {this.props.points ? (<InputBase  className={s.InputBase} id={this.props.val.session[0]._id.toString()} defaultValue={this.props.val.session[0].points}
                                                                 type={'number'}
                                                                 onChange={this.onChangeInputBase}
-                                /> ): <Checkbox style={val.correct===1||this.state.correct ? {color:correct}:
-                                    {color:'#3333'}} defaultChecked={val.correct===1} id={val._id.toString()} onChange={this.onChangeCheckbox}/>}
-                            </div>
-                        )}
+                                /> ): <Checkbox style={this.props.val.session[0].correct===1||this.state.correct ? {color:correct}:
+                                    {color:'#3333'}} defaultChecked={this.props.val.session[0].correct===1} id={this.props.val.session[0]._id.toString()} onChange={this.onChangeCheckbox}/>}
+                            </div>}
                         <div className={s.SaveButton} id='ButtonSave'>
                         <Button  onClick={this.onClickSaveButton}>Save</Button>
                         </div>

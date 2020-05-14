@@ -1,18 +1,19 @@
 import React from "react";
 import s from './QuestionNumberIcon.css'
 
-class QuestionNumberIcon extends React.Component{
-
-    render() {
-
-        return(
-            <div className="container">
-                <div className={this.props.correct ? "correctSquare" : "square"}>
-                    {this.props.val}
-                </div>
-            </div>
-        );
+const QuestionNumberIcon = (props) => {
+    let correct=0;
+    if (props.val.session !== undefined) {
+        if (props.points) {
+           correct =props.val.session.map(value => value.points)
+        }
+        correct =props.val.session.map(value => value.correct)
     }
+    return (
+        <div className={correct>0?'Correct':'Square'}>
+            {props.index + 1}
+        </div>
+    );
 }
 
 export default QuestionNumberIcon;

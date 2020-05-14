@@ -2,10 +2,10 @@ import React from "react";
 import s from "./ReportCard.module.css";
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
 
 class ReportCard extends React.Component {
     render() {
+        console.log(this.props)
         return (
             <div className={s.ReportCard}>
                 <CardContent className={s.CardContent}>

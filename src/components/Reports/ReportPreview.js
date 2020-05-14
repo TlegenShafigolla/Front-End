@@ -8,7 +8,6 @@ import Button from "@material-ui/core/Button";
 
 class ReportPreview extends React.Component {
     render() {
-        console.log(this.props)
         return (
             <div className={s.Root}>
                 <CardContent className={s.CardContent}>

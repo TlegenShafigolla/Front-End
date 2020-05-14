@@ -1,9 +1,9 @@
 .container{
 }
 
-.correctSquare{
-     border: 3px solid green;
-     display: flex;
+.Correct{
+    border: 2px solid green;
+    display: flex;
      align-items: center;
      justify-content: center;
      width: 30px;
@@ -11,7 +11,7 @@
      border-radius: 50%;
  }
 
-.square{
+.Square{
     border: 2px solid red;
     display: flex;
     align-items: center;
