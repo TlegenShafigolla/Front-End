@@ -12,7 +12,7 @@ import DialogActions from "@material-ui/core/DialogActions/DialogActions";
 import {NavLink} from "react-router-dom";
 import Slide from "@material-ui/core/Slide/Slide";
 import {getQuestion} from "../../services/API/userAPI/Survey/questions";
-import {postQuizAnswer} from "../../services/API/userAPI/Quiz/answers";
+import {postAnswer} from "../../services/API/userAPI/Survey/answers";
 
 class TakeSurvey extends React.Component{
     constructor(props){
@@ -32,7 +32,8 @@ class TakeSurvey extends React.Component{
     onClickSubmit = () => {
         const finished = 1;
         const session_id = localStorage.getItem(`session_id${this.state.link}`);
-        postQuizAnswer(this.state.link, session_id, finished, this.state.answers).then(val => {
+        postAnswer(this.state.link, session_id, finished, this.state.answers).then(val => {
+            console.log(val);
             localStorage.removeItem(`session_id${this.state.link}`);
             localStorage.removeItem(`survey_started${this.state.link}`);
             this.setState({endTestDialog: true});
@@ -80,9 +81,9 @@ class TakeSurvey extends React.Component{
                 answers[i].answer = event.target.value;
                 if (answers[i].answer === null || answers[i].answer === '') {
                     answers.splice(i, 1);
-                    this.setState({answers: answers});
-                    return;
                 }
+                this.setState({answers: answers});
+                return;
             }
         }
         let newQuestion = {
