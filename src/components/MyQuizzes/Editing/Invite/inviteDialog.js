@@ -28,15 +28,20 @@ class InviteDialog extends React.Component {
         super(props);
         this.state = {
             quiz_id: this.props.quiz_id,
+            invitationType: 'Person',
+            openSnackbar: false,
+            // For Group Invitation
+            groups: [],
+            selectedGroup: 0,
+            selectedPersons: {},
+            // For Person Invitation
             name: null,
             surname: null,
             email: null,
-            person: true,
-            groups: null,
             errorName: false,
             errorSurname: false,
             errorEmail: false,
-            openSnackbar: false,
+
             start_date: null,
             end_date: null,
             date: '2017-05-24T10:30',
@@ -79,75 +84,102 @@ class InviteDialog extends React.Component {
         this.props.onClose();
     };
 
+    getPersonInvitation = (start, end, time_limit) => {
+        const email = /[0-9a-z_-]+@[0-9a-z_-]+\.[a-z]{2,5}$/i;
+        if (this.state.name === '' || this.state.name === null) {
+            this.setState({errorName: true});
+            return null;
+        }
+        if (this.state.surname === '' || this.state.surname === null) {
+            this.setState({errorSurname: true});
+            return null;
+        }
+        if (!email.test(this.state.email)) {
+            this.setState({errorEmail: true});
+            return null;
+        }
+        const invitation = {
+            name: this.state.name,
+            surname: this.state.surname,
+            email: this.state.email,
+            quiz_id: this.state.quiz_id,
+            start_date: start,
+            end_date: end,
+            time_limit: time_limit,
+        };
+        this.setState({
+            email: null,
+            name: null,
+            surname: null
+        });
+        return invitation;
+    };
+
+    getGroupInvitation = (start, end, time_limit) => {
+        const group_id = this.state.groups[this.state.selectedGroup]._id;
+        const group = [];
+        for(const [key, value] of Object.entries(this.state.selectedPersons)){
+            if(value){
+                group.push(key);
+            }
+        }
+        if(group.length === 0){
+            return null;
+        }
+        const invitation = {
+            group_id: group_id,
+            group: group,
+            quiz_id: this.state.quiz_id,
+            start_date: start,
+            end_date: end,
+            time_limit: time_limit,
+        };
+        return invitation;
+    };
+
+    generateInvitationJSON = (start, end, time_limit) => {
+        if(this.state.invitationType === 'Person'){
+            return this.getPersonInvitation(start, end, time_limit);
+        } else if(this.state.invitationType === 'Group'){
+            return this.getGroupInvitation(start, end, time_limit);
+        } else if(this.state.invitationType === 'Link'){
+            return null;
+        }
+    };
+
     onClickInviteInDialog = async () => {
         if (this.state.disabledInviteButton) {
             return ''
         }
         this.setState({disabledInviteButton: true});
-        let email = /[0-9a-z_-]+@[0-9a-z_-]+\.[a-z]{2,5}$/i;
-        let time;
-        let start;
-        let end;
-        this.state.checkEnd ? end = this.state.end_date : end = null;
-        this.state.checkStart ? start = this.state.start_date : start = null;
-        this.state.checkTime ? time = this.state.time_limit : time = null;
-        if (this.state.name !== null && this.state.name !== '' && this.state.surname !== null && this.state.surname !== '' && email.test(this.state.email)) {
-            const invite = {
-                name: this.state.name,
-                surname: this.state.surname,
-                email: this.state.email,
-                quiz_id: this.state.quiz_id,
-                start_date: start,
-                end_date: end,
-                time_limit: time,
-            };
-            await postInvitations(invite).then((val) => {
+        const time_limit = this.state.checkTime ? this.state.time_limit : null;
+        const start = this.state.checkStart ? this.state.start_date : null;
+        const end = this.state.checkEnd ? this.state.end_date : null;
+        const invitation = this.generateInvitationJSON(start, end, time_limit);
+        if (invitation !== null) {
+            await postInvitations(invitation).then((val) => {
                 console.log(val);
                 if (val.Status === 'Success') {
                     this.setState({openSnackbar: true});
-                } else {
-                    this.setState({email: null});
-                    this.setState({name: null});
-                    this.setState({surname: null});
-
-
                 }
             });
-            this.setState({open: false});
             this.props.onClose();
         }
-        if (this.state.name === '' || this.state.name === null) {
-            this.setState({errorName: true})
-        }
-        if (this.state.surname === '' || this.state.surname === null) {
-            this.setState({errorSurname: true})
-        }
-        if (!email.test(this.state.email)) {
-            this.setState({errorEmail: true})
-        }
         this.setState({disabledInviteButton: false});
-
     };
 
     snackClose = () => {
         this.setState({openSnackbar: false})
     };
-    onChangePerson = () => {
-        this.setState({person: true})
+
+    onChangeType = (newType) => {
+        this.setState({invitationType: newType})
     };
-    onChangeGroup = () => {
-        this.setState({person: false})
-    };
+
     onChangeName = (event) => {
         this.setState({name: event.target.value});
         this.setState({errorName: false})
     };
-
-    componentDidMount() {
-        let date = new Date().toISOString().replace('Z', '').split('.');
-        this.setState({date: date[0], end_date: date[0]});
-        getListGroup().then(json => this.setState({groups: json.groups}));
-    }
 
     onChangeSurname = (event) => {
         this.setState({surname: event.target.value, errorSurname: false});
@@ -178,9 +210,41 @@ class InviteDialog extends React.Component {
         let t = Number(s[0]) * 60 + Number(s[1]);
         this.setState({time_limit: t});
     };
-    onSelectGroup=()=>{
-console.log('okey')
+    onSelectGroup = (event) =>{
+        const selectedPersons = {};
+        this.state.groups[event.target.value].members.map((val, index) => {
+            selectedPersons[val.email] = true;
+        });
+        this.setState({selectedPersons: selectedPersons});
+        this.setState({selectedGroup: event.target.value});
+    };
+    onSelectChecked = (email) => {
+        const selectedPersons = this.state.selectedPersons;
+        selectedPersons[email] = !this.state.selectedPersons[email];
+        this.setState({selectedPersons: selectedPersons});
+    };
+    initializeSelectedPersons = (groups) => {
+        if(groups.length === 0){
+            return;
+        }
+        const selectedPersons = {};
+        groups[0].members.map((val, index) => {
+            selectedPersons[val.email] = true;
+        });
+        this.setState({selectedPersons: selectedPersons});
+    };
+
+    componentDidMount() {
+        let date = new Date().toISOString().replace('Z', '').split('.');
+        this.setState({date: date[0], end_date: date[0]});
+        getListGroup().then(json => {
+            this.setState({groups: json.groups});
+            return json.groups;
+        }).then(groups => {
+            this.initializeSelectedPersons(groups)
+        });
     }
+
     render() {
         return (
             <div>
@@ -202,31 +266,36 @@ console.log('okey')
                             <div className={s.RadioButton}>
 
                                 <FormControlLabel value="person" control={<Radio color="primary"/>}
-                                                  checked={this.state.person}
-                                                  onChange={this.onChangePerson}
+                                                  checked={this.state.invitationType === 'Person'}
+                                                  onChange={() => this.onChangeType('Person')}
                                                   label="Person"/>
                                 <FormControlLabel value="Class" control={<Radio color="primary"/>}
-                                                  checked={!this.state.person}
-                                                  onChange={this.onChangeGroup}
+                                                  disabled={this.state.groups.length === 0}
+                                                  checked={this.state.invitationType === 'Group'}
+                                                  onChange={() => this.onChangeType('Group')}
                                                   label='Groups'/>
                             </div>
 
                         </RadioGroup>
                     </FormControl>
                     <DialogContent>
-                        {this.state.person ?
+                        {this.state.invitationType === 'Person' ?
                             <Person errorName={this.state.errorName}
                                     errorSurname={this.state.errorSurname}
                                     errorEmail={this.state.errorEmail}
                                     onChangeName={this.onChangeName}
                                     onChangeSurname={this.onChangeSurname}
                                     onChangeEmail={this.onChangeEmail}
-                            /> : <Group
+                            /> : null}
+                        { this.state.invitationType === 'Group' ?
+                            <Group
                                 onSelectGroup={this.onSelectGroup}
+                                onSelectChecked={this.onSelectChecked}
+                                selectedGroup={this.state.selectedGroup}
+                                selectedPersons={this.state.selectedPersons}
                                 groups={this.state.groups}
-                            />}
-                        <FormControlLabel control={<Checkbox color={"primary"}/>}
-                                          label={"More options"}/>
+                            /> : null
+                        }
                         <div className={s.Time}>
                             <div className={s.Checkbox}>
                                 <FormControlLabel control={<Checkbox onChange={this.checkStart} color={"primary"}/>}
