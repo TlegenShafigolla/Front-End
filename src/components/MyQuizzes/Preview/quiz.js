@@ -28,7 +28,6 @@ class Quiz extends React.Component {
 
 
     render() {
-
         return (
             <ShowQuiz
                 quiz_id={this.state.id}

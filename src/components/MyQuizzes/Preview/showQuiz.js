@@ -6,11 +6,12 @@ import CardActions from "@material-ui/core/CardActions";
 import {Link} from "react-router-dom";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import {Tooltip} from "@material-ui/core";
+import {Snackbar, Tooltip} from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import SendIcon from '@material-ui/icons/Send';
 import DeleteQuizDialog from "./deleteQuizDialog";
 import InviteDialog from "../Editing/Invite/inviteDialog";
+import Alert from "@material-ui/lab/Alert/Alert";
 
 class ShowQuiz extends React.Component {
     constructor(props) {
@@ -21,6 +22,7 @@ class ShowQuiz extends React.Component {
             quiz_name: this.props.quiz_name,
             openDeleteQuizDialog: false,
             openInviteDialog: false,
+            noQuestionSnackbar: false,
         }
     }
 
@@ -41,7 +43,16 @@ class ShowQuiz extends React.Component {
     };
 
     inviteDialog = () => {
-        this.setState({openInviteDialog: !this.state.openInviteDialog})
+        if(this.props.value.questions_count === 0){
+            this.setState({noQuestionSnackbar: true});
+        }
+        else{
+            this.setState({openInviteDialog: !this.state.openInviteDialog})
+        }
+    };
+
+    closeNoQuestionSnackbar = () => {
+        this.setState({noQuestionSnackbar: false});
     };
 
     onClickQuiz = () => {
@@ -86,13 +97,24 @@ class ShowQuiz extends React.Component {
                         </IconButton>
                     </Link>
                 </div>
-                <InviteDialog openDialog={this.state.openInviteDialog}
-                              onClose={this.onClickInvite}
-                              quiz_id={this.state.quiz_id}/>
+                <InviteDialog openDialog={this.state.openInviteDialog} onClose={this.onClickInvite} quiz_id={this.state.quiz_id}/>
                 <DeleteQuizDialog openDialog={this.state.openDeleteQuizDialog} onClose={this.onClickDelete}/>
+                <NoQuestionSnackbar openSnackbar={this.state.noQuestionSnackbar} snackClose={this.closeNoQuestionSnackbar}/>
             </div>
         );
     }
 }
+
+const NoQuestionSnackbar = (props) => {
+    return(
+        <Snackbar
+            open={props.openSnackbar}
+            onClose={props.snackClose}>
+            <Alert variant="filled" severity="warning">
+                No questions in the quiz
+            </Alert>
+        </Snackbar>
+    );
+};
 
 export default ShowQuiz;
