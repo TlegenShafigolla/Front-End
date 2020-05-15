@@ -1,4 +1,4 @@
- import React, {Component} from "react";
+import React, {Component} from "react";
 import AdminHeader from "../components/AdminHeader/AdminHeader";
 import SideBar from "../components/SideBar/SideBar";
 import "../css/App.css";
@@ -16,6 +16,7 @@ class Admin extends Component {
             displayName: '',
         }
     }
+
     LogOut = () => {
         localStorage.clear();
         this.setState({isLoggedIn: false})
@@ -23,6 +24,9 @@ class Admin extends Component {
     openSideBar = () => {
         this.setState({isSideBarOpen: !this.state.isSideBarOpen})
     };
+    onClose = () => {
+        this.setState({isSideBarOpen: false})
+    }
 
     render() {
         if (!this.state.isLoggedIn) {
@@ -37,9 +41,10 @@ class Admin extends Component {
                     DisplayName={this.state.displayName}
                 />
                 <SideBar
+                    close={this.onClose}
                     open={this.state.isSideBarOpen}
                 />
-                <div onClick={()=>this.setState({isSideBarOpen: false})} >
+                <div onClick={() => this.setState({isSideBarOpen: false})}>
                     <Routes open={this.state.isSideBarOpen}/>
                 </div>
 
@@ -48,16 +53,16 @@ class Admin extends Component {
     }
 
     componentDidMount() {
-        if(localStorage.getItem('admin_name') !== null){
+        if (localStorage.getItem('admin_name') !== null) {
             this.setState({displayName: localStorage.getItem('admin_name') + " " + localStorage.getItem('admin_surname')});
-        } else{
+        } else {
             getProfile().then(value => {
                 this.setState({displayName: value['name'] + " " + value['surname']});
                 localStorage.setItem('admin_name', value['name']);
                 localStorage.setItem('admin_surname', value['surname']);
             });
         }
-     }
+    }
 
 }
 

@@ -5,11 +5,12 @@ import clsx from "clsx";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import MyQuizRoute from "../components/MyQuizzes/MyQuizRoute";
 import Invitations from "../components/Invitations/Invitations";
-import ReportRoute from "../components/Reports/ReportRoute";
+import ReportRoute from "../components/QuizReports/ReportRoute";
 import MySurveyRoute from "../components/MySurveys/MySurveysRoute";
 import GroupRoutes from "../components/Group/Routes";
+import ReportSurveyRoute from "../components/SurveyReports/ReportRoute";
 
-const drawerWidth = 240;
+const drawerWidth = 0;
 const styles = makeStyles(theme => ({
     grow: {
         width: '100wh',
@@ -57,6 +58,7 @@ export const Routes = (props) => {
                 <Route path="/admin/reports" render={() => <ReportRoute/>}/>
                 <Route path="/admin/surveys" render={() => <MySurveyRoute/>}/>
                 <Route path='/admin/group' component={GroupRoutes}/>
+                <Route path='/admin/surveys/reports' render={()=><ReportSurveyRoute/>}/>
 
 
             </main>

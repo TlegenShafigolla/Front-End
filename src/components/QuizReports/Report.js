@@ -84,10 +84,8 @@ class Report extends React.Component {
                             </Tabs>
                         </AppBar>
                     </div>
-                    <div>
                         <ReportQuestion val={this.state.question} session={this.state.report.session}
                                         newState={this.newState} points={this.state.report.quiz.points}/>
-                    </div>
                 </div>
             </div>
         );
@@ -95,7 +93,6 @@ class Report extends React.Component {
 
 
     componentDidMount() {
-        console.log('qwe')
         getReport(this.state.report_id).then(val => {
             console.log(val);
             this.setState({report: val});

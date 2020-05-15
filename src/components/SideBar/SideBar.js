@@ -13,8 +13,8 @@ const SideBar = (props) => {
     return (
         <Drawer
             open={props.open}
-            variant='persistent'
             className={s.drawer}
+            onBackdropClick={props.close}
             anchor='left'
             classes={{
                 paper: s.drawerPaper
@@ -78,12 +78,13 @@ const SideBar = (props) => {
                             startIcon={<InsertInvitationSharpIcon/>}>
                         Invitations
                     </Button>
+                    <NavLink to='/admin/surveys/reports'>
                     <Button color='primary'
-                            disabled={true}
                             className={s.secondary}
                             startIcon={<AssessmentSharpIcon/>}>
                         Reports
                     </Button>
+                    </NavLink>
                 </div>
             </div>
         </Drawer>

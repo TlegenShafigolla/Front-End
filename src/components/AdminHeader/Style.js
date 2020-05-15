@@ -23,7 +23,7 @@ export const useStyles = makeStyles(theme => ({
         }),
     },
     appBarShift: {
-        width: `calc(100% - ${240}px)`,
+        width: "100%",
         marginLeft: 240,
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.easeOut,
