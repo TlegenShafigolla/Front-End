@@ -30,6 +30,8 @@ class InviteDialog extends React.Component {
             quiz_id: this.props.quiz_id,
             invitationType: 'Person',
             openSnackbar: false,
+            // For Link Invitation
+            invitationLink: null,
             // For Group Invitation
             groups: [],
             selectedGroup: 0,
@@ -49,7 +51,8 @@ class InviteDialog extends React.Component {
             checkTime: false,
             checkStart: false,
             checkEnd: false,
-            disabledInviteButton: false
+            disabledInviteButton: false,
+            disabledGetLinkButton: false,
         };
     }
 
@@ -78,73 +81,87 @@ class InviteDialog extends React.Component {
         }
     };
     handleCancel = () => {
-        this.setState({email: null});
-        this.setState({name: null});
-        this.setState({surname: null});
-        this.props.onClose();
-    };
-
-    getPersonInvitation = (start, end, time_limit) => {
-        const email = /[0-9a-z_-]+@[0-9a-z_-]+\.[a-z]{2,5}$/i;
-        if (this.state.name === '' || this.state.name === null) {
-            this.setState({errorName: true});
-            return null;
-        }
-        if (this.state.surname === '' || this.state.surname === null) {
-            this.setState({errorSurname: true});
-            return null;
-        }
-        if (!email.test(this.state.email)) {
-            this.setState({errorEmail: true});
-            return null;
-        }
-        const invitation = {
-            name: this.state.name,
-            surname: this.state.surname,
-            email: this.state.email,
-            quiz_id: this.state.quiz_id,
-            start_date: start,
-            end_date: end,
-            time_limit: time_limit,
-        };
         this.setState({
             email: null,
             name: null,
-            surname: null
+            surname: null,
+            invitationLink: null,
+            groups: [],
+            selectedGroup: 0,
+            selectedPersons: {},
         });
-        return invitation;
-    };
-
-    getGroupInvitation = (start, end, time_limit) => {
-        const group_id = this.state.groups[this.state.selectedGroup]._id;
-        const group = [];
-        for(const [key, value] of Object.entries(this.state.selectedPersons)){
-            if(value){
-                group.push(key);
-            }
-        }
-        if(group.length === 0){
-            return null;
-        }
-        const invitation = {
-            group_id: group_id,
-            group: group,
-            quiz_id: this.state.quiz_id,
-            start_date: start,
-            end_date: end,
-            time_limit: time_limit,
-        };
-        return invitation;
+        this.props.onClose();
     };
 
     generateInvitationJSON = (start, end, time_limit) => {
         if(this.state.invitationType === 'Person'){
-            return this.getPersonInvitation(start, end, time_limit);
+            const email = /[0-9a-z_-]+@[0-9a-z_-]+\.[a-z]{2,5}$/i;
+            if (this.state.name === '' || this.state.name === null) {
+                this.setState({errorName: true});
+                return null;
+            }
+            if (this.state.surname === '' || this.state.surname === null) {
+                this.setState({errorSurname: true});
+                return null;
+            }
+            if (!email.test(this.state.email)) {
+                this.setState({errorEmail: true});
+                return null;
+            }
+            const invitation = {
+                name: this.state.name,
+                surname: this.state.surname,
+                email: this.state.email,
+                quiz_id: this.state.quiz_id,
+                start_date: start,
+                end_date: end,
+                time_limit: time_limit,
+            };
+            this.setState({
+                email: null,
+                name: null,
+                surname: null
+            });
+            return invitation;
         } else if(this.state.invitationType === 'Group'){
-            return this.getGroupInvitation(start, end, time_limit);
-        } else if(this.state.invitationType === 'Link'){
-            return null;
+            const group_id = this.state.groups[this.state.selectedGroup]._id;
+            const group = [];
+            for(const [key, value] of Object.entries(this.state.selectedPersons)){
+                if(value){
+                    group.push(key);
+                }
+            }
+            if(group.length === 0){
+                return null;
+            }
+            const invitation = {
+                group_id: group_id,
+                group: group,
+                quiz_id: this.state.quiz_id,
+                start_date: start,
+                end_date: end,
+                time_limit: time_limit,
+            };
+            return invitation;
         }
+    };
+
+    onClickGetLinkInDialog = () => {
+        const time_limit = this.state.checkTime ? this.state.time_limit : null;
+        const start = this.state.checkStart ? this.state.start_date : null;
+        const end = this.state.checkEnd ? this.state.end_date : null;
+        const invitation = {
+            public: true,
+            quiz_id: this.state.quiz_id,
+            start_date: start,
+            end_date: end,
+            time_limit: time_limit,
+        };
+        postInvitations(invitation).then((val) => {
+            console.log(val);
+            const link = val.link;
+            this.setState({invitationLink: link});
+        });
     };
 
     onClickInviteInDialog = async () => {
@@ -249,7 +266,8 @@ class InviteDialog extends React.Component {
         return (
             <div>
                 <Dialog
-                    maxWidth={'xl'}
+                    maxWidth={'sm'}
+                    fullWidth={'sm'}
                     open={this.props.openDialog}
                     aria-labelledby="Invite"
                     onClose={this.handleCancel}>
@@ -274,6 +292,10 @@ class InviteDialog extends React.Component {
                                                   checked={this.state.invitationType === 'Group'}
                                                   onChange={() => this.onChangeType('Group')}
                                                   label='Groups'/>
+                                <FormControlLabel value="Class" control={<Radio color="primary"/>}
+                                                  checked={this.state.invitationType === 'Link'}
+                                                  onChange={() => this.onChangeType('Link')}
+                                                  label='Link'/>
                             </div>
 
                         </RadioGroup>
@@ -287,7 +309,7 @@ class InviteDialog extends React.Component {
                                     onChangeSurname={this.onChangeSurname}
                                     onChangeEmail={this.onChangeEmail}
                             /> : null}
-                        { this.state.invitationType === 'Group' ?
+                        {this.state.invitationType === 'Group' ?
                             <Group
                                 onSelectGroup={this.onSelectGroup}
                                 onSelectChecked={this.onSelectChecked}
@@ -341,18 +363,32 @@ class InviteDialog extends React.Component {
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
-
                                     />
                                 </div>
                             </div>
                         </div>
+                        <div className={s.InvitationLinkTextField}>
+                            {this.state.invitationLink !== null ? <TextField
+                                id="outlined-read-only-input"
+                                label="Link"
+                                defaultValue={this.state.invitationLink}
+                                InputProps={{
+                                    readOnly: true,
+                                }}
+                                variant="outlined"
+                            /> : null}
+                        </div>
                     </DialogContent>
                     <DialogActions>
-                        <Button color="primary" onClick={this.onClickInviteInDialog}>
-                            Invite
-                        </Button>
+                        {this.state.invitationType === 'Link' ?
+                            <Button color="primary" onClick={this.onClickGetLinkInDialog}>
+                                {this.state.invitationType === 'Link' ? "Get Link": "Invite"}
+                            </Button> :
+                            <Button color="primary" onClick={this.onClickInviteInDialog}>
+                                {this.state.invitationType === 'Link' ? "Get Link": "Invite"}
+                            </Button>
+                        }
                     </DialogActions>
-
                 </Dialog>
                 <Snackbar
                     open={this.state.openSnackbar}
