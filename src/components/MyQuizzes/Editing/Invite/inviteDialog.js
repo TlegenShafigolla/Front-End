@@ -29,7 +29,7 @@ class InviteDialog extends React.Component {
         this.state = {
             quiz_id: this.props.quiz_id,
             invitationType: 'Person',
-            openSnackbar: false,
+            openSuccessSnackbar: false,
             // For Link Invitation
             invitationLink: null,
             // For Group Invitation
@@ -177,7 +177,7 @@ class InviteDialog extends React.Component {
             await postInvitations(invitation).then((val) => {
                 console.log(val);
                 if (val.Status === 'Success') {
-                    this.setState({openSnackbar: true});
+                    this.setState({openSuccessSnackbar: true});
                 }
             });
             this.props.onClose();
@@ -186,7 +186,7 @@ class InviteDialog extends React.Component {
     };
 
     snackClose = () => {
-        this.setState({openSnackbar: false})
+        this.setState({openSuccessSnackbar: false})
     };
 
     onChangeType = (newType) => {
@@ -297,7 +297,6 @@ class InviteDialog extends React.Component {
                                                   onChange={() => this.onChangeType('Link')}
                                                   label='Link'/>
                             </div>
-
                         </RadioGroup>
                     </FormControl>
                     <DialogContent>
@@ -391,7 +390,7 @@ class InviteDialog extends React.Component {
                     </DialogActions>
                 </Dialog>
                 <Snackbar
-                    open={this.state.openSnackbar}
+                    open={this.state.openSuccessSnackbar}
                     onClose={this.snackClose}>
                     <Alert variant="filled" severity="success">
                         Success

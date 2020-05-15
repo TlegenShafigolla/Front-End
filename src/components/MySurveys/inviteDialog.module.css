@@ -1,3 +1,28 @@
+/*-----------------------------------------------------------Group----------------------------------------------------*/
+.Group{
+    display: flex;
+    flex-direction: column;
+}
+
+.GroupName {
+    width: 500px;
+    margin: auto;
+}
+
+.GroupMembers{
+    padding: 10px;
+    border: lightgray 1px solid;
+    border-radius: 2px;
+}
+
+.FormControl{
+    margin: 3px;
+    padding: 3px;
+}
+/*-----------------------------------------------------------Person----------------------------------------------------*/
+
+/*------------------------------------------------------Invite Dialog-------------------------------------------------*/
+
 .RadioButton {
     display: flex;
     justify-content: space-around;
@@ -27,4 +52,10 @@
 
 .EndDate {
     display: none;
+}
+
+.InvitationLinkTextField{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
