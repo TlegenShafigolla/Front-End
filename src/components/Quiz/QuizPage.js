@@ -15,7 +15,7 @@ import {NavLink} from "react-router-dom";
 import DialogActions from "@material-ui/core/DialogActions";
 
 
-class StartQuiz extends React.Component {
+class QuizPage extends React.Component {
     constructor(props) {
         super(props);
 
@@ -231,4 +231,4 @@ class StartQuiz extends React.Component {
     }
 }
 
-export default StartQuiz;
+export default QuizPage;
