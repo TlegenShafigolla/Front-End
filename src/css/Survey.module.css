@@ -10,3 +10,65 @@
     align-items: center;
     flex-direction: column;
 }
+.QuizDescriptionDialog{
+    padding: 10px 10px 20px;
+}
+
+.Logo {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 120px;
+    width: 120px;
+}
+
+.Instructions{
+    width: 70%;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid rgba(66, 121, 255, 0.2);
+}
+.QuizName{
+    text-align: center;
+    color: rgb(47, 87, 181);
+    margin-bottom: 7px;
+    font-size: 50px;
+}
+.SurveyCount{
+    text-align: center;
+    font-size: 20px;
+    color: #333333;
+    margin-bottom: 7px;
+}
+
+.Description{
+    margin: 10px;
+}
+
+li{
+    color: #717274;
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+    .Instructions{
+        width: 85%;
+    }
+    .SurveyName {
+        font-size: 40px;
+    }
+    .Logo{
+        height: 110px;
+        width: 110px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .Instructions{
+        width: 85%;
+    }
+    .SurveyName {
+        font-size: 30px;
+    }
+    .Logo{
+        height: 100px;
+        width: 100px;
+    }
+}
