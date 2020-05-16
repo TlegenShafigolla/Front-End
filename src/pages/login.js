@@ -9,11 +9,9 @@ class Login extends React.Component {
     render() {
 
         return (
-            <div>
                 <div className={s.loginPage}>
                     <SignIn/>
                 </div>
-            </div>
         );
     }
 }

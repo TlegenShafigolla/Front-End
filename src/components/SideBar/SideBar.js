@@ -9,6 +9,7 @@ import AssignmentSharpIcon from '@material-ui/icons/AssignmentSharp';
 import s from './SideBar.module.css'
 import logo from '../../images/192x192logoGray.png'
 import GroupIcon from '@material-ui/icons/Group';
+
 const SideBar = (props) => {
     return (
         <Drawer
@@ -79,11 +80,11 @@ const SideBar = (props) => {
                         Invitations
                     </Button>
                     <NavLink to='/admin/surveys/reports'>
-                    <Button color='primary'
-                            className={s.secondary}
-                            startIcon={<AssessmentSharpIcon/>}>
-                        Reports
-                    </Button>
+                        <Button color='primary'
+                                className={s.secondary}
+                                startIcon={<AssessmentSharpIcon/>}>
+                            Reports
+                        </Button>
                     </NavLink>
                 </div>
             </div>
