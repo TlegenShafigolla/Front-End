@@ -1,16 +1,19 @@
 import React from 'react'
 import {getInvitation, postInvitation} from "../services/API/userAPI/Quiz/invitation";
-import StartQuiz from "../components/Quiz/StartQuiz";
+import QuizPage from "../components/Quiz/QuizPage";
 import CheckEmail from "../components/Quiz/CheckEmail";
 import Typography from "@material-ui/core/Typography";
 import s from '../components/Quiz/Quiz.module.css'
 import Button from "@material-ui/core/Button";
 import {NavLink} from "react-router-dom";
-import StartTest from "../components/Quiz/QuizDescriptionDialog";
+import StartingPage from "../components/Quiz/QuizDescriptionDialog";
 
 class Quiz extends React.Component {
     constructor(props) {
         super(props);
+        const path = window.location.pathname.split('/');
+        const link = path[2];
+        const quiz = localStorage.getItem(`quiz_session${link}`) ? JSON.parse(localStorage.getItem(`quiz_session${link}`)) : null;
         this.state = {
             status: null,
             email: null,
@@ -18,7 +21,7 @@ class Quiz extends React.Component {
             error: false,
             startTest: null,
             start: false,
-            quiz: null
+            quiz: quiz,
         };
     }
 
@@ -41,18 +44,20 @@ class Quiz extends React.Component {
         this.setState({error: false})
     };
     startTest = () => {
-        localStorage.setItem('start_test', 'true')
+        localStorage.setItem('start_test', 'true');
         this.setState({start: true});
     };
     onClickContinue = async () => {
         localStorage.setItem('time_limit', '0');
         const path = window.location.pathname.split('/');
+        const link = path[2];
         const email = this.state.email;
-        await postInvitation(path[2], email).then(json => {
+        await postInvitation(link, email).then(json => {
             console.log(json);
             this.setState({statusEmail: 'Success' === json.Status});
             if (json.Status === 'Success') {
-                localStorage.setItem(`session_id${path[2]}`, json['session_id']);
+                localStorage.setItem(`session_id${link}`, json['session_id']);
+                localStorage.setItem(`quiz_session${link}`, JSON.stringify(json.quiz));
                 this.setState({quiz: json.quiz})
             }
             if (json.Status === 'Failed') {
@@ -73,7 +78,7 @@ class Quiz extends React.Component {
             return <div>Time for this session has passed.</div>
         }
         if (this.state.status && localStorage.getItem(`session_id${path[2]}`) === null) {
-            localStorage.removeItem('date')
+            localStorage.removeItem('date');
             return (
                 <CheckEmail
                     error={this.state.error}
@@ -84,10 +89,10 @@ class Quiz extends React.Component {
         }
         if (this.state.status && localStorage.getItem(`session_id${path[2]}`) !== null) {
             if (localStorage.getItem('start_test') === 'true') {
-                return <StartQuiz/>
+                return <QuizPage/>
             }
             return (
-                <StartTest quiz={this.state.quiz} start={this.startTest}/>
+                <StartingPage quiz={this.state.quiz} start={this.startTest}/>
             );
         } else {
             localStorage.removeItem(`session_id${path[2]}`);
