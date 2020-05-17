@@ -13,9 +13,10 @@ import {NavLink} from "react-router-dom";
 import Slide from "@material-ui/core/Slide/Slide";
 import {getQuestion} from "../../services/API/userAPI/Survey/questions";
 import {postAnswer} from "../../services/API/userAPI/Survey/answers";
+import Grid from "@material-ui/core/Grid";
 
 class TakeSurvey extends React.Component{
-    constructor(props){
+    constructor(props) {
         super(props);
         const path = window.location.pathname.split('/');
         this.state = {
@@ -56,7 +57,7 @@ class TakeSurvey extends React.Component{
             };
             answers.push(newAnswer);
             this.setState({answers: answers});
-        } else if(!event.target.checked) {
+        } else if (!event.target.checked) {
             for (let i = 0; i < answers.length; i++) {
                 if (answers[i].question_id === Number(event.target.id)) {
                     for (let j = 0; j < answers[i].answer_ids.length; j++) {
@@ -111,57 +112,65 @@ class TakeSurvey extends React.Component{
             return <Slide direction="up" ref={ref} {...props} />;
         });
 
-        return(
+        return (
             <div className={s.SurveyPage}>
                 <AppBar>
                     <Toolbar className={s.Header}>
-                        <Typography variant='h5'>{this.state.survey_name}</Typography>
-                        <Button onClick={this.onClickSubmit}>End Test</Button>
+                        <p>{this.state.survey_name}</p>
+                        <Button variant="outlined" size="medium" onClick={this.onClickSubmit}>End Test</Button>
                     </Toolbar>
                 </AppBar>
                 <div className={s.Survey}>
-                    <div className={s.Info}>
-                        {this.state.questions === undefined || this.state.questions === null ? ' ' :
-                            this.state.questions.map((val, index) =>
-                                <Link
-                                    key={index}
-                                    activeClass="active"
-                                    to={index.toString()}
-                                    spy={true}
-                                    smooth={true}
-                                    offset={-130}
-                                    duration={500}>
-                                    <Button key={index}>{index + 1}</Button>
-                                </Link>)}
-                    </div>
-                    <div
-                        className={s.Questions}> {this.state.questions === undefined || this.state.questions === null ? ' ' :
-                        this.state.questions.map((val, index) => <Questions
-                            onChangeCheck={this.onChangeCheck}
-                            onChangeAnswer={this.onChangeAnswer}
-                            key={val._id.toString()}
-                            index={index}
-                            value={val}
-                        />)}
-                    </div>
-
+                    <Grid
+                        container
+                        direction="row"
+                        alignItems="flex-start"
+                        justify="center">
+                        <Grid
+                            direction="column"
+                            lg={8} md={8} sm={12} xs={12}>
+                            {this.state.questions === undefined || this.state.questions === null ? ' ' :
+                                this.state.questions.map((val, index) => <Questions
+                                    onChangeCheck={this.onChangeCheck}
+                                    onChangeAnswer={this.onChangeAnswer}
+                                    key={val._id.toString()}
+                                    index={index}
+                                    value={val}
+                                />)}
+                        </Grid>
+                    </Grid>
                 </div>
-                <Dialog open={this.state.endTestDialog} fullScreen TransitionComponent={Transition}>
-                    <DialogContent>
-                        <Typography variant='h5'>
-                            Thank you for passing the survey
-                        </Typography>
-                    </DialogContent>
+                {/*    {this.state.questions === undefined || this.state.questions === null ? ' ' :*/}
+                {/*        this.state.questions.map((val, index) =>*/}
+                {/*            <Link*/}
+                {/*                key={index}*/}
+                {/*                activeClass="active"*/}
+                {/*                to={index.toString()}*/}
+                {/*                spy={true}*/}
+                {/*                smooth={true}*/}
+                {/*                offset={-130}*/}
+                {/*                duration={500}>*/}
+                {/*                <Button key={index}>{index + 1}</Button>*/}
+                {/*            </Link>)}*/}
+                {/*</div>*/}
 
-                    <DialogActions>
-                        <NavLink className={s.Button} to='/'>
-                            <Button color='primary' variant='contained'>Back to home page</Button>
-                        </NavLink>
-                    </DialogActions>
-                </Dialog>
-            </div>
-        );
+
+        <Dialog open={this.state.endTestDialog} fullScreen TransitionComponent={Transition}>
+            <DialogContent>
+                <Typography variant='h5'>
+                    Thank you for passing the survey
+                </Typography>
+            </DialogContent>
+
+            <DialogActions>
+                <NavLink className={s.Button} to='/'>
+                    <Button color='primary' variant='contained'>Back to home page</Button>
+                </NavLink>
+            </DialogActions>
+        </Dialog>
+    </div>
+    );
     }
-}
+    }
 
-export default TakeSurvey;
+    export default TakeSurvey;

@@ -8,15 +8,15 @@ import Divider from "@material-ui/core/Divider";
 class Questions extends React.Component {
     render() {
         return (
-            <div className={s.Question} id={this.props.index.toString()}>
+            <div className={s.Survey} id={this.props.index.toString()}>
 
-                <div className={s.QuestionInfo}>
-                    <Typography variant="h6" component="h2">
-                        {this.props.index+1}.</Typography>
-                    <div className={s.QuestionField}>
-                        <Typography variant="h6" component="h2">
+                <div className={s.SurveyInfo}>
+                   <span>
+                        {this.props.index+1}.</span>
+                    <div className={s.SurveyField}>
+                        <span>
                             {this.props.value.question}
-                        </Typography>
+                        </span>
                     </div>
                 </div>
                 <Divider/>

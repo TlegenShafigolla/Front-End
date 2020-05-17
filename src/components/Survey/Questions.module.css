@@ -1,15 +1,14 @@
-.Question {
+.Survey {
     padding: 10px;
-    margin-top: 25px;
-    border-radius: 4px;
+    margin-top: 20px;
     box-shadow: 5px 5px 10px #333333;
 }
 
-.QuestionInfo {
+.SurveyInfo {
     display: flex;
     width: 100%;
 }
 
-.QuestionField {
+.SurveyField {
     margin-left: 5px;
 }

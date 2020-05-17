@@ -246,7 +246,6 @@ class InviteDialog extends React.Component{
         return(
             <div>
                 <Dialog maxWidth={'sm'}
-                        fullWidth={'sm'}
                         open={this.props.openDialog}
                         aria-labelledby="Invite"
                         onClose={this.handleCancel}>
