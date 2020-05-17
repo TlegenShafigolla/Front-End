@@ -13,6 +13,7 @@ import {Link} from "react-scroll";
 import Slide from "@material-ui/core/Slide";
 import {NavLink} from "react-router-dom";
 import DialogActions from "@material-ui/core/DialogActions";
+import Grid from "@material-ui/core/Grid";
 
 
 class QuizPage extends React.Component {
@@ -175,14 +176,14 @@ class QuizPage extends React.Component {
         return (
             <div className={s.quizPage}>
                 <AppBar>
-                    <Toolbar className={s.header}>
-                        <Typography variant='h5'> {this.state.quiz_name}</Typography>
+                    <Toolbar className={s.Header}>
+                        <p> {this.state.quiz_name}</p>
                         {this.state.time_left === null ? '' : "Time left: " + this.state.time_left}
-                        <Button onClick={this.onClickSubmit}>End Test</Button>
+                        <Button variant="outlined" size="medium" onClick={this.onClickSubmit}>End Test</Button>
                     </Toolbar>
                 </AppBar>
                 <div className={s.quiz}>
-                    <div className={s.info}>
+                    <Grid>
 
                         {this.state.questions === undefined || this.state.questions === null ? ' ' :
                             this.state.questions.map((val, index) =>
@@ -193,24 +194,28 @@ class QuizPage extends React.Component {
                                     spy={true}
                                     smooth={true}
                                     offset={-130}
-                                    duration={500}
-                                >
+                                    duration={500}>
                                     <Button key={index}>{index + 1}
 
                                     </Button></Link>)}
 
-                    </div>
-                    <div
-                        className={s.questions}> {this.state.questions === undefined || this.state.questions === null ? ' ' :
-                        this.state.questions.map((val, index) => <Question
-                            onChangeCheck={this.onChangeCheck}
-                            onChangeAnswer={this.onChangeAnswer}
-                            key={val._id.toString()}
-                            index={index}
-                            value={val}
-                        />)}
-                    </div>
-
+                    </Grid>
+                    <Grid
+                        container
+                        direction="column"
+                        justify="flex-start"
+                        alignItems="center">
+                        <Grid item lg={8} md={8} sm={12} xs={12}>
+                        {this.state.questions === undefined || this.state.questions === null ? ' ' :
+                            this.state.questions.map((val, index) =>
+                                <Question onChangeCheck={this.onChangeCheck}
+                                          onChangeAnswer={this.onChangeAnswer}
+                                          key={val._id.toString()}
+                                          index={index}
+                                          value={val}/>
+                        )}
+                        </Grid>
+                    </Grid>
                 </div>
                 <Dialog open={this.state.endTestDialog} fullScreen TransitionComponent={Transition}>
                     <DialogContent>

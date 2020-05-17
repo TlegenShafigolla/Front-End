@@ -1,4 +1,4 @@
-.header {
+.Header {
     width: 100%;
     height: 64px;
     border-bottom: 1px solid silver;
@@ -7,7 +7,7 @@
     justify-content: space-between;
     position: fixed;
   }
-  .header button{
+  .Header button{
     margin-left: 15px;
   }
   .logo{

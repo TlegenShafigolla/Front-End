@@ -3,6 +3,7 @@ import s from "./Quiz.module.css";
 import Typography from "@material-ui/core/Typography";
 import Answers from "./Answers";
 import Divider from "@material-ui/core/Divider";
+import Grid from "@material-ui/core/Grid";
 
 
 const Question =(props)=>{

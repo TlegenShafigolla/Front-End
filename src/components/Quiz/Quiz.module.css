@@ -1,17 +1,8 @@
 .quiz {
-    margin-top: 30px;
-    padding: 20px;
-    margin-right: auto;
-    margin-left: auto;
-    width: 600px;
+    margin-top: 40px;
+    padding: 10px;
 }
 .quizPage{
-display: flex;
-}
-.questions {
-    margin-top: 60px;
-    display: flex;
-    flex-direction: column;
 }
 
 .error {
@@ -23,7 +14,6 @@ display: flex;
 }
 
 .info {
-    display: flex;
     top: 70px;
     position: fixed;
     border: 1px solid rgba(255, 255, 255, 0.67);
@@ -36,8 +26,7 @@ display: flex;
 
 .Question {
     padding: 10px;
-    margin-top: 25px;
-    border-radius: 4px;
+    margin-top: 20px;
     box-shadow: 5px 5px 10px #333333;
 }
 
@@ -110,14 +99,16 @@ display: flex;
 
 }
 
-.header {
+.Header {
+    background-color: #f3f3f3;
     display: flex;
     justify-content: space-between;
+    color: #3F51B5;
+    font-size: 20px;
 }
 
-.header Button {
-    background: #3F51B5;
-    color: white;
+.Header button {
+    color: #3F51B5;
 }
 
 .button {
@@ -167,7 +158,18 @@ li{
     color: #717274;
 }
 
-@media (min-width: 601px) and (max-width: 900px) {
+/*
+xs, extra-small: 0px
+sm, small: 600px
+md, medium: 960px
+lg, large: 1280px
+xl, extra-large: 1920px
+*/
+
+@media (min-width: 601px) and (max-width: 960px) {
+    .Header {
+        font-size: 20px;
+    }
     .Instructions{
         width: 85%;
     }
@@ -180,6 +182,12 @@ li{
     }
 }
 @media screen and (max-width: 600px) {
+    .Header{
+        font-size: 16px;
+    }
+    .Header button{
+        font-size: 10px;
+    }
     .Instructions{
         width: 85%;
     }
