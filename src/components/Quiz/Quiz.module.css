@@ -1,8 +1,8 @@
 .quiz {
-    margin-top: 40px;
-    padding: 10px;
+    margin-top: 50px;
 }
-.quizPage{
+.QuizPage{
+    margin-bottom: 15px;
 }
 
 .error {
@@ -12,7 +12,12 @@
     justify-content: center;
     align-items: center;
 }
+.Board{
+}
 
+.BoardGrid{
+    margin-top: 10px;
+}
 .info {
     top: 70px;
     position: fixed;
@@ -31,8 +36,8 @@
 }
 
 .QuestionInfo {
+    font-size: 16px;
     display: flex;
-    width: 100%;
 }
 
 .QuestionField {
@@ -43,9 +48,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0;
-    left: -15px;
-    height: 35px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .textarea {
@@ -167,8 +171,14 @@ xl, extra-large: 1920px
 */
 
 @media (min-width: 601px) and (max-width: 960px) {
+    .QuizPage{
+        padding: 5px
+    }
     .Header {
         font-size: 20px;
+    }
+    .Board{
+        display: none;
     }
     .Instructions{
         width: 85%;
@@ -182,8 +192,14 @@ xl, extra-large: 1920px
     }
 }
 @media screen and (max-width: 600px) {
+    .QuizPage{
+        padding: 5px
+    }
     .Header{
         font-size: 16px;
+    }
+    .Board{
+        display: none;
     }
     .Header button{
         font-size: 10px;

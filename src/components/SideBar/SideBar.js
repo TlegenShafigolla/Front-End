@@ -23,7 +23,7 @@ const SideBar = (props) => {
 
         >
 
-            <div className={s.header}>
+            <div className={s.Header}>
                 <img className={s.logo} src={logo} alt="Logo"/>
                 <Typography className={s.name} variant="h5" noWrap color="primary">
                     QUIZZES

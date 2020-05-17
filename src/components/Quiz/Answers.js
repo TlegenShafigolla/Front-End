@@ -5,25 +5,20 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Divider from "@material-ui/core/Divider";
 
 class Answers extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            type: this.props.value.type,
-        }
-    }
 
     render() {
-        if (this.state.type === 'MULTIPLE CHOICE') {
+        if (this.props.value.type === 'MULTIPLE CHOICE') {
             return (
-                <div className={s.Answers}>
-                    <ol type='A' className={s.ol}>
+                <div >
+                    <ol type='A' >
                         {this.props.value.answers === null ? '' : this.props.value.answers.map((val, index) =>
                             <div key={index}>
                                 <div  className={s.Answer}>
                                     <li>  {val.answer}</li>
                                     <Checkbox id={val.question_id.toString()}
                                               value={val._id.toString()}
-                                              onChange={this.props.onChangeCheck} color='primary'/>
+                                              onChange={this.props.onChangeCheck}
+                                              color='primary' size='small'/>
                                 </div>
                                 <Divider/>
                             </div>

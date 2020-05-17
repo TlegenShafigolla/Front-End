@@ -174,7 +174,7 @@ class QuizPage extends React.Component {
         });
 
         return (
-            <div className={s.quizPage}>
+            <div className={s.QuizPage}>
                 <AppBar>
                     <Toolbar className={s.Header}>
                         <p> {this.state.quiz_name}</p>
@@ -183,29 +183,14 @@ class QuizPage extends React.Component {
                     </Toolbar>
                 </AppBar>
                 <div className={s.quiz}>
-                    <Grid>
-
-                        {this.state.questions === undefined || this.state.questions === null ? ' ' :
-                            this.state.questions.map((val, index) =>
-                                <Link
-                                    key={index}
-                                    activeClass="active"
-                                    to={index.toString()}
-                                    spy={true}
-                                    smooth={true}
-                                    offset={-130}
-                                    duration={500}>
-                                    <Button key={index}>{index + 1}
-
-                                    </Button></Link>)}
-
-                    </Grid>
+                <Grid
+                    container
+                    direction="row"
+                    alignItems="flex-start"
+                    justify="flex-end">
                     <Grid
-                        container
                         direction="column"
-                        justify="flex-start"
-                        alignItems="center">
-                        <Grid item lg={8} md={8} sm={12} xs={12}>
+                        lg={8} md={8} sm={12} xs={12}>
                         {this.state.questions === undefined || this.state.questions === null ? ' ' :
                             this.state.questions.map((val, index) =>
                                 <Question onChangeCheck={this.onChangeCheck}
@@ -214,8 +199,29 @@ class QuizPage extends React.Component {
                                           index={index}
                                           value={val}/>
                         )}
-                        </Grid>
                     </Grid>
+                    <Grid
+                        direction="column"
+                        alignItems="center"
+                        lg={2} md={2}
+                        container
+                        className={s.BoardGrid}>
+                        {/*{this.state.questions === undefined || this.state.questions === null ? ' ' :*/}
+                        {/*    this.state.questions.map((val, index) =>*/}
+                        {/*        <div key={index}  className={s.Board}>*/}
+                        {/*        <Link*/}
+                        {/*            activeClass="active"*/}
+                        {/*            to={index.toString()}*/}
+                        {/*            spy={true}*/}
+                        {/*            smooth={true}*/}
+                        {/*            offset={-130}*/}
+                        {/*            duration={500}>*/}
+                        {/*            <Button key={index}>{index + 1}*/}
+
+                        {/*            </Button></Link>*/}
+                        {/*        </div>)}*/}
+                    </Grid>
+                </Grid>
                 </div>
                 <Dialog open={this.state.endTestDialog} fullScreen TransitionComponent={Transition}>
                     <DialogContent>
