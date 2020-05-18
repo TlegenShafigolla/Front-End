@@ -11,7 +11,7 @@ import {
     TextField,
     Button,
     Dialog,
-    Snackbar
+    Snackbar, Tooltip
 } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
 import s from "./invite.module.css";
@@ -22,6 +22,8 @@ import Person from "./person";
 import Group from "./group";
 import {postInvitations} from "../../../../services/API/adminAPI/Quiz/invitations";
 import {getListGroup} from "../../../../services/API/adminAPI/Group/group";
+import Typography from "@material-ui/core/Typography";
+import Switch from "@material-ui/core/Switch/Switch";
 
 class InviteDialog extends React.Component {
     constructor(props) {
@@ -44,6 +46,8 @@ class InviteDialog extends React.Component {
             errorSurname: false,
             errorEmail: false,
 
+            mixed: false,
+            showResults: false,
             start_date: null,
             end_date: null,
             date: '2017-05-24T10:30',
@@ -79,6 +83,13 @@ class InviteDialog extends React.Component {
         } else {
             $('.' + s.EndDate).hide(500)
         }
+    };
+    mixedChecked = (checked) => {
+        this.setState({mixed: !this.state.mixed});
+    };
+
+    showResultsChecked = (event) => {
+        this.setState({showResults: !this.state.showResults});
     };
     handleCancel = () => {
         this.setState({
@@ -116,6 +127,8 @@ class InviteDialog extends React.Component {
                 start_date: start,
                 end_date: end,
                 time_limit: time_limit,
+                mixed: this.state.mixed,
+                showResults: this.state.showResults
             };
             this.setState({
                 email: null,
@@ -141,6 +154,8 @@ class InviteDialog extends React.Component {
                 start_date: start,
                 end_date: end,
                 time_limit: time_limit,
+                mixed: this.state.mixed,
+                showResults: this.state.showResults
             };
             return invitation;
         }
@@ -156,6 +171,8 @@ class InviteDialog extends React.Component {
             start_date: start,
             end_date: end,
             time_limit: time_limit,
+            mixed: this.state.mixed,
+            showResults: this.state.showResults
         };
         postInvitations(invitation).then((val) => {
             console.log(val);
@@ -363,6 +380,38 @@ class InviteDialog extends React.Component {
                                         }}
                                     />
                                 </div>
+                            </div>
+                        </div>
+                        <div className={s.Settings}>
+                            <div className={s.SwitchLine}>
+                                <Tooltip
+                                    title={"During the quiz, your questions will be shown in the order in which you see them now."}>
+                                    <Typography className={s.SwitchTextLeft}>In-order</Typography>
+                                </Tooltip>
+
+                                <Switch className={s.Switch}
+                                        color="primary"
+                                        value={"active"}
+                                        checked={this.state.mixed}
+                                        onChange={this.mixedChecked}/>
+
+                                <Tooltip title={"During the quiz, your questions will be shown in mixed order."}>
+                                    <Typography className={s.SwitchTextRight}>Mixed</Typography>
+                                </Tooltip>
+                            </div>
+                            <div className={s.SwitchLine}>
+                                <Tooltip title={"After taking this quiz, results won't be shown."}>
+                                    <Typography className={s.SwitchTextLeft}>Don't show results</Typography>
+                                </Tooltip>
+                                <Switch
+                                    className={s.Switch}
+                                    color="primary"
+                                    value={"active"}
+                                    checked={this.state.showResults}
+                                    onChange={this.showResultsChecked}/>
+                                <Tooltip title={"After taking this quiz, results will be shown."}>
+                                    <Typography className={s.SwitchTextRight}>Show results</Typography>
+                                </Tooltip>
                             </div>
                         </div>
                         <div className={s.InvitationLinkTextField}>
