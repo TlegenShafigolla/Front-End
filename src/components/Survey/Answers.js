@@ -15,15 +15,15 @@ class Answers extends React.Component {
     render() {
         if (this.state.type === 'MULTIPLE CHOICE') {
             return (
-                <div className={s.Answers}>
-                    <ol type='A' className={s.ol}>
+                <div>
+                    <ol type='A' >
                         {this.props.value.answers === null ? '' : this.props.value.answers.map((val, index) =>
                             <div key={index}>
-                                <div  className={s.Answer}>
+                                <div className={s.Answer}>
                                     <li>  {val.answer}</li>
                                     <Checkbox id={val.question_id.toString()}
                                               value={val._id.toString()}
-                                              onChange={this.props.onChangeCheck} color='primary'/>
+                                              onChange={this.props.onChangeCheck}  size='small' color='primary'/>
                                 </div>
                                 <Divider/>
                             </div>
@@ -35,10 +35,12 @@ class Answers extends React.Component {
         } else {
             return (
                 <div>
-                    {this.props.value.answers.length === 0 ? <TextareaAutosize className={s.Textarea} id={this.props.value._id} onChange={this.props.onChangeAnswer} /> : this.props.value.answers.map((val, index) =>
-                        <TextareaAutosize id={val.question_id.toString()} className={s.Textarea} key={index}
-                                          onChange={this.props.onChangeAnswer}/>
-                    )}
+                    {this.props.value.answers.length === 0 ?
+                        <TextareaAutosize className={s.Textarea} id={this.props.value._id}
+                                          onChange={this.props.onChangeAnswer}/> : this.props.value.answers.map((val, index) =>
+                            <TextareaAutosize id={val.question_id.toString()} className={s.Textarea} key={index}
+                                              onChange={this.props.onChangeAnswer}/>
+                        )}
                 </div>
             );
         }

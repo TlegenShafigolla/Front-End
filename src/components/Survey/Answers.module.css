@@ -2,9 +2,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0;
-    left: -15px;
-    height: 35px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 

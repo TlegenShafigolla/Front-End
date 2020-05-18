@@ -98,7 +98,7 @@ class QuizPage extends React.Component {
 
 
     onClickSubmit = () => {
-        this.setState({time_limit:null});
+        this.setState({time_limit: null});
         const finished = 1;
         const path = window.location.pathname.split('/');
         const session_id = localStorage.getItem(`session_id${path[2]}`);
@@ -167,7 +167,7 @@ class QuizPage extends React.Component {
         }
         if (this.state.time === 0) {
             this.onClickSubmit();
-            this.setState({time:null})
+            this.setState({time: null})
         }
         const Transition = React.forwardRef(function Transition(props, ref) {
             return <Slide direction="up" ref={ref} {...props} />;
@@ -175,7 +175,7 @@ class QuizPage extends React.Component {
 
         return (
             <div className={s.QuizPage}>
-                <AppBar>
+                <AppBar position='fixed'>
                     <Toolbar className={s.Header}>
                         <p> {this.state.quiz_name}</p>
                         {this.state.time_left === null ? '' : "Time left: " + this.state.time_left}
@@ -183,59 +183,60 @@ class QuizPage extends React.Component {
                     </Toolbar>
                 </AppBar>
                 <div className={s.quiz}>
-                <Grid
-                    container
-                    direction="row"
-                    alignItems="flex-start"
-                    justify="flex-end">
                     <Grid
-                        direction="column"
-                        lg={8} md={8} sm={12} xs={12}>
-                        {this.state.questions === undefined || this.state.questions === null ? ' ' :
-                            this.state.questions.map((val, index) =>
-                                <Question onChangeCheck={this.onChangeCheck}
-                                          onChangeAnswer={this.onChangeAnswer}
-                                          key={val._id.toString()}
-                                          index={index}
-                                          value={val}/>
-                        )}
-                    </Grid>
-                    <Grid
-                        direction="column"
-                        alignItems="center"
-                        lg={2} md={2}
                         container
-                        className={s.BoardGrid}>
-                        {/*{this.state.questions === undefined || this.state.questions === null ? ' ' :*/}
-                        {/*    this.state.questions.map((val, index) =>*/}
-                        {/*        <div key={index}  className={s.Board}>*/}
-                        {/*        <Link*/}
-                        {/*            activeClass="active"*/}
-                        {/*            to={index.toString()}*/}
-                        {/*            spy={true}*/}
-                        {/*            smooth={true}*/}
-                        {/*            offset={-130}*/}
-                        {/*            duration={500}>*/}
-                        {/*            <Button key={index}>{index + 1}*/}
+                        direction="row"
+                        alignItems="flex-start"
+                        justify="flex-end">
+                        <Grid
+                            direction="column"
+                            lg={8} md={8} sm={12} xs={12}>
+                            {this.state.questions === undefined || this.state.questions === null ? ' ' :
+                                this.state.questions.map((val, index) =>
+                                    <Question onChangeCheck={this.onChangeCheck}
+                                              onChangeAnswer={this.onChangeAnswer}
+                                              key={val._id.toString()}
+                                              index={index}
+                                              value={val}/>
+                                )}
+                        </Grid>
+                        <Grid
+                            direction="column"
+                            alignItems="center"
+                            lg={2} md={2}
+                            container
+                            className={s.BoardGrid}>
+                            {/*{this.state.questions === undefined || this.state.questions === null ? ' ' :*/}
+                            {/*    this.state.questions.map((val, index) =>*/}
+                            {/*        <div key={index}  className={s.Board}>*/}
+                            {/*        <Link*/}
+                            {/*            activeClass="active"*/}
+                            {/*            to={index.toString()}*/}
+                            {/*            spy={true}*/}
+                            {/*            smooth={true}*/}
+                            {/*            offset={-130}*/}
+                            {/*            duration={500}>*/}
+                            {/*            <Button key={index}>{index + 1}*/}
 
-                        {/*            </Button></Link>*/}
-                        {/*        </div>)}*/}
+                            {/*            </Button></Link>*/}
+                            {/*        </div>)}*/}
+                        </Grid>
                     </Grid>
-                </Grid>
                 </div>
                 <Dialog open={this.state.endTestDialog} fullScreen TransitionComponent={Transition}>
-                    <DialogContent>
+                    <Grid container
+                          direction="column"
+                          justify="space-between"
+                          alignItems="center">
                         <Typography variant='h5'>
                             Thank you for passing the test
                             {this.state.showResults ? ' You result: ' + (this.state.corrects === undefined ? this.state.points : this.state.corrects) + ' points' : ''}
                         </Typography>
-                    </DialogContent>
 
-                    <DialogActions>
                         <NavLink className={s.button} to='/'>
                             <Button color='primary' variant='contained'>Back to home page</Button>
                         </NavLink>
-                    </DialogActions>
+                    </Grid>
                 </Dialog>
             </div>
         );
