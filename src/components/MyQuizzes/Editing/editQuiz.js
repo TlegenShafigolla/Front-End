@@ -199,20 +199,24 @@ class EditQuiz extends React.Component {
             );
         }
         return (
-            <div>
-                <div  className={s.ArrowButton}>
+            <Grid container
+                  direction="row"
+                  alignItems="flex-start"
+                  justify="flex-end"
+                  spacing={3}
+            >
+                <Grid item lg={3} md={3} sm={2} className={s.ArrowButton}>
                     <Link to='/admin/quizzes/'>
                         <IconButton color="primary">
                             <ArrowBackIosIcon/>
                         </IconButton>
                     </Link>
-                </div>
-                <Grid  container
+                </Grid>
+                <Grid item lg={6} md={6} sm={8} xs={12}
                       direction="column"
                       justify="flex-start"
                       alignItems="center"
                 >
-                    <Grid item lg={6} md={6} sm={8} xs={12}>
                     <Paper square elevation={3} className={s.QuizNameDescription}>
                         {this.state.editQuizName ?
                             <TextField error={this.state.error} onBlur={this.onBlurQuizName}
@@ -260,31 +264,31 @@ class EditQuiz extends React.Component {
                                             />)}
                                     {provided.placeholder}</div>)}</Droppable>
                     </DragDropContext>
-                    </Grid>
-                        <Grid item>
-                            <IconButton color='primary' size='medium' className={s.AddButton}
-                                    onClick={this.addNewQuestion}>
-                                    <AddIcon fontSize='large'/>
-                            </IconButton>
-                        </Grid>
+                    <IconButton color='primary' size='medium' className={s.AddButton}
+                                onClick={this.addNewQuestion}>
+                        <AddIcon fontSize='large'/>
+                    </IconButton>
                 </Grid>
+                <Grid item lg={3} md={3} sm={2}>
+                    <Paper square elevation={3} className={this.state.questions.length === 0 ? s.display : s.BoardRows}>
                         {this.state.questions !== null ?
                             this.state.questions.map((val, index) =>
                                 <Board value={val} index={index} key={val.order_id}/>
                             ) : null}
-
-                <Button variant="outlined" color="primary" onClick={this.openPdfDialog}>
-                    Export to PDF
-                </Button>
-                <GeneratePdfDialog
-                    open={this.state.generatePdfDialog}
-                    onClose={this.closePdfDialog}
-                    quiz_name={this.state.quiz_name}
-                    description={this.state.description}
-                    questions={this.state.questions}
-                    answers={this.state.answers}
-                />
-            </div>
+                    </Paper>
+                </Grid>
+                {/*<Button variant="outlined" color="primary" onClick={this.openPdfDialog}>*/}
+                {/*    Export to PDF*/}
+                {/*</Button>*/}
+                {/*<GeneratePdfDialog*/}
+                {/*    open={this.state.generatePdfDialog}*/}
+                {/*    onClose={this.closePdfDialog}*/}
+                {/*    quiz_name={this.state.quiz_name}*/}
+                {/*    description={this.state.description}*/}
+                {/*    questions={this.state.questions}*/}
+                {/*    answers={this.state.answers}*/}
+                {/*/>*/}
+            </Grid>
 
         );
     }

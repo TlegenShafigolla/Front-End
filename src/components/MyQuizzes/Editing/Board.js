@@ -5,7 +5,6 @@ import Paper from "@material-ui/core/Paper/Paper";
 
 const board = (props) => {
     return (
-        <Paper square elevation={3} className={props.value.length === 0 ? s.display : s.BoardRows}>
         <Link
             activeClass="active"
             to={props.value.order_id.toString()}
@@ -18,11 +17,11 @@ const board = (props) => {
                 <div className={s.OrderId}>
                     {props.value.order_id}
                 </div>
-                {props.value.type === 'FILL THE BLANK' ? 'FB' : 'MC'}
+                <div>
+                    {props.value.type === 'FILL THE BLANK' ? 'FB' : 'MC'}
+                </div>
             </div>
         </Link>
-        </Paper>
-
     );
 };
 

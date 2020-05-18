@@ -6,19 +6,6 @@
     align-items: center;
 }
 
-.display {
-    display: none;
-}
-
-.BoardRows {
-    position: fixed;
-    right: 0;
-    padding: 5px;
-    display: flex;
-    flex-direction: column;
-    border: 100px solid red;
-}
-
 .OrderId {
     display: flex;
     justify-content: center;

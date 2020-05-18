@@ -23,6 +23,19 @@
     position: fixed;
     left: 10px;
 }
+.display {
+    display: none;
+}
+
+.BoardRows {
+    position: fixed;
+    margin-top: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
 .QuizNameDescription{
     margin-top: 10px;
     margin-bottom: 15px;
