@@ -23,6 +23,9 @@
     margin-top: 10px;
     display: flex;
 }
+.AddButton{
+    margin: 0 auto;
+}
 
 .CardContent {
     overflow: hidden;
