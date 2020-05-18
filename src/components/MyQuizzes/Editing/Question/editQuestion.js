@@ -11,6 +11,7 @@ import ChangeTypeDialog from "./AnswerTypes/changeTypeDialog";
 import $ from "jquery";
 import DeleteIcon from "@material-ui/icons/Delete";
 import {Draggable} from "react-beautiful-dnd";
+import Paper from "@material-ui/core/Paper";
 
 class EditQuestion extends React.Component {
     constructor(props) {
@@ -61,14 +62,13 @@ class EditQuestion extends React.Component {
 
     render() {
         return (
-            <div className={s.EditQuestion}>
                 <Draggable draggableId={this.props.value._id} index={this.props.index}>
                     {provided => (
-                        <div className={s.Question} id={this.props.value.order_id}
+                        <Paper square elevation={3} id={this.props.value.order_id}
                              {...provided.draggableProps}
                              {...provided.dragHandleProps}
                              ref={provided.innerRef}
-                        >
+                               className={s.EditQuestion}>
                             <div className={s.QuestionInfo}>
                                 <div className={s.QuestionOrder}>{this.props.value.order_id}.</div>
                                 <div className={s.QuestionField}>
@@ -125,10 +125,7 @@ class EditQuestion extends React.Component {
                             </div>
                             <ChangeTypeDialog openDialog={this.state.openChangeTypeDialog}
                                               onClose={this.dialog}/>
-                        </div>)}</Draggable>
-
-
-            </div>
+                        </Paper>)}</Draggable>
 
         );
     }

@@ -6,6 +6,19 @@
     align-items: center;
 }
 
+.display {
+    display: none;
+}
+
+.BoardRows {
+    position: fixed;
+    right: 0;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    border: 100px solid red;
+}
+
 .OrderId {
     display: flex;
     justify-content: center;
@@ -15,6 +28,6 @@
     background: #2f57b5;
     border-radius: 50%;
     color: white;
-    box-shadow: 0px 0px 5px #2f57b5;
+    box-shadow: 0 0 5px #2f57b5;
     margin: 5px;
 }

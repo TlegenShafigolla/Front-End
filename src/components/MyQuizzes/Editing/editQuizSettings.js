@@ -4,6 +4,7 @@ import s from './css/editQuizz.module.css'
 import Switch from "@material-ui/core/Switch";
 import Typography from "@material-ui/core/Typography";
 import {Tooltip} from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
 
 class EditQuizSettings extends React.Component {
     constructor(props) {

@@ -4,10 +4,11 @@ import Typography from "@material-ui/core/Typography";
 import ShowAnswer from "./showAnswer";
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from "@material-ui/core/IconButton";
+import Paper from "@material-ui/core/Paper";
 
 const ShowQuestion = (props) => {
     return (
-        <div id={props.value.order_id.toString()}>
+        <Paper square elevation={3} id={props.value.order_id.toString()} className={s.Question}>
             <div onClick={props.editOnClick}>
                 <div className={s.QuestionInfo}>
                     <div className={s.QuestionOrder}>{props.value.order_id}.</div>
@@ -32,7 +33,7 @@ const ShowQuestion = (props) => {
                     <DeleteIcon/>
                 </IconButton>
             </div>
-        </div>
+        </Paper>
     );
 };
 

@@ -1,53 +1,9 @@
-.Body {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-.Edit {
-    width: 700px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-}
-
 
 
 .QuizSettings {
-    width: 100%;
-    box-shadow: 5px 5px 10px #333333;
     display: flex;
     padding: 10px 0 10px 0;
     flex-direction: column;
-}
-
-
-
-.display {
-    display: none;
-}
-
-.board {
-    right: 10%;
-    box-shadow: 0 0 5px #333333;
-    position: fixed;
-    padding: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.boardNone {
-    width: 0;
-}
-
-.BoardRows {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 .Radio {
@@ -57,21 +13,17 @@
     justify-content: center;
 }
 
-.Question {
-    width: 100%;
-}
-
 .AddButton {
     padding: 0;
 }
-
+.EditQuiz{
+    width: 100vw;
+}
 .ArrowButton {
-    left: 10px;
     position: fixed;
+    left: 10px;
 }
 .QuizNameDescription{
-    width: 100% ;
-    box-shadow: 5px 5px 10px #333333;
     margin-top: 10px;
     margin-bottom: 15px;
     text-align: center;

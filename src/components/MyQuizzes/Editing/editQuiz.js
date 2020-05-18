@@ -15,6 +15,8 @@ import Button from "@material-ui/core/Button";
 import GeneratePdfDialog from "./generatePdfDialog";
 import {DragDropContext, Droppable} from "react-beautiful-dnd";
 import getQuestions, {postQuestions, putQuestions} from "../../../services/API/adminAPI/Quiz/questions";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 
 class EditQuiz extends React.Component {
     constructor(props) {
@@ -197,16 +199,21 @@ class EditQuiz extends React.Component {
             );
         }
         return (
-            <div className={s.Body}>
-                <div className={s.ArrowButton}>
+            <div>
+                <div  className={s.ArrowButton}>
                     <Link to='/admin/quizzes/'>
                         <IconButton color="primary">
                             <ArrowBackIosIcon/>
                         </IconButton>
                     </Link>
                 </div>
-                <div className={s.Edit}>
-                    <div className={s.QuizNameDescription}>
+                <Grid  container
+                      direction="column"
+                      justify="flex-start"
+                      alignItems="center"
+                >
+                    <Grid item lg={6} md={6} sm={8} xs={12}>
+                    <Paper square elevation={3} className={s.QuizNameDescription}>
                         {this.state.editQuizName ?
                             <TextField error={this.state.error} onBlur={this.onBlurQuizName}
                                        onChange={this.changeQuizName}
@@ -225,20 +232,18 @@ class EditQuiz extends React.Component {
                             <Typography className={s.QuizInfo}
                                         onClick={() => this.setState({editDescription: true})}
                                         variant='body1'>{this.state.description}</Typography>}
-                    </div>
-                    <EditQuizSettings pointsChecked={this.pointsChecked}
-                                      mixedChecked={this.mixedChecked}
-                                      showResultsChecked={this.showResultsChecked}
-                                      showResults={this.state.showResults}
-                                      mixed={this.state.mixed}
-                                      points={this.state.points}
-                                      lastedit={this.state.last_edited_date}
-                    />
+                        <EditQuizSettings pointsChecked={this.pointsChecked}
+                                          mixedChecked={this.mixedChecked}
+                                          showResultsChecked={this.showResultsChecked}
+                                          showResults={this.state.showResults}
+                                          mixed={this.state.mixed}
+                                          points={this.state.points}
+                                          lastedit={this.state.last_edited_date}/>
+                    </Paper>
                     <DragDropContext onDragEnd={this.onDragEnd}>
                         <Droppable droppableId={this.state.quiz_id.toString()}>
                             {provided => (
                                 <div
-                                    className={s.Question}
                                     {...provided.droppableProps}
                                     ref={provided.innerRef}
                                 >
@@ -255,22 +260,19 @@ class EditQuiz extends React.Component {
                                             />)}
                                     {provided.placeholder}</div>)}</Droppable>
                     </DragDropContext>
-                    <div>
-                        <IconButton color='primary' size='medium' className={s.AddButton}
+                    </Grid>
+                        <Grid item>
+                            <IconButton color='primary' size='medium' className={s.AddButton}
                                     onClick={this.addNewQuestion}>
-                            <AddIcon fontSize='large'/>
-                        </IconButton>
-                    </div>
-                </div>
-                <div className={this.state.questions.length === 0 ? s.display : s.board}>
-                    <div className={s.BoardRows}>
+                                    <AddIcon fontSize='large'/>
+                            </IconButton>
+                        </Grid>
+                </Grid>
                         {this.state.questions !== null ?
                             this.state.questions.map((val, index) =>
                                 <Board value={val} index={index} key={val.order_id}/>
                             ) : null}
 
-                    </div>
-                </div>
                 <Button variant="outlined" color="primary" onClick={this.openPdfDialog}>
                     Export to PDF
                 </Button>
