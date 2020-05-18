@@ -12,6 +12,10 @@ import SendIcon from '@material-ui/icons/Send';
 import DeleteQuizDialog from "./deleteQuizDialog";
 import InviteDialog from "../Editing/Invite/inviteDialog";
 import Alert from "@material-ui/lab/Alert/Alert";
+import {deleteQuiz} from "../../../services/API/adminAPI/Quiz/quiz";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+
 
 class ShowQuiz extends React.Component {
     constructor(props) {
@@ -31,7 +35,7 @@ class ShowQuiz extends React.Component {
         if (!action) {
             return;
         }
-        this.props.deleteQuizOnClick();
+        this.deleteQuizOnClick();
     };
 
     openDeleteDialog = () => {
@@ -60,9 +64,16 @@ class ShowQuiz extends React.Component {
         // this.history.push(`/admin/quizzes/edit/${this.props.value._id}`)
     };
 
+    deleteQuizOnClick = async () => {
+        if (this.state.id !== undefined) {
+            await deleteQuiz(this.state.id)
+        }
+        this.props.deleteQuiz(this.props.value._id)
+    };
+
     render() {
         return (
-            <div className={s.Root} onKeyDown={this.onClickQuiz}>
+            <Paper square elevation={3} className={s.Root} onKeyDown={this.onClickQuiz}>
                 <div className={s.CardContent}>
                     <Typography variant="h5" component="h2" noWrap>
                         {this.props.quiz_name}
@@ -85,7 +96,7 @@ class ShowQuiz extends React.Component {
                         </Tooltip>
                         <Tooltip title='Delete'>
                             <IconButton size='small'
-                                        onClick={this.state.quiz_id === undefined ? this.props.deleteQuizOnClick : this.openDeleteDialog}
+                                        onClick={this.state.quiz_id === undefined ? this.deleteQuizOnClick : this.openDeleteDialog}
                                         aria-label='delete'>
                                 <DeleteIcon color='primary'/>
                             </IconButton>
@@ -100,7 +111,7 @@ class ShowQuiz extends React.Component {
                 <InviteDialog openDialog={this.state.openInviteDialog} onClose={this.onClickInvite} quiz_id={this.state.quiz_id}/>
                 <DeleteQuizDialog openDialog={this.state.openDeleteQuizDialog} onClose={this.onClickDelete}/>
                 <NoQuestionSnackbar openSnackbar={this.state.noQuestionSnackbar} snackClose={this.closeNoQuestionSnackbar}/>
-            </div>
+            </Paper>
         );
     }
 }

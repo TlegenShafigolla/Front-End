@@ -1,10 +1,11 @@
 import React from "react";
-import getQuiz, {postQuiz} from "../../../services/API/adminAPI/Quiz/quiz";
-import Quiz from "./quiz";
+import getQuiz, {deleteQuiz, postQuiz} from "../../../services/API/adminAPI/Quiz/quiz";
 import s from './listQuizPreview.module.css'
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from '@material-ui/icons/Add';
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Grid from "@material-ui/core/Grid";
+import ShowQuiz from "./showQuiz";
 
 class ListQuizPreview extends React.Component {
     constructor(props) {
@@ -46,6 +47,7 @@ class ListQuizPreview extends React.Component {
         }
         this.setState({quizzes: quizzes});
     };
+
     render() {
         if (this.state.quizzes === null) {
             return (
@@ -55,18 +57,28 @@ class ListQuizPreview extends React.Component {
             );
         }
         return (
-                <div className={s.Container}>
+                <Grid container
+                      direction="column"
+                      justify="flex-start"
+                      alignItems="center"
+                >
+                    <Grid item lg={6} md={6} sm={8} xs={12}>
                     {this.state.quizzes !== undefined ? this.state.quizzes.map((val, index) =>
-                        <Quiz key={val._id} id={index}
+                        <ShowQuiz key={val._id} id={index}
                               index={index}
                               value={val}
                               deleteQuiz={this.deleteQuiz}
+                              quiz_id={val._id}
+                              quiz_name={val.quiz_name}
+                              description={val.description}
+                              last_edited_date={new Date(val.last_edited_date).toLocaleString()}
                         />
                     ) : ' '}
+                    </Grid>
                     <IconButton color="primary" onClick={this.addNewQuizz}>
                         <AddIcon fontSize='large'/>
                     </IconButton>
-                </div>
+                </Grid>
 
         );
     }
