@@ -9,7 +9,9 @@
 .QuestionOrder {
     margin-top: 2px;
 }
-
+.Question{
+    margin-bottom: 10px;
+}
 .FormControl {
     display: flex;
     justify-content: center;

@@ -28,12 +28,14 @@ class Admin extends Component {
         this.setState({isSideBarOpen: false})
     }
 
+
     render() {
+
         if (!this.state.isLoggedIn) {
             return <Redirect to="/login"/>;
         }
         return (
-            <div>
+            <div >
                 <AdminHeader
                     OpenButton={this.openSideBar}
                     Logout={this.LogOut}
@@ -44,10 +46,9 @@ class Admin extends Component {
                     close={this.onClose}
                     open={this.state.isSideBarOpen}
                 />
-                <div onClick={() => this.setState({isSideBarOpen: false})}>
-                    <Routes open={this.state.isSideBarOpen}/>
+                <div >
+                <Routes open={this.state.isSideBarOpen}/>
                 </div>
-
             </div>
         );
     }

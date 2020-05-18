@@ -199,97 +199,100 @@ class EditQuiz extends React.Component {
             );
         }
         return (
-            <Grid container
-                  direction="row"
-                  alignItems="flex-start"
-                  justify="flex-end"
-                  spacing={3}
-            >
-                <Grid item lg={3} md={3} sm={2} className={s.ArrowButton}>
-                    <Link to='/admin/quizzes/'>
-                        <IconButton color="primary">
-                            <ArrowBackIosIcon/>
-                        </IconButton>
-                    </Link>
-                </Grid>
-                <Grid item lg={6} md={6} sm={8} xs={12}
-                      direction="column"
-                      justify="flex-start"
-                      alignItems="center"
+            <div className={s.EditQueston}>
+                <Grid container
+                      direction="row"
+                      alignItems="flex-start"
+                      justify="flex-end"
+                      spacing={3}
                 >
-                    <Paper square elevation={3} className={s.QuizNameDescription}>
-                        {this.state.editQuizName ?
-                            <TextField error={this.state.error} onBlur={this.onBlurQuizName}
-                                       onChange={this.changeQuizName}
-                                       autoFocus fullWidth
-                                       variant='outlined' margin='dense'
-                                       defaultValue={this.state.quiz_name}
-                                       className={s.QuizInfo}/> :
-                            <Typography onClick={this.editQuizName} noWrap
-                                        className={s.QuizInfo}
-                                        variant='h4'> {this.state.quiz_name}</Typography>}
-                        {this.state.editDescription ?
-                            <TextField error={this.state.error} onChange={this.changeDescription}
-                                       onBlur={this.onBlurDescription}
-                                       defaultValue={this.state.description} autoFocus variant='outlined'
-                                       margin='dense' fullWidth multiline rows={2} rowsMax={5}/> :
-                            <Typography className={s.QuizInfo}
-                                        onClick={() => this.setState({editDescription: true})}
-                                        variant='body1'>{this.state.description}</Typography>}
-                        <EditQuizSettings pointsChecked={this.pointsChecked}
-                                          mixedChecked={this.mixedChecked}
-                                          showResultsChecked={this.showResultsChecked}
-                                          showResults={this.state.showResults}
-                                          mixed={this.state.mixed}
-                                          points={this.state.points}
-                                          lastedit={this.state.last_edited_date}/>
-                    </Paper>
-                    <DragDropContext onDragEnd={this.onDragEnd}>
-                        <Droppable droppableId={this.state.quiz_id.toString()}>
-                            {provided => (
-                                <div
-                                    {...provided.droppableProps}
-                                    ref={provided.innerRef}
-                                >
-                                    {this.state.questions === undefined || this.state.questions === null ? ' ' :
-                                        this.state.questions.map((val, index) =>
-                                            <Question
-                                                index={index}
-                                                key={val._id}
-                                                value={val}
-                                                point={this.state.points}
-                                                deleteQuestion={this.deleteQuestion}
-                                                setQuestion={this.setQuestion}
-                                                setAnswers={this.setAnswers}
-                                            />)}
-                                    {provided.placeholder}</div>)}</Droppable>
-                    </DragDropContext>
-                    <IconButton color='primary' size='medium' className={s.AddButton}
-                                onClick={this.addNewQuestion}>
-                        <AddIcon fontSize='large'/>
-                    </IconButton>
-                </Grid>
-                <Grid item lg={3} md={3} sm={2}>
-                    <Paper square elevation={3} className={this.state.questions.length === 0 ? s.display : s.BoardRows}>
-                        {this.state.questions !== null ?
-                            this.state.questions.map((val, index) =>
+                    <Grid item lg={3} md={3} sm={2} className={s.ArrowButton}>
+                        <Link to='/admin/quizzes/'>
+                            <IconButton color="primary">
+                                <ArrowBackIosIcon/>
+                            </IconButton>
+                        </Link>
+                    </Grid>
+                    <Grid item lg={6} md={6} sm={8} xs={12}
+                          container
+                          direction="column"
+                          spacing={1}
+                    >
+                        <Paper square elevation={3} className={s.QuizNameDescription}>
+                            {this.state.editQuizName ?
+                                <TextField error={this.state.error} onBlur={this.onBlurQuizName}
+                                           onChange={this.changeQuizName}
+                                           autoFocus fullWidth
+                                           variant='outlined' margin='dense'
+                                           defaultValue={this.state.quiz_name}
+                                           className={s.QuizInfo}/> :
+                                <Typography onClick={this.editQuizName} noWrap
+                                            className={s.QuizInfo}
+                                            variant='h4'> {this.state.quiz_name}</Typography>}
+                            {this.state.editDescription ?
+                                <TextField error={this.state.error} onChange={this.changeDescription}
+                                           onBlur={this.onBlurDescription}
+                                           defaultValue={this.state.description} autoFocus variant='outlined'
+                                           margin='dense' fullWidth multiline rows={2} rowsMax={5}/> :
+                                <Typography className={s.QuizInfo}
+                                            onClick={() => this.setState({editDescription: true})}
+                                            variant='body1'>{this.state.description}</Typography>}
+                            <EditQuizSettings pointsChecked={this.pointsChecked}
+                                              mixedChecked={this.mixedChecked}
+                                              showResultsChecked={this.showResultsChecked}
+                                              showResults={this.state.showResults}
+                                              mixed={this.state.mixed}
+                                              points={this.state.points}
+                                              lastedit={this.state.last_edited_date}/>
+                        </Paper>
+                        <DragDropContext onDragEnd={this.onDragEnd}>
+                            <Droppable droppableId={this.state.quiz_id.toString()}>
+                                {provided => (
+                                    <div
+                                        {...provided.droppableProps}
+                                        ref={provided.innerRef}
+                                    >
+                                        {this.state.questions === undefined || this.state.questions === null ? ' ' :
+                                            this.state.questions.map((val, index) =>
+                                                <Question
+                                                    index={index}
+                                                    key={val._id}
+                                                    value={val}
+                                                    point={this.state.points}
+                                                    deleteQuestion={this.deleteQuestion}
+                                                    setQuestion={this.setQuestion}
+                                                    setAnswers={this.setAnswers}
+                                                />)}
+                                        {provided.placeholder}</div>)}</Droppable>
+                        </DragDropContext>
+                        <div className={s.AddButton}>
+                            <IconButton color='primary'
+                                        onClick={this.addNewQuestion}>
+                                <AddIcon fontSize='large'/>
+                            </IconButton>
+                        </div>
+                    </Grid>
+                    <Grid item lg={3} md={3} sm={2}>
+                        <Paper square elevation={3}
+                               className={this.state.questions.length === 0 ? s.display : s.BoardRows}>
+                            {this.state.questions.map((val, index) =>
                                 <Board value={val} index={index} key={val.order_id}/>
-                            ) : null}
-                    </Paper>
+                            )}
+                        </Paper>
+                    </Grid>
+                    {/*<Button variant="outlined" color="primary" onClick={this.openPdfDialog}>*/}
+                    {/*    Export to PDF*/}
+                    {/*</Button>*/}
+                    {/*<GeneratePdfDialog*/}
+                    {/*    open={this.state.generatePdfDialog}*/}
+                    {/*    onClose={this.closePdfDialog}*/}
+                    {/*    quiz_name={this.state.quiz_name}*/}
+                    {/*    description={this.state.description}*/}
+                    {/*    questions={this.state.questions}*/}
+                    {/*    answers={this.state.answers}*/}
+                    {/*/>*/}
                 </Grid>
-                {/*<Button variant="outlined" color="primary" onClick={this.openPdfDialog}>*/}
-                {/*    Export to PDF*/}
-                {/*</Button>*/}
-                {/*<GeneratePdfDialog*/}
-                {/*    open={this.state.generatePdfDialog}*/}
-                {/*    onClose={this.closePdfDialog}*/}
-                {/*    quiz_name={this.state.quiz_name}*/}
-                {/*    description={this.state.description}*/}
-                {/*    questions={this.state.questions}*/}
-                {/*    answers={this.state.answers}*/}
-                {/*/>*/}
-            </Grid>
-
+            </div>
         );
     }
 
