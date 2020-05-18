@@ -56,3 +56,25 @@
     flex-direction: column;
     justify-content: center;
 }
+.Settings{
+    display: flex;
+    padding: 10px 0 10px 0;
+    flex-direction: column;
+}
+.SwitchLine{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.SwitchTextLeft{
+    width: 150px;
+    text-align: right;
+}
+.Switch{
+    margin-left: auto;
+    margin-right: auto;
+}
+.SwitchTextRight{
+    text-align: left;
+    width: 150px;
+}
