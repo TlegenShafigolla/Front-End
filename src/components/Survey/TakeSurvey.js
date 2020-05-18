@@ -15,7 +15,7 @@ import {getQuestion} from "../../services/API/userAPI/Survey/questions";
 import {postAnswer} from "../../services/API/userAPI/Survey/answers";
 import Grid from "@material-ui/core/Grid";
 
-class TakeSurvey extends React.Component{
+class TakeSurvey extends React.Component {
     constructor(props) {
         super(props);
         const path = window.location.pathname.split('/');
@@ -116,7 +116,7 @@ class TakeSurvey extends React.Component{
             <div className={s.SurveyPage}>
                 <AppBar>
                     <Toolbar className={s.Header}>
-                        <p>{this.state.survey_name}</p>
+                        <p className={s.SurveyNameHeader}>{this.state.survey_name}</p>
                         <Button variant="outlined" size="medium" onClick={this.onClickSubmit}>End Test</Button>
                     </Toolbar>
                 </AppBar>
@@ -155,22 +155,22 @@ class TakeSurvey extends React.Component{
                 {/*</div>*/}
 
 
-        <Dialog open={this.state.endTestDialog} fullScreen TransitionComponent={Transition}>
-            <DialogContent>
-                <Typography variant='h5'>
-                    Thank you for passing the survey
-                </Typography>
-            </DialogContent>
+                <Dialog open={this.state.endTestDialog} fullScreen TransitionComponent={Transition}>
+                    <DialogContent>
+                        <Typography variant='h5'>
+                            Thank you for passing the survey
+                        </Typography>
+                    </DialogContent>
 
-            <DialogActions>
-                <NavLink className={s.Button} to='/'>
-                    <Button color='primary' variant='contained'>Back to home page</Button>
-                </NavLink>
-            </DialogActions>
-        </Dialog>
-    </div>
-    );
+                    <DialogActions>
+                        <NavLink className={s.Button} to='/'>
+                            <Button color='primary' variant='contained'>Back to home page</Button>
+                        </NavLink>
+                    </DialogActions>
+                </Dialog>
+            </div>
+        );
     }
-    }
+}
 
-    export default TakeSurvey;
+export default TakeSurvey;

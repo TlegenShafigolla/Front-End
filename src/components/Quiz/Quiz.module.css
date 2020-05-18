@@ -1,7 +1,8 @@
 .quiz {
     margin-top: 50px;
 }
-.QuizPage{
+
+.QuizPage {
     margin-bottom: 15px;
 }
 
@@ -12,12 +13,14 @@
     justify-content: center;
     align-items: center;
 }
-.Board{
+
+.Board {
 }
 
-.BoardGrid{
+.BoardGrid {
     margin-top: 10px;
 }
+
 .info {
     top: 70px;
     position: fixed;
@@ -122,7 +125,7 @@ a {
     text-decoration: none;
 }
 
-.QuizDescriptionDialog{
+.QuizDescriptionDialog {
     padding: 10px 10px 20px;
 }
 
@@ -133,30 +136,33 @@ a {
     width: 120px;
 }
 
-.Instructions{
+.Instructions {
     width: 70%;
     margin: 10px;
     padding: 10px;
     border: 1px solid rgba(66, 121, 255, 0.2);
 }
-.QuizName{
+
+.QuizName {
     text-align: center;
     color: rgb(47, 87, 181);
     margin-bottom: 7px;
     font-size: 50px;
 }
-.QuestionsCount{
+
+.QuestionsCount {
     text-align: center;
     font-size: 20px;
     color: #333333;
     margin-bottom: 7px;
 }
 
-.Description{
+.Description {
     margin: 10px;
 }
 
-li{
+
+li {
     color: #717274;
 }
 
@@ -169,46 +175,59 @@ xl, extra-large: 1920px
 */
 
 @media (min-width: 601px) and (max-width: 960px) {
-    .QuizPage{
+    .QuizPage {
         padding: 5px
     }
+
     .Header {
         font-size: 20px;
     }
-    .Board{
+
+    .Board {
         display: none;
     }
-    .Instructions{
+
+    .Instructions {
         width: 85%;
     }
+
     .QuizName {
         font-size: 40px;
     }
-    .Logo{
+
+    .Logo {
         height: 110px;
         width: 110px;
     }
 }
+
 @media screen and (max-width: 600px) {
-    .QuizPage{
+    .QuizPage {
         padding: 5px
     }
-    .Header{
-        font-size: 16px;
+
+    .QuizNameHeader {
+        width: 400px;
+        overflow-x: hidden;
+        margin-right: 4px;
+        font-size: 15px;
     }
-    .Board{
+
+
+    .Board {
         display: none;
     }
-    .Header button{
-        font-size: 10px;
-    }
-    .Instructions{
+
+
+    .Instructions {
         width: 85%;
     }
+
     .QuizName {
         font-size: 30px;
     }
-    .Logo{
+
+    .Logo {
         height: 100px;
         width: 100px;
     }

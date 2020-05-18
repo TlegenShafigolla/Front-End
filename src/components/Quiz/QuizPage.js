@@ -177,7 +177,7 @@ class QuizPage extends React.Component {
             <div className={s.QuizPage}>
                 <AppBar position='fixed'>
                     <Toolbar className={s.Header}>
-                        <p> {this.state.quiz_name}</p>
+                        <p className={s.QuizNameHeader}> {this.state.quiz_name}</p>
                         {this.state.time_left === null ? '' : "Time left: " + this.state.time_left}
                         <Button variant="outlined" size="medium" onClick={this.onClickSubmit}>End Test</Button>
                     </Toolbar>
