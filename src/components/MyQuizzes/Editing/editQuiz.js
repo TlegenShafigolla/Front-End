@@ -25,8 +25,6 @@ class EditQuiz extends React.Component {
         this.state = {
             quiz_id: id[4],
             questions: null,
-            mixed: null,
-            showResults: null,
             description: null,
             last_edited_date: null,
             quiz_name: null,
@@ -139,15 +137,6 @@ class EditQuiz extends React.Component {
         this.setState({points: event});
         this.setState({quizChanges: true});
     };
-    mixedChecked = (event) => {
-        this.setState({mixed: event});
-        this.setState({quizChanges: true})
-    };
-
-    showResultsChecked = (event) => {
-        this.setState({showResults: event});
-        this.setState({quizChanges: true})
-    };
 
     editQuizName = () => {
         this.setState({editQuizName: true})
@@ -199,12 +188,13 @@ class EditQuiz extends React.Component {
             );
         }
         return (
+            <div className={s.EditQuiz}>
                 <Grid container
                       direction="row"
                       alignItems="flex-start"
                       justify="flex-end"
                       spacing={3}
-                      className={s.EditQuiz}
+
                 >
                     <Grid item lg={3} md={3} sm={2} className={s.ArrowButton}>
                         <Link to='/admin/quizzes/'>
@@ -292,6 +282,7 @@ class EditQuiz extends React.Component {
                     {/*    answers={this.state.answers}*/}
                     {/*/>*/}
                 </Grid>
+            </div>
         );
     }
 

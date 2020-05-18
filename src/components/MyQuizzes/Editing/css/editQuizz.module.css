@@ -3,6 +3,8 @@
     display: flex;
     padding: 10px 0 10px 0;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .Radio {
@@ -18,7 +20,7 @@
 }
 
 .EditQuiz {
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .ArrowButton {
@@ -54,22 +56,17 @@
 .SwitchLine {
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
 .SwitchTextRight {
     text-align: left;
-    width: 150px;
 }
 
 .SwitchTextLeft {
-    width: 150px;
     text-align: right;
 }
 
 .Switch {
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .CircularProgress {
@@ -84,6 +81,9 @@
 }
 
 @media screen and (max-width: 600px) {
+    .EditQuiz {
+        padding: 2px;
+    }
 
     .ArrowButton {
         display: none;
