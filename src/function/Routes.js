@@ -3,12 +3,12 @@ import {Route} from "react-router-dom";
 import Profile from '../components/Profile/Profile';
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import MyQuizRoute from "../components/MyQuizzes/MyQuizRoute";
-import Invitations from "../components/Invitations/Invitations";
 import ReportRoute from "../components/QuizReports/ReportRoute";
 import MySurveyRoute from "../components/MySurveys/MySurveysRoute";
 import GroupRoutes from "../components/Group/Routes";
 import ReportSurveyRoute from "../components/SurveyReports/ReportRoute";
 import clsx from "clsx";
+import Quizzes from "../components/Invitations/Quizzes";
 
 const styles = makeStyles(theme => ({
     grow: {
@@ -48,7 +48,7 @@ export const Routes = (props) => {
                 <div className={classes.drawerHeader}/>
                 <Route path="/admin/profile" render={() => <Profile/>}/>
                 <Route path="/admin/quizzes" render={() => <MyQuizRoute/>}/>
-                <Route path="/admin/invitations" render={() => <Invitations/>}/>
+                <Route path="/admin/invitations" render={() => <Quizzes/>}/>
                 <Route path="/admin/reports" render={() => <ReportRoute/>}/>
                 <Route path="/admin/surveys" render={() => <MySurveyRoute/>}/>
                 <Route path='/admin/group' component={GroupRoutes}/>
