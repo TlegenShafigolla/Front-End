@@ -199,12 +199,12 @@ class EditQuiz extends React.Component {
             );
         }
         return (
-            <div className={s.EditQueston}>
                 <Grid container
                       direction="row"
                       alignItems="flex-start"
                       justify="flex-end"
                       spacing={3}
+                      className={s.EditQuiz}
                 >
                     <Grid item lg={3} md={3} sm={2} className={s.ArrowButton}>
                         <Link to='/admin/quizzes/'>
@@ -292,7 +292,6 @@ class EditQuiz extends React.Component {
                     {/*    answers={this.state.answers}*/}
                     {/*/>*/}
                 </Grid>
-            </div>
         );
     }
 

@@ -51,10 +51,7 @@ const AdminHeader = (props) => {
     return (
         <div className={classes.grow}>
 
-            <AppBar position="fixed" style={{background: "#f3f3f3"}}
-                    className={clsx(classes.appBar, {
-                        [classes.appBarShift]: props.OpenSideBar,
-                    })}>
+            <AppBar position="fixed" style={{background: "#f3f3f3"}}>
                 <Toolbar>
                     <IconButton className={classes.menuButton} onClick={props.OpenButton} color="primary">
                         <MenuIcon/>

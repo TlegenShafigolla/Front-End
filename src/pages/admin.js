@@ -46,9 +46,7 @@ class Admin extends Component {
                     close={this.onClose}
                     open={this.state.isSideBarOpen}
                 />
-                <div >
                 <Routes open={this.state.isSideBarOpen}/>
-                </div>
             </div>
         );
     }
