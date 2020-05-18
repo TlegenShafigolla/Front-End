@@ -84,13 +84,7 @@ class InviteDialog extends React.Component {
             $('.' + s.EndDate).hide(500)
         }
     };
-    mixedChecked = (checked) => {
-        this.setState({mixed: !this.state.mixed});
-    };
 
-    showResultsChecked = (event) => {
-        this.setState({showResults: !this.state.showResults});
-    };
     handleCancel = () => {
         this.setState({
             email: null,
@@ -267,6 +261,12 @@ class InviteDialog extends React.Component {
         });
         this.setState({selectedPersons: selectedPersons});
     };
+    mixedChecked = () => {
+        this.setState({mixed: !this.state.mixed});
+    };
+    showResultsChecked = () => {
+        this.setState({showResults: !this.state.showResults});
+    };
 
     componentDidMount() {
         let date = new Date().toISOString().replace('Z', '').split('.');
@@ -388,13 +388,11 @@ class InviteDialog extends React.Component {
                                     title={"During the quiz, your questions will be shown in the order in which you see them now."}>
                                     <Typography className={s.SwitchTextLeft}>In-order</Typography>
                                 </Tooltip>
-
                                 <Switch className={s.Switch}
                                         color="primary"
                                         value={"active"}
                                         checked={this.state.mixed}
                                         onChange={this.mixedChecked}/>
-
                                 <Tooltip title={"During the quiz, your questions will be shown in mixed order."}>
                                     <Typography className={s.SwitchTextRight}>Mixed</Typography>
                                 </Tooltip>

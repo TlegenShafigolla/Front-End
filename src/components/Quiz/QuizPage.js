@@ -23,14 +23,13 @@ class QuizPage extends React.Component {
         this.state = {
             startTestDialog: localStorage.getItem('start_test') === null,
             endTestDialog: false,
-            showResults: false,
             questions: [],
             answers: [],
-            corrects: null,
+            corrects: undefined,
             quiz_name: '',
             description: '',
             questions_count: '',
-            points: null,
+            points: undefined,
             maxPoint: null,
             time_limit: null,
             time_left: null,
@@ -104,6 +103,7 @@ class QuizPage extends React.Component {
         const session_id = localStorage.getItem(`session_id${path[2]}`);
         const answers = this.state.answers;
         postQuizAnswer(path[2], session_id, finished, answers).then(val => {
+            console.log(val);
             this.setState({corrects: val.corrects});
             this.setState({points: val.points});
             localStorage.removeItem(`session_id${path[2]}`);
@@ -126,7 +126,6 @@ class QuizPage extends React.Component {
                 quiz_name: json.quiz.quiz_name,
                 questions_count: json.quiz.questions_count,
                 description: json.quiz.description,
-                showResults: json.quiz.showResults,
             });
             const lastTime = Number(new Date(localStorage.getItem('date')));
             if (lastTime !== 0 && lastTime !== undefined) {
