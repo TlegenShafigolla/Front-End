@@ -57,28 +57,32 @@ class ListQuizPreview extends React.Component {
             );
         }
         return (
-                <Grid container
-                      direction="column"
-                      justify="flex-start"
-                      alignItems="center"
-                >
-                    <Grid item lg={6} md={6} sm={8} xs={12}>
+            <Grid container
+                  justify="center"
+                  alignItems="center"
+            >
+                <Grid item lg={6} md={6} sm={8} xs={12}>
                     {this.state.quizzes !== undefined ? this.state.quizzes.map((val, index) =>
                         <ShowQuiz key={val._id} id={index}
-                              index={index}
-                              value={val}
-                              deleteQuiz={this.deleteQuiz}
-                              quiz_id={val._id}
-                              quiz_name={val.quiz_name}
-                              description={val.description}
-                              last_edited_date={new Date(val.last_edited_date).toLocaleString()}
+                                  index={index}
+                                  value={val}
+                                  deleteQuiz={this.deleteQuiz}
+                                  quiz_id={val._id}
+                                  quiz_name={val.quiz_name}
+                                  description={val.description}
+                                  last_edited_date={new Date(val.last_edited_date).toLocaleString()}
                         />
                     ) : ' '}
+                    <Grid container
+                          alignItems="center"
+                          justify="center"
+                    >
+                        <IconButton color="primary" onClick={this.addNewQuizz}>
+                            <AddIcon fontSize='large'/>
+                        </IconButton>
                     </Grid>
-                    <IconButton color="primary" onClick={this.addNewQuizz}>
-                        <AddIcon fontSize='large'/>
-                    </IconButton>
                 </Grid>
+            </Grid>
 
         );
     }
