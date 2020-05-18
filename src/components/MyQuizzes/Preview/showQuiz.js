@@ -1,8 +1,6 @@
 import React from "react";
 import s from "./listQuizPreview.module.css";
-import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import CardActions from "@material-ui/core/CardActions";
 import {Link} from "react-router-dom";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
@@ -13,7 +11,6 @@ import DeleteQuizDialog from "./deleteQuizDialog";
 import InviteDialog from "../Editing/Invite/inviteDialog";
 import Alert from "@material-ui/lab/Alert/Alert";
 import {deleteQuiz} from "../../../services/API/adminAPI/Quiz/quiz";
-import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
 
@@ -30,13 +27,7 @@ class ShowQuiz extends React.Component {
         }
     }
 
-    onClickDelete = (action) => {
-        this.setState({openDeleteQuizDialog: false});
-        if (!action) {
-            return;
-        }
-        this.deleteQuizOnClick();
-    };
+
 
     openDeleteDialog = () => {
         this.setState({openDeleteQuizDialog: true});
@@ -47,10 +38,9 @@ class ShowQuiz extends React.Component {
     };
 
     inviteDialog = () => {
-        if(this.props.value.questions_count === 0){
+        if (this.props.value.questions_count === 0) {
             this.setState({noQuestionSnackbar: true});
-        }
-        else{
+        } else {
             this.setState({openInviteDialog: !this.state.openInviteDialog})
         }
     };
@@ -65,10 +55,17 @@ class ShowQuiz extends React.Component {
     };
 
     deleteQuizOnClick = async () => {
-        if (this.state.id !== undefined) {
-            await deleteQuiz(this.state.id)
+        if (this.state.quiz_id !== undefined) {
+            await deleteQuiz(this.state.quiz_id)
         }
         this.props.deleteQuiz(this.props.value._id)
+    };
+    onClickDelete = (action) => {
+        this.setState({openDeleteQuizDialog: false});
+        if (!action) {
+            return;
+        }
+        this.deleteQuizOnClick();
     };
 
     render() {
@@ -78,7 +75,7 @@ class ShowQuiz extends React.Component {
                     <Typography variant="h5" component="h2" noWrap>
                         {this.props.quiz_name}
                     </Typography>
-                    < Typography >
+                    < Typography>
                         {this.props.description}
                     </Typography>
                     <Typography>  {this.props.value.questions_count.toString()} </Typography>
@@ -103,21 +100,23 @@ class ShowQuiz extends React.Component {
                         </Tooltip>
                     </div>
                     <Link to={'/admin/quizzes/edit/' + this.props.value._id.toString()}>
-                        <IconButton color="primary"  onClick={this.handleClick}>
+                        <IconButton color="primary" onClick={this.handleClick}>
                             <ArrowForwardIosIcon fontSize='large'/>
                         </IconButton>
                     </Link>
                 </div>
-                <InviteDialog openDialog={this.state.openInviteDialog} onClose={this.onClickInvite} quiz_id={this.state.quiz_id}/>
+                <InviteDialog openDialog={this.state.openInviteDialog} onClose={this.onClickInvite}
+                              quiz_id={this.state.quiz_id}/>
                 <DeleteQuizDialog openDialog={this.state.openDeleteQuizDialog} onClose={this.onClickDelete}/>
-                <NoQuestionSnackbar openSnackbar={this.state.noQuestionSnackbar} snackClose={this.closeNoQuestionSnackbar}/>
+                <NoQuestionSnackbar openSnackbar={this.state.noQuestionSnackbar}
+                                    snackClose={this.closeNoQuestionSnackbar}/>
             </Paper>
         );
     }
 }
 
 const NoQuestionSnackbar = (props) => {
-    return(
+    return (
         <Snackbar
             open={props.openSnackbar}
             onClose={props.snackClose}>

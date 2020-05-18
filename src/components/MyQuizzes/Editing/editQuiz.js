@@ -192,16 +192,17 @@ class EditQuiz extends React.Component {
                 <Grid container
                       direction="row"
                       alignItems="flex-start"
-                      justify="flex-end"
+                      justify="center"
                       spacing={3}
-
                 >
-                    <Grid item lg={3} md={3} sm={2} className={s.ArrowButton}>
+                    <Grid item lg={3} md={3} sm={2} >
+                        <div className={s.ArrowButton}>
                         <Link to='/admin/quizzes/'>
                             <IconButton color="primary">
                                 <ArrowBackIosIcon/>
                             </IconButton>
                         </Link>
+                        </div>
                     </Grid>
                     <Grid item lg={6} md={6} sm={8} xs={12}
                           container

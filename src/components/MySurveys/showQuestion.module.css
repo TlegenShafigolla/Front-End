@@ -1,18 +1,20 @@
-.QuestionInfo {
+.Survey {
+    padding: 10px;
+}
+
+.SurveyInfo {
     display: flex;
 }
 
-.QuestionOrder {
+.SurveyOrder {
     margin-top: 2px;
 }
 
-.QuestionField {
+.SurveyField {
     padding: 0;
     margin-left: 5px;
 }
 
-.AnswerType {
-}
 
 .Button {
     display: flex;

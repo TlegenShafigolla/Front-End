@@ -21,14 +21,11 @@
 }
 
 .QuestionField {
-    padding: 0;
     margin-left: 5px;
-    width: 98%;
+    flex-grow: 1;
 }
 
-.AnswerType {
 
-}
 
 .Snackbar {
     width: 450px;
@@ -43,12 +40,8 @@
 }
 
 .Buttons {
-    width: 55%;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    margin-left: auto;
-    margin-right: 0px;
 }
 
 .AddButton {

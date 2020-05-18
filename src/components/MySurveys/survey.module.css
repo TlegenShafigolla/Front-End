@@ -1,32 +1,22 @@
 .Root {
     padding: 10px;
     margin-top: 10px;
-    box-shadow: 3px 3px 10px #333333;
     display: flex;
-    min-height: 100%;
-    justify-content: space-between;
+}
+.AddButton{
+    margin: 0 auto;
 }
 
 .CardContent {
-    cursor: pointer;
+    overflow: hidden;
     flex-grow: 1;
 }
-
+.DeleteAndInvite{
+    display: flex;
+}
 .CardActions {
     display: flex;
     flex-direction: column-reverse;
+    align-items: center;
 }
 
-.Title {
-    fontSize: 14;
-}
-
-.ArrowButton {
-    position: relative;
-    right: -25px;
-}
-
-.ButtonPanel {
-    position: relative;
-    bottom: -10px;
-}

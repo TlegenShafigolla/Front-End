@@ -1,52 +1,36 @@
-.Body{
-    position: relative;
-    margin: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+.EditSurvey {
+    overflow: hidden;
+
 }
 
-.ArrowButton{
-    left: 10px;
+.ArrowButton {
     position: fixed;
-    height: 50px;
-    width: 50px;
+    margin-top: 10px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
-.ArrowBackIosIcon{
-    height: 50px;
-    width: 50px;
-}
-
-.Edit{
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-.SurveyName{
-    width: 100%;
-    padding: 10px;
-    box-shadow: 5px 5px 10px #333333;
+.SurveyNameDescription {
     margin-top: 10px;
     margin-bottom: 15px;
     text-align: center;
+    overflow: hidden;
 }
 
-.Settings{
-    width: 100%;
-    box-shadow: 5px 5px 10px #333333;
-    padding: 10px;
-    display: inline-flex;
-    flex-direction: column;
+.AddButton {
+    width: 50px;
+    margin: 0 auto;
 }
+@media screen and (max-width: 600px) {
+    .EditQuiz {
+        padding: 4px;
+    }
 
-.Question{
-    width: 100%;
-}
+    .ArrowButton {
+        display: none;
+    }
 
-.AddButton{
-    padding: 0px;
+    .BoardRows {
+        display: none;
+    }
 }

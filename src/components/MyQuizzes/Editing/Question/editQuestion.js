@@ -62,70 +62,70 @@ class EditQuestion extends React.Component {
 
     render() {
         return (
-                <Draggable draggableId={this.props.value._id} index={this.props.index}>
-                    {provided => (
-                        <Paper square elevation={3} id={this.props.value.order_id}
-                             {...provided.draggableProps}
-                             {...provided.dragHandleProps}
-                             ref={provided.innerRef}
-                               className={s.EditQuestion}>
-                            <div className={s.QuestionInfo}>
-                                <div className={s.QuestionOrder}>{this.props.value.order_id}.</div>
-                                <div className={s.QuestionField}>
-                                    <TextField
-                                        autoFocus
-                                        error={this.props.errorQuestion}
-                                        placeholder="Question"
-                                        fullWidth
-                                        size='small'
-                                        defaultValue={this.props.question}
-                                        onChange={this.props.onChangeQuestion}
-                                        multiline={true}
-                                        rows={4}
-                                        rowsMax={6}
-                                        label="Question"
-                                        variant="outlined"
-                                    />
-                                </div>
-                            </div>
-                            <div className={s.FormControl}>
-                                <FormControlLabel value="Type question"
-                                                  control={
-                                                      <Radio
-                                                          checked={this.state.isMultipleChoice}
-                                                          onChange={this.multipleChoiceChecked}
-                                                          color="primary"
-                                                      />} label='Multiple Choice'/>
-                                <FormControlLabel value="Type question"
-                                                  control={
-                                                      <Radio
-                                                          color="primary"
-                                                          onChange={this.fillTheBlankChecked}
-                                                          checked={!this.state.isMultipleChoice}
-                                                      />} label='Fill the blank '/>
-                            </div>
-                            <div className={s.AnswerType}>
-                                <EditAnswer
-                                    isMultipleChoice={this.state.isMultipleChoice}
-                                    {...this.props}
+            <Draggable draggableId={this.props.value._id} index={this.props.index}>
+                {provided => (
+                    <Paper square elevation={3} id={this.props.value.order_id}
+                           {...provided.draggableProps}
+                           {...provided.dragHandleProps}
+                           ref={provided.innerRef}
+                           className={s.EditQuestion}>
+                        <div className={s.QuestionInfo}>
+                            <div className={s.QuestionOrder}>{this.props.value.order_id}.</div>
+                            <div className={s.QuestionField}>
+                                <TextField
+                                    autoFocus
+                                    error={this.props.errorQuestion}
+                                    placeholder="Question"
+                                    fullWidth
+                                    size='small'
+                                    defaultValue={this.props.question}
+                                    onChange={this.props.onChangeQuestion}
+                                    multiline={true}
+                                    rows={4}
+                                    rowsMax={6}
+                                    label="Question"
+                                    variant="outlined"
                                 />
                             </div>
-                            <div className={s.Buttons}>
-                                {this.state.isMultipleChoice ?
-                                    <IconButton className={s.AddButton} color="primary"
-                                                onClick={event => this.props.addNewAnswer()}>
-                                        <AddIcon/>
-                                    </IconButton> : ''}
-                                <Button color="primary" className={s.SaveButton} onClick={this.props.saveOnClick}>
-                                    Save
-                                </Button>
-                                <IconButton aria-label="delete" onClick={this.props.deleteQuestionOnClick}>
-                                    <DeleteIcon/>
-                                </IconButton>
-                            </div>
-                            <ChangeTypeDialog openDialog={this.state.openChangeTypeDialog}
-                                              onClose={this.dialog}/>
-                        </Paper>)}</Draggable>
+                        </div>
+                        <div className={s.FormControl}>
+                            <FormControlLabel value="Type question"
+                                              control={
+                                                  <Radio
+                                                      checked={this.state.isMultipleChoice}
+                                                      onChange={this.multipleChoiceChecked}
+                                                      color="primary"
+                                                  />} label='Multiple Choice'/>
+                            <FormControlLabel value="Type question"
+                                              control={
+                                                  <Radio
+                                                      color="primary"
+                                                      onChange={this.fillTheBlankChecked}
+                                                      checked={!this.state.isMultipleChoice}
+                                                  />} label='Fill the blank '/>
+                        </div>
+                        <div>
+                            <EditAnswer
+                                isMultipleChoice={this.state.isMultipleChoice}
+                                {...this.props}
+                            />
+                        </div>
+                        <div className={s.Buttons}>
+                            <Button color="primary" className={s.SaveButton} onClick={this.props.saveOnClick}>
+                                Save
+                            </Button>
+                            {this.state.isMultipleChoice ?
+                                <IconButton className={s.AddButton} color="primary"
+                                            onClick={event => this.props.addNewAnswer()}>
+                                    <AddIcon/>
+                                </IconButton> : ''}
+                            <IconButton aria-label="delete" onClick={this.props.deleteQuestionOnClick}>
+                                <DeleteIcon/>
+                            </IconButton>
+                        </div>
+                        <ChangeTypeDialog openDialog={this.state.openChangeTypeDialog}
+                                          onClose={this.dialog}/>
+                    </Paper>)}</Draggable>
 
         );
     }

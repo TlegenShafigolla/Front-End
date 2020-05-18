@@ -2,18 +2,19 @@ import React from "react";
 import s from "./editSurvey.module.css";
 import {Link} from "react-router-dom";
 import IconButton from "@material-ui/core/IconButton";
-import ArrowBackIosIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import TextField from "@material-ui/core/TextField/TextField";
 import Typography from "@material-ui/core/Typography";
-import EditSurveySettings from "./editSurveySettings";
 import getQuestions from "../../services/API/adminAPI/Survey/questions";
 import {DragDropContext, Droppable} from "react-beautiful-dnd";
 import AddIcon from "@material-ui/icons/Add";
 import Question from "./question";
 import {postQuestions, putQuestions} from "../../services/API/adminAPI/Survey/questions";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 
-class EditSurvey extends React.Component{
-    constructor(props){
+class EditSurvey extends React.Component {
+    constructor(props) {
         super(props);
         const id = window.location.pathname.split('/');
         this.state = {
@@ -140,63 +141,74 @@ class EditSurvey extends React.Component{
 
     render() {
         return (
-            <div className={s.Body}>
-                <div className={s.ArrowButton}>
-                    <Link to='/admin/surveys/'>
-                        <IconButton className={s.ArrowBackIosIcon} color="primary">
-                            <ArrowBackIosIcon/>
-                        </IconButton>
-                    </Link>
-                </div>
-                <div className={s.Edit}>
-                    <div className={s.SurveyName}>
-                        {this.state.editSurveyName ?
-                            <TextField error={this.state.error} onBlur={this.onBlurSurveyName} onChange={this.changeSurveyName}
-                                       autoFocus fullWidth
-                                       variant='outlined' margin='dense'
-                                       defaultValue={this.state.survey_name}/> :
-                            <Typography onClick={this.editSurveyName} noWrap
-                                        variant='h4'> {this.state.survey_name}</Typography>}
-                        {this.state.editDescription ?
-                            <TextField error={this.state.error} onChange={this.changeDescription}
-                                       onBlur={this.onBlurDescription}
-                                       defaultValue={this.state.description} autoFocus variant='outlined'
-                                       margin='dense' fullWidth multiline rows={2} rowsMax={5}/> :
-                            <Typography onClick={() => this.setState({editDescription: true})}
-                                        variant='body1'>{this.state.description}</Typography>}
-                    </div>
-                    <div className={s.Settings}>
-                        <EditSurveySettings />
-                    </div>
-                    <DragDropContext onDragEnd={this.onDragEnd}>
-                        <Droppable droppableId={this.state.survey_id.toString()}>
-                            {provided => (
-                                <div
-                                    className={s.Question}
-                                    {...provided.droppableProps}
-                                    ref={provided.innerRef}>
-                                    {this.state.questions === [] || this.state.questions === null ? '' :
-                                        this.state.questions.map((val, index) =>
-                                            <Question
-                                                index={index}
-                                                key={val._id}
-                                                value={val}
-                                                point={this.state.points}
-                                                deleteQuestion={this.deleteQuestion}
-                                                setQuestion={this.setQuestion}
-                                                setAnswers={this.setAnswers}
-                                            />)}
-                                    {provided.placeholder}
-                                </div>)}
-                        </Droppable>
-                    </DragDropContext>
-                    <div>
-                        <IconButton color='primary' size='medium' className={s.AddButton} onClick={this.addNewQuestion}>
-                            <AddIcon fontSize='large'/>
-                        </IconButton>
-                    </div>
-                </div>
-            </div>);
+            <div className={s.EditSurvey}>
+                <Grid container
+                      direction="row"
+                      alignItems="flex-start"
+                      justify="flex-start"
+                      spacing={3}
+                >
+                    <Grid item lg={3} md={3} sm={2}>
+                        <div className={s.ArrowButton}>
+                            <Link to='/admin/surveys/'>
+                                <IconButton  color="primary">
+                                    <ArrowBackIosIcon/>
+                                </IconButton>
+                            </Link>
+                        </div>
+                    </Grid>
+                    <Grid item lg={6} md={6} sm={8} xs={12}
+                          container
+                          direction="column"
+                          spacing={1}>
+                        <Paper square elevation={3} className={s.SurveyNameDescription}>
+                            {this.state.editSurveyName ?
+                                <TextField error={this.state.error} onBlur={this.onBlurSurveyName}
+                                           onChange={this.changeSurveyName}
+                                           autoFocus fullWidth
+                                           variant='outlined' margin='dense'
+                                           defaultValue={this.state.survey_name}/> :
+                                <Typography onClick={this.editSurveyName} noWrap
+                                            variant='h4'> {this.state.survey_name}</Typography>}
+                            {this.state.editDescription ?
+                                <TextField error={this.state.error} onChange={this.changeDescription}
+                                           onBlur={this.onBlurDescription}
+                                           defaultValue={this.state.description} autoFocus variant='outlined'
+                                           margin='dense' fullWidth multiline rows={2} rowsMax={5}/> :
+                                <Typography onClick={() => this.setState({editDescription: true})}
+                                            variant='body1'>{this.state.description}</Typography>}
+                        </Paper>
+                        <DragDropContext onDragEnd={this.onDragEnd}>
+                            <Droppable droppableId={this.state.survey_id.toString()}>
+                                {provided => (
+                                    <div
+                                        {...provided.droppableProps}
+                                        ref={provided.innerRef}>
+                                        {this.state.questions === [] || this.state.questions === null ? '' :
+                                            this.state.questions.map((val, index) =>
+                                                <Question
+                                                    index={index}
+                                                    key={val._id}
+                                                    value={val}
+                                                    point={this.state.points}
+                                                    deleteQuestion={this.deleteQuestion}
+                                                    setQuestion={this.setQuestion}
+                                                    setAnswers={this.setAnswers}
+                                                />)}
+                                        {provided.placeholder}
+                                    </div>)}
+                            </Droppable>
+                        </DragDropContext>
+                        <div className={s.AddButton}>
+                            <IconButton color='primary' size='medium'
+                                        onClick={this.addNewQuestion}>
+                                <AddIcon fontSize='large'/>
+                            </IconButton>
+                        </div>
+                    </Grid>
+                </Grid>
+            </div>
+        );
     }
 
     componentDidMount() {

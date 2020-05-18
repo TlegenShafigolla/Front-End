@@ -60,7 +60,7 @@ export function deleteSurvey(survey_id) {
         })
     };
 
-    return fetch(`${api}/quiz`, requestOptions).then(res => {
+    return fetch(`${api}/survey`, requestOptions).then(res => {
         return res.json();
     });
 }

@@ -1,30 +1,31 @@
 import React from "react";
-import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import CardActions from "@material-ui/core/CardActions/CardActions";
 import {Snackbar, Tooltip} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
-import SendIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import SendIcon from '@material-ui/icons/Send';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import {Link} from "react-router-dom";
 import s from "./survey.module.css";
 import InviteDialog from "./inviteDialog";
 import Alert from "@material-ui/lab/Alert/Alert";
+import Paper from "@material-ui/core/Paper";
+import {deleteSurvey} from "../../services/API/adminAPI/Survey/survey";
 
-class Survey extends React.Component{
-    constructor(props){
+class Survey extends React.Component {
+    constructor(props) {
         super(props);
         this.state = {
+            id: this.props.value._id,
             openInviteDialog: false,
             noQuestionSnackbar: false,
         };
     }
 
     inviteDialog = () => {
-        if(this.props.value.questions_count === 0){
+        if (this.props.value.questions_count === 0) {
             this.setState({noQuestionSnackbar: true});
-        } else{
+        } else {
             this.setState({openInviteDialog: !this.state.openInviteDialog})
         }
     };
@@ -36,23 +37,28 @@ class Survey extends React.Component{
     closeNoQuestionSnackbar = () => {
         this.setState({noQuestionSnackbar: false});
     };
+    deleteSurveyOnclick = () => {
+        deleteSurvey(this.props.value._id)
+        this.props.deleteSurvey(this.props.value._id)
+    }
+
 
     render() {
-        return(
-            <div className={s.Root} onKeyDown={this.onClickQuiz}>
-                <CardContent className={s.CardContent}>
+        return (
+            <Paper square elevation={3} className={s.Root} onKeyDown={this.onClickQuiz}>
+                <div className={s.CardContent}>
                     <Typography variant="h5" component="h2" noWrap>
                         {this.props.value.survey_name}
                     </Typography>
-                    <Typography className={s.Title}> {this.props.value.description}</Typography>
-                    <Typography className={s.pos}> {this.props.value.questions_count.toString()} </Typography>
+                    <Typography> {this.props.value.description}</Typography>
+                    <Typography> {this.props.value.questions_count.toString()} </Typography>
                     <Typography variant="body2"
                                 component="p"
                                 color="textSecondary">
-                        Version: {this.props.value.last_edited_date} </Typography>
-                </CardContent>
-                <CardActions className={s.CardActions}>
-                    <div className={s.ButtonPanel}>
+                        Version: {new Date(this.props.value.last_edited_date).toLocaleString()} </Typography>
+                </div>
+                <div className={s.CardActions}>
+                    <div className={s.DeleteAndInvite}>
                         <Tooltip title='Invite'>
                             <IconButton color="primary" onClick={this.inviteDialog}>
                                 <SendIcon/>
@@ -60,26 +66,28 @@ class Survey extends React.Component{
                         </Tooltip>
                         <Tooltip title='Delete'>
                             <IconButton size='small'
-                                        aria-label='delete'>
+                                        aria-label='delete' onClick={this.deleteSurveyOnclick}>
                                 <DeleteIcon color='primary'/>
                             </IconButton>
                         </Tooltip>
                     </div>
                     <Link to={'/admin/surveys/edit/' + this.props.value._id.toString()}>
-                        <IconButton color="primary" className={s.ArrowButton} onClick={this.handleClick}>
+                        <IconButton color="primary" onClick={this.handleClick}>
                             <ArrowForwardIosIcon fontSize='large'/>
                         </IconButton>
                     </Link>
-                </CardActions>
-                <InviteDialog openDialog={this.state.openInviteDialog} onClose={this.onClickInvite} survey_id={this.props.value._id}/>
-                <NoQuestionSnackbar openSnackbar={this.state.noQuestionSnackbar} snackClose={this.closeNoQuestionSnackbar}/>
-            </div>
+                </div>
+                <InviteDialog openDialog={this.state.openInviteDialog} onClose={this.onClickInvite}
+                              survey_id={this.props.value._id}/>
+                <NoQuestionSnackbar openSnackbar={this.state.noQuestionSnackbar}
+                                    snackClose={this.closeNoQuestionSnackbar}/>
+            </Paper>
         );
     }
 }
 
 const NoQuestionSnackbar = (props) => {
-    return(
+    return (
         <Snackbar
             open={props.openSnackbar}
             onClose={props.snackClose}>

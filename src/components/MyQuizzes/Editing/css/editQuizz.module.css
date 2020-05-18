@@ -25,7 +25,9 @@
 
 .ArrowButton {
     position: fixed;
-    left: 10px;
+    margin-top: 10px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .display {
@@ -82,7 +84,7 @@
 
 @media screen and (max-width: 600px) {
     .EditQuiz {
-        padding: 2px;
+        padding: 4px;
     }
 
     .ArrowButton {

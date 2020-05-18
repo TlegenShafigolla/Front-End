@@ -180,6 +180,7 @@ class Question extends React.Component{
                             <div {...provided.draggableProps}
                                  {...provided.dragHandleProps}
                                  ref={provided.innerRef}
+                                 className={s.Survey}
                             >
                                 <EditQuestion
                                     errorAnswer={this.state.errorAnswer}
@@ -215,7 +216,7 @@ class Question extends React.Component{
                     <div {...provided.draggableProps}
                          {...provided.dragHandleProps}
                          ref={provided.innerRef}
-                         className={s.Question}>
+                         className={s.Survey}>
                         <ShowQuestion editOnClick={this.editOnClick}
                                       deleteQuestionOnClick={this.deleteQuestionOnClick}
                                       answerType={this.state.answerType}
