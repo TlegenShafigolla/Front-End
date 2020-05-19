@@ -28,7 +28,6 @@ class ShowQuiz extends React.Component {
     }
 
 
-
     openDeleteDialog = () => {
         this.setState({openDeleteQuizDialog: true});
     };
@@ -65,8 +64,8 @@ class ShowQuiz extends React.Component {
         if (!action) {
             return;
         }
-        this.deleteQuizOnClick();
-    };
+        this.deleteQuizOnClick()
+    }
 
     render() {
         return (

@@ -38,7 +38,6 @@ class Survey extends React.Component {
         this.setState({noQuestionSnackbar: false});
     };
     deleteSurveyOnclick = () => {
-        deleteSurvey(this.props.value._id)
         this.props.deleteSurvey(this.props.value._id)
     }
 

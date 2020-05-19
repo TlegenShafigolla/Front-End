@@ -32,15 +32,18 @@ class ListSurveyPreview extends React.Component {
         this.setState({surveys: surveys});
         this.setState({disabledButton: false});
     };
-    deleteSurvey = async (survey_id) => {
+    deleteSurvey = (survey_id) => {
+        debugger
         let surveys = this.state.surveys;
+        deleteSurvey(survey_id).then(json => console.log(json))
         for (let i = 0; i < surveys.length; i++) {
-            if (survey_id.toString() === surveys[i]._id) {
+            if (survey_id === surveys[i]._id) {
                 surveys.splice(i, 1);
             }
         }
         this.setState({surveys: surveys});
     };
+
     render() {
         console.log(this.state.surveys)
         return (
@@ -49,15 +52,16 @@ class ListSurveyPreview extends React.Component {
                   alignItems="center"
             >
                 <Grid item lg={6} md={6} sm={8} xs={12}>
-                    {this.state.surveys.map((val, index) => <Survey key={val._id} deleteSurvey={this.deleteSurvey} value={val}/>
+                    {this.state.surveys.map((val, index) => <Survey key={val._id} deleteSurvey={this.deleteSurvey}
+                                                                    value={val}/>
                     )}
                     <Grid container
                           alignItems="center"
                           justify="center"
                     >
-                    <Button color="primary" onClick={this.addNewSurvey}>
-                        Add New Survey
-                    </Button>
+                        <Button color="primary" onClick={this.addNewSurvey}>
+                            Add New Survey
+                        </Button>
                     </Grid>
                 </Grid>
             </Grid>
@@ -66,6 +70,7 @@ class ListSurveyPreview extends React.Component {
 
     componentDidMount() {
         getSurvey().then(json => {
+            console.log(json)
             this.setState({surveys: json.surveys});
         });
     }
