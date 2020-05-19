@@ -1,0 +1,21 @@
+.Root{
+    flex-grow: 1;
+}
+.Paper{
+    flex-grow: 1;
+}
+.CircularProgress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+.QuizNameDescription {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    overflow: hidden;
+}
+.QuizInfo {
+    padding: 10px;
+}

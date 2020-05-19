@@ -23,7 +23,7 @@ class EditQuiz extends React.Component {
         super(props);
         const id = window.location.pathname.split('/');
         this.state = {
-            quiz_id: id[4],
+            quiz_id: id[5],
             questions: null,
             description: null,
             last_edited_date: null,
@@ -197,7 +197,7 @@ class EditQuiz extends React.Component {
                 >
                     <Grid item lg={3} md={3} sm={2} >
                         <div className={s.ArrowButton}>
-                        <Link to='/admin/quizzes/'>
+                        <Link to='/admin/quiz/editor'>
                             <IconButton color="primary">
                                 <ArrowBackIosIcon/>
                             </IconButton>

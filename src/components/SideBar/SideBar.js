@@ -42,21 +42,21 @@ const SideBar = (props) => {
                         <Button color='primary'
                                 className={s.main}
                                 startIcon={<GroupIcon/>}>
-                            Group
+                            Groups
+                        </Button>
+                    </NavLink>
+                    <NavLink to='/admin/quiz/editor'>
+                        <Button color='primary'
+                                className={s.main}
+                                startIcon={<AssignmentSharpIcon/>}>
+                            Quiz Editor
                         </Button>
                     </NavLink>
                     <NavLink to='/admin/quizzes'>
                         <Button color='primary'
-                                className={s.main}
-                                startIcon={<AssignmentSharpIcon/>}>
-                            Quizzes
-                        </Button>
-                    </NavLink>
-                    <NavLink to='/admin/invitations'>
-                        <Button color='primary'
                                 className={s.secondary}
                                 startIcon={<InsertInvitationSharpIcon/>}>
-                            Invitations
+                            Quizzes
                         </Button>
                     </NavLink>
                     <NavLink to='/admin/reports'>
@@ -70,7 +70,7 @@ const SideBar = (props) => {
                         <Button color='primary'
                                 className={s.main}
                                 startIcon={<AssignmentSharpIcon/>}>
-                            Surveys
+                            Survey Constructor
                         </Button>
                     </NavLink>
                     <Button color='primary'
