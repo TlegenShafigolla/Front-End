@@ -4,10 +4,9 @@ import s from "./Quiz.module.css";
 import Paper from "@material-ui/core/Paper";
 import getUsedQuizQuestions from "../../services/API/adminAPI/Quiz/usedQuizQuestions";
 import getUsedQuizInvitations from "../../services/API/adminAPI/Quiz/usedQuizInvitations";
-import TextField from "@material-ui/core/TextField/TextField";
 import Typography from "@material-ui/core/Typography";
-import EditQuizSettings from "../QuizEditor/Editing/editQuizSettings";
 import {CircularProgress} from "@material-ui/core";
+import Question from "./Question";
 
 class Quiz extends React.Component{
     constructor(props){
@@ -48,6 +47,7 @@ class Quiz extends React.Component{
                         <Typography className={s.QuizInfo}
                                     variant='body1'>{this.state.quiz.description}</Typography>
                     </Paper>
+                    {this.state.questions.map((question, index) => <Question key={question._id} value={question} points={this.state.quiz.points}/> )}
                 </Grid>
                 <Grid item lg={3} md={2} sm={1} xs={1}>
                     <Paper className={s.Paper}>F3</Paper>
