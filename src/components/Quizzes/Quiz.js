@@ -7,6 +7,7 @@ import getUsedQuizInvitations from "../../services/API/adminAPI/Quiz/usedQuizInv
 import Typography from "@material-ui/core/Typography";
 import {CircularProgress} from "@material-ui/core";
 import Question from "./Question";
+import Invitations from "./Invitations";
 
 class Quiz extends React.Component{
     constructor(props){
@@ -50,7 +51,7 @@ class Quiz extends React.Component{
                     {this.state.questions.map((question, index) => <Question key={question._id} value={question} points={this.state.quiz.points}/> )}
                 </Grid>
                 <Grid item lg={3} md={2} sm={1} xs={1}>
-                    <Paper className={s.Paper}>F3</Paper>
+                    <Invitations invitations={this.state.invitations}/>
                 </Grid>
             </Grid>
         );
