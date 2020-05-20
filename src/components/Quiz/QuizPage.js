@@ -7,12 +7,9 @@ import {postTakeQuestion} from "../../services/API/userAPI/Quiz/questions";
 import s from './Quiz.module.css'
 import Toolbar from "@material-ui/core/Toolbar";
 import AppBar from "@material-ui/core/AppBar";
-import DialogContent from "@material-ui/core/DialogContent";
 import Typography from "@material-ui/core/Typography";
-import {Link} from "react-scroll";
 import Slide from "@material-ui/core/Slide";
 import {NavLink} from "react-router-dom";
-import DialogActions from "@material-ui/core/DialogActions";
 import Grid from "@material-ui/core/Grid";
 
 

@@ -8,9 +8,12 @@ import Typography from "@material-ui/core/Typography";
 import {CircularProgress} from "@material-ui/core";
 import Question from "./Question";
 import Invitations from "./Invitations";
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 
-class Quiz extends React.Component{
-    constructor(props){
+class Quiz extends React.Component {
+    constructor(props) {
         super(props);
         const id = window.location.pathname.split('/');
         this.state = {
@@ -23,24 +26,20 @@ class Quiz extends React.Component{
     }
 
     render() {
-        if(this.state.quiz === null){
+        if (this.state.quiz === null) {
             return (
                 <div className={s.CircularProgress}>
                     <CircularProgress size={70}/>
                 </div>
             );
         }
-        return(
+        return (
             <Grid container
-                  direction="row"
-                  justify="center"
                   alignItems="flex-start"
-                  className={s.Root}
-                  spacing={1}>
-                <Grid item lg={3} md={2} sm={1} xs={1}>
-                    <Paper className={s.Paper}>F1</Paper>
-                </Grid>
-                <Grid item lg={6} md={8} sm={10} xs={12}>
+                  justify="flex-end"
+            >
+
+                <Grid item  lg={6} md={8} sm={10} xs={12}>
                     <Paper square elevation={3} className={s.QuizNameDescription}>
                         <Typography noWrap
                                     className={s.QuizInfo}
@@ -48,9 +47,10 @@ class Quiz extends React.Component{
                         <Typography className={s.QuizInfo}
                                     variant='body1'>{this.state.quiz.description}</Typography>
                     </Paper>
-                    {this.state.questions.map((question, index) => <Question key={question._id} value={question} points={this.state.quiz.points}/> )}
+                    {this.state.questions.map((question, index) => <Question key={question._id} value={question}
+                                                                             points={this.state.quiz.points}/>)}
                 </Grid>
-                <Grid item lg={3} md={2} sm={1} xs={1}>
+                <Grid item lg={3} md={2} className={s.InfoPanel}>
                     <Invitations invitations={this.state.invitations}/>
                 </Grid>
             </Grid>

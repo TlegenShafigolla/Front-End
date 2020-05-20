@@ -2,7 +2,6 @@
     flex-grow: 1;
 }
 .Paper{
-    flex-grow: 1;
 }
 .CircularProgress {
     display: flex;
@@ -18,4 +17,8 @@
 }
 .QuizInfo {
     padding: 10px;
+}
+.InfoPanel{
+    padding-left: 5px;
+    padding-right: 5px;
 }
