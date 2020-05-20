@@ -1,0 +1,30 @@
+.Question{
+    margin-bottom: 10px;
+    padding: 10px;
+}
+.QuestionInfo {
+     display: flex;
+}
+.QuestionOrder {
+    margin-top: 2px;
+}
+.QuestionField {
+    padding: 0;
+    margin-left: 5px;
+}
+.Button {
+    display: flex;
+    flex-direction: row-reverse;
+}
+.FormControl{
+    display:flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.Answer{
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 1px solid silver;
+    align-items: center;
+}

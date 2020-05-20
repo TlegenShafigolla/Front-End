@@ -3,6 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import s from "./Quizzes.module.css";
 import getUsedQuiz from "../../services/API/adminAPI/Quiz/usedQuizzes";
+import {NavLink} from "react-router-dom";
 
 class Quizzes extends React.Component{
     constructor(props){
@@ -37,7 +38,7 @@ class Quizzes extends React.Component{
                           className={s.Body}>
                         {this.state.quizzes.map((val, index) =>
                             <Grid key={index} item lg={3} md={3} sm={4} xs={12}>
-                                <QuizCard quiz_name={val.quiz_name}/>
+                                <QuizCard quiz_name={val.quiz_name} _id={val._id}/>
                             </Grid>)}
                     </Grid>
                 </Grid>
@@ -51,7 +52,9 @@ class Quizzes extends React.Component{
 const QuizCard = (props) => {
     return(
         <Paper square elevation={3} className={s.QuizCard}>
-            {props.quiz_name}
+            <NavLink to={`/admin/quizzes/${props._id}`}>
+                {props.quiz_name}
+            </NavLink>
         </Paper>
     );
 };

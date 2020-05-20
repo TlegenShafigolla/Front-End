@@ -16,12 +16,12 @@ const AdminHeader = (props) => {
             name: 'Profile'
         },
         {
-            path: '/admin/quizzes',
-            name: 'Quizzes'
+            path: '/admin/quiz',
+            name: 'Quiz - Quizzes'
         },
         {
-            path: '/admin/invitations',
-            name: 'Quiz - Invitations'
+            path: '/admin/quiz/editor',
+            name: 'Quiz - Editor'
         },
         {
             path: '/admin/reports',
