@@ -66,19 +66,20 @@ const SideBar = (props) => {
                             Reports
                         </Button>
                     </NavLink>
-                    <NavLink to='/admin/surveys'>
+                    <NavLink to='/admin/survey/editor'>
                         <Button color='primary'
                                 className={s.main}
                                 startIcon={<AssignmentSharpIcon/>}>
-                            Survey Constructor
+                            Survey Editor
                         </Button>
                     </NavLink>
-                    <Button color='primary'
-                            disabled={true}
-                            className={s.secondary}
-                            startIcon={<InsertInvitationSharpIcon/>}>
-                        Invitations
-                    </Button>
+                    <NavLink to='/admin/surveys'>
+                        <Button color='primary'
+                                className={s.secondary}
+                                startIcon={<InsertInvitationSharpIcon/>}>
+                            Surveys
+                        </Button>
+                    </NavLink>
                     <NavLink to='/admin/surveys/reports'>
                         <Button color='primary'
                                 className={s.secondary}

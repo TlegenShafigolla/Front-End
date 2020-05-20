@@ -16,12 +16,12 @@ const AdminHeader = (props) => {
             name: 'Profile'
         },
         {
-            path: '/admin/quiz',
-            name: 'Quiz - Quizzes'
+            path: '/admin/quizzes',
+            name: 'Quizzes'
         },
         {
             path: '/admin/quiz/editor',
-            name: 'Quiz - Editor'
+            name: 'Quiz Editor'
         },
         {
             path: '/admin/reports',
@@ -30,6 +30,10 @@ const AdminHeader = (props) => {
         {
             path: '/admin/surveys',
             name: 'Surveys'
+        },
+        {
+            path: '/admin/survey/editor',
+            name: 'Survey Editor'
         },
         {
             path: '/admin/group',

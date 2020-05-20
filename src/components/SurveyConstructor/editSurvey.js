@@ -18,7 +18,7 @@ class EditSurvey extends React.Component {
         super(props);
         const id = window.location.pathname.split('/');
         this.state = {
-            survey_id: id[4],
+            survey_id: id[5],
             editSurveyName: false,
             editDescription: false,
             error: false,
