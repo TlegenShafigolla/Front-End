@@ -2,9 +2,9 @@ import React from "react";
 import Paper from "@material-ui/core/Paper";
 import s from "./Invitations.module.css";
 import Grid from "@material-ui/core/Grid";
-import DoneIcon from '@material-ui/icons/Done';
 import Chip from "@material-ui/core/Chip";
 import Link from "@material-ui/core/Link";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 class Invitations extends React.Component{
     render() {
@@ -19,7 +19,7 @@ class Invitations extends React.Component{
 export default Invitations;
 
 const InvitationListItem = (props) => {
-    if(props.value.email !== null){
+    if(props.value.email !== undefined){
         return <PersonListItem
             email={props.value.email}
             invited_date={props.value.invited_date}
@@ -32,10 +32,29 @@ const InvitationListItem = (props) => {
         />;
     }
     if(props.value.group_id !== undefined && props.value.group_id !== null){
-        return <GroupListItem />
+        return <GroupListItem
+            group={props.value.group}
+            group_name={props.value.group_id}
+            invited_date={props.value.invited_date}
+            mixed={props.value.mixed}
+            showResults={props.value.showResults}
+            start_date={props.value.start_date}
+            end_date={props.value.end_date}
+            time_limit={props.value.time_limit}
+            session={props.value.session}
+        />
     }
     if(props.value.public){
-        return <LinkListItem link={props.value.link} created_date={props.value.invited_date}/>
+        return <LinkListItem
+            link={props.value.link}
+            created_date={props.value.invited_date}
+            mixed={props.value.mixed}
+            showResults={props.value.showResults}
+            start_date={props.value.start_date}
+            end_date={props.value.end_date}
+            time_limit={props.value.time_limit}
+            session={props.value.session}
+        />
     }
     return null;
 };
@@ -62,7 +81,6 @@ const PersonListItem = (props) => {
             </Grid>
             <Grid
                 container
-                justify="space-around"
                 alignItems="flex-start">
                 <Grid item>
                     <Chip
@@ -117,7 +135,83 @@ const PersonListItem = (props) => {
 
 const GroupListItem = (props) => {
     return (
-        <div>Group</div>
+        <Grid
+            container
+            direction="column"
+            justify="flex-start"
+            alignItems="center"
+            className={s.PersonListItem}>
+            <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="flex-start">
+                <Grid item lg={6} md={6} sm={12} xs={12}>
+                    <span className={s.Email}>{props.group_name}</span>
+                </Grid>
+                <Grid item lg={6} md={6} sm={12} xs={12}>
+                    <span className={s.Invited_date}>Invited:{props.invited_date}</span>
+                </Grid>
+            </Grid>
+            <Grid
+                container
+                alignItems="flex-start">
+                <Grid item>
+                    <Chip
+                        size="small"
+                        label="Mixed"
+                        variant="outlined"
+                        color={props.mixed ? "primary" : "secondary"}
+                    />
+                </Grid>
+                <Grid item>
+                    <Chip
+                        size="small"
+                        label="Show Results"
+                        variant="outlined"
+                        color={props.showResults ? "primary" : "secondary"}
+                    />
+                </Grid>
+                {props.time_limit ?
+                    <Grid item>
+                        <Chip
+                            size="small"
+                            label={"Time Limit: " + props.time_limit + "m"}
+                            variant="outlined"
+                            color="primary"
+                        />
+                    </Grid>: null}
+                {props.start_date ?
+                    <Grid item>
+                        <Chip
+                            size="small"
+                            label="Start Date"
+                            variant="outlined"
+                            color="primary"
+                        />
+                    </Grid>: null}
+                {props.end_date ? <Grid item>
+                    <Chip
+                        size="small"
+                        label="End Date"
+                        variant="outlined"
+                        color="primary"
+                    />
+                </Grid>: null}
+            </Grid>
+            {props.session.length > 0 ? <Grid item xs={12}> <Link>See Group Report</Link> </Grid>: null}
+            <Grid item>
+                <ExpandMoreIcon />
+            </Grid>
+            <Grid container
+                  direction="column"
+                  justify="flex-start"
+                  alignItems="flex-end">
+                <Grid item xs={11}>
+                    {props.group.map((email) => <div>{email}</div>)}
+                </Grid>
+            </Grid>
+        </Grid>
     );
 };
 

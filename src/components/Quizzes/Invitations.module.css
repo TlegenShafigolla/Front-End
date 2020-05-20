@@ -14,3 +14,13 @@
 .Invited_date{
     font-size: 11px;
 }
+
+.GroupListItem{
+    margin-bottom: 5px;
+    padding: 5px;
+    border: 1px solid lightgray;
+}
+
+.ExpansionPanel{
+    width: 90%;
+}
