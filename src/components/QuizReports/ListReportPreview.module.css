@@ -5,16 +5,4 @@
     margin-top: 50px;
 }
 
-.Container{
-    height: 91vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
-.Box{
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-}

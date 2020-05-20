@@ -1,80 +1,93 @@
 /*-----------------------------------------------------------Group----------------------------------------------------*/
-.Group{
+.Group {
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 .GroupName {
-    width: 500px;
-    margin: auto;
+    width: 100%;
+    height: 30px;
 }
 
-.GroupMembers{
-    padding: 10px;
-    border: lightgray 1px solid;
-    border-radius: 2px;
+.GroupMembers {
+    width: 100%;
 }
 
-.FormControl{
-    margin: 3px;
+.FormControl {
     padding: 3px;
 }
+
 /*-----------------------------------------------------------Person----------------------------------------------------*/
 
 /*-----------------------------------------------------------Invite----------------------------------------------------*/
 
-.TimeLimit {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
+.Invite{
+    padding: 10px;
 }
 .Checkbox {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
+
 .StartDate {
     display: none;
 }
+
 .EndDate {
     display: none;
 }
+
 .RadioButton {
     display: flex;
     justify-content: space-around;
 }
+
 .Time {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+
 .Timer {
     display: none;
 }
-.InvitationLinkTextField{
+
+.InvitationLinkTextField {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.Settings{
+
+.Settings {
     display: flex;
     padding: 10px 0 10px 0;
     flex-direction: column;
 }
-.SwitchLine{
+
+.SwitchLine {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.SwitchTextLeft{
+
+.SwitchTextLeft {
     width: 150px;
     text-align: right;
 }
-.Switch{
+
+.Switch {
     margin-left: auto;
     margin-right: auto;
 }
-.SwitchTextRight{
+
+.SwitchTextRight {
     text-align: left;
     width: 150px;
+}
+@media screen and (max-width: 600px){
+    .Invite{
+        padding: 4px;
+    }
 }

@@ -24,6 +24,7 @@ import {postInvitations} from "../../../../services/API/adminAPI/Quiz/invitation
 import {getListGroup} from "../../../../services/API/adminAPI/Group/group";
 import Typography from "@material-ui/core/Typography";
 import Switch from "@material-ui/core/Switch/Switch";
+import Grid from "@material-ui/core/Grid";
 
 class InviteDialog extends React.Component {
     constructor(props) {
@@ -99,7 +100,7 @@ class InviteDialog extends React.Component {
     };
 
     generateInvitationJSON = (start, end, time_limit) => {
-        if(this.state.invitationType === 'Person'){
+        if (this.state.invitationType === 'Person') {
             const email = /[0-9a-z_-]+@[0-9a-z_-]+\.[a-z]{2,5}$/i;
             if (this.state.name === '' || this.state.name === null) {
                 this.setState({errorName: true});
@@ -130,15 +131,15 @@ class InviteDialog extends React.Component {
                 surname: null
             });
             return invitation;
-        } else if(this.state.invitationType === 'Group'){
+        } else if (this.state.invitationType === 'Group') {
             const group_id = this.state.groups[this.state.selectedGroup]._id;
             const group = [];
-            for(const [key, value] of Object.entries(this.state.selectedPersons)){
-                if(value){
+            for (const [key, value] of Object.entries(this.state.selectedPersons)) {
+                if (value) {
                     group.push(key);
                 }
             }
-            if(group.length === 0){
+            if (group.length === 0) {
                 return null;
             }
             const invitation = {
@@ -238,7 +239,7 @@ class InviteDialog extends React.Component {
         let t = Number(s[0]) * 60 + Number(s[1]);
         this.setState({time_limit: t});
     };
-    onSelectGroup = (event) =>{
+    onSelectGroup = (event) => {
         const selectedPersons = {};
         this.state.groups[event.target.value].members.map((val, index) => {
             selectedPersons[val.email] = true;
@@ -252,7 +253,7 @@ class InviteDialog extends React.Component {
         this.setState({selectedPersons: selectedPersons});
     };
     initializeSelectedPersons = (groups) => {
-        if(groups.length === 0){
+        if (groups.length === 0) {
             return;
         }
         const selectedPersons = {};
@@ -283,7 +284,7 @@ class InviteDialog extends React.Component {
         return (
             <div>
                 <Dialog
-                    maxWidth={'sm'}
+                    fullWidth
                     open={this.props.openDialog}
                     aria-labelledby="Invite"
                     onClose={this.handleCancel}>
@@ -295,27 +296,36 @@ class InviteDialog extends React.Component {
                         </IconButton>
                     </DialogActions>
                     <DialogTitle id="Invite">Invite: {this.state.quiz_name}</DialogTitle>
-                    <FormControl component="fieldset">
-                        <RadioGroup aria-label="type" name="Results">
-                            <div className={s.RadioButton}>
-
-                                <FormControlLabel value="person" control={<Radio color="primary"/>}
-                                                  checked={this.state.invitationType === 'Person'}
-                                                  onChange={() => this.onChangeType('Person')}
-                                                  label="Person"/>
-                                <FormControlLabel value="Class" control={<Radio color="primary"/>}
-                                                  disabled={this.state.groups.length === 0}
-                                                  checked={this.state.invitationType === 'Group'}
-                                                  onChange={() => this.onChangeType('Group')}
-                                                  label='Groups'/>
-                                <FormControlLabel value="Class" control={<Radio color="primary"/>}
-                                                  checked={this.state.invitationType === 'Link'}
-                                                  onChange={() => this.onChangeType('Link')}
-                                                  label='Link'/>
-                            </div>
-                        </RadioGroup>
-                    </FormControl>
-                    <DialogContent>
+                    <div className={s.Invite}>
+                        <FormControl component="fieldset">
+                            <RadioGroup aria-label="type" name="Results">
+                                <Grid
+                                    container
+                                    direction="row"
+                                    justify="space-between"
+                                    alignItems="center">
+                                    <Grid item>
+                                        <FormControlLabel value="person" control={<Radio color="primary"/>}
+                                                          checked={this.state.invitationType === 'Person'}
+                                                          onChange={() => this.onChangeType('Person')}
+                                                          label="Person"/>
+                                    </Grid>
+                                    <Grid item>
+                                        <FormControlLabel value="Class" control={<Radio color="primary"/>}
+                                                          disabled={this.state.groups.length === 0}
+                                                          checked={this.state.invitationType === 'Group'}
+                                                          onChange={() => this.onChangeType('Group')}
+                                                          label='Groups'/>
+                                    </Grid>
+                                    <Grid item>
+                                        <FormControlLabel value="Class" control={<Radio color="primary"/>}
+                                                          checked={this.state.invitationType === 'Link'}
+                                                          onChange={() => this.onChangeType('Link')}
+                                                          label='Link'/>
+                                    </Grid>
+                                </Grid>
+                            </RadioGroup>
+                        </FormControl>
                         {this.state.invitationType === 'Person' ?
                             <Person errorName={this.state.errorName}
                                     errorSurname={this.state.errorSurname}
@@ -333,17 +343,11 @@ class InviteDialog extends React.Component {
                                 groups={this.state.groups}
                             /> : null
                         }
-                        <div className={s.Time}>
-                            <div className={s.Checkbox}>
+                        <Grid container
+                              justify="space-around">
+                            <Grid item xs={12} lg={4} md={4} sm={4} xl={4}>
                                 <FormControlLabel control={<Checkbox onChange={this.checkStart} color={"primary"}/>}
                                                   label={"Start date"}/>
-                                <FormControlLabel control={<Checkbox onChange={this.checkEnd} color={"primary"}/>}
-                                                  label={"End date"}/>
-                                <FormControlLabel control={<Checkbox onChange={this.checkTime} color={"primary"}/>}
-                                                  label={'Time Limit'}/>
-
-                            </div>
-                            <div className={s.TimeLimit}>
                                 <div id="startDate" className={s.StartDate}>
                                     <TextField
                                         label="Start date"
@@ -356,6 +360,10 @@ class InviteDialog extends React.Component {
                                         fullWidth
                                     />
                                 </div>
+                            </Grid>
+                            <Grid item xs={12} lg={4} md={4} sm={4} xl={4}>
+                                <FormControlLabel control={<Checkbox onChange={this.checkEnd} color={"primary"}/>}
+                                                  label={"End date"}/>
                                 <div id="endDate" className={s.EndDate}>
                                     <TextField
                                         fullWidth
@@ -368,6 +376,10 @@ class InviteDialog extends React.Component {
                                         }}
                                     />
                                 </div>
+                            </Grid>
+                            <Grid item xs={12} lg={4} md={4} sm={4} xl={4}>
+                                <FormControlLabel control={<Checkbox onChange={this.checkTime} color={"primary"}/>}
+                                                  label={'Time Limit'}/>
                                 <div id="time" className={s.Timer}>
                                     <TextField
                                         fullWidth
@@ -380,8 +392,8 @@ class InviteDialog extends React.Component {
                                         }}
                                     />
                                 </div>
-                            </div>
-                        </div>
+                            </Grid>
+                        </Grid>
                         <div className={s.Settings}>
                             <div className={s.SwitchLine}>
                                 <Tooltip
@@ -416,21 +428,22 @@ class InviteDialog extends React.Component {
                             {this.state.invitationLink !== null ? <TextField
                                 id="outlined-read-only-input"
                                 label="Link"
-                                defaultValue={this.state.invitationLink}
+                                autoFocus
+                                defaultValue={"http://localhost:3000/quiz/"+this.state.invitationLink}
                                 InputProps={{
                                     readOnly: true,
                                 }}
                                 variant="outlined"
                             /> : null}
                         </div>
-                    </DialogContent>
+                    </div>
                     <DialogActions>
                         {this.state.invitationType === 'Link' ?
                             <Button color="primary" onClick={this.onClickGetLinkInDialog}>
-                                {this.state.invitationType === 'Link' ? "Get Link": "Invite"}
+                                {this.state.invitationType === 'Link' ? "Get Link" : "Invite"}
                             </Button> :
                             <Button color="primary" onClick={this.onClickInviteInDialog}>
-                                {this.state.invitationType === 'Link' ? "Get Link": "Invite"}
+                                {this.state.invitationType === 'Link' ? "Get Link" : "Invite"}
                             </Button>
                         }
                     </DialogActions>

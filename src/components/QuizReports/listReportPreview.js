@@ -3,6 +3,7 @@ import getReportList from "../../services/API/adminAPI/Quiz/reports";
 import ReportPreview from "./ReportPreview";
 import s from './ListReportPreview.module.css'
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Grid from "@material-ui/core/Grid";
 
 
 class ListReportPreview extends React.Component{
@@ -22,14 +23,15 @@ class ListReportPreview extends React.Component{
             );
         }
         return(
-            <div className={s.Container}>
-                <div className={s.Box}>
-                    <div>
-                        {this.state.Reports !== [] ? this.state.Reports.map((val, index) =>
-                            <ReportPreview id={index} key={val._id} val={val}/>) : ' '}
-                    </div>
-                </div>
-            </div>
+            <Grid container
+                  alignItems="flex-start"
+                  justify="center"
+            >
+                <Grid item lg={6} md={6} sm={8} xs={12}>
+                        {this.state.Reports.map((val, index) =>
+                            <ReportPreview id={index} key={val._id} val={val}/>) }
+                </Grid>
+            </Grid>
         );
     }
 

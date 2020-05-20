@@ -25,7 +25,7 @@ const Person=(props)=>{
             error={props.errorEmail}
             margin="dense"
             id="Email"
-            label="Email Address"
+            label="Email"
             type="email"
             fullWidth
             variant='outlined'
