@@ -1,7 +1,6 @@
 .Root {
     display: flex;
     margin-top: 15px;
-    box-shadow: 3px 3px 10px #333333;
 }
 
 .CardContent {
@@ -9,23 +8,15 @@
 }
 
 .quizName {
-    display: flex;
-    padding-top: 10px;
-    justify-content: center;
+    text-align: center;
 }
 
-.Title {
-    fontSize: 14;
-}
+
 
 .Tabs {
     margin-top: 10px;
-    box-shadow: 3px 3px 10px #333333;
 }
 
-.Tab {
-    width: 100px;
-}
 
 .ArrowButton {
     position: fixed;
@@ -33,12 +24,13 @@
 }
 
 .Container {
-    min-height: 90vh;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.Box {
-    width: 50%;
+@media screen and (max-width: 600px){
+    .ArrowButton{
+        display: none;
+    }
 }

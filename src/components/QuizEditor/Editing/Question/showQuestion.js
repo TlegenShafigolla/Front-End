@@ -13,7 +13,7 @@ const ShowQuestion = (props) => {
                 <div className={s.QuestionInfo}>
                     <div className={s.QuestionOrder}>{props.value.order_id}.</div>
                     <div className={s.QuestionField}>
-                        <Typography variant="body1" gutterBottom>
+                        <Typography variant="body1" gutterBottom >
                             {props.question === ' ' ? 'New question' : props.question}
                         </Typography>
                     </div>

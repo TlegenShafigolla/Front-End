@@ -1,9 +1,10 @@
-.FormControl{
-    display:flex;
-        justify-content: center;
+.FormControl {
+    display: flex;
+    justify-content: center;
     flex-wrap: wrap;
 }
-.Answer{
+
+.Answer {
     display: inline-flex;
     justify-content: space-between;
     width: 100%;

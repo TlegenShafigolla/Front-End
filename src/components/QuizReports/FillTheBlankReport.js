@@ -5,24 +5,24 @@ import Button from "@material-ui/core/Button";
 import CheckIcon from '@material-ui/icons/Check';
 import {green} from "@material-ui/core/colors";
 import red from "@material-ui/core/colors/red";
+import Paper from "@material-ui/core/Paper";
+
 const correct = green.A700;
-const wrong = red.A700;
 const FillTheBlank = (props) => {
+    console.log(props)
     return (
-        <div>
-            <div className={s.Question} id={props.val._id.toString()}>
-                <div className={s.QuestionInfo}>
-                    <div className={s.QuestionOrder}>{props.val.order_id}.</div>
-                    <div className={s.QuestionField}>
-                        <Typography variant="body1" gutterBottom>
-                            {props.val.question}
+        <Paper square elevation={3} className={s.Question} id={props.val._id.toString()}>
+            <div className={s.QuestionInfo}>
+                <div className={s.QuestionOrder}>{props.val.order_id}.</div>
+                <div className={s.QuestionField}>
+                    <Typography variant="body1" gutterBottom>
+                        {props.val.question}
+                    </Typography>
+                    <div className={s.CorrectAnswer}>
+                        <Typography variant="body1">
+                            Correct answer: {props.val.answers[0].answer}
                         </Typography>
-                        <div className={s.CorrectAnswer}>
-                            <Typography variant="body1">
-                                {props.val.answers[0].answer}
-                            </Typography>
-                            <CheckIcon/>
-                        </div>
+                        <CheckIcon/>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@ const FillTheBlank = (props) => {
                     <div className={s.answers}>
                         <Typography
                             variant="body1">
-                            Answer: {props.val.session[0].answer}
+                            User answer: {props.val.session[0].answer}
                         </Typography>
                         {props.points ? (
                             <InputBase className={s.InputBase} id={props.val.session[0]._id.toString()}
@@ -40,8 +40,8 @@ const FillTheBlank = (props) => {
                                        type={'number'}
                                        onChange={props.onChangeInputBase}
                             />) : <Checkbox
-                            style={props.val.session[0].correct === 1 ? {color: correct} :
-                                {color: '#3333'}} defaultChecked={props.val.session[0].correct === 1}
+                            style={{color: correct}}
+                            defaultChecked={props.val.session[0].correct === 1}
                             id={props.val.session[0]._id.toString()}
                             onChange={props.onChangeCheckbox}/>}
                     </div>
@@ -49,7 +49,7 @@ const FillTheBlank = (props) => {
                         <Button onClick={props.onClickSaveButton}>Save</Button>
                     </div>
                 </div>}
-        </div>
+        </Paper>
     )
 }
 export default FillTheBlank;

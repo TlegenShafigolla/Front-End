@@ -13,7 +13,6 @@ import QuizzesRoute from "../components/Quizzes/QuizzesRoute";
 
 const styles = makeStyles(theme => ({
     grow: {
-        width: '100wh',
         height: '100vh',
     },
     drawerHeader: {
@@ -43,9 +42,6 @@ export const Routes = (props) => {
     const classes = styles();
     return (
         <div className={classes.grow}>
-            <main className={clsx(classes.content, {
-                [classes.contentShift]: props.open,
-            })}>
                 <div className={classes.drawerHeader}/>
                 <Route path="/admin/profile" render={() => <Profile/>}/>
                 <Route path="/admin/quiz/editor" render={() => <QuizEditor/>}/>
@@ -54,7 +50,6 @@ export const Routes = (props) => {
                 <Route path="/admin/surveys" render={() => <MySurveyRoute/>}/>
                 <Route path='/admin/group' component={GroupRoutes}/>
                 <Route path='/admin/surveys/reports' render={() => <ReportSurveyRoute/>}/>
-            </main>
         </div>
 
     );

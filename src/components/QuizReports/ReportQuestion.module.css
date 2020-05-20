@@ -1,8 +1,6 @@
 .Question {
     margin-top: 10px;
-    box-shadow: 5px 5px 10px #333333;
     padding: 10px;
-    border: 1px solid #301131;
 
 }
 
@@ -35,7 +33,7 @@
 }
 
 .CorrectAnswer {
-    border-top: 2px solid #333333;
+    border-bottom: 1px solid #333333;
     display: flex;
     justify-content: space-between;
 }
@@ -70,10 +68,6 @@
 }
 
 .Answer {
-    width: 50%;
     margin-top: 10px;
     padding: 10px;
-    align-items: center;
-    border-bottom: 1px solid rgba(14, 14, 14, .3);
-    box-shadow: 3px 3px 5px #333333;
 }

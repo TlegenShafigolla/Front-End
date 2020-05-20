@@ -2,12 +2,13 @@ import React from "react";
 import s from "./ReportCard.module.css";
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
+import Paper from "@material-ui/core/Paper";
 
 class ReportCard extends React.Component {
     render() {
         console.log(this.props)
         return (
-            <div className={s.ReportCard}>
+            <Paper square elevation={3} className={s.ReportCard}>
                 <CardContent className={s.CardContent}>
                     <div className={s.Person}>
                         <Typography gutterBottom>
@@ -35,7 +36,7 @@ class ReportCard extends React.Component {
                 <Typography className={s.version} variant="body2" color='textSecondary' component="p">
                     {"Quiz version of: " + this.props.report.quiz.created_date}
                 </Typography>
-            </div>
+            </Paper>
         );
     }
 }

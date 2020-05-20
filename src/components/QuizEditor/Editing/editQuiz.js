@@ -190,78 +190,79 @@ class EditQuiz extends React.Component {
         return (
             <div className={s.EditQuiz}>
                 <Grid container
-                      direction="row"
                       alignItems="flex-start"
-                      justify="center"
+                      justify="flex-start"
                       spacing={3}
                 >
-                    <Grid item lg={3} md={3} sm={2} >
+                    <Grid item lg={3} md={3} sm={2}>
                         <div className={s.ArrowButton}>
-                        <Link to='/admin/quiz/editor'>
-                            <IconButton color="primary">
-                                <ArrowBackIosIcon/>
-                            </IconButton>
-                        </Link>
+                            <Link to='/admin/quiz/editor'>
+                                <IconButton color="primary">
+                                    <ArrowBackIosIcon/>
+                                </IconButton>
+                            </Link>
                         </div>
                     </Grid>
-                    <Grid item lg={6} md={6} sm={8} xs={12}
-                          container
-                          direction="column"
-                          spacing={1}
-                    >
-                        <Paper square elevation={3} className={s.QuizNameDescription}>
-                            {this.state.editQuizName ?
-                                <TextField error={this.state.error} onBlur={this.onBlurQuizName}
-                                           onChange={this.changeQuizName}
-                                           autoFocus fullWidth
-                                           variant='outlined' margin='dense'
-                                           defaultValue={this.state.quiz_name}
-                                           className={s.QuizInfo}/> :
-                                <Typography onClick={this.editQuizName} noWrap
-                                            className={s.QuizInfo}
-                                            variant='h4'> {this.state.quiz_name}</Typography>}
-                            {this.state.editDescription ?
-                                <TextField error={this.state.error} onChange={this.changeDescription}
-                                           onBlur={this.onBlurDescription}
-                                           defaultValue={this.state.description} autoFocus variant='outlined'
-                                           margin='dense' fullWidth multiline rows={2} rowsMax={5}/> :
-                                <Typography className={s.QuizInfo}
-                                            onClick={() => this.setState({editDescription: true})}
-                                            variant='body1'>{this.state.description}</Typography>}
-                            <EditQuizSettings pointsChecked={this.pointsChecked}
-                                              mixedChecked={this.mixedChecked}
-                                              showResultsChecked={this.showResultsChecked}
-                                              showResults={this.state.showResults}
-                                              mixed={this.state.mixed}
-                                              points={this.state.points}
-                                              lastedit={this.state.last_edited_date}/>
-                        </Paper>
-                        <DragDropContext onDragEnd={this.onDragEnd}>
-                            <Droppable droppableId={this.state.quiz_id.toString()}>
-                                {provided => (
-                                    <div
-                                        {...provided.droppableProps}
-                                        ref={provided.innerRef}
-                                    >
-                                        {this.state.questions === undefined || this.state.questions === null ? ' ' :
-                                            this.state.questions.map((val, index) =>
-                                                <Question
-                                                    index={index}
-                                                    key={val._id}
-                                                    value={val}
-                                                    point={this.state.points}
-                                                    deleteQuestion={this.deleteQuestion}
-                                                    setQuestion={this.setQuestion}
-                                                    setAnswers={this.setAnswers}
-                                                />)}
-                                        {provided.placeholder}</div>)}</Droppable>
-                        </DragDropContext>
-                        <div className={s.AddButton}>
-                            <IconButton color='primary'
-                                        onClick={this.addNewQuestion}>
-                                <AddIcon fontSize='large'/>
-                            </IconButton>
-                        </div>
+                    <Grid item lg={6} md={6} sm={8} xs={12}>
+                        <Grid
+                            container
+                            direction="column"
+                            spacing={1}
+                        >
+                            <Paper square elevation={3} className={s.QuizNameDescription}>
+                                {this.state.editQuizName ?
+                                    <TextField error={this.state.error} onBlur={this.onBlurQuizName}
+                                               onChange={this.changeQuizName}
+                                               autoFocus fullWidth
+                                               variant='outlined' margin='dense'
+                                               defaultValue={this.state.quiz_name}
+                                               className={s.QuizInfo}/> :
+                                    <Typography onClick={this.editQuizName} noWrap
+                                                className={s.QuizInfo}
+                                                variant='h4'> {this.state.quiz_name}</Typography>}
+                                {this.state.editDescription ?
+                                    <TextField error={this.state.error} onChange={this.changeDescription}
+                                               onBlur={this.onBlurDescription}
+                                               defaultValue={this.state.description} autoFocus variant='outlined'
+                                               margin='dense' fullWidth multiline rows={2} rowsMax={5}/> :
+                                    <Typography className={s.QuizInfo}
+                                                onClick={() => this.setState({editDescription: true})}
+                                                variant='body1'>{this.state.description}</Typography>}
+                                <EditQuizSettings pointsChecked={this.pointsChecked}
+                                                  mixedChecked={this.mixedChecked}
+                                                  showResultsChecked={this.showResultsChecked}
+                                                  showResults={this.state.showResults}
+                                                  mixed={this.state.mixed}
+                                                  points={this.state.points}
+                                                  lastedit={this.state.last_edited_date}/>
+                            </Paper>
+                            <DragDropContext onDragEnd={this.onDragEnd}>
+                                <Droppable droppableId={this.state.quiz_id.toString()}>
+                                    {provided => (
+                                        <div
+                                            {...provided.droppableProps}
+                                            ref={provided.innerRef}
+                                        >
+                                            {this.state.questions === undefined || this.state.questions === null ? ' ' :
+                                                this.state.questions.map((val, index) =>
+                                                    <Question
+                                                        index={index}
+                                                        key={val._id}
+                                                        value={val}
+                                                        point={this.state.points}
+                                                        deleteQuestion={this.deleteQuestion}
+                                                        setQuestion={this.setQuestion}
+                                                        setAnswers={this.setAnswers}
+                                                    />)}
+                                            {provided.placeholder}</div>)}</Droppable>
+                            </DragDropContext>
+                            <div className={s.AddButton}>
+                                <IconButton color='primary'
+                                            onClick={this.addNewQuestion}>
+                                    <AddIcon fontSize='large'/>
+                                </IconButton>
+                            </div>
+                        </Grid>
                     </Grid>
                     <Grid item lg={3} md={3} sm={2}>
                         <Paper square elevation={3}

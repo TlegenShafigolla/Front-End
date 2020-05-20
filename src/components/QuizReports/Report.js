@@ -1,16 +1,13 @@
 import React from "react";
 import {getReport} from "../../services/API/adminAPI/Quiz/reports";
 import s from "./Report.module.css";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import QuestionNumberIcon from "./QuestionNumberIcon";
 import ReportQuestion from "./ReportQuestion";
 import ReportCard from "./ReportCard";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import {Link} from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
 
 class Report extends React.Component {
     constructor(props) {
@@ -29,9 +26,6 @@ class Report extends React.Component {
     newState = (count) => {
         this.setState({count: !this.state.count})
     };
-    scrollTabHandleChange = (event, newValue) => {
-        this.setState({question: this.state.report.questions[newValue], tab: newValue});
-    };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevState.count !== this.state.count) {
@@ -46,7 +40,9 @@ class Report extends React.Component {
             return '';
         }
         return (
-            <div className={s.Container}>
+            <Grid container
+                  alignItems="flex-start"
+                  justify="center">
                 <div className={s.ArrowButton}>
                     <Link to='/admin/reports'>
                         <IconButton color="primary">
@@ -54,40 +50,21 @@ class Report extends React.Component {
                         </IconButton>
                     </Link>
                 </div>
-                <div className={s.Box}>
+                <Grid item lg={6} md={6} sm={9} xs={12}>
                     <Typography className={s.quizName} variant="h5" component="p" gutterBottom>
                         {this.state.report.quiz.quiz_name}
                     </Typography>
                     <div className={s.Root}>
                         <ReportCard report={this.state.report}/>
                     </div>
-                    <div className={s.Tabs}>
-                        <AppBar position="static" color="inherit">
-                            <Tabs
-                                value={this.state.tab}
-                                onChange={this.scrollTabHandleChange}
-                                variant="scrollable"
-                                scrollButtons="on"
-                                indicatorColor="primary"
-                                textColor="primary"
-                                aria-label="scrollable force tabs example"
-                            >
-                                {this.state.report.questions.map((val, index) =>
-                                    <Tab id={index} key={val._id}
-                                         fullWidth={false}
-                                         icon={<QuestionNumberIcon points={this.state.report.quiz.points}
-                                                                    val={val}
-                                                                   index={index}
-                                                                />
-                                            }
-                                    />)}
-                            </Tabs>
-                        </AppBar>
-                    </div>
-                        <ReportQuestion val={this.state.question} session={this.state.report.session}
-                                        newState={this.newState} points={this.state.report.quiz.points}/>
-                </div>
-            </div>
+                    {this.state.report.questions.map(val => <ReportQuestion val={val}
+                                                                            key={val._id}
+                                                                            session={this.state.report.session}
+                                                                            newState={this.newState}
+                                                                            points={this.state.report.quiz.points}/>)}
+
+                </Grid>
+            </Grid>
         );
     }
 

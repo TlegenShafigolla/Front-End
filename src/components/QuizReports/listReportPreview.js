@@ -27,7 +27,7 @@ class ListReportPreview extends React.Component{
                   alignItems="flex-start"
                   justify="center"
             >
-                <Grid item lg={6} md={6} sm={8} xs={12}>
+                <Grid item lg={3} md={3} sm={6} xl={9} xs={12}>
                         {this.state.Reports.map((val, index) =>
                             <ReportPreview id={index} key={val._id} val={val}/>) }
                 </Grid>

@@ -9,7 +9,7 @@ import $ from 'jquery'
 import FillTheBlank from "./FillTheBlankReport";
 import MultipleChoiceReport from "./MultipleChoiceReport";
 
-class ReportQuestion extends React.Component {
+class   ReportQuestion extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -55,14 +55,6 @@ class ReportQuestion extends React.Component {
         if (this.props.val === null) {
             return '';
         }
-        let map = {};
-        let key = this.props.points ? "points" : "correct";
-        let length = this.props.val.session !== undefined ? this.props.val.session.length : 0;
-        for (let i = 0; i < length; i++) {
-            map[this.props.val.session[i].answer_id] = this.props.val.session[i][key];
-        }
-        const correct = green.A700;
-        const wrong = red.A700;
         return (
             <div>
                 {this.props.val.type !== "FILL THE BLANK" ? <MultipleChoiceReport val={this.props.val}/> :
