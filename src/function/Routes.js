@@ -4,7 +4,7 @@ import Profile from '../components/Profile/Profile';
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import QuizEditor from "../components/QuizEditor/QuizEditor";
 import ReportRoute from "../components/QuizReports/ReportRoute";
-import MySurveyRoute from "../components/SurveyConstructor/MySurveysRoute";
+import MySurveyRoute from "../components/SurveyEditor/MySurveysRoute";
 import GroupRoutes from "../components/Group/Routes";
 import ReportSurveyRoute from "../components/SurveyReports/ReportRoute";
 import clsx from "clsx";

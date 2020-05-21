@@ -150,7 +150,7 @@ class EditSurvey extends React.Component {
                 >
                     <Grid item lg={3} md={3} sm={2}>
                         <div className={s.ArrowButton}>
-                            <Link to='/admin/surveys/'>
+                            <Link to='/admin/survey/editor'>
                                 <IconButton color="primary">
                                     <ArrowBackIosIcon/>
                                 </IconButton>
