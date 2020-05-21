@@ -14,6 +14,7 @@ import SurveysRoute from "../components/Surveys/SurveysRoutes";
 
 const styles = makeStyles(theme => ({
     grow: {
+        width: '100wh',
         height: '100vh',
     },
     drawerHeader: {
@@ -43,6 +44,7 @@ export const Routes = (props) => {
     const classes = styles();
     return (
         <div className={classes.grow}>
+
                 <div className={classes.drawerHeader}/>
                 <Route path="/admin/profile" render={() => <Profile/>}/>
                 <Route path="/admin/quiz/editor" render={() => <QuizEditor/>}/>
