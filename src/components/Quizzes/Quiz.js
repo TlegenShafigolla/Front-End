@@ -39,7 +39,7 @@ class Quiz extends React.Component {
                   justify="flex-end"
             >
 
-                <Grid item  lg={6} md={8} sm={10} xs={12}>
+                <Grid item  lg={6} md={8} sm={12} xs={12}>
                     <Paper square elevation={3} className={s.QuizNameDescription}>
                         <Typography noWrap
                                     className={s.QuizInfo}
@@ -50,7 +50,7 @@ class Quiz extends React.Component {
                     {this.state.questions.map((question, index) => <Question key={question._id} value={question}
                                                                              points={this.state.quiz.points}/>)}
                 </Grid>
-                <Grid item lg={3} md={2} className={s.InfoPanel}>
+                <Grid item lg={3} md={2} sm={12} xs={12} className={s.InfoPanel}>
                     <Invitations invitations={this.state.invitations}/>
                 </Grid>
             </Grid>

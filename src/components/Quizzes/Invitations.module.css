@@ -6,21 +6,17 @@
     padding: 5px;
     margin-top: 10px;
     margin-bottom: 5px;
-    border-bottom: 1px solid lightgray;
 }
 .Email{
     font-size: 14px;
 }
 .Invited_date{
-    font-size: 11px;
+    font-size: 14px;
 }
 
 .GroupListItem{
     margin-bottom: 5px;
     padding: 5px;
-    border: 1px solid lightgray;
 }
 
-.ExpansionPanel{
-    width: 90%;
-}
+

@@ -1,6 +1,4 @@
 import React from "react";
-import Paper from "@material-ui/core/Paper";
-import s from "./Invitations.module.css";
 import InvitationListItem from "./InvitationListItem";
 
 class Invitations extends React.Component {
