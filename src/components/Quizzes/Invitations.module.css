@@ -4,6 +4,8 @@
 }
 .PersonListItem{
     padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 5px;
     border-bottom: 1px solid lightgray;
 }
 .Email{
