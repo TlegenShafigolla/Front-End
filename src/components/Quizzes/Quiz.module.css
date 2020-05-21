@@ -9,13 +9,13 @@
     align-items: center;
     margin-top: 50px;
 }
-.SurveyNameDescription {
+.QuizNameDescription {
     margin-top: 10px;
     margin-bottom: 15px;
     text-align: center;
     overflow: hidden;
 }
-.SurveyInfo {
+.QuizInfo {
     padding: 10px;
 }
 .InfoPanel{
