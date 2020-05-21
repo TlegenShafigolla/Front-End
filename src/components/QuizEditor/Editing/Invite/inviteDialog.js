@@ -35,7 +35,7 @@ class InviteDialog extends React.Component {
             openSuccessSnackbar: false,
             // For Link Invitation
             invitationLink: null,
-            // For Group Invitation
+            // For Groups Invitation
             groups: [],
             selectedGroup: 0,
             selectedPersons: {},

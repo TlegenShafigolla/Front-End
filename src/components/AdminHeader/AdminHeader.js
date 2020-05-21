@@ -37,7 +37,7 @@ const AdminHeader = (props) => {
         },
         {
             path: '/admin/group',
-            name: 'Group'
+            name: 'Groups'
         },
     ];
 
