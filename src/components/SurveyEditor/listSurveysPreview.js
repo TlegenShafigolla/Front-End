@@ -27,7 +27,7 @@ class ListSurveyPreview extends React.Component {
         await postSurvey(newSurvey).then(val => {
             console.log(val);
             surveys.push(val);
-            this.props.history.push(`/admin/surveys/edit/${val._id}`);
+            this.props.history.push(`/admin/survey/editor/edit/${val._id}`);
         });
         this.setState({surveys: surveys});
         this.setState({disabledButton: false});

@@ -32,7 +32,7 @@ class InviteDialog extends React.Component{
         this.state = {
             // For Link Invitation
             invitationLink: null,
-            // For Group Invitation
+            // For Groups Invitation
             groups: [],
             selectedGroup: 0,
             selectedPersons: {},

@@ -7,6 +7,10 @@ import Button from "@material-ui/core/Button";
 import FaceIcon from '@material-ui/icons/Face';
 import postFeedback from "../../services/API/adminAPI/feedback";
 import Snackbar from "@material-ui/core/Snackbar";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import Alert from "@material-ui/lab/Alert/Alert";
 class Profile extends React.Component {
     constructor(props) {
         super(props);
@@ -45,26 +49,48 @@ class Profile extends React.Component {
 
     render() {
         return (
-                <div className={s.profile}>
+            <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="flex-start">
+                <Grid item lg={8} md={8} sm={10} xs={12}>
+                    <Paper square elevation={3} className={s.ProfilePaper}>
+                            <div className={s.ProfileInfo}>
+                                <div>
+                                    <FaceIcon className={s.Avatar} fontSize='large'/>
+                                </div>
+                                <Typography variant='h6' >{this.state.displayName}</Typography>
+                                <Typography>  {this.state.email}</Typography>
+                            </div>
 
-                    <div className={s.profileInfo}>
-                        <div >
-                             <FaceIcon className={s.avatar} fontSize='large'/>
-                        </div>
-                        <Typography variant='h6' >{this.state.displayName}</Typography>
-                        <Typography>  {this.state.email}</Typography>
-                    </div>
-                    <div className={s.feedback}>
-                        <Typography>Feedback</Typography>
-                        <TextareaAutosize value={this.state.feedback} className={s.textarea} onChange={this.handleOnChange}/>
+                    </Paper>
+                </Grid>
+                <Grid item lg={8} md={8} sm={10} xs={12}>
+                    <Paper square elevation={3} className={s.FeedbackPaper}>
+                        <TextField
+                            id="outlined-helperText"
+                            label="Leave your feedback here"
+                            helperText="It will help us a lot. Thanks!"
+                            variant="outlined"
+                            value={this.state.feedback}
+                            onChange={this.handleOnChange}
+                            fullWidth
+                            multiline
+                            rowsMax={4}
+                        />
                         <Button color='primary' onClick={this.handleOnSubmit}>submit</Button>
-                    </div>
-                    <Snackbar
-                        open={this.state.openSnackbar}
-                        message="Success! Feedback sent!"
-                        onClose={this.snackClose}
-                    />
-                </div>
+                    </Paper>
+                </Grid>
+                <Snackbar
+                    open={this.state.openSnackbar}
+                    onClose={this.snackClose}>
+                    <Alert variant="filled" severity="success">
+                        Success! Feedback sent!
+                    </Alert>
+                </Snackbar>
+
+            </Grid>
         )
     };
 

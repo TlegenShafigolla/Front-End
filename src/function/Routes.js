@@ -4,12 +4,13 @@ import Profile from '../components/Profile/Profile';
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import QuizEditor from "../components/QuizEditor/QuizEditor";
 import ReportRoute from "../components/QuizReports/ReportRoute";
-import MySurveyRoute from "../components/SurveyConstructor/MySurveysRoute";
-import GroupRoutes from "../components/Group/Routes";
+import MySurveyRoute from "../components/SurveyEditor/MySurveysRoute";
+import GroupRoutes from "../components/Groups/GroupsRoutes";
 import ReportSurveyRoute from "../components/SurveyReports/ReportRoute";
 import clsx from "clsx";
 import Quizzes from "../components/Quizzes/Quizzes";
 import QuizzesRoute from "../components/Quizzes/QuizzesRoute";
+import SurveysRoute from "../components/Surveys/SurveysRoutes";
 
 const styles = makeStyles(theme => ({
     grow: {
@@ -49,7 +50,8 @@ export const Routes = (props) => {
                 <Route path="/admin/quiz/editor" render={() => <QuizEditor/>}/>
                 <Route path="/admin/quizzes" render={() => <QuizzesRoute/>}/>
                 <Route path="/admin/reports" render={() => <ReportRoute/>}/>
-                <Route path="/admin/surveys" render={() => <MySurveyRoute/>}/>
+                <Route path="/admin/survey/editor" render={() => <MySurveyRoute/>}/>
+                <Route path="/admin/surveys" render={() => <SurveysRoute/>}/>
                 <Route path='/admin/group' component={GroupRoutes}/>
                 <Route path='/admin/surveys/reports' render={() => <ReportSurveyRoute/>}/>
         </div>

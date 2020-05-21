@@ -43,14 +43,14 @@
     flex-direction: column;
 }
 
-.QuizNameDescription {
+.SurveyNameDescription {
     margin-top: 10px;
     margin-bottom: 15px;
     text-align: center;
     overflow: hidden;
 }
 
-.QuizInfo {
+.SurveyInfo {
     padding: 10px;
 }
 

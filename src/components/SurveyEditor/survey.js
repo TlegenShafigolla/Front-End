@@ -70,7 +70,7 @@ class Survey extends React.Component {
                             </IconButton>
                         </Tooltip>
                     </div>
-                    <Link to={'/admin/surveys/edit/' + this.props.value._id.toString()}>
+                    <Link to={'/admin/survey/editor/edit/' + this.props.value._id.toString()}>
                         <IconButton color="primary" onClick={this.handleClick}>
                             <ArrowForwardIosIcon fontSize='large'/>
                         </IconButton>
