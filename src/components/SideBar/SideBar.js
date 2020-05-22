@@ -59,13 +59,6 @@ const SideBar = (props) => {
                             Quizzes
                         </Button>
                     </NavLink>
-                    <NavLink to='/admin/reports'>
-                        <Button color='primary'
-                                className={s.secondary}
-                                startIcon={<AssessmentSharpIcon/>}>
-                            Reports
-                        </Button>
-                    </NavLink>
                     <NavLink to='/admin/survey/editor'>
                         <Button color='primary'
                                 className={s.main}

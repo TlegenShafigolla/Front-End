@@ -3,7 +3,6 @@ import InvitationListItem from "./InvitationListItem";
 
 class Invitations extends React.Component {
     render() {
-        console.log(this.props)
         return (<div>
                 {this.props.invitations.map((invitation, index) => <InvitationListItem key={index}
                                                                                        value={invitation}/>)}

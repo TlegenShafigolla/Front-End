@@ -30,7 +30,7 @@ const MultipleChoiceReport = (props) => {
                         </Typography>
                         <Checkbox
                             style={(val.point > 0 || val.correct > 0) ? {color: correct} : {color: wrong}}
-                            checked={val.session === 1}
+                            checked={val.correct === 1}
                         />
                     </div>
                 )

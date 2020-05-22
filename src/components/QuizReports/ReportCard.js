@@ -9,32 +9,29 @@ class ReportCard extends React.Component {
         console.log(this.props)
         return (
             <Paper square elevation={3} className={s.ReportCard}>
-                <CardContent className={s.CardContent}>
-                    <div className={s.Person}>
+                <Typography variant="h5" component="p" gutterBottom>
+                    {this.props.report.quiz.quiz_name}
+                </Typography>
+                <Typography variant="h5" component="p" gutterBottom>
+                    {this.props.report.quiz.description}
+                </Typography>
+                <CardContent>
+                    <div>
                         <Typography gutterBottom>
                             {this.props.report.email}
                         </Typography>
                         <Typography gutterBottom>
-                            {this.props.report.name + " " + this.props.report.surname}
-                        </Typography>
-                        <Typography variant="body1" component="p">
-                            Scored points: {this.props.report.points ? this.props.report.total_points : this.props.report.total_corrects}
+                            {this.props.report.session.email}
                         </Typography>
                     </div>
                     <div>
-                        <Typography >
+                        <Typography>
                             {"No of questions: " + this.props.report.quiz.questions_count.toString()}
-                        </Typography>
-                        <Typography variant="body2" component="p">
-                            Show Results: {this.props.report.showResults ? 'Yes' : 'No'}
-                        </Typography>
-                        <Typography variant="body2" component="p">
-                            {"Invited: " + this.props.report.invited_date}
                         </Typography>
                     </div>
                 </CardContent>
                 <Typography className={s.version} variant="body2" color='textSecondary' component="p">
-                    {"Quiz version of: " + this.props.report.quiz.created_date}
+                    {"Quiz version of: " + new Date(this.props.report.quiz.created_date).toLocaleString()}
                 </Typography>
             </Paper>
         );
