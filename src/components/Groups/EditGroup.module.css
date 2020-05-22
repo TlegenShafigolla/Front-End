@@ -15,29 +15,23 @@
 }
 
 .MembersBoard {
-    padding-bottom: 10px;
-    box-shadow: 3px 3px 5px #333333;
+    margin-top: 20px;
+    padding: 10px;
     position: fixed;
     display: flex;
     align-items: center;
     flex-direction: column;
-    right: 5%;
-    top: 100px;
-
 }
 .GroupName{
-    margin-top: 50px;
-    box-shadow: 3px 3px 5px #333333;
-    margin-bottom: 10px;
-    width: 500px;
+    margin-top: 20px;
+    padding: 10px;
     text-align: center;
-    min-height: 50px;
 }
-.Quiz {
-    width: 500px;
-    box-shadow: 3px 3px 5px #333333;
+.QuizList {
+    margin-top: 10px;
+    padding: 10px;
 }
-.Survey {
-    width: 500px;
-    box-shadow: 3px 3px 5px #333333;
+.SurveyList {
+    margin-top: 10px;
+    padding: 10px;
 }
