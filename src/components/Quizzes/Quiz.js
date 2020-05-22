@@ -8,9 +8,6 @@ import Typography from "@material-ui/core/Typography";
 import {CircularProgress} from "@material-ui/core";
 import Question from "./Question";
 import Invitations from "./Invitations";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 
 class Quiz extends React.Component {
     constructor(props) {

@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper/Paper";
 import Typography from "@material-ui/core/Typography";
 import Question from "./Question";
+import InvitationsSurvey from "./Invitations";
 
 class Survey extends React.Component {
     constructor(props) {
@@ -49,6 +50,7 @@ class Survey extends React.Component {
                         {this.state.questions.map((question, index) => <Question key={question._id} value={question}/> )}
                     </Grid>
                     <Grid item lg={3} md={2} sm={1} xs={1}>
+                        <InvitationsSurvey invitations={this.state.invitations}/>
                     </Grid>
             </Grid>
         );
