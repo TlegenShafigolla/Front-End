@@ -12,7 +12,7 @@ class ReportSurveyPreview extends React.Component {
                 <CardContent className={s.CardContent}>
                     <Typography variant="h5" component="h2">
                         {this.props.val.survey.survey_name}  </Typography>
-                    <Typography color="textSecondary" gutterBottom> {this.props.val .survey.description} </Typography>
+                    <Typography color="textSecondary" gutterBottom> {this.props.val.survey.description} </Typography>
                     <Typography color="textSecondary"> {this.props.val.email} </Typography>
                     <Typography variant="body2"
                                 component="p"> {this.props.val.end_date} </Typography>

@@ -25,10 +25,10 @@ class ListReportSurveyPreview extends React.Component {
         return (
             <div className={s.Container}>
                 <div className={s.Box}>
-                    <div>
-                        {this.state.Reports !== [] ? this.state.Reports.map((val, index) =>
-                            <ReportSurveyPreview id={index} key={val._id} val={val}/>) : ' '}
-                    </div>
+                    {/*<div>*/}
+                    {/*    {this.state.Reports.map((val, index) =>*/}
+                    {/*        <ReportSurveyPreview id={index} key={val._id} val={val}/>)}*/}
+                    {/*</div>*/}
                 </div>
             </div>
 
@@ -36,7 +36,11 @@ class ListReportSurveyPreview extends React.Component {
     }
 
     componentDidMount() {
-        getReports().then(val => this.setState({Reports: val.Reports}))
+        getReports().then(val => {
+            this.setState({Reports: val.Reports}
+            )
+            console.log(val)
+        })
     }
 }
 

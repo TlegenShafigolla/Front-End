@@ -17,23 +17,10 @@ class Report extends React.Component {
             tab: 0,
             report_id: id,
             report: null,
-            question: null,
             correctQuestions: null,
-            count: false
         };
     }
 
-    newState = (count) => {
-        this.setState({count: !this.state.count})
-    };
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState.count !== this.state.count) {
-            getReport(this.state.report_id).then(val => {
-                this.setState({report: val});
-            })
-        }
-    }
 
     render() {
         if (this.state.report === null) {
@@ -42,18 +29,16 @@ class Report extends React.Component {
         return (
             <Grid container
                   alignItems="flex-start"
-                  justify="center">
+                  justify="center"
+            >
                 <div className={s.ArrowButton}>
-                    <Link to='/admin/reports'>
+                    <Link to={`/admin/quizzes/${this.state.report.quiz._id}`}>
                         <IconButton color="primary">
                             <ArrowBackIosIcon/>
                         </IconButton>
                     </Link>
                 </div>
                 <Grid item lg={6} md={6} sm={9} xs={12}>
-                    <Typography className={s.quizName} variant="h5" component="p" gutterBottom>
-                        {this.state.report.quiz.quiz_name}
-                    </Typography>
                     <div className={s.Root}>
                         <ReportCard report={this.state.report}/>
                     </div>
@@ -64,6 +49,7 @@ class Report extends React.Component {
                                                                             points={this.state.report.quiz.points}/>)}
 
                 </Grid>
+
             </Grid>
         );
     }
@@ -73,7 +59,6 @@ class Report extends React.Component {
         getReport(this.state.report_id).then(val => {
             console.log(val);
             this.setState({report: val});
-            this.setState({question: val.questions[0]});
         })
 
     }

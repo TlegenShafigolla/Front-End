@@ -6,7 +6,6 @@ import {NavLink} from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
 
 const PersonListItem = (props) => {
-    console.log(props)
     return (
         <Paper square
                className={s.PersonListItem}

@@ -8,8 +8,8 @@ import Paper from "@material-ui/core/Paper/Paper";
 import Typography from "@material-ui/core/Typography";
 import Question from "./Question";
 
-class Survey extends React.Component{
-    constructor(props){
+class Survey extends React.Component {
+    constructor(props) {
         super(props);
         const id = window.location.pathname.split('/');
         this.state = {
@@ -22,7 +22,7 @@ class Survey extends React.Component{
     }
 
     render() {
-        if(this.state.survey === null){
+        if (this.state.survey === null) {
             return (
                 <div className={s.CircularProgress}>
                     <CircularProgress size={70}/>
@@ -39,16 +39,17 @@ class Survey extends React.Component{
                 <Grid item lg={3} md={2} sm={1} xs={1}>
                 </Grid>
                 <Grid item lg={6} md={8} sm={10} xs={12}>
-                    <Paper square elevation={3} className={s.SurveyNameDescription}>
-                        <Typography noWrap
-                                    className={s.SurveyInfo}
-                                    variant='h4'> {this.state.survey.survey_name}</Typography>
-                        <Typography className={s.SurveyInfo}
-                                    variant='body1'>{this.state.survey.description}</Typography>
-                    </Paper>
-                    {this.state.questions.map((question, index) => <Question key={question._id} value={question}/> )}
-                </Grid>
-                <Grid item lg={3} md={2} sm={1} xs={1}>
+                    {/*    <Paper square elevation={3} className={s.SurveyNameDescription}>*/}
+                    {/*        <Typography noWrap*/}
+                    {/*                    className={s.SurveyInfo}*/}
+                    {/*                    variant='h4'> {this.state.survey.survey_name}</Typography>*/}
+                    {/*        <Typography className={s.SurveyInfo}*/}
+                    {/*                    variant='body1'>{this.state.survey.description}</Typography>*/}
+                    {/*    </Paper>*/}
+                    {/*    {this.state.questions.map((question, index) => <Question key={question._id} value={question}/> )}*/}
+                    {/*</Grid>*/}
+                    {/*<Grid item lg={3} md={2} sm={1} xs={1}>*/}
+                    {/*</Grid>*/}
                 </Grid>
             </Grid>
         );

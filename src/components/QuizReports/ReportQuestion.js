@@ -1,15 +1,9 @@
 import React from "react";
-import s from './ReportQuestion.module.css'
-import {Checkbox, InputBase, Typography} from "@material-ui/core";
-import {green} from "@material-ui/core/colors";
-import red from "@material-ui/core/colors/red";
-import Button from "@material-ui/core/Button";
 import {postReport} from "../../services/API/adminAPI/Quiz/reports";
-import $ from 'jquery'
 import FillTheBlank from "./FillTheBlankReport";
 import MultipleChoiceReport from "./MultipleChoiceReport";
 
-class   ReportQuestion extends React.Component {
+class ReportQuestion extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,36 +14,27 @@ class   ReportQuestion extends React.Component {
         }
     }
 
-    onClickSaveButton = async () => {
-        if (this.state.disabledButton) {
-            return;
-        }
-        this.setState({disabledButton: true});
-        let id = this.state.id;
+
+    onChangeCheckbox = async (event) => {
+        let id = event.target.id
+        let correct = Number(event.target.checked)
         let points = this.state.points;
-        let correct = Number(this.state.correct);
         let session_id = this.props.session._id;
-        await postReport(id, correct, points, session_id).then(val => {
-            console.log(val)
-        });
-        let count = 1;
-        this.props.newState(count);
-
-        $('#ButtonSave').hide(500);
-        this.setState({disabledButton: false})
-    };
-
-
-    onChangeCheckbox = (event) => {
-        this.setState({id: event.target.id});
-        this.setState({correct: event.target.checked});
-        $('#ButtonSave').show(500)
+        await postReport(id, correct, points, session_id)
     };
     onChangeInputBase = (event) => {
         this.setState({points: event.target.value});
         this.setState({id: event.target.id});
-        $('#ButtonSave').show(500)
     };
+    onSubmitInput = () => {
+        let id = this.state.id
+        let correct = Number(this.state.correct)
+        let points = this.state.points;
+        let session_id = this.props.session._id;
+        postReport(id, correct, points, session_id).then(val => {
+            console.log(val)
+        });
+    }
 
     render() {
         if (this.props.val === null) {
@@ -60,9 +45,9 @@ class   ReportQuestion extends React.Component {
                 {this.props.val.type !== "FILL THE BLANK" ? <MultipleChoiceReport val={this.props.val}/> :
                     <FillTheBlank val={this.props.val}
                                   points={this.props.points}
-                                  onChamgeInputBase={this.onChangeInputBase}
+                                  onChangeInputBase={this.onChangeInputBase}
                                   onChangeCheckbox={this.onChangeCheckbox}
-                                  onClickSaveButton={this.onClickSaveButton}/>
+                                  onSubmitInput={this.onSubmitInput}/>
                 }
             </div>
         );
