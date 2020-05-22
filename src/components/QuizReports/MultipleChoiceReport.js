@@ -12,10 +12,22 @@ const MultipleChoiceReport = (props) => {
     console.log(props)
 
     let answers = props.val.answers;
+    let session = props.val.session;
+    for (let i in answers) {
+        for (let j in session) {
+            if (session[j].answer_id === answers[i]._id) {
+                answers[i] = {
+                    ...answers[i],
+                    session: 1
+                }
+            }
+        }
+    }
+    console.log(answers)
     return (
         <Paper square elevation={3} className={s.Answer}>
             <div className={s.QuestionInfo}>
-                <div  className={s.QuestionOrder}>{props.val.order_id}.</div>
+                <div className={s.QuestionOrder}>{props.val.order_id}.</div>
                 <div className={s.QuestionField}>
                     <Typography variant="body1" gutterBottom>
                         {props.val.question}
@@ -30,7 +42,7 @@ const MultipleChoiceReport = (props) => {
                         </Typography>
                         <Checkbox
                             style={(val.point > 0 || val.correct > 0) ? {color: correct} : {color: wrong}}
-                            checked={val.correct === 1}
+                            checked={val.session === 1}
                         />
                     </div>
                 )
