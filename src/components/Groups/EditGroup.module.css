@@ -27,11 +27,17 @@
     padding: 10px;
     text-align: center;
 }
+
+.QuizListHeading{
+    padding: 10px
+}
 .QuizList {
     margin-top: 10px;
-    padding: 10px;
+}
+
+.SurveyListHeading{
+    padding: 10px
 }
 .SurveyList {
     margin-top: 10px;
-    padding: 10px;
 }

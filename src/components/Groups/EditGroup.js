@@ -11,6 +11,16 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import {getGroupQuizzes} from "../../services/API/adminAPI/Group/quizzes";
 import {getGroupSurveys} from "../../services/API/adminAPI/Group/surveys";
+import {makeStyles} from "@material-ui/core/styles";
+import TableContainer from "@material-ui/core/TableContainer";
+import Table from "@material-ui/core/Table";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+import TableBody from "@material-ui/core/TableBody";
+import TablePagination from "@material-ui/core/TablePagination";
+import QuizTable from "./QuizTable";
+import SurveyTable from "./SurveyTable";
 
 class EditGroup extends React.Component {
     constructor(props) {
@@ -108,14 +118,16 @@ class EditGroup extends React.Component {
                         </div>
                     </Paper>
                     <Grid container spacing={1}>
-                        <Grid item lg={6} md={6} sm={12} xs={12}>
+                        <Grid item xs={12}>
                             <Paper square elevation={3} className={s.QuizList}>
-                                Quiz Quiz
+                                <Typography variant='h6' className={s.QuizListHeading}>Group's Quizzes</Typography>
+                                <QuizTable quizzes={this.state.quizzes}/>
                             </Paper>
                         </Grid>
-                        <Grid item lg={6} md={6} sm={12} xs={12}>
+                        <Grid item xs={12}>
                             <Paper square elevation={3} className={s.SurveyList}>
-                                Survey Survey
+                                <Typography variant='h6' className={s.SurveyListHeading}>Group's Quizzes</Typography>
+                                <SurveyTable surveys={this.state.surveys}/>
                             </Paper>
                         </Grid>
                     </Grid>
