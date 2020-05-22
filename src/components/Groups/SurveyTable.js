@@ -7,6 +7,7 @@ import TableCell from "@material-ui/core/TableCell/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import TablePagination from "@material-ui/core/TablePagination";
 import s from "./SurveyTable.module.css";
+import {Link} from "react-router-dom";
 
 class SurveyTable extends React.Component {
     constructor(props) {
@@ -20,23 +21,25 @@ class SurveyTable extends React.Component {
     columns = [
         {id: 'survey', label: 'Survey', minWidth: 130},
         {id: 'invited_date', label: 'Invited date', minWidth: 70},
+        {id: 'completed', label: 'Completed', minWidth: 60},
         {
-            id: 'completed',
-            label: 'Completed',
+            id: 'report',
+            label: 'Report',
             minWidth: 60,
             align: 'right',
         },
     ];
 
-    createData = (survey, completed, invited_date) => {
-        return {survey, completed, invited_date};
+    createData = (survey, completed, invited_date, report) => {
+        return {survey, completed, invited_date, report};
     };
 
     initializeRows = (invitations) => {
         const arr = [];
         invitations.map(invitation => {
             const completed = `${invitation.completed}/${invitation.group.length}`;
-            arr.push(this.createData(invitation.used_survey.survey_name, completed, invitation.invited_date));
+            const report = `/admin/group/report/${invitation._id}`;
+            arr.push(this.createData(invitation.used_survey.survey_name, completed, invitation.invited_date, report));
         });
         return arr;
     };
@@ -75,6 +78,15 @@ class SurveyTable extends React.Component {
                                     <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                                         {this.columns.map((column) => {
                                             const value = row[column.id];
+                                            if(column.id === 'report'){
+                                                return (
+                                                    <TableCell key={column.id} align={column.align}>
+                                                        <Link to={value}>
+                                                            Report
+                                                        </Link>
+                                                    </TableCell>
+                                                );
+                                            }
                                             return (
                                                 <TableCell key={column.id} align={column.align}>
                                                     {column.format && typeof value === 'number' ? column.format(value) : value}
