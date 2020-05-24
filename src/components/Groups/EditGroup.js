@@ -11,14 +11,6 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import {getGroupQuizzes} from "../../services/API/adminAPI/Group/quizzes";
 import {getGroupSurveys} from "../../services/API/adminAPI/Group/surveys";
-import {makeStyles} from "@material-ui/core/styles";
-import TableContainer from "@material-ui/core/TableContainer";
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import TableBody from "@material-ui/core/TableBody";
-import TablePagination from "@material-ui/core/TablePagination";
 import QuizTable from "./QuizTable";
 import SurveyTable from "./SurveyTable";
 

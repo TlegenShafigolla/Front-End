@@ -32,14 +32,10 @@ class Survey extends React.Component {
         }
         return (
             <Grid container
-                  direction="row"
-                  justify="center"
                   alignItems="flex-start"
-                  className={s.Root}
-                  spacing={1}>
-                <Grid item lg={3} md={2} sm={1} xs={1}>
-                </Grid>
-                <Grid item lg={6} md={8} sm={10} xs={12}>
+                  justify="flex-end"
+                 >
+                <Grid item lg={6} md={8} sm={12} xs={12}>
                         <Paper square elevation={3} className={s.SurveyNameDescription}>
                             <Typography noWrap
                                         className={s.SurveyInfo}
@@ -49,7 +45,7 @@ class Survey extends React.Component {
                         </Paper>
                         {this.state.questions.map((question, index) => <Question key={question._id} value={question}/> )}
                     </Grid>
-                    <Grid item lg={3} md={2} sm={1} xs={1}>
+                    <Grid item lg={3} md={2} sm={12} xs={12} className={s.InfoPanel}>
                         <InvitationsSurvey invitations={this.state.invitations}/>
                     </Grid>
             </Grid>
