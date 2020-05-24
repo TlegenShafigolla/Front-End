@@ -38,7 +38,8 @@ const InvitationListItem = (props) => {
                     alignItems="center"
                     className={s.GroupListItem}>
                     <Typography variant='body2'>{props.value.group_name}</Typography>
-                    <Typography style={{marginLeft:'10px'}} variant='body2'>Invited: {new Date(props.value.invited_date).toLocaleString()}</Typography>
+                    <Typography style={{marginLeft: '10px'}}
+                                variant='body2'>Invited: {new Date(props.value.invited_date).toLocaleString()}</Typography>
                     <Grid
                         container
                         justify="space-evenly"
@@ -109,7 +110,8 @@ const InvitationListItem = (props) => {
                     alignItems="center"
                     className={s.GroupListItem}>
                     <Typography variant='body2'>{props.value.link}</Typography>
-                    <Typography style={{marginLeft:'10px'}} variant='body2'>Invited: {new Date(props.value.invited_date).toLocaleString()}</Typography>
+                    <Typography style={{marginLeft: '10px'}}
+                                variant='body2'>Invited: {new Date(props.value.invited_date).toLocaleString()}</Typography>
                     <Grid
                         container
                         justify="space-evenly"

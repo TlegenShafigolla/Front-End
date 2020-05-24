@@ -1,11 +1,7 @@
 import Grid from "@material-ui/core/Grid";
-import s from "../Quizzes/Invitations.module.css";
-import Chip from "@material-ui/core/Chip";
 import Link from "@material-ui/core/Link";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import React from "react";
 import Typography from "@material-ui/core/Typography";
-import {session} from "../../services/API/session";
 
 const GroupSurveyListItem = (props) => {
     let group = props.group
