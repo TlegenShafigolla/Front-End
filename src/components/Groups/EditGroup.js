@@ -80,7 +80,7 @@ class EditGroup extends React.Component {
         this.setState({group_name: e.target.value.trim()})
     };
     onDeleteMember = (id) => {
-        deleteMember(id, this.state.path).then(json => {
+        deleteMember(id, this.state.group_id).then(json => {
             let members = this.state.members;
             for (let i = 0; i < members.length; i++) {
                 if (members[i]._id === json._id) {

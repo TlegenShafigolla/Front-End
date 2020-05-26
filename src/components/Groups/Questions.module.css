@@ -1,0 +1,24 @@
+.Question{
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.QuestionInfo {
+    display: flex;
+}
+
+.QuestionOrder {
+    margin-top: 2px;
+}
+
+
+.QuestionField {
+    padding: 0;
+    margin-left: 5px;
+    flex-grow: 1;
+}
+
+.Button {
+    display: flex;
+    flex-direction: row-reverse;
+}
