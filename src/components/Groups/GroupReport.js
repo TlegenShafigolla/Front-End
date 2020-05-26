@@ -34,7 +34,8 @@ class GroupReport extends React.Component {
                         direction="column"
                         spacing={1}
                     >
-                        {this.state.report === null ? null : this.state.report.questions.map(val => <Questions
+                        {this.state.report === null ? null : this.state.report.questions.map((val,index) => <Questions
+                            index={index}
                             key={val._id} val={val}/>)}
                     </Grid>
                 </Grid>

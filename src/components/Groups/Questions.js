@@ -1,25 +1,19 @@
 import React from "react";
-import Paper from "@material-ui/core/Paper";
 import s from "./Questions.module.css";
-import Typography from "@material-ui/core/Typography";
+import MultipleChoiceGroupReport from "./MultipleChoiceReport";
+import FillTheBlankGroup from "./FillTheBlankReport";
 const Questions=props=>{
     console.log(props)
     return(
-        <Paper square elevation={3} id={props.val.order_id.toString()} className={s.Question}>
-            <div >
-                <div className={s.QuestionInfo}>
-                    <div className={s.QuestionOrder}>{props.val.order_id}.</div>
-                    <div className={s.QuestionField}>
-                        <Typography variant="body1" gutterBottom >
-                            {props.val.question === ' ' ? 'New question' : props.val.question}
-                        </Typography>
-                    </div>
-                </div>
-                <div >
+        <div>
+            {props.val.type !== "FILL THE BLANK" ? <MultipleChoiceGroupReport val={props.val}/> :
+                <FillTheBlankGroup val={props.val}
+                                   points={props.points}
+                                   index={props.index}
+                             />
+            }
+        </div>
 
-                </div>
-            </div>
-        </Paper>
     )
 }
 export default Questions;

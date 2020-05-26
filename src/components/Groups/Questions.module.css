@@ -1,4 +1,4 @@
-.Question{
+.Question {
     padding: 10px;
     margin-top: 10px;
 }
@@ -11,6 +11,74 @@
     margin-top: 2px;
 }
 
+.Question {
+    margin-top: 10px;
+    padding: 10px;
+
+}
+
+.InputBase {
+    width: 50px;
+}
+
+.InputBase:hover {
+    border: 1px solid #301131;
+
+}
+
+.InputBase:focus {
+    border: 0.5px solid #301131;
+
+}
+
+.answers {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.QuestionInfo {
+    display: flex;
+}
+
+.QuestionOrder {
+    margin-top: 2px;
+}
+
+.CorrectAnswer {
+    border-bottom: 1px solid #333333;
+    display: flex;
+    justify-content: space-between;
+}
+
+.QuestionField {
+    width: 100%;
+}
+
+.AnswerType {
+}
+
+.Button {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+
+.FormControl {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.answerForm {
+    display: flex;
+    align-items: center;
+}
+
+.Answer {
+    margin-top: 10px;
+    padding: 10px;
+}
 
 .QuestionField {
     padding: 0;
