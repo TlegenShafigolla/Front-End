@@ -25,7 +25,7 @@ class GroupReport extends React.Component {
         return (
             <Grid container
                   alignItems="flex-start"
-                  justify="center"
+                  justify="flex-end"
                   spacing={3}
             >
                 <Grid item lg={6} md={6} sm={8} xs={12}>
@@ -34,10 +34,14 @@ class GroupReport extends React.Component {
                         direction="column"
                         spacing={1}
                     >
-                        {this.state.report === null ? null : this.state.report.questions.map((val,index) => <Questions
+                        {this.state.report === null ? null : this.state.report.questions.map((val, index) => <Questions
                             index={index}
                             key={val._id} val={val}/>)}
                     </Grid>
+                </Grid>
+                <Grid item lg={3} md={3} sm={2} xs={12}>
+                    {this.state.report === null ? null : this.state.report.sessions.map(val => <Paper
+                        key={val._id}>{val.email}</Paper>)}
                 </Grid>
             </Grid>
         );
