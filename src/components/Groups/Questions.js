@@ -3,11 +3,14 @@ import s from "./Questions.module.css";
 import MultipleChoiceGroupReport from "./MultipleChoiceReport";
 import FillTheBlankGroup from "./FillTheBlankReport";
 const Questions=props=>{
-    console.log(props)
     return(
         <div>
-            {props.val.type !== "FILL THE BLANK" ? <MultipleChoiceGroupReport val={props.val}/> :
-                <FillTheBlankGroup val={props.val}
+            {props.val.type !== "FILL THE BLANK" ? <MultipleChoiceGroupReport val={props.val}
+                index={props.index}
+                /> :
+                <FillTheBlankGroup
+                    question_number={props.question_number}
+                    val={props.val}
                                    points={props.points}
                                    index={props.index}
                              />

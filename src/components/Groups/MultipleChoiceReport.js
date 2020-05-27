@@ -12,18 +12,19 @@ const MultipleChoiceGroupReport = (props) => {
     console.log(props)
 
     let answers = props.val.answers;
-    let session = props.val.session[0].answers;
+    let session = props.val.session[Number(props.index)].answers;
+    let sessions=null;
     for (let i in answers) {
         for (let j in session) {
             if (session[j].answer_id === answers[i]._id) {
-                answers[i] = {
+                sessions = {
                     ...answers[i],
                     session: 1
                 }
             }
         }
     }
-    console.log(answers)
+    console.log(sessions)
     return (
         <Paper square elevation={3} className={s.Answer}>
             <div className={s.QuestionInfo}>
@@ -42,7 +43,7 @@ const MultipleChoiceGroupReport = (props) => {
                         </Typography>
                         <Checkbox
                             style={(val.point > 0 || val.correct > 0) ? {color: correct} : {color: wrong}}
-                            checked={val.session === 1}
+                            checked={val._id === sessions._id}
                         />
                     </div>
                 )

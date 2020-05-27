@@ -8,20 +8,19 @@ class GroupReport extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            report: null
+            report: null,
+            index: 0,
         }
     }
 
     componentDidMount() {
         const path = window.location.pathname.split('/');
         getReportGroup(path[4]).then(val => {
-            console.log(val)
             this.setState({report: val})
         })
     }
 
     render() {
-        console.log(this.state.report)
         return (
             <Grid container
                   alignItems="flex-start"
@@ -35,13 +34,15 @@ class GroupReport extends React.Component {
                         spacing={1}
                     >
                         {this.state.report === null ? null : this.state.report.questions.map((val, index) => <Questions
-                            index={index}
+                            index={this.state.index}
+                            question_number={index}
                             key={val._id} val={val}/>)}
                     </Grid>
                 </Grid>
                 <Grid item lg={3} md={3} sm={2} xs={12}>
-                    {this.state.report === null ? null : this.state.report.sessions.map(val => <Paper
-                        key={val._id}>{val.email}</Paper>)}
+                    {this.state.report === null ? null : this.state.report.sessions.map((val, index) => <Paper
+                        key={val._id} id={index}
+                        onClick={(e) => this.setState({index: e.target.id})}>{val.email}</Paper>)}
                 </Grid>
             </Grid>
         );

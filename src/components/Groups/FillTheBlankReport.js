@@ -1,15 +1,22 @@
 import React from "react";
 import s from "./Questions.module.css";
 import {Checkbox, InputBase, Typography} from "@material-ui/core";
-import Button from "@material-ui/core/Button";
 import CheckIcon from '@material-ui/icons/Check';
 import {green} from "@material-ui/core/colors";
-import red from "@material-ui/core/colors/red";
 import Paper from "@material-ui/core/Paper";
 
 const correct = green.A700;
 const FillTheBlankGroup = (props) => {
-    console.log(props)
+    let answers = props.val.answers[0].question_id;
+    let session = props.val.session[props.index].answers;
+    let sessions = null
+    for (let j in session) {
+        if (session[j].question_id === answers) {
+            sessions = {
+                ...session[j]
+            }
+        }
+    }
     return (
         <Paper square elevation={3} className={s.Question} id={props.val._id.toString()}>
             <div className={s.QuestionInfo}>
@@ -32,19 +39,19 @@ const FillTheBlankGroup = (props) => {
                     <div className={s.answers}>
                         <Typography
                             variant="body1">
-                            User answer: {props.val.session[0].answers[props.index].answer}
+                            User answer: {sessions.answer}
                         </Typography>
                         {props.points ? (
-                            <InputBase className={s.InputBase} id={props.val.session[0]._id.toString()}
-                                       defaultValue={props.val.session[0].points}
+                            <InputBase className={s.InputBase} id={props.val.session[props.index]._id.toString()}
+                                       defaultValue={props.val.session[props.index].points}
                                        type={'number'}
                                        onBlur={props.onSubmitInput}
                                        onSubmit={props.onSubmitInput}
                                        onChange={props.onChangeInputBase}
                             />) : <Checkbox
                             style={{color: correct}}
-                            defaultChecked={props.val.session[0].answers[props.index].correct === 1}
-                            id={props.val.session[0]._id.toString()}
+                            defaultChecked={props.val.session[props.index].correct === 1}
+                            id={props.val.session[props.index]._id.toString()}
                             onChange={props.onChangeCheckbox}/>}
                     </div>
                 </div>}
