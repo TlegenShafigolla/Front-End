@@ -6,6 +6,7 @@ import Questions from "./Questions";
 import $ from 'jquery'
 import MoreIcon from '@material-ui/icons/More';
 import s from './GroupReport.module.css'
+import LabelIcon from '@material-ui/icons/Label';
 import GroupSurveyListItem from "../Surveys/GroupListItem";
 
 class GroupReport extends React.Component {
@@ -25,17 +26,33 @@ class GroupReport extends React.Component {
     }
 
     onClickIcon = () => {
-        console.log('ok')
-        $('.' + s.SideBar).toggleClass(s.active)
+        $('.' + s.EmailSideBar).toggleClass(s.active)
+    }
+    onClickQuestionSideBar = () => {
+        $('.' + s.QuestionSideBar).toggleClass(s.Active)
     }
 
     render() {
         return (
             <Grid container
                   alignItems="flex-start"
-                  justify="flex-end"
+                  justify="space-between"
                   spacing={3}
             >
+                <Grid item lg={3} md={3} sm={2}>
+                    <div className={s.QuestionSideBar}>
+                        <div className={s.IconQuestion} onClick={this.onClickQuestionSideBar}><LabelIcon/></div>
+                        <Paper elevation={3}
+                               square>{this.state.report !== null ?
+                            this.state.report.questions.map(val =>
+                                <div key={val._id}
+                                >
+                                    {val.question}
+                                </div>
+                            ) : null
+                        }</Paper>
+                    </div>
+                </Grid>
                 <Grid item lg={6} md={6} sm={8} xs={12}>
                     <Grid
                         container
@@ -49,15 +66,14 @@ class GroupReport extends React.Component {
                     </Grid>
                 </Grid>
                 <Grid item lg={3} md={3} sm={2}>
-                    <div className={s.SideBar}>
+                    <div className={s.EmailSideBar}>
                         <div className={s.Icon} onClick={this.onClickIcon}><MoreIcon/></div>
-                        <div className={s.Email}>
-                            {this.state.report === null ? null : this.state.report.sessions.map((val, index) => <Paper
-                                elevation={3}
-                                square
+                        <Paper elevation={3}
+                               square>
+                            {this.state.report === null ? null : this.state.report.sessions.map((val, index) => <div
                                 key={val._id} id={index}
-                                onClick={(e) => this.setState({index: e.target.id})}>{val.email}</Paper>)}
-                        </div>
+                                onClick={(e) => this.setState({index: e.target.id})}>{val.email}</div>)}
+                        </Paper>
                     </div>
                 </Grid>
             </Grid>

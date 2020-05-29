@@ -1,5 +1,4 @@
 import React from "react";
-import s from "./Questions.module.css";
 import MultipleChoiceGroupReport from "./MultipleChoiceReport";
 import FillTheBlankGroup from "./FillTheBlankReport";
 const Questions=props=>{

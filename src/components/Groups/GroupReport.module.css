@@ -1,28 +1,43 @@
-.Email {
-
-}
-
-.SideBar {
-    top: 60px;
+.EmailSideBar {
+    top: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: fixed;
-    margin-top: 10px;
-    padding: 5px;
     transition: right 1s ease-out 0.5s;
+}
+
+.QuestionSideBar {
+    top: 70px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    transition: left 1s ease-out 0.5s;
 }
 
 .Icon {
     display: none;
-    margin: 5px;
+    margin: 5px 15px 5px 5px;
+}
+
+.IconQuestion {
+    display: none;
+    margin: 5px 5px 5px 15px;
 }
 
 @media (max-width: 912px) {
-    .SideBar {
+    .EmailSideBar {
         position: fixed;
         width: 150px;
-        right: -150px;
+        right: -120px;
+        background: white;
+    }
+
+    .QuestionSideBar {
+        position: fixed;
+        left: -140px;
         background: white;
     }
 
@@ -30,7 +45,15 @@
         display: block;
     }
 
-    .SideBar.active {
-        right: 30px;
+    .EmailSideBar.active {
+        right: 5px;
+    }
+
+    .IconQuestion {
+        display: block;
+    }
+
+    .QuestionSideBar.Active {
+        left: 5px;
     }
 }
