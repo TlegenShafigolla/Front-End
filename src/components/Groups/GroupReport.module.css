@@ -1,0 +1,36 @@
+.Email {
+
+}
+
+.SideBar {
+    top: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    margin-top: 10px;
+    padding: 5px;
+    transition: right 1s ease-out 0.5s;
+}
+
+.Icon {
+    display: none;
+    margin: 5px;
+}
+
+@media (max-width: 912px) {
+    .SideBar {
+        position: fixed;
+        width: 150px;
+        right: -150px;
+        background: white;
+    }
+
+    .Icon {
+        display: block;
+    }
+
+    .SideBar.active {
+        right: 30px;
+    }
+}

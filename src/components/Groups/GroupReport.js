@@ -3,6 +3,10 @@ import {getReportGroup} from "../../services/API/adminAPI/Group/Report";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Questions from "./Questions";
+import $ from 'jquery'
+import MoreIcon from '@material-ui/icons/More';
+import s from './GroupReport.module.css'
+import GroupSurveyListItem from "../Surveys/GroupListItem";
 
 class GroupReport extends React.Component {
     constructor(props) {
@@ -18,6 +22,11 @@ class GroupReport extends React.Component {
         getReportGroup(path[4]).then(val => {
             this.setState({report: val})
         })
+    }
+
+    onClickIcon = () => {
+        console.log('ok')
+        $('.' + s.SideBar).toggleClass(s.active)
     }
 
     render() {
@@ -39,10 +48,17 @@ class GroupReport extends React.Component {
                             key={val._id} val={val}/>)}
                     </Grid>
                 </Grid>
-                <Grid item lg={3} md={3} sm={2} xs={12}>
-                    {this.state.report === null ? null : this.state.report.sessions.map((val, index) => <Paper
-                        key={val._id} id={index}
-                        onClick={(e) => this.setState({index: e.target.id})}>{val.email}</Paper>)}
+                <Grid item lg={3} md={3} sm={2}>
+                    <div className={s.SideBar}>
+                        <div className={s.Icon} onClick={this.onClickIcon}><MoreIcon/></div>
+                        <div className={s.Email}>
+                            {this.state.report === null ? null : this.state.report.sessions.map((val, index) => <Paper
+                                elevation={3}
+                                square
+                                key={val._id} id={index}
+                                onClick={(e) => this.setState({index: e.target.id})}>{val.email}</Paper>)}
+                        </div>
+                    </div>
                 </Grid>
             </Grid>
         );

@@ -3,13 +3,11 @@ import s from "./Questions.module.css";
 import {Checkbox, Typography} from "@material-ui/core";
 import {green} from "@material-ui/core/colors";
 import red from "@material-ui/core/colors/red";
-import CheckIcon from "@material-ui/icons/Check";
 import Paper from "@material-ui/core/Paper";
 
 const MultipleChoiceGroupReport = (props) => {
     const correct = green.A700;
     const wrong = red.A700;
-    console.log(props)
 
     let answers = props.val.answers;
     let session = props.val.session[Number(props.index)].answers;
@@ -24,7 +22,6 @@ const MultipleChoiceGroupReport = (props) => {
             }
         }
     }
-    console.log(sessions)
     return (
         <Paper square elevation={3} className={s.Answer}>
             <div className={s.QuestionInfo}>
