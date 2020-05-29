@@ -1,19 +1,23 @@
 import React from "react";
-import getQuiz, {deleteQuiz, postQuiz} from "../../../services/API/adminAPI/Quiz/quiz";
+import getQuiz, {postQuiz} from "../../../services/API/adminAPI/Quiz/quiz";
 import s from './listQuizPreview.module.css'
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from '@material-ui/icons/Add';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from "@material-ui/core/Grid";
 import ShowQuiz from "./showQuiz";
+import {getListGroup} from "../../../services/API/adminAPI/Group/group";
 
 class ListQuizPreview extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            groups: [],
             quizzes: null,
             editMode: false,
-            disabledButton: false
+            disabledButton: false,
+            groupsLoading: true,
+            quizzesLoading: true,
         };
     }
 
@@ -49,7 +53,7 @@ class ListQuizPreview extends React.Component {
     };
 
     render() {
-        if (this.state.quizzes === null) {
+        if (this.state.quizzesLoading || this.state.groupsLoading) {
             return (
                 <div className={s.CircularProgress}>
                     <CircularProgress size={70}/>
@@ -63,7 +67,9 @@ class ListQuizPreview extends React.Component {
             >
                 <Grid item lg={6} md={6} sm={8} xs={12}>
                     {this.state.quizzes !== undefined ? this.state.quizzes.map((val, index) =>
-                        <ShowQuiz key={val._id} id={index}
+                        <ShowQuiz key={val._id}
+                                  id={index}
+                                  groups={this.state.groups}
                                   index={index}
                                   value={val}
                                   deleteQuiz={this.deleteQuiz}
@@ -88,8 +94,11 @@ class ListQuizPreview extends React.Component {
     }
 
     componentDidMount() {
+        getListGroup().then(json => {
+            this.setState({groups: json.groups, groupsLoading: false});
+        });
         getQuiz().then(json => {
-            this.setState({quizzes: json.quizzes})
+            this.setState({quizzes: json.quizzes, quizzesLoading: false})
         });
     }
 }

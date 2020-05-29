@@ -7,7 +7,6 @@ import {
     RadioGroup,
     FormControlLabel,
     Radio,
-    DialogContent,
     TextField,
     Button,
     Dialog,
@@ -21,7 +20,6 @@ import $ from 'jquery'
 import Person from "./person";
 import Group from "./group";
 import {postInvitations} from "../../../../services/API/adminAPI/Quiz/invitations";
-import {getListGroup} from "../../../../services/API/adminAPI/Group/group";
 import Typography from "@material-ui/core/Typography";
 import Switch from "@material-ui/core/Switch/Switch";
 import Grid from "@material-ui/core/Grid";
@@ -36,7 +34,7 @@ class InviteDialog extends React.Component {
             // For Link Invitation
             invitationLink: null,
             // For Groups Invitation
-            groups: [],
+            groups: props.groups,
             selectedGroup: 0,
             selectedPersons: {},
             // For Person Invitation
@@ -272,12 +270,7 @@ class InviteDialog extends React.Component {
     componentDidMount() {
         let date = new Date().toISOString().replace('Z', '').split('.');
         this.setState({date: date[0], end_date: date[0]});
-        getListGroup().then(json => {
-            this.setState({groups: json.groups});
-            return json.groups;
-        }).then(groups => {
-            this.initializeSelectedPersons(groups)
-        });
+        this.initializeSelectedPersons(this.state.groups);
     }
 
     render() {

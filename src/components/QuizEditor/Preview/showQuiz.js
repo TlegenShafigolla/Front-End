@@ -105,7 +105,7 @@ class ShowQuiz extends React.Component {
                     </Link>
                 </div>
                 <InviteDialog openDialog={this.state.openInviteDialog} onClose={this.onClickInvite}
-                              quiz_id={this.state.quiz_id}/>
+                              quiz_id={this.state.quiz_id} groups={this.props.groups}/>
                 <DeleteQuizDialog openDialog={this.state.openDeleteQuizDialog} onClose={this.onClickDelete}/>
                 <NoQuestionSnackbar openSnackbar={this.state.noQuestionSnackbar}
                                     snackClose={this.closeNoQuestionSnackbar}/>
