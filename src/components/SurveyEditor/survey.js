@@ -77,7 +77,7 @@ class Survey extends React.Component {
                     </Link>
                 </div>
                 <InviteDialog openDialog={this.state.openInviteDialog} onClose={this.onClickInvite}
-                              survey_id={this.props.value._id}/>
+                              survey_id={this.props.value._id} groups={this.props.groups}/>
                 <NoQuestionSnackbar openSnackbar={this.state.noQuestionSnackbar}
                                     snackClose={this.closeNoQuestionSnackbar}/>
             </Paper>

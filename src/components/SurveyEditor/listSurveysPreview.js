@@ -3,13 +3,19 @@ import Survey from "./survey";
 import getSurvey, {deleteSurvey, postSurvey} from "../../services/API/adminAPI/Survey/survey";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import {getListGroup} from "../../services/API/adminAPI/Group/group";
+import s from "./listSurveysPreview.module.css";
+import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
 
 class ListSurveyPreview extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            groups: [],
             surveys: [],
             disabledButton: false,
+            groupsLoading: true,
+            surveysLoading: true,
         }
     }
 
@@ -45,20 +51,26 @@ class ListSurveyPreview extends React.Component {
     };
 
     render() {
-        console.log(this.state.surveys)
+        if (this.state.surveysLoading || this.state.groupsLoading) {
+            return (
+                <div className={s.CircularProgress}>
+                    <CircularProgress size={70}/>
+                </div>
+            );
+        }
         return (
             <Grid container
                   justify="center"
-                  alignItems="center"
-            >
+                  alignItems="center">
                 <Grid item lg={6} md={6} sm={8} xs={12}>
-                    {this.state.surveys.map((val, index) => <Survey key={val._id} deleteSurvey={this.deleteSurvey}
-                                                                    value={val}/>
-                    )}
+                    {this.state.surveys.map((val, index) =>
+                        <Survey key={val._id}
+                                groups={this.state.groups}
+                                deleteSurvey={this.deleteSurvey}
+                                value={val}/>)}
                     <Grid container
                           alignItems="center"
-                          justify="center"
-                    >
+                          justify="center">
                         <Button color="primary" onClick={this.addNewSurvey}>
                             Add New Survey
                         </Button>
@@ -70,8 +82,10 @@ class ListSurveyPreview extends React.Component {
 
     componentDidMount() {
         getSurvey().then(json => {
-            console.log(json)
-            this.setState({surveys: json.surveys});
+            this.setState({surveys: json.surveys, surveysLoading: false});
+        });
+        getListGroup().then(json => {
+            this.setState({groups: json.groups, groupsLoading: false});
         });
     }
 }

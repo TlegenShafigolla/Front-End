@@ -33,7 +33,7 @@ class InviteDialog extends React.Component{
             // For Link Invitation
             invitationLink: null,
             // For Groups Invitation
-            groups: [],
+            groups: props.groups,
             selectedGroup: 0,
             selectedPersons: {},
             // For Person Invitation
@@ -234,12 +234,7 @@ class InviteDialog extends React.Component{
     };
 
     componentDidMount() {
-        getListGroup().then(json => {
-            this.setState({groups: json.groups});
-            return json.groups;
-        }).then(groups => {
-            this.initializeSelectedPersons(groups)
-        });
+        this.initializeSelectedPersons(this.state.groups);
     }
 
     render() {
