@@ -15,6 +15,7 @@ class GroupReport extends React.Component {
         this.state = {
             report: null,
             index: 0,
+            question:false,
         }
     }
 
@@ -61,6 +62,7 @@ class GroupReport extends React.Component {
                         spacing={1}
                     >
                         {this.state.report === null ? null : this.state.report.questions.map((val, index) => <Questions
+                            report={this.state.report}
                             index={this.state.index}
                             question_number={index}
                             key={val._id} val={val}/>)}

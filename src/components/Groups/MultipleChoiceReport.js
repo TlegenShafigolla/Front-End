@@ -9,20 +9,21 @@ const MultipleChoiceGroupReport = (props) => {
     const correct = green.A700;
     const wrong = red.A700;
     console.log(props)
-    let answers = props.val.answers;
-    let session = props.val.session[Number(props.index)].answers;
+    const answers = props.val.answers;
+    let sessions = props.val.session[props.index].answers;
+    let session = [...answers];
     for (let i = 0; i < answers.length; i++) {
-        for (let j=0;j<session.length;j++) {
-            if (answers[i]._id === session[j].answer_id) {
-                answers[i] = {
-                    ...answers[i],
-                    sessions: 1
+        for (let j = 0; j < sessions.length; j++) {
+            if (answers[i]._id === sessions[j].answer_id) {
+                session[i] = {
+                    ...session[i],
+                    session: 1
                 }
             }
         }
     }
-    console.log(session)
     console.log(answers)
+    console.log(session)
     return (
         <Paper square elevation={3} className={s.Answer}>
             <div className={s.QuestionInfo}>
@@ -34,14 +35,14 @@ const MultipleChoiceGroupReport = (props) => {
                 </div>
             </div>
             <div>
-                {answers.map(val =>
+                {session.map(val =>
                     <div className={s.answerForm} key={val._id}>
                         <Typography variant="body1">
                             {val.answer}
                         </Typography>
                         <Checkbox
                             style={(val.point > 0 || val.correct > 0) ? {color: correct} : {color: wrong}}
-                            checked={val.sessions === 1}
+                            checked={val.session === 1}
                         />
                     </div>
                 )

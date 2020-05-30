@@ -1,18 +1,20 @@
 import React from "react";
 import MultipleChoiceGroupReport from "./MultipleChoiceReport";
 import FillTheBlankGroup from "./FillTheBlankReport";
-const Questions=props=>{
-    return(
+
+const Questions = props => {
+    return (
         <div>
             {props.val.type !== "FILL THE BLANK" ? <MultipleChoiceGroupReport val={props.val}
-                index={props.index}
+                                                                              index={props.index}
+                                                                              report={props.report}
                 /> :
                 <FillTheBlankGroup
                     question_number={props.question_number}
                     val={props.val}
-                                   points={props.points}
-                                   index={props.index}
-                             />
+                    points={props.points}
+                    index={props.index}
+                />
             }
         </div>
 
