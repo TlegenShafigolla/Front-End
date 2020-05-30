@@ -51,8 +51,7 @@ const FillTheBlankGroup = (props) => {
                             />) : <Checkbox
                             style={{color: correct}}
                             defaultChecked={props.val.session[props.index].correct === 1}
-                            id={props.val.session[props.index]._id.toString()}
-                            onChange={props.onChangeCheckbox}/>}
+                                                        onChange={props.onChangeCheckbox}/>}
                     </div>
                 </div>}
         </Paper>

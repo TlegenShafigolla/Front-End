@@ -21,6 +21,7 @@ class GroupReport extends React.Component {
     componentDidMount() {
         const path = window.location.pathname.split('/');
         getReportGroup(path[4]).then(val => {
+            console.log(val)
             this.setState({report: val})
         })
     }

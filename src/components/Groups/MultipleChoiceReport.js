@@ -8,20 +8,21 @@ import Paper from "@material-ui/core/Paper";
 const MultipleChoiceGroupReport = (props) => {
     const correct = green.A700;
     const wrong = red.A700;
-
+    console.log(props)
     let answers = props.val.answers;
     let session = props.val.session[Number(props.index)].answers;
-    let sessions=null;
-    for (let i in answers) {
-        for (let j in session) {
-            if (session[j].answer_id === answers[i]._id) {
-                sessions = {
+    for (let i = 0; i < answers.length; i++) {
+        for (let j=0;j<session.length;j++) {
+            if (answers[i]._id === session[j].answer_id) {
+                answers[i] = {
                     ...answers[i],
-                    session: 1
+                    sessions: 1
                 }
             }
         }
     }
+    console.log(session)
+    console.log(answers)
     return (
         <Paper square elevation={3} className={s.Answer}>
             <div className={s.QuestionInfo}>
@@ -40,7 +41,7 @@ const MultipleChoiceGroupReport = (props) => {
                         </Typography>
                         <Checkbox
                             style={(val.point > 0 || val.correct > 0) ? {color: correct} : {color: wrong}}
-                            checked={val._id === sessions._id}
+                            checked={val.sessions === 1}
                         />
                     </div>
                 )

@@ -32,13 +32,11 @@
         position: fixed;
         width: 150px;
         right: -120px;
-        background: white;
     }
 
     .QuestionSideBar {
         position: fixed;
         left: -140px;
-        background: white;
     }
 
     .Icon {
