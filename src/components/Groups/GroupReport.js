@@ -8,6 +8,7 @@ import MoreIcon from '@material-ui/icons/More';
 import s from './GroupReport.module.css'
 import LabelIcon from '@material-ui/icons/Label';
 import GroupSurveyListItem from "../Surveys/GroupListItem";
+import Typography from "@material-ui/core/Typography";
 
 class GroupReport extends React.Component {
     constructor(props) {
@@ -15,7 +16,7 @@ class GroupReport extends React.Component {
         this.state = {
             report: null,
             index: 0,
-            question:false,
+            question: false,
         }
     }
 
@@ -35,6 +36,9 @@ class GroupReport extends React.Component {
     }
 
     render() {
+        if (this.state.report === null) {
+            return '';
+        }
         return (
             <Grid container
                   alignItems="flex-start"
@@ -45,13 +49,12 @@ class GroupReport extends React.Component {
                     <div className={s.QuestionSideBar}>
                         <div className={s.IconQuestion} onClick={this.onClickQuestionSideBar}><LabelIcon/></div>
                         <Paper elevation={3}
-                               square>{this.state.report !== null ?
-                            this.state.report.questions.map(val =>
-                                <div key={val._id}
-                                >
-                                    {val.question}
-                                </div>
-                            ) : null
+                               square>{this.state.report.questions.map(val =>
+                            <div key={val._id}
+                            >
+                                {val.question}
+                            </div>
+                        )
                         }</Paper>
                     </div>
                 </Grid>
@@ -61,7 +64,11 @@ class GroupReport extends React.Component {
                         direction="column"
                         spacing={1}
                     >
-                        {this.state.report === null ? null : this.state.report.questions.map((val, index) => <Questions
+                        <Paper square elevation={3} className={s.Quiz}>
+                            <Typography>{this.state.report.quiz_used.quiz_name}</Typography>
+                            <Typography>{this.state.report.quiz_used.description}</Typography>
+                        </Paper>
+                        {this.state.report.questions.map((val, index) => <Questions
                             report={this.state.report}
                             index={this.state.index}
                             question_number={index}
@@ -73,7 +80,7 @@ class GroupReport extends React.Component {
                         <div className={s.Icon} onClick={this.onClickIcon}><MoreIcon/></div>
                         <Paper elevation={3}
                                square>
-                            {this.state.report === null ? null : this.state.report.sessions.map((val, index) => <div
+                            {this.state.report.sessions.map((val, index) => <div
                                 key={val._id} id={index}
                                 onClick={(e) => this.setState({index: e.target.id})}>{val.email}</div>)}
                         </Paper>

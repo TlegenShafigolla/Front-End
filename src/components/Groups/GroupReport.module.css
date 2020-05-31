@@ -27,15 +27,22 @@
     margin: 5px 5px 5px 15px;
 }
 
+.Quiz {
+    margin-top: 10px;
+    text-align: center;
+    overflow: hidden;
+}
+
 @media (max-width: 912px) {
     .EmailSideBar {
         position: fixed;
-        width: 150px;
-        right: -120px;
+        width: 180px;
+        right: -160px;
     }
 
     .QuestionSideBar {
         position: fixed;
+        width: 160px;
         left: -140px;
     }
 
@@ -44,7 +51,7 @@
     }
 
     .EmailSideBar.active {
-        right: 5px;
+        right: 20px;
     }
 
     .IconQuestion {
@@ -52,6 +59,6 @@
     }
 
     .QuestionSideBar.Active {
-        left: 5px;
+        left: 20px;
     }
 }
