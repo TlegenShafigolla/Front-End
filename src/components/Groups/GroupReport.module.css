@@ -6,7 +6,10 @@
     position: fixed;
     transition: right 1s ease-out 0.5s;
 }
-
+.QuestionInfo{
+    padding: 10px;
+    margin-top: 10px;
+}
 .QuestionSideBar {
     top: 70px;
     display: flex;

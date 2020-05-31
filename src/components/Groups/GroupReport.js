@@ -9,6 +9,7 @@ import s from './GroupReport.module.css'
 import LabelIcon from '@material-ui/icons/Label';
 import GroupSurveyListItem from "../Surveys/GroupListItem";
 import Typography from "@material-ui/core/Typography";
+import QuestionInfo from "./QuestionInfo";
 
 class GroupReport extends React.Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class GroupReport extends React.Component {
             report: null,
             index: 0,
             question: false,
+            question_number: 0
         }
     }
 
@@ -34,6 +36,12 @@ class GroupReport extends React.Component {
     onClickQuestionSideBar = () => {
         $('.' + s.QuestionSideBar).toggleClass(s.Active)
     }
+    onClickQuestion = event => {
+        this.setState({
+            question: true,
+            question_number: Number(event.target.id)
+        })
+    }
 
     render() {
         if (this.state.report === null) {
@@ -49,8 +57,8 @@ class GroupReport extends React.Component {
                     <div className={s.QuestionSideBar}>
                         <div className={s.IconQuestion} onClick={this.onClickQuestionSideBar}><LabelIcon/></div>
                         <Paper elevation={3}
-                               square>{this.state.report.questions.map(val =>
-                            <div key={val._id}
+                               square>{this.state.report.questions.map((val, index) =>
+                            <div onClick={this.onClickQuestion} id={index} key={val._id}
                             >
                                 {val.question}
                             </div>
@@ -67,28 +75,32 @@ class GroupReport extends React.Component {
                         <Paper square elevation={3} className={s.Quiz}>
                             <Typography>{this.state.report.quiz_used.quiz_name}</Typography>
                             <Typography>{this.state.report.quiz_used.description}</Typography>
-                        </Paper>
-                        {this.state.report.questions.map((val, index) => <Questions
-                            report={this.state.report}
-                            index={this.state.index}
-                            question_number={index}
-                            key={val._id} val={val}/>)}
-                    </Grid>
-                </Grid>
-                <Grid item lg={3} md={3} sm={2}>
-                    <div className={s.EmailSideBar}>
+                        </Paper>{this.state.question ?
+                        <QuestionInfo question_number={this.state.question_number} report={this.state.report}/> :
+                            this.state.report.questions.map((val, index) => <Questions
+                                report={this.state.report}
+                                index={this.state.index}
+                                question_number={index}
+                                key={val._id} val={val}/>)}
+                        </Grid>
+                        </Grid>
+                        <Grid item lg={3} md={3} sm={2}>
+                        <div className={s.EmailSideBar}>
                         <div className={s.Icon} onClick={this.onClickIcon}><MoreIcon/></div>
                         <Paper elevation={3}
-                               square>
-                            {this.state.report.sessions.map((val, index) => <div
-                                key={val._id} id={index}
-                                onClick={(e) => this.setState({index: e.target.id})}>{val.email}</div>)}
+                        square>
+                        {this.state.report.sessions.map((val, index) => <div
+                        key={val._id} id={index}
+                        onClick={(e) => this.setState({
+                        index: e.target.id,
+                        question: false
+                        })}>{val.email}</div>)}
                         </Paper>
-                    </div>
-                </Grid>
-            </Grid>
-        );
-    }
-}
+                        </div>
+                        </Grid>
+                        </Grid>
+                        );
+                        }
+                        }
 
-export default GroupReport;
+                        export default GroupReport;
