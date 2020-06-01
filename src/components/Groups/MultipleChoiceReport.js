@@ -8,7 +8,6 @@ import Paper from "@material-ui/core/Paper";
 const MultipleChoiceGroupReport = (props) => {
     const correct = green.A700;
     const wrong = red.A700;
-    console.log(props)
     const answers = props.val.answers;
     let sessions = props.val.session[props.index].answers;
     let session = [...answers];
@@ -22,8 +21,7 @@ const MultipleChoiceGroupReport = (props) => {
             }
         }
     }
-    console.log(answers)
-    console.log(session)
+
     return (
         <Paper square elevation={3} className={s.Answer}>
             <div className={s.QuestionInfo}>

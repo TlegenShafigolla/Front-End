@@ -77,30 +77,30 @@ class GroupReport extends React.Component {
                             <Typography>{this.state.report.quiz_used.description}</Typography>
                         </Paper>{this.state.question ?
                         <QuestionInfo question_number={this.state.question_number} report={this.state.report}/> :
-                            this.state.report.questions.map((val, index) => <Questions
-                                report={this.state.report}
-                                index={this.state.index}
-                                question_number={index}
-                                key={val._id} val={val}/>)}
-                        </Grid>
-                        </Grid>
-                        <Grid item lg={3} md={3} sm={2}>
-                        <div className={s.EmailSideBar}>
+                        this.state.report.questions.map((val, index) => <Questions
+                            report={this.state.report}
+                            index={this.state.index}
+                            question_number={index}
+                            key={val._id} val={val}/>)}
+                    </Grid>
+                </Grid>
+                <Grid item lg={3} md={3} sm={2}>
+                    <div className={s.EmailSideBar}>
                         <div className={s.Icon} onClick={this.onClickIcon}><MoreIcon/></div>
                         <Paper elevation={3}
-                        square>
-                        {this.state.report.sessions.map((val, index) => <div
-                        key={val._id} id={index}
-                        onClick={(e) => this.setState({
-                        index: e.target.id,
-                        question: false
-                        })}>{val.email}</div>)}
+                               square>
+                            {this.state.report.sessions.map((val, index) => <div
+                                key={val._id} id={index}
+                                onClick={(e) => this.setState({
+                                    index: e.target.id,
+                                    question: false
+                                })}>{val.email}</div>)}
                         </Paper>
-                        </div>
-                        </Grid>
-                        </Grid>
-                        );
-                        }
-                        }
+                    </div>
+                </Grid>
+            </Grid>
+        );
+    }
+}
 
-                        export default GroupReport;
+export default GroupReport;
