@@ -1,27 +1,27 @@
 import React from "react";
-
+import s from './GroupReport.module.css'
 const MultipleChoice = props => {
     console.log(props)
     const answers = props.report.questions[props.question_number].answers;
     let sessions = props.report.questions[props.question_number].session;
-    let session = [...answers];
-    for (let i = 0; i < answers.length; i++) {
-        for (let j = 0; j < sessions.length; j++) {
-            if (answers[i]._id === sessions[j].answer_id) {
-                session[i] = {
-                    ...session[i],
-                    session: 1
+    let session = [...sessions]
+    answers.map(val => {
+        sessions.map((value, index) => value.answers.map((ans, ind) => {
+                if (val._id === ans.answer_id) {
+                    session[index].answers[ind] = {
+                        ...session[index].answers[ind],
+                        answer: val.answer
+                    }
                 }
             }
-        }
-    }
+        ))
+    })
+
     console.log(answers)
     console.log(session)
     return (
         <div>
-            {props.report.questions[props.question_number].session.map((val, index) => <div
-                key={index}>{val.email}: {props.report.questions[props.question_number].session[index].answers.map(value =>
-                <span>{value.answer_id}</span>)}</div>)}
+            {session.map(val=><div key={val.email}>{val.email}: {val.answers.map(value=><span className={s.answer} key={value.answer_id}>{value.answer}</span>)}</div>)}
         </div>
     )
 }
