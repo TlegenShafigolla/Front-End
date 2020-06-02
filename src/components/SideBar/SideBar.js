@@ -54,7 +54,7 @@ const SideBar = (props) => {
                     </NavLink>
                     <NavLink to='/admin/quizzes'>
                         <Button color='primary'
-                                className={s.secondary}
+                                className={s.main}
                                 startIcon={<InsertInvitationSharpIcon/>}>
                             Quizzes
                         </Button>
@@ -68,16 +68,9 @@ const SideBar = (props) => {
                     </NavLink>
                     <NavLink to='/admin/surveys'>
                         <Button color='primary'
-                                className={s.secondary}
+                                className={s.main}
                                 startIcon={<InsertInvitationSharpIcon/>}>
                             Surveys
-                        </Button>
-                    </NavLink>
-                    <NavLink to='/admin/surveys/reports'>
-                        <Button color='primary'
-                                className={s.secondary}
-                                startIcon={<AssessmentSharpIcon/>}>
-                            Reports
                         </Button>
                     </NavLink>
                 </div>
