@@ -1,8 +1,8 @@
 .buttongroup Button{
 color: #f3f3f3;
     width: 210px;
-    margin-top: 5px;
-   margin-bottom: 20px;
+    margin-top: 20px;
+   margin-bottom: 10px;
 }
 .drawer {
     width: 100%;
@@ -25,7 +25,6 @@ color: #f3f3f3;
 .drawerPaper{
      display: flex;
      width: 240px;
-
 }
 .buttongroup {
     display: flex;
