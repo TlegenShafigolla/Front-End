@@ -9,7 +9,6 @@ import Paper from "@material-ui/core/Paper";
 const MultipleChoiceReport = (props) => {
     const correct = green.A700;
     const wrong = red.A700;
-    console.log(props)
 
     let answers = props.val.answers;
     let session = props.val.session;
@@ -23,7 +22,6 @@ const MultipleChoiceReport = (props) => {
             }
         }
     }
-    console.log(answers)
     return (
         <Paper square elevation={3} className={s.Answer}>
             <div className={s.QuestionInfo}>
@@ -41,7 +39,7 @@ const MultipleChoiceReport = (props) => {
                             {val.answer}
                         </Typography>
                         <Checkbox
-                            style={(val.point > 0 || val.correct > 0) ? {color: correct} : {color: wrong}}
+                            style={(val.point !== 0) ? {color: correct} : {color: wrong}}
                             checked={val.session === 1}
                         />
                     </div>

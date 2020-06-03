@@ -8,7 +8,6 @@ class ReportQuestion extends React.Component {
         super(props);
         this.state = {
             points: 0,
-            correct: false,
             disabledButton: false,
             id: null,
         }
@@ -17,24 +16,22 @@ class ReportQuestion extends React.Component {
 
     onChangeCheckbox = async (event) => {
         let id = event.target.id
-        let correct = Number(event.target.checked)
-        let points = this.state.points;
+        let points = Number(event.target.checked);
         let session_id = this.props.session._id;
-        await postReport(id, correct, points, session_id)
+        await postReport(id, points, session_id)
     };
     onChangeInputBase = (event) => {
         this.setState({points: event.target.value});
         this.setState({id: event.target.id});
     };
     onSubmitInput = () => {
-        let id = this.state.id
-        let correct = Number(this.state.correct)
+        let id = this.state.id;
         let points = this.state.points;
         let session_id = this.props.session._id;
-        postReport(id, correct, points, session_id).then(val => {
+        postReport(id, points, session_id).then(val => {
             console.log(val)
         });
-    }
+    };
 
     render() {
         if (this.props.val === null) {

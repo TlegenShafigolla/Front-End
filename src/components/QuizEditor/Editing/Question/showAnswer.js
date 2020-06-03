@@ -42,7 +42,7 @@ class ShowAnswer extends React.Component {
                             </Typography>
                             {this.props.point ? <Typography variant="body1">{val.points} </Typography> :
                                 (this.state.multiple_choice ?
-                                    <Checkbox checked={val.correct === 1} disabled={true}/> : '')}
+                                    <Checkbox checked={val.points !== 0} disabled={true}/> : '')}
                         </div>
                     )}
                 </div>

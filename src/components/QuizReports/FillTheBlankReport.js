@@ -42,7 +42,7 @@ const FillTheBlank = (props) => {
                                        onChange={props.onChangeInputBase}
                             />) : <Checkbox
                             style={{color: correct}}
-                            defaultChecked={props.val.session[0].correct === 1}
+                            defaultChecked={props.val.session[0].points !== 0}
                             id={props.val.session[0]._id.toString()}
                             onChange={props.onChangeCheckbox}/>}
                     </div>

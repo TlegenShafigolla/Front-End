@@ -54,7 +54,7 @@ class Question extends React.Component {
 
     changeCheck = (event) => {
         let answer = this.state.answers;
-        answer[Number(event.target.id)].correct = Number(event.target.checked);
+        answer[Number(event.target.id)].points = Number(event.target.checked);
         this.setState({answers: answer});
         this.setState({answersChanged: true});
     };
@@ -118,14 +118,8 @@ class Question extends React.Component {
             if (answer[j].answer === '') {
                 empty = 1
             }
-            if (this.props.point) {
-                if (answer[j].points === 0) {
-                    wrong++
-                }
-            } else {
-                if (answer[j].correct === 0) {
-                    wrong++
-                }
+            if (answer[j].points === 0) {
+                wrong++
             }
         }
         let corrects = answer.length - wrong;
@@ -196,11 +190,10 @@ class Question extends React.Component {
         this.setState({errorQuestion: false})
     };
 
-    addNewAnswer = (correct = 0, points = 0) => {
+    addNewAnswer = (points = 0) => {
         const answers = this.state.answers;
         answers.push({
             question_id: this.state.id,
-            correct: correct,
             points: points,
             answer: '',
         });

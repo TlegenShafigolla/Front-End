@@ -42,7 +42,7 @@ class MultipleChoice extends React.Component {
                                     id={this.props.id}
                                     key={this.props.index}
                                     color='primary'
-                                    checked={this.props.val.correct === 1}
+                                    checked={this.props.val.points !== 0}
                                     onChange={this.props.changeCheck}/>}/>
                         }
                     </div>
