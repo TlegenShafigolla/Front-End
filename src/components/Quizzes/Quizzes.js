@@ -4,9 +4,10 @@ import Paper from "@material-ui/core/Paper";
 import s from "./Quizzes.module.css";
 import getUsedQuiz from "../../services/API/adminAPI/Quiz/usedQuizzes";
 import {NavLink} from "react-router-dom";
+import Typography from "@material-ui/core/Typography";
 
-class Quizzes extends React.Component{
-    constructor(props){
+class Quizzes extends React.Component {
+    constructor(props) {
         super(props);
         this.state = {
             quizzes: [],
@@ -21,7 +22,7 @@ class Quizzes extends React.Component{
     }
 
     render() {
-        return(
+        return (
             <Grid container
                   direction="row"
                   justify="center"
@@ -38,7 +39,10 @@ class Quizzes extends React.Component{
                           className={s.Body}>
                         {this.state.quizzes.map((val, index) =>
                             <Grid key={index} item lg={3} md={3} sm={4} xs={12}>
-                                <QuizCard quiz_name={val.quiz_name} _id={val._id}/>
+                                <QuizCard quiz_name={val.quiz_name}
+                                          _id={val._id}
+                                          questions_count={val.questions_count}
+                                          created_date={val.created_date}/>
                             </Grid>)}
                     </Grid>
                 </Grid>
@@ -50,12 +54,22 @@ class Quizzes extends React.Component{
 }
 
 const QuizCard = (props) => {
-    return(
-        <Paper square elevation={3} className={s.QuizCard}>
-            <NavLink to={`/admin/quizzes/${props._id}`}>
-                {props.quiz_name}
-            </NavLink>
-        </Paper>
+    return (
+        <NavLink to={`/admin/quizzes/${props._id}`}>
+            <Paper square elevation={3} className={s.QuizCard}>
+                <Grid
+                    container
+                    direction="column"
+                    justify="flex-start"
+                    alignItems="center"
+                    spacing={1}
+                >
+                    <Typography variant="subtitle1" gutterBottom>{props.quiz_name}</Typography>
+                    <Typography variant="caption" display="block" gutterBottom>{props.questions_count + (props.questions_count > 1 ? " questions" : " question")}</Typography>
+                    <Typography variant="caption" display="block" gutterBottom>Created date: {props.created_date}</Typography>
+                </Grid>
+            </Paper>
+        </NavLink>
     );
 };
 
