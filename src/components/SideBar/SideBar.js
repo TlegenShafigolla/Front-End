@@ -31,42 +31,42 @@ const SideBar = (props) => {
             </div>
             <div className={s.sidebar}>
                 <div className={s.buttongroup}>
-                    <NavLink to="/admin/profile">
+                    <NavLink to="/admin/profile" activeClassName={s.focus}>
                         <Button color='primary'
                                 className={s.main}
                                 startIcon={<AccountBoxSharpIcon/>}>
                             Profile
                         </Button>
                     </NavLink>
-                    <NavLink to='/admin/group'>
+                    <NavLink to='/admin/group' activeClassName={s.focus} >
                         <Button color='primary'
                                 className={s.main}
                                 startIcon={<GroupIcon/>}>
                             Groups
                         </Button>
                     </NavLink>
-                    <NavLink to='/admin/quiz/editor'>
+                    <NavLink to='/admin/quiz/editor' activeClassName={s.focus}>
                         <Button color='primary'
                                 className={s.main}
                                 startIcon={<AssignmentSharpIcon/>}>
                             Quiz Editor
                         </Button>
                     </NavLink>
-                    <NavLink to='/admin/quizzes'>
+                    <NavLink to='/admin/quizzes' activeClassName={s.focus}>
                         <Button color='primary'
                                 className={s.main}
                                 startIcon={<InsertInvitationSharpIcon/>}>
                             Quizzes
                         </Button>
                     </NavLink>
-                    <NavLink to='/admin/survey/editor'>
+                    <NavLink to='/admin/survey/editor' activeClassName={s.focus}>
                         <Button color='primary'
                                 className={s.main}
                                 startIcon={<AssignmentSharpIcon/>}>
                             Survey Editor
                         </Button>
                     </NavLink>
-                    <NavLink to='/admin/surveys'>
+                    <NavLink to='/admin/surveys' activeClassName={s.focus}>
                         <Button color='primary'
                                 className={s.main}
                                 startIcon={<InsertInvitationSharpIcon/>}>

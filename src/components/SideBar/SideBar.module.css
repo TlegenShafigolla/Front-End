@@ -1,78 +1,82 @@
-.buttongroup Button{
-color: #f3f3f3;
+.buttongroup Button {
+    color: #f3f3f3;
     width: 210px;
-    margin-top: 20px;
-   margin-bottom: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
+
 .drawer {
     width: 100%;
 
 }
-.sidebar{
+
+.sidebar {
     position: relative;
     height: 100%;
     background: #333333;
 }
-.sidebar:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: inherit;
+
+.drawerPaper {
+    display: flex;
+    width: 240px;
 }
-.drawerPaper{
-     display: flex;
-     width: 240px;
-}
+
 .buttongroup {
     display: flex;
     flex-direction: column;
     height: 100%;
     align-items: center;
 }
-.buttongroup Button.main{
+
+.buttongroup Button.main {
     display: flex;
     justify-content: flex-start;
 }
-.buttongroup Button:focus {
+
+.buttongroup a.focus {
+    display: block;
     color: #f3f3f3;
-     transition: 1s;
-     background: #3F51B5;
-     box-shadow: 0 0 10px #2f57b5;
- }
-.buttongroup a{
+    background: #3F51B5;
+    box-shadow: 0 0 10px #2f57b5;
+}
+
+.buttongroup a {
     text-decoration: none;
 }
-.buttongroup Button.secondary{
+
+.buttongroup Button.secondary {
     display: flex;
     padding-left: 60px;
     justify-content: flex-start;
 }
-.Header{
+
+.Header {
     display: flex;
     flex-direction: row;
     width: 100%;
     height: 64px;
     background-color: #f3f3f3;
 }
-.logo{
+
+.logo {
     height: 64px;
     width: 64px;
 }
-.name{
+
+.name {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
 }
-.buttongroup Button.main1:disabled{
+
+.buttongroup Button.main1:disabled {
     background: #272827;
     color: #333333;
     box-shadow: none;
 }
-.buttongroup Button.secondary1:disabled{
+
+.buttongroup Button.secondary1:disabled {
     background: #272827;
     color: #333333;
     box-shadow: none;

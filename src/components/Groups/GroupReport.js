@@ -6,8 +6,6 @@ import Questions from "./Questions";
 import $ from 'jquery'
 import MoreIcon from '@material-ui/icons/More';
 import s from './GroupReport.module.css'
-import LabelIcon from '@material-ui/icons/Label';
-import GroupSurveyListItem from "../Surveys/GroupListItem";
 import Typography from "@material-ui/core/Typography";
 import QuestionInfo from "./QuestionInfo";
 
@@ -36,6 +34,7 @@ class GroupReport extends React.Component {
     onClickQuestionSideBar = () => {
         $('.' + s.QuestionSideBar).toggleClass(s.Active)
     }
+
     onClickQuestion = event => {
         this.setState({
             question: true,
@@ -47,6 +46,22 @@ class GroupReport extends React.Component {
         if (this.state.report === null) {
             return '';
         }
+        $('.' + s.Questions).find('.' + s.Question).on('click', function () {
+            const _this = $(this);
+            _this
+                .parent()
+                .children()
+                .removeClass(s.focus);
+            _this.addClass(s.focus);
+        });
+        $('.' + s.Emails).find('.' + s.Email).on('click', function () {
+            const _this = $(this);
+            _this
+                .parent()
+                .children()
+                .removeClass(s.focus);
+            _this.addClass(s.focus);
+        });
         return (
             <Grid container
                   alignItems="flex-start"
@@ -57,9 +72,9 @@ class GroupReport extends React.Component {
                     <div className={s.QuestionSideBar}>
                         <div className={s.IconQuestion} onClick={this.onClickQuestionSideBar}><MoreIcon/></div>
                         <Paper elevation={3}
-                               square className={s.Question}>
+                               square className={s.Questions}>
                             <ol type='1'>{this.state.report.questions.map((val, index) =>
-                                <li onClick={this.onClickQuestion} id={index} key={val._id}
+                                <li className={s.Question} onClick={this.onClickQuestion} id={index} key={val._id}
                                 >
                                     {val.question}
                                 </li>
@@ -90,8 +105,8 @@ class GroupReport extends React.Component {
                     <div className={s.EmailSideBar}>
                         <div className={s.Icon} onClick={this.onClickIcon}><MoreIcon/></div>
                         <Paper elevation={3}
-                               square className={s.Email}>
-                            {this.state.report.sessions.map((val, index) => <div
+                               square className={s.Emails}>
+                            {this.state.report.sessions.map((val, index) => <div className={s.Email}
                                 key={val._id} id={index}
                                 onClick={(e) => this.setState({
                                     index: e.target.id,

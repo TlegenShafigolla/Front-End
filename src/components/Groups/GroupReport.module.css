@@ -14,21 +14,53 @@
 }
 
 .answer {
+    text-align: center;
     color: red;
-    margin: 2px;
+    margin: 4px;
     font-size: 20px;
 }
-.correctAnswer{
-    color: green;
-    margin: 2px;
+
+.Answer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border-bottom: 1px solid #333333;
+}
+
+.correctAnswer {
+    text-align: center;
+    color: #00c853;
+    margin: 4px;
     font-size: 20px;
 }
-.Email {
+
+.Session {
+    flex-grow: 1;
+}
+
+.Emails {
+    padding: 5px;
+}
+
+.Questions {
     padding: 5px;
 }
 
 .Question {
-    padding: 5px;
+}
+
+.Question.focus {
+    border-radius: 5px;
+    background: rgba(63, 81, 181, 0.75);
+    box-shadow: 0px 0px 5px #3f51b5;
+    color: #2d2a2a;
+}
+
+.Email.focus {
+    border-radius: 5px;
+    background: rgba(63, 81, 181, 0.75);
+    box-shadow: 0 0 5px #3f51b5;
+    color: #2d2a2a;
 }
 
 .QuestionSideBar {
@@ -62,13 +94,13 @@
     .EmailSideBar {
         position: fixed;
         width: 180px;
-        right: -160px;
+        right: -173px;
     }
 
     .QuestionSideBar {
         position: fixed;
         width: 160px;
-        left: -140px;
+        left: -160px;
     }
 
     .Icon {

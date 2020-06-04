@@ -2,7 +2,6 @@ import React from "react";
 import s from './GroupReport.module.css'
 
 const MultipleChoice = props => {
-    console.log(props)
     const answers = props.report.questions[props.question_number].answers;
     let sessions = props.report.questions[props.question_number].session;
     let session = [...sessions]
@@ -20,9 +19,12 @@ const MultipleChoice = props => {
 
     return (
         <div>
-            {session.map(val => <div key={val.email}>{val.email}: {val.answers.map(value => <div
-                className={value.correct > 0 ? s.correctAnswer : s.answer}
-                key={value.answer_id}>{value.answer}</div>)}</div>)}
+            {session.map(val => <div className={s.Answer} key={val.email}>
+                <div className={s.Session}>{val.email}:</div>
+                <div>{val.answers.map(value => <div
+                    className={value.correct > 0 ? s.correctAnswer : s.answer}
+                    key={value.answer_id}>{value.answer}</div>)}</div>
+            </div>)}
         </div>
     )
 }
