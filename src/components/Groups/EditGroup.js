@@ -118,7 +118,7 @@ class EditGroup extends React.Component {
                         </Grid>
                         <Grid item xs={12}>
                             <Paper square elevation={3} className={s.SurveyList}>
-                                <Typography variant='h6' className={s.SurveyListHeading}>Group's Quizzes</Typography>
+                                <Typography variant='h6' className={s.SurveyListHeading}>Group's Survey</Typography>
                                 <SurveyTable surveys={this.state.surveys}/>
                             </Paper>
                         </Grid>

@@ -38,7 +38,7 @@ class SurveyTable extends React.Component {
         const arr = [];
         invitations.map(invitation => {
             const completed = `${invitation.completed}/${invitation.group.length}`;
-            const report = `/admin/group/report/${invitation._id}`;
+            const report = `/admin/group/survey/report/${invitation._id}`;
             arr.push(this.createData(invitation.used_survey.survey_name, completed, invitation.invited_date, report));
         });
         return arr;

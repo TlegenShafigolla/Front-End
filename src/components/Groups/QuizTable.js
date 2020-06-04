@@ -38,7 +38,7 @@ class QuizTable extends React.Component {
         const arr = [];
         invitations.map(invitation => {
             const completed = `${invitation.completed}/${invitation.group.length}`;
-            const report = `/admin/group/report/${invitation._id}`;
+            const report = `/admin/group/quiz/report/${invitation._id}`;
             arr.push(this.createData(invitation.used_quiz.quiz_name, completed, invitation.invited_date, report));
         });
         return arr;
@@ -73,12 +73,12 @@ class QuizTable extends React.Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.slice(this.state.page * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage + this.state.rowsPerPage).map((row,index) => {
+                            {rows.slice(this.state.page * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage + this.state.rowsPerPage).map((row, index) => {
                                 return (
                                     <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                                         {this.columns.map((column) => {
                                             const value = row[column.id];
-                                            if(column.id === 'report'){
+                                            if (column.id === 'report') {
                                                 return (
                                                     <TableCell key={column.id} align={column.align}>
                                                         <Link to={value}>

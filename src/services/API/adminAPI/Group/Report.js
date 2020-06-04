@@ -13,3 +13,15 @@ export function getReportGroup(id) {
         return res.json();
     });
 }
+export function getSurveyReportGroup(id) {
+    const authToken = `Bearer ${session()}`;
+    const requestOptions = {
+
+        method: 'GET',
+        headers: {Authorization: authToken},
+    };
+
+    return fetch(`${api}/group/survey/report/${id}`, requestOptions).then(res => {
+        return res.json();
+    });
+}
