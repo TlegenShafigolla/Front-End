@@ -1,23 +1,42 @@
 .EmailSideBar {
     top: 70px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     position: fixed;
+    cursor: pointer;
     transition: right 1s ease-out 0.5s;
 }
-.QuestionInfo{
+
+.QuestionInfo {
     padding: 10px;
     margin-top: 10px;
 }
-.answer{
+
+.answer {
+    color: red;
     margin: 2px;
+    font-size: 20px;
 }
+.correctAnswer{
+    color: green;
+    margin: 2px;
+    font-size: 20px;
+}
+.Email {
+    padding: 5px;
+}
+
+.Question {
+    padding: 5px;
+}
+
 .QuestionSideBar {
     top: 70px;
+    cursor: pointer;
     display: flex;
     flex-direction: row-reverse;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     position: fixed;
     transition: left 1s ease-out 0.5s;

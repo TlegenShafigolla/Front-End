@@ -1,5 +1,6 @@
 import React from "react";
 import s from './GroupReport.module.css'
+
 const MultipleChoice = props => {
     console.log(props)
     const answers = props.report.questions[props.question_number].answers;
@@ -17,11 +18,11 @@ const MultipleChoice = props => {
         ))
     })
 
-    console.log(answers)
-    console.log(session)
     return (
         <div>
-            {session.map(val=><div key={val.email}>{val.email}: {val.answers.map(value=><span className={s.answer} key={value.answer_id}>{value.answer}</span>)}</div>)}
+            {session.map(val => <div key={val.email}>{val.email}: {val.answers.map(value => <div
+                className={value.correct > 0 ? s.correctAnswer : s.answer}
+                key={value.answer_id}>{value.answer}</div>)}</div>)}
         </div>
     )
 }

@@ -53,17 +53,19 @@ class GroupReport extends React.Component {
                   justify="space-between"
                   spacing={3}
             >
-                <Grid item lg={3} md={3} sm={2}>
+                <Grid item lg={3} md={3} sm={2} container justify={"center"} alignItems={"flex-start"}>
                     <div className={s.QuestionSideBar}>
-                        <div className={s.IconQuestion} onClick={this.onClickQuestionSideBar}><LabelIcon/></div>
+                        <div className={s.IconQuestion} onClick={this.onClickQuestionSideBar}><MoreIcon/></div>
                         <Paper elevation={3}
-                               square>{this.state.report.questions.map((val, index) =>
-                            <div onClick={this.onClickQuestion} id={index} key={val._id}
-                            >
-                                {val.question}
-                            </div>
-                        )
-                        }</Paper>
+                               square className={s.Question}>
+                            <ol type='1'>{this.state.report.questions.map((val, index) =>
+                                <li onClick={this.onClickQuestion} id={index} key={val._id}
+                                >
+                                    {val.question}
+                                </li>
+                            )
+                            }</ol>
+                        </Paper>
                     </div>
                 </Grid>
                 <Grid item lg={6} md={6} sm={8} xs={12}>
@@ -84,11 +86,11 @@ class GroupReport extends React.Component {
                             key={val._id} val={val}/>)}
                     </Grid>
                 </Grid>
-                <Grid item lg={3} md={3} sm={2}>
+                <Grid item lg={3} md={3} sm={2} container justify={"center"} alignItems={"flex-start"}>
                     <div className={s.EmailSideBar}>
                         <div className={s.Icon} onClick={this.onClickIcon}><MoreIcon/></div>
                         <Paper elevation={3}
-                               square>
+                               square className={s.Email}>
                             {this.state.report.sessions.map((val, index) => <div
                                 key={val._id} id={index}
                                 onClick={(e) => this.setState({
