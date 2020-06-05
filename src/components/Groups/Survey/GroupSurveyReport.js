@@ -21,8 +21,13 @@ class GroupSurveyReport extends React.Component {
     componentDidMount() {
         const path = window.location.pathname.split('/');
         getSurveyReportGroup(path[5]).then(val => {
-            console.log(val)
             this.setState({report: val})
+        })
+    }
+    onClickQuestion = event => {
+        this.setState({
+            question: true,
+            question_number: Number(event.target.id)
         })
     }
     render() {

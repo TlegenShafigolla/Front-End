@@ -25,8 +25,8 @@ const MultipleChoiceGroupReport = (props) => {
                 </div>
             </div>
             <div>
-                {session.map(val =>
-                    <div className={s.answerForm} key={val}>
+                {session.map((val,index) =>
+                    <div className={s.answerForm} key={index}>
                         <Typography variant="body1">
                             {val}
                         </Typography>

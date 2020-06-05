@@ -5,7 +5,6 @@ import MultipleChoice from "./MultipleChoice";
 import FillTheBlank from "./FillTheBlank";
 
 const QuestionInfo = props => {
-    console.log(props)
     return (
         <Paper className={s.QuestionInfo} square elevation={3}>
             {props.report.questions[props.question_number].order_id}.
