@@ -1,10 +1,10 @@
 import SignIn from "../components/Login/login";
 import {connect} from "react-redux";
-import {LogIn} from "../redux/LoginPage/actions";
+import {LogIn} from "../redux/Auth/actions";
 
 let mapStateToProps = (state) => {
     return {
-        Auth: state.loginPage.Auth
+        Auth: state.Auth.Auth
     }
 }
 

@@ -12,14 +12,14 @@ let LoginForm = (props) => {
                 <Field label='Email' fullWidth
                        variant='outlined' name='email'
                        validate={required}
-                       auth={props.Auth}
+                       error={props.error}
                        component={renderTextField}/>
             </div>
             <div className={s.input}>
                 <Field label='Password' fullWidth
                        variant='outlined' name='password'
                        validate={required}
-                       auth={props.Auth}
+                       error={props.error}
                        type='password' component={renderTextField}/>
             </div>
             <Button variant='contained' type='submit' color='primary'>Continue</Button>

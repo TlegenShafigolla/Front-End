@@ -1,13 +1,14 @@
 import {LOGIN} from "./actions";
 
 let initialState = {
-    Auth: false,
+    Auth:null,
 }
-const LoginReducer = (state = initialState, action) => {
+const AuthReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOGIN: {
             return {
-                Auth: true
+                ...state,
+                Auth: action.data,
             }
         }
 
@@ -17,4 +18,4 @@ const LoginReducer = (state = initialState, action) => {
 
 }
 
-export default LoginReducer;
+export default AuthReducer;

@@ -18,8 +18,7 @@ const Routes = () => {
             <Route path='/quiz/:link' render={() => <Quiz/>}/>
             <Route path='/survey/:link' render={() => <Survey/>}/>
             <PrivateAdminRoute path="/admin/" render={() => <Admin/>}/>
-            <PrivateUserRoute path="/user" render={() => <Users/>}/>
-        </Switch>
+            </Switch>
     );
 };
 

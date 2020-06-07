@@ -4,7 +4,7 @@ export const PrivateAdminRoute = ({ render: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      (localStorage.getItem('status')==='admin') ? (
+      (localStorage.getItem('access_token')) ? (
         <Component {...props} />
       ) : (
         <Redirect
@@ -14,17 +14,3 @@ export const PrivateAdminRoute = ({ render: Component, ...rest }) => (
     }
   />
   );
-    export const PrivateUserRoute = ({ render: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-     (localStorage.getItem('status')==='user') ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{ pathname: "/login", state: { from: props.location } }}
-        />
-      )
-    }
-  />
-);
