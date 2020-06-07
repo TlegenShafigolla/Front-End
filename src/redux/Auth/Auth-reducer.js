@@ -1,7 +1,8 @@
-import {LOGIN} from "./actions";
+import {LOGIN, REGISTER} from "./actions";
 
 let initialState = {
     Auth:null,
+    Register:false
 }
 const AuthReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -11,7 +12,12 @@ const AuthReducer = (state = initialState, action) => {
                 Auth: action.data,
             }
         }
-
+        case REGISTER:{
+            return {
+                ...state,
+                Register: true
+            }
+        }
         default :
             return state
     }

@@ -16,7 +16,7 @@ const SignIn = (props) => {
         <div className={s.loginPage}>
             <div className={s.SignIn}>
                 <img className={s.logo} src={logo} alt="Logo"/>
-                <LoginForm Auth={props.Auth} onSubmit={onSubmit}/>
+                <LoginForm  onSubmit={onSubmit}/>
                 <div className={s.forgot}>
                     <Link to='#' underline='none'>Forgot password?</Link>
                     <Link to='/registration' underline='none'>Register</Link>
