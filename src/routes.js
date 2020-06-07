@@ -1,7 +1,7 @@
 import React from "react";
 import Admin from "./pages/admin";
 import Users from "./pages/user";
-import Login from "./pages/login";
+import Login from "./pages/loginContainer";
 import {Route, Switch} from "react-router-dom";
 import {PrivateAdminRoute, PrivateUserRoute} from "./function/PrivateRoute";
 import Home from "./pages/home";

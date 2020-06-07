@@ -1,28 +1,16 @@
-import {CHANGE_EMAIL, CHANGE_PASSWORD} from "./actions";
+import {LOGIN} from "./actions";
 
 let initialState = {
-    email: '',
-    password: '',
-    loggedIn: false,
-    disabledButton: false,
-    error: false
+    Auth: false,
 }
 const LoginReducer = (state = initialState, action) => {
     switch (action.type) {
-        case CHANGE_EMAIL: {
+        case LOGIN: {
             return {
-                ...state,
-                email: action.email,
-                error: false
+                Auth: true
             }
         }
-        case CHANGE_PASSWORD: {
-            return {
-                ...state,
-                password: action.password,
-                error: false
-            }
-        }
+
         default :
             return state
     }

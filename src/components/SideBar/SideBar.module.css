@@ -1,4 +1,4 @@
-.buttongroup Button {
+.SideBar Button {
     color: #f3f3f3;
     width: 210px;
     margin-top: 5px;
@@ -10,10 +10,13 @@
 
 }
 
-.sidebar {
+.SideBar {
     position: relative;
     height: 100%;
     background: #333333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .drawerPaper {
@@ -21,34 +24,23 @@
     width: 240px;
 }
 
-.buttongroup {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    align-items: center;
-}
 
-.buttongroup Button.main {
+.SideBar Button.main {
     display: flex;
     justify-content: flex-start;
 }
 
-.buttongroup a.focus {
+.SideBar a.focus {
     display: block;
     color: #f3f3f3;
     background: #3F51B5;
     box-shadow: 0 0 10px #2f57b5;
 }
 
-.buttongroup a {
+.SideBar a {
     text-decoration: none;
 }
 
-.buttongroup Button.secondary {
-    display: flex;
-    padding-left: 60px;
-    justify-content: flex-start;
-}
 
 .Header {
     display: flex;
@@ -70,14 +62,3 @@
     width: 100%;
 }
 
-.buttongroup Button.main1:disabled {
-    background: #272827;
-    color: #333333;
-    box-shadow: none;
-}
-
-.buttongroup Button.secondary1:disabled {
-    background: #272827;
-    color: #333333;
-    box-shadow: none;
-}
