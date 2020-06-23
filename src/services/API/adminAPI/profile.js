@@ -2,7 +2,7 @@ import {session} from "../session";
 import {api} from "../../../App"
 
 
-export default function getProfile() {
+export default function Profile() {
     const authToken = `Bearer ${session()}`;
     const requestOptions = {
         method: 'GET',
@@ -11,6 +11,9 @@ export default function getProfile() {
 
     const json = fetch(`${api}/profile`, requestOptions).then(res => {
         return res.json();
-    });
+    }).catch(() => {
+            return "403"
+        }
+    )
     return json;
 }

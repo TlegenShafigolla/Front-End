@@ -1,0 +1,8 @@
+.Preloader{
+    text-align: center;
+    height: 100vh;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

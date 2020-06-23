@@ -4,7 +4,7 @@ import Login from "./pages/loginContainer";
 import {Route, Switch} from "react-router-dom";
 import {PrivateAdminRoute} from "./function/PrivateRoute";
 import Home from "./pages/home";
-import Quiz from "./pages/quiz";
+import QuizContainer from "./pages/quizContainer";
 import Survey from "./pages/survey";
 import RegistrationContainer from "./pages/RegistrationContainer";
 
@@ -14,10 +14,10 @@ const Routes = () => {
             <Route exact path="/" render={() => <Home/>}/>
             <Route path="/login" render={() => <Login/>}/>
             <Route path='/registration' render={() => <RegistrationContainer/>}/>
-            <Route path='/quiz/:link' render={() => <Quiz/>}/>
+            <Route path='/quiz/:link' render={() => <QuizContainer/>}/>
             <Route path='/survey/:link' render={() => <Survey/>}/>
             <PrivateAdminRoute path="/admin/" render={() => <Admin/>}/>
-            </Switch>
+        </Switch>
     );
 };
 

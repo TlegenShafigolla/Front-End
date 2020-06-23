@@ -5,14 +5,15 @@ import CheckEmail from "../components/Quiz/CheckEmail";
 import Typography from "@material-ui/core/Typography";
 import s from '../components/Quiz/Quiz.module.css'
 import Button from "@material-ui/core/Button";
-import {NavLink} from "react-router-dom";
+import {NavLink, withRouter} from "react-router-dom";
 import StartingPage from "../components/Quiz/QuizDescriptionDialog";
+import {connect} from "react-redux";
+import {compose} from "redux";
 
-class Quiz extends React.Component {
+class QuizContainer extends React.Component {
     constructor(props) {
         super(props);
-        const path = window.location.pathname.split('/');
-        const link = path[2];
+        const link = this.props.match.params.id;
         const quiz = localStorage.getItem(`quiz_session${link}`) ? JSON.parse(localStorage.getItem(`quiz_session${link}`)) : null;
         this.state = {
             status: null,
@@ -110,4 +111,7 @@ class Quiz extends React.Component {
 
 }
 
-export default Quiz;
+export default compose(
+    connect(null),
+    withRouter,
+)(QuizContainer);

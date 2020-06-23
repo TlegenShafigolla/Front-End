@@ -43,7 +43,9 @@
     display: flex;
     justify-content: space-around;
 }
-
+.Type{
+    display: flex;
+}
 .Time {
     display: flex;
     align-items: center;

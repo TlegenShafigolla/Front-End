@@ -6,17 +6,17 @@ import LoginForm from "./loginForm";
 
 const SignIn = (props) => {
     let onSubmit = (value) => {
-        props.LogIn(value.email,value.password)
-    }
+        props.LogIn(value.email, value.password)
+    };
 
-    if(props.Auth!==null||localStorage.getItem('access_token')){
-      return  <Redirect to='/admin/profile'/>
+    if (props.isLoggedIn || localStorage.getItem('access_token')) {
+        return <Redirect to='/admin/profile'/>
     }
     return (
         <div className={s.loginPage}>
             <div className={s.SignIn}>
                 <img className={s.logo} src={logo} alt="Logo"/>
-                <LoginForm  onSubmit={onSubmit}/>
+                <LoginForm onSubmit={onSubmit}/>
                 <div className={s.forgot}>
                     <Link to='#' underline='none'>Forgot password?</Link>
                     <Link to='/registration' underline='none'>Register</Link>

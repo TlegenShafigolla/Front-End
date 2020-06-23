@@ -1,36 +1,41 @@
 import React from "react";
-import {TextField} from "@material-ui/core";
+import {Field,} from "redux-form";
+import {renderTextField} from "../../../common/TextField";
+import {checkEmail, required} from "../../../../utils/validators";
 
-const Person=(props)=>{
-    return(<div>
-        <TextField
-            error={props.errorName}
-            autoFocus
+const Person = (props) => {
+    return (<>
+        <Field
             margin="dense"
             id="name"
+            name="name"
             label="Name"
             fullWidth
             variant='outlined'
-            onChange={props.onChangeName}
-        /> <TextField
-        error={props.errorSurname}
+            validate={required}
+            component={renderTextField}
+        /> <Field
+        component={renderTextField}
+        validate={required}
         margin="dense"
+        name="surname"
         id="Surname"
         label="Surname"
         fullWidth
         variant='outlined'
-        onChange={props.onChangeSurname}
     />
-        <TextField
-            error={props.errorEmail}
+        <Field
+            name="email"
+            validate={required && checkEmail}
+            component={renderTextField}
             margin="dense"
             id="Email"
             label="Email"
             type="email"
             fullWidth
             variant='outlined'
-            onChange={props.onChangeEmail}
         />
-    </div>)
+    </>)
 };
 export default Person;
+

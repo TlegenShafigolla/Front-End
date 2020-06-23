@@ -4,7 +4,6 @@ import {Typography, IconButton} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import {useStyles} from "./Style";
 import Toolbar from '@material-ui/core/Toolbar';
-import clsx from "clsx";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const AdminHeader = (props) => {
@@ -25,7 +24,7 @@ const AdminHeader = (props) => {
         },
         {
             path: '/admin/reports',
-            name: 'Quiz - Reports'
+            name: 'QuizContainer - Reports'
         },
         {
             path: '/admin/surveys',

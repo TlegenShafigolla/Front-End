@@ -3,7 +3,7 @@ import {Route} from "react-router-dom";
 import Quizzes from "./Quizzes";
 import Quiz from "./Quiz";
 
-const QuizzesRoute = (props) => {
+const   QuizzesRoute = (props) => {
     return (
         <div>
             <Route exact path='/admin/quizzes' component={Quizzes}/>

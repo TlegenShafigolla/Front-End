@@ -4,126 +4,58 @@ import Typography from "@material-ui/core/Typography";
 import {Link} from "react-router-dom";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import {Snackbar, Tooltip} from "@material-ui/core";
+import {Tooltip} from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import SendIcon from '@material-ui/icons/Send';
 import DeleteQuizDialog from "./deleteQuizDialog";
-import InviteDialog from "../Editing/Invite/inviteDialog";
-import Alert from "@material-ui/lab/Alert/Alert";
-import {deleteQuiz} from "../../../services/API/adminAPI/Quiz/quiz";
 import Paper from "@material-ui/core/Paper";
+import Alerts from "../../common/Alert";
+import InviteDialogContainer from "../../../containers/QuizEditor/InviteDialogContainer";
 
 
-class ShowQuiz extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            quiz_id: this.props.quiz_id,
-            last_edited_date: this.props.last_edited_date,
-            quiz_name: this.props.quiz_name,
-            openDeleteQuizDialog: false,
-            openInviteDialog: false,
-            noQuestionSnackbar: false,
-        }
-    }
-
-
-    openDeleteDialog = () => {
-        this.setState({openDeleteQuizDialog: true});
-    };
-
-    onClickInvite = () => {
-        this.setState({openInviteDialog: false});
-    };
-
-    inviteDialog = () => {
-        if (this.props.value.questions_count === 0) {
-            this.setState({noQuestionSnackbar: true});
-        } else {
-            this.setState({openInviteDialog: !this.state.openInviteDialog})
-        }
-    };
-
-    closeNoQuestionSnackbar = () => {
-        this.setState({noQuestionSnackbar: false});
-    };
-
-    onClickQuiz = () => {
-        console.log('ok')
-        // this.history.push(`/admin/quizzes/edit/${this.props.value._id}`)
-    };
-
-    deleteQuizOnClick = async () => {
-        if (this.state.quiz_id !== undefined) {
-            await deleteQuiz(this.state.quiz_id)
-        }
-        this.props.deleteQuiz(this.props.value._id)
-    };
-    onClickDelete = (action) => {
-        this.setState({openDeleteQuizDialog: false});
-        if (!action) {
-            return;
-        }
-        this.deleteQuizOnClick()
-    }
-
-    render() {
-        return (
-            <Paper square elevation={3} className={s.Root} onKeyDown={this.onClickQuiz}>
-                <div className={s.CardContent}>
-                    <Typography variant="h5" component="h2" noWrap>
-                        {this.props.quiz_name}
-                    </Typography>
-                    < Typography>
-                        {this.props.description}
-                    </Typography>
-                    <Typography>  {this.props.value.questions_count.toString()} </Typography>
-                    <Typography variant="body2"
-                                component="p"
-                                color="textSecondary">
-                        Version: {this.props.last_edited_date} </Typography>
-                </div>
-                <div className={s.CardActions}>
-                    <div className={s.DeleteAndInvite}>
-                        <Tooltip title='Invite'>
-                            <IconButton color="primary" onClick={this.inviteDialog}>
-                                <SendIcon/>
-                            </IconButton>
-                        </Tooltip>
-                        <Tooltip title='Delete'>
-                            <IconButton size='small'
-                                        onClick={this.state.quiz_id === undefined ? this.deleteQuizOnClick : this.openDeleteDialog}
-                                        aria-label='delete'>
-                                <DeleteIcon color='primary'/>
-                            </IconButton>
-                        </Tooltip>
-                    </div>
-                    <Link to={'/admin/quiz/editor/edit/' + this.props.value._id.toString()}>
-                        <IconButton color="primary" onClick={this.handleClick}>
-                            <ArrowForwardIosIcon fontSize='large'/>
-                        </IconButton>
-                    </Link>
-                </div>
-                <InviteDialog openDialog={this.state.openInviteDialog} onClose={this.onClickInvite}
-                              quiz_id={this.state.quiz_id} groups={this.props.groups}/>
-                <DeleteQuizDialog openDialog={this.state.openDeleteQuizDialog} onClose={this.onClickDelete}/>
-                <NoQuestionSnackbar openSnackbar={this.state.noQuestionSnackbar}
-                                    snackClose={this.closeNoQuestionSnackbar}/>
-            </Paper>
-        );
-    }
-}
-
-const NoQuestionSnackbar = (props) => {
+const ShowQuiz = (props) => {
     return (
-        <Snackbar
-            open={props.openSnackbar}
-            onClose={props.snackClose}>
-            <Alert variant="filled" severity="warning">
-                No questions in the quiz
-            </Alert>
-        </Snackbar>
+        <Paper square elevation={3} className={s.Root}>
+            <div className={s.CardContent}>
+                <Typography variant="h5" component="h2" noWrap>
+                    {props.value.quiz_name}
+                </Typography>
+                < Typography>
+                    {props.value.description}
+                </Typography>
+                <Typography>  {props.value.questions_count.toString()} </Typography>
+                <Typography variant="body2"
+                            component="p"
+                            color="textSecondary">
+                    Version: {props.last_edited_date} </Typography>
+            </div>
+            <div className={s.CardActions}>
+                <div className={s.DeleteAndInvite}>
+                    <Tooltip title='Invite'>
+                        <IconButton color="primary" onClick={() => props.onClickInvite(props.value.questions_count,props.value._id)}>
+                            <SendIcon/>
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title='Delete'>
+                        <IconButton size='small'
+                                    onClick={() => props.deleteQuiz(props.value._id)}
+                                    aria-label='delete'>
+                            <DeleteIcon color='primary'/>
+                        </IconButton>
+                    </Tooltip>
+                </div>
+                <Link to={'/admin/quiz/editor/' + props.value._id.toString()}>
+                    <IconButton color="primary">
+                        <ArrowForwardIosIcon fontSize='large'/>
+                    </IconButton>
+                </Link>
+            </div>
+            <InviteDialogContainer openDialog={props.Invite}  onClose={props.onInvite} onSubmit={props.onSubmit}
+                                   />
+            <DeleteQuizDialog openDialog={props.DeleteQuiz} id={props.value._id} onClose={props.onClickDelete}/>
+            <Alerts variant="filled" severity="warning" open={props.openSnackbar} children=" No questions in the quiz"/>
+        </Paper>
     );
-};
+}
 
 export default ShowQuiz;

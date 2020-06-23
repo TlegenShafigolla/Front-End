@@ -1,68 +1,56 @@
-import React, {Component} from "react";
+import React, {useEffect, useState} from "react";
 import AdminHeader from "../components/AdminHeader/AdminHeader";
 import SideBar from "../components/SideBar/SideBar";
 import "../css/App.css";
 import {Routes} from "../function/Routes";
 import {Redirect} from "react-router-dom";
-import getProfile from "../services/API/adminAPI/profile";
+import {connect} from "react-redux";
+import {requestProfile, logout} from "../redux/Auth/actions";
+import Preloader from "../components/common/Preloader";
+import {getProfile, isLoggedIn} from "../redux/Reselects/Auth-reselect";
 
-class Admin extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            isSideBarOpen: false,
-            isLoggedIn: true,
-            displayName: '',
-        }
-    }
-
-    LogOut = () => {
-        localStorage.clear();
-        this.setState({isLoggedIn: false})
+const Admin = (props) => {
+    let [isSideBar, openSideBar] = useState(false);
+    useEffect(() => {
+        props.requestProfile()
+    }, [props.requestProfile])
+    let LogOut = () => {
+        props.logout();
     };
-    openSideBar = () => {
-        this.setState({isSideBarOpen: !this.state.isSideBarOpen})
+    let openSideBarOnClick = () => {
+        openSideBar(true)
     };
-    onClose = () => {
-        this.setState({isSideBarOpen: false})
+    let onClose = () => {
+        openSideBar(false)
+    }
+    if (props.isLoggedIn === null) {
+        return <Preloader/>
     }
 
-
-    render() {
-
-        if (!this.state.isLoggedIn) {
-            return <Redirect to="/login"/>;
-        }
-        return (
-            <div >
-                <AdminHeader
-                    OpenButton={this.openSideBar}
-                    Logout={this.LogOut}
-                    OpenSideBar={this.state.isSideBarOpen}
-                    DisplayName={this.state.displayName}
-                />
-                <SideBar
-                    close={this.onClose}
-                    open={this.state.isSideBarOpen}
-                />
-                <Routes open={this.state.isSideBarOpen}/>
-            </div>
-        );
+    if (!props.isLoggedIn && localStorage.getItem('access_token')===null) {
+        return <Redirect to="/login"/>;
     }
-
-    componentDidMount() {
-        if (localStorage.getItem('admin_name') !== null) {
-            this.setState({displayName: localStorage.getItem('admin_name') + " " + localStorage.getItem('admin_surname')});
-        } else {
-            getProfile().then(value => {
-                this.setState({displayName: value['name'] + " " + value['surname']});
-                localStorage.setItem('admin_name', value['name']);
-                localStorage.setItem('admin_surname', value['surname']);
-            });
-        }
-    }
-
+    return (
+        <div>
+            <AdminHeader
+                OpenButton={openSideBarOnClick}
+                Logout={LogOut}
+                OpenSideBar={isSideBar}
+                DisplayName={props.Profile.name + " " + props.Profile.surname}
+            />
+            <SideBar
+                close={onClose}
+                open={isSideBar}
+            />
+            <Routes open={isSideBar}/>
+        </div>
+    );
 }
 
-export default Admin;
+let mapStateToProps = (state) => {
+    return {
+        Profile: getProfile(state),
+        isLoggedIn: isLoggedIn(state)
+    }
+}
+export default connect(mapStateToProps, {logout, requestProfile})(Admin);

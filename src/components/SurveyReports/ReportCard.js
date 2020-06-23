@@ -22,7 +22,7 @@ class ReportCard extends React.Component {
                     </div>
                 </CardContent>
                 <Typography className={s.version} variant="body2" color='textSecondary' component="p">
-                    {"Quiz version of: " + this.props.report.survey.created_date}
+                    {"QuizContainer version of: " + this.props.report.survey.created_date}
                 </Typography>
             </div>
         );

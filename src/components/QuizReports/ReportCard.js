@@ -31,7 +31,7 @@ class ReportCard extends React.Component {
                     </div>
                 </CardContent>
                 <Typography className={s.version} variant="body2" color='textSecondary' component="p">
-                    {"Quiz version of: " + new Date(this.props.report.quiz.created_date).toLocaleString()}
+                    {"QuizContainer version of: " + new Date(this.props.report.quiz.created_date).toLocaleString()}
                 </Typography>
             </Paper>
         );

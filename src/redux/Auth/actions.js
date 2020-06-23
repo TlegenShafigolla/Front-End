@@ -1,35 +1,43 @@
 import {login} from "../../services/API/login";
 import {stopSubmit} from "redux-form";
 import {registration} from "../../services/API/userAPI/registration";
+import Profile from "../../services/API/adminAPI/profile";
 
-export const LOGIN = "LOGIN";
-export const REGISTER = "REGISTER"
+export const GET_PROFILE = "AUTH/GET_PROFILE";
+export const LOGIN = "AUTH/LOGIN";
+export const REGISTER = "AUTH/REGISTER";
+export const LOGOUT = "AUTH/LOGOUT";
+export const ERROR = "AUTH/ERROR";
 
-const register = () => ({type: REGISTER,})
-const successLogIn = (data) => ({type: LOGIN, data})
-export const LogIn = (email, password) => (dispatch) => {
-    login(email, password).then(data => {
-        if (data.message === "Auth successful") {
-            localStorage.setItem("access_token", data["access_token"]);
-            localStorage.setItem("access_time", Date());
-            dispatch(successLogIn(data))
-            console.log(data)
-        } else {
-            let action = stopSubmit("login", {_error: true});
-            dispatch(action)
-        }
-    });
+const profile = (data) => ({type: GET_PROFILE, data});
+const register = () => ({type: REGISTER,});
+export const logout = () => ({type: LOGOUT,});
+export const requestProfile = () => async (dispatch) => {
+    let data = await Profile();
+    if (data === "403") {
+        dispatch(logout())
+    }
+    dispatch(profile(data))
+};
+export const LogIn = (email, password) => async (dispatch) => {
+    let data = await login(email, password);
+    if (data.message === "Auth successful") {
+        localStorage.setItem("access_token", data["access_token"]);
+        localStorage.setItem("access_time", Date());
+        dispatch(requestProfile())
+    } else {
+        let action = stopSubmit("login", {_error: true});
+        dispatch(action)
+    }
 }
-export const Registration = (name, surname, password, occupation, email) => (dispatch) => {
-    registration(name, surname, password, occupation, email).then(data => {
-        if (data.Status === "Success") {
-            dispatch(LogIn(email, password))
-            dispatch(register())
-        } else {
-            let action = stopSubmit("registration", {_error: data.message})
-            dispatch(action)
-        }
-        console.log(data)
-    })
-}
+export const Registration = (name, surname, password, occupation, email) => async (dispatch) => {
+    let data = await registration(name, surname, password, occupation, email);
+    if (data.Status === "Success") {
+        dispatch(LogIn(email, password));
+        dispatch(register())
+    } else {
+        let action = stopSubmit("registration", {_error: data.message});
+        dispatch(action)
+    }
+};
 

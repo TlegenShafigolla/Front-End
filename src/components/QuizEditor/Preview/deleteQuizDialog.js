@@ -6,39 +6,37 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 
-class DeleteQuizDialog extends React.Component{
-    handleAgree = () => {
-        this.props.onClose(true);
+const DeleteQuizDialog = (props) => {
+    let handleAgree = () => {
+        props.onClose(true,props.id);
     };
 
-    handleCancel = () => {
-        this.props.onClose(false);
+    let handleCancel = () => {
+        props.onClose(false,props.id);
     };
 
-    render() {
-        return(
-            <Dialog
-                open={this.props.openDialog}
-                onClose={this.handleCancel}
-                aria-labelledby="responsive-dialog-title"
-            >
-                <DialogTitle id="responsive-dialog-title">{"Delete the quiz?"}</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        Deletion of the quiz means deletion of all the questions and answers.
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button autoFocus onClick={this.handleCancel} color="primary">
-                        Cancel
-                    </Button>
-                    <Button onClick={this.handleAgree} color="primary" autoFocus>
-                        Yes
-                    </Button>
-                </DialogActions>
-            </Dialog>
-        );
-    }
+    return (
+        <Dialog
+            open={props.openDialog}
+            onClose={handleCancel}
+            aria-labelledby="responsive-dialog-title"
+        >
+            <DialogTitle id="responsive-dialog-title">{"Delete the quiz?"}</DialogTitle>
+            <DialogContent>
+                <DialogContentText>
+                    Deletion of the quiz means deletion of all the questions and answers.
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Button autoFocus onClick={handleCancel} color="primary">
+                    Cancel
+                </Button>
+                <Button onClick={handleAgree} color="primary" autoFocus>
+                    Yes
+                </Button>
+            </DialogActions>
+        </Dialog>
+    );
 }
 
 export default DeleteQuizDialog;

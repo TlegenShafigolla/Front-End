@@ -4,7 +4,7 @@ export const PrivateAdminRoute = ({ render: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      (localStorage.getItem('access_token')) ? (
+      (localStorage.getItem('access_token')!==null) ? (
         <Component {...props} />
       ) : (
         <Redirect

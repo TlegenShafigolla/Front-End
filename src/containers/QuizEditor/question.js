@@ -1,14 +1,23 @@
 import React from "react";
-import ShowQuestion from "./showQuestion";
-import EditQuestion from "./editQuestion";
-import {getAnswers, deleteAnswers, postAnswers, putAnswers} from "../../../../services/API/adminAPI/Quiz/answers";
-import {deleteQuestions, putQuestions} from "../../../../services/API/adminAPI/Quiz/questions";
-import makeID from "../../../../services/utils";
+import ShowQuestion from "../../components/QuizEditor/Editing/Question/showQuestion";
+import EditQuestion from "../../components/QuizEditor/Editing/Question/editQuestion";
+import { postAnswers, putAnswers} from "../../services/API/adminAPI/Quiz/answers";
+import {deleteQuestions, putQuestions} from "../../services/API/adminAPI/Quiz/questions";
+import makeID from "../../services/utils";
 import Snackbar from "@material-ui/core/Snackbar";
-import s from '../css/editQuestion.module.css'
+import s from '../../components/QuizEditor/Editing/css/editQuestion.module.css'
 import Typography from "@material-ui/core/Typography";
 import Alert from "@material-ui/lab/Alert";
 import {Draggable} from "react-beautiful-dnd";
+import {connect} from "react-redux";
+import {
+    addNewAnswer,
+    changeAnswer,
+    changePoint,
+    deleteAnswer,
+    requestAnswers
+} from "../../redux/QuizEditor/Questions/actions";
+import {getAnswers} from "../../redux/Reselects/QuizEditor-reselect";
 
 class Question extends React.Component {
     state = {
@@ -19,7 +28,7 @@ class Question extends React.Component {
         question: this.props.value.question,
         questionChanged: false,
         answersChanged: false,
-        answers: [],
+        answers: this.props.answers,
         image: this.props.value.image,
         disableSaveButton: false,
         index_key: {},
@@ -32,39 +41,26 @@ class Question extends React.Component {
 
 
     componentDidMount() {
-        if (this.state.id !== undefined) {
-            getAnswers(this.state.id).then(val => {
-                this.setState({answers: val.answers});
-                this.props.setAnswers(this.state.id, val.answers);
-                let index_key = this.state.index_key;
-                for (let i = 0; i < this.state.answers.length; i++) {
-                    index_key[i] = makeID(8);
-                }
-                this.setState({index_key: index_key});
-            })
-        }
+        this.props.requestAnswers(this.state.id)
     }
 
     onChangePoint = (event) => {
-        let answer = this.state.answers;
-        answer[Number(event.target.id)].points = event.target.value;
-        this.setState({answers: answer});
+        this.props.changePoint(Number(event.target.id), event.target.value);
         this.setState({answersChanged: true});
     };
 
-    changeCheck = (event) => {
-        let answer = this.state.answers;
-        answer[Number(event.target.id)].points = Number(event.target.checked);
-        this.setState({answers: answer});
+    changeCheck = (event,index) => {
+        this.props.changePoint(index,Number(event.target.id), Number(event.target.checked));
         this.setState({answersChanged: true});
     };
 
-    changeType = (newType) => {
+    changeType = (index,newType) => {
+        console.log(index)
         this.setState({answerType: newType});
         this.setState({questionChanged: true});
         this.setState({answersChanged: true});
-        for (let i = this.state.answers.length - 1; i >= 0; i--) {
-            this.deleteAnswerOnClick(i);
+        for (let i = this.props.answers[index].length - 1; i >= 0; i--) {
+            this.deleteAnswerOnClick(index,i);
         }
     };
 
@@ -72,19 +68,21 @@ class Question extends React.Component {
         this.setState({editMode: true});
     };
 
-    deleteAnswerOnClick = (index) => {
-        let answers = this.state.answers;
-        if (this.state.id !== undefined && answers[index]._id !== undefined) {
-            deleteAnswers(this.state.id, answers[index]._id);
-        }
-        let index_key = this.state.index_key;
-        for (let i = index; i < answers.length - 1; i++) {
-            index_key[i] = this.state.index_key[i + 1];
-        }
-        delete index_key[answers.length - 1];
-        answers.splice(index, 1);
-        this.setState({answers: answers});
-        this.setState({index_key: index_key});
+    deleteAnswerOnClick = (index,id) => {
+        // let answers = this.state.answers;
+        this.props.deleteAnswer(index,id)
+        // this.setState({answersChanged: true});
+        // if (this.state.id !== undefined && answers[index]._id !== undefined) {
+        //     deleteAnswers(this.state.id, answers[index]._id);
+        // }
+        // let index_key = this.state.index_key;
+        // for (let i = index; i < answers.length - 1; i++) {
+        //     index_key[i] = this.state.index_key[i + 1];
+        // }
+        // delete index_key[answers.length - 1];
+        // answers.splice(index, 1);
+        // this.setState({answers: answers});
+        // this.setState({index_key: index_key});
     };
 
     deleteQuestionOnClick = async () => {
@@ -137,6 +135,7 @@ class Question extends React.Component {
                                 await putAnswers(this.state.id, value);
                             } else {
                                 await postAnswers(this.state.id, value);
+
                             }
                         })).then((ret) => {
                             getAnswers(this.state.id).then(val => {
@@ -172,12 +171,8 @@ class Question extends React.Component {
         this.setState({disableSaveButton: false});
     };
 
-    onChangeAnswer = (event) => {
-        let answers = this.state.answers;
-        answers[Number(event.target.id)].answer = event.target.value.trim();
-        this.setState({answers: answers});
-        this.setState({answersChanged: true});
-        this.setState({errorAnswer: false});
+    onChangeAnswer = (event,index,id) => {
+        this.props.changeAnswer(event.target.value,index,id);
     };
 
     onCloseDialogAnswer = () => {
@@ -186,47 +181,38 @@ class Question extends React.Component {
 
     onChangeQuestion = (event) => {
         this.setState({question: event.target.value.trim()});
-        this.setState({questionChanged: true});
-        this.setState({errorQuestion: false})
     };
 
-    addNewAnswer = (points = 0) => {
-        const answers = this.state.answers;
-        answers.push({
-            question_id: this.state.id,
-            points: points,
-            answer: '',
-        });
-        this.setState({answers: answers});
-        let index_key = this.state.index_key;
-        index_key[answers.length - 1] = makeID(8);
-        this.setState({index_key: index_key});
+    addNewAnswers = (index) => {
+        this.props.addNewAnswer(index);
+
     };
     onClick = () => {
         this.setState({dialogOpenAnswer: false})
     };
 
     render() {
+        console.log(this.props.answers)
         if (this.state.editMode) {
-            return <div > <EditQuestion
-                                errorAnswer={this.state.errorAnswer}
-                                errorQuestion={this.state.errorQuestion}
-                                changeCheck={this.changeCheck}
-                                changePoint={this.onChangePoint}
-                                deleteAnswerOnClick={this.deleteAnswerOnClick}
-                                onChangeAnswer={this.onChangeAnswer}
-                                addNewAnswer={this.addNewAnswer}
-                                onChangeQuestion={this.onChangeQuestion}
-                                saveOnClick={this.saveOnClick}
-                                changeType={this.changeType}
-                                editMode={this.state.editMode}
-                                answerType={this.state.answerType}
-                                answers={this.state.answers}
-                                question={this.state.question}
-                                question_id={this.state.id}
-                                index_key={this.state.index_key}
-                                deleteQuestionOnClick={this.deleteQuestionOnClick}
-                                {...this.props}/>
+            return <> <EditQuestion
+                errorAnswer={this.state.errorAnswer}
+                errorQuestion={this.state.errorQuestion}
+                changeCheck={this.changeCheck}
+                changePoint={this.onChangePoint}
+                deleteAnswerOnClick={this.deleteAnswerOnClick}
+                onChangeAnswer={this.onChangeAnswer}
+                addNewAnswers={this.addNewAnswers}
+                onChangeQuestion={this.onChangeQuestion}
+                saveOnClick={this.saveOnClick}
+                changeType={this.changeType}
+                editMode={this.state.editMode}
+                answerType={this.state.answerType}
+                answers={this.state.answers}
+                question={this.state.question}
+                question_id={this.state.id}
+                index_key={this.state.index_key}
+                deleteQuestionOnClick={this.deleteQuestionOnClick}
+                {...this.props}/>
                 <Snackbar
                     open={this.state.dialogOpenAnswer}
                     autoHideDuration={6000}
@@ -235,7 +221,7 @@ class Question extends React.Component {
                         <Typography>There must be at least 1 correct and 1 incorrect answer</Typography>
                     </Alert>
                 </Snackbar>
-            </div>
+            </>
         }
         return (
             <Draggable draggableId={this.props.value._id} index={this.props.index}>
@@ -258,4 +244,9 @@ class Question extends React.Component {
     }
 }
 
-export default Question;
+let mapStateToProps = (state) => {
+    return {
+        answers: getAnswers(state)
+    }
+};
+export default connect(mapStateToProps, {requestAnswers, changePoint, changeAnswer,deleteAnswer,addNewAnswer})(Question);
