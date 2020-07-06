@@ -13,7 +13,8 @@ const Admin = (props) => {
     let [isSideBar, openSideBar] = useState(false);
     useEffect(() => {
         props.requestProfile()
-    }, [props.requestProfile])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     let LogOut = () => {
         props.logout();
     };
@@ -22,7 +23,7 @@ const Admin = (props) => {
     };
     let onClose = () => {
         openSideBar(false)
-    }
+    };
     if (props.isLoggedIn === null) {
         return <Preloader/>
     }

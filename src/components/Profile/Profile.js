@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import s from './Profile.module.css'
 import Typography from "@material-ui/core/Typography";
 import FaceIcon from '@material-ui/icons/Face';
@@ -11,7 +11,7 @@ const Profile = (props) => {
 
     let onSubmit = (value) => {
         props.feedback(value.feedback);
-    }
+    };
     return (
         <Grid
             container

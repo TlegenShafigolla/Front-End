@@ -14,16 +14,16 @@ const ShowQuestion = (props) => {
                     <div className={s.QuestionOrder}>{props.value.order_id}.</div>
                     <div className={s.QuestionField}>
                         <Typography variant="body1" gutterBottom >
-                            {props.question === ' ' ? 'New question' : props.question}
+                            {props.value.question === ' ' ? 'New question' :props.value.question}
                         </Typography>
                     </div>
                 </div>
                 <div >
                     <ShowAnswer
-                        key={props.question_id}
-                        question_id={props.question_id}
+                        key={props.value._id}
+                        question_id={props.value._id}
                         answers={props.answers}
-                        answerType={props.answerType}
+                        answerType={props.value.type}
                         {...props}
                     />
                 </div>

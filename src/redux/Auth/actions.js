@@ -29,7 +29,7 @@ export const LogIn = (email, password) => async (dispatch) => {
         let action = stopSubmit("login", {_error: true});
         dispatch(action)
     }
-}
+};
 export const Registration = (name, surname, password, occupation, email) => async (dispatch) => {
     let data = await registration(name, surname, password, occupation, email);
     if (data.Status === "Success") {

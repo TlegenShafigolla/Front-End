@@ -18,12 +18,7 @@ class EditQuestion extends React.Component {
         super(props);
         document.addEventListener('mousedown', this.onClickOuterModal, false);
         this.state = {
-            editMode: this.props.editMode,
-            question_id: this.props.question_id,
-            answerType: this.props.answerType,
-            isMultipleChoice: this.props.answerType === 'MULTIPLE CHOICE',
             openChangeTypeDialog: false,
-            openDialogAnswer: this.props.openDialogAnswer,
         }
 
     }
@@ -33,19 +28,14 @@ class EditQuestion extends React.Component {
         if (!action) {
             return;
         }
-        this.setState({isMultipleChoice: !this.state.isMultipleChoice});
-        let newType = this.state.answerType === 'MULTIPLE CHOICE' ? 'FILL THE BLANK' : 'MULTIPLE CHOICE';
-        this.setState({answerType: newType});
-        this.props.changeType(newType);
+        let newType = this.props.value.type === 'MULTIPLE CHOICE' ? 'FILL THE BLANK' : 'MULTIPLE CHOICE';
+        this.props.changeType(this.props.index,newType);
     };
 
-    multipleChoiceChecked = () => {
+    Checked = () => {
         this.setState({openChangeTypeDialog: true});
     };
 
-    fillTheBlankChecked = () => {
-        this.setState({openChangeTypeDialog: true});
-    };
 
     componentWillUnmount() {
         document.removeEventListener('mousedown', this.onClickOuterModal, false);
@@ -59,7 +49,6 @@ class EditQuestion extends React.Component {
             save();
         }
     };
-
     render() {
         return (
             <Draggable draggableId={this.props.value._id} index={this.props.index}>
@@ -78,7 +67,7 @@ class EditQuestion extends React.Component {
                                     placeholder="Question"
                                     fullWidth
                                     size='small'
-                                    defaultValue={this.props.question}
+                                    value={this.props.value.question}
                                     onChange={this.props.onChangeQuestion}
                                     multiline={true}
                                     rows={4}
@@ -92,31 +81,30 @@ class EditQuestion extends React.Component {
                             <FormControlLabel value="Type question"
                                               control={
                                                   <Radio
-                                                      checked={this.state.isMultipleChoice}
-                                                      onChange={this.multipleChoiceChecked}
+                                                      checked={this.props.value.type==='MULTIPLE CHOICE'}
+                                                      onChange={this.Checked}
                                                       color="primary"
                                                   />} label='Multiple Choice'/>
                             <FormControlLabel value="Type question"
                                               control={
                                                   <Radio
                                                       color="primary"
-                                                      onChange={this.fillTheBlankChecked}
-                                                      checked={!this.state.isMultipleChoice}
+                                                      onChange={this.Checked}
+                                                      checked={this.props.value.type==='FILL THE BLANK'}
                                                   />} label='Fill the blank '/>
                         </div>
                         <div>
                             <EditAnswer
-                                isMultipleChoice={this.state.isMultipleChoice}
                                 {...this.props}
                             />
                         </div>
                         <div className={s.Buttons}>
-                            <Button color="primary" className={s.SaveButton} onClick={this.props.saveOnClick}>
+                            <Button color="primary" className={s.SaveButton} type='submit' onClick={this.props.saveOnClick}>
                                 Save
                             </Button>
-                            {this.state.isMultipleChoice ?
+                            {this.props.value.type === 'MULTIPLE CHOICE' ?
                                 <IconButton className={s.AddButton} color="primary"
-                                            onClick={event => this.props.addNewAnswer()}>
+                                            onClick={()=>this.props.addNewAnswers(this.props.index)}>
                                     <AddIcon/>
                                 </IconButton> : ''}
                             <IconButton aria-label="delete" onClick={this.props.deleteQuestionOnClick}>

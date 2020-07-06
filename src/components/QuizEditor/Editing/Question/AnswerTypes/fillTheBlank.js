@@ -3,52 +3,39 @@ import TextField from "@material-ui/core/TextField";
 import InputBase from "@material-ui/core/InputBase";
 import React from "react";
 
-class FillTheBlank extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state={
-            error:false
-        };
+const FillTheBlank = (props) => {
+    if(props.answers[props.index]===undefined){
+        return null;
     }
-    render() {
-
-        if(this.props.answers[0] === undefined){
-            this.props.addNewAnswer(1,1);
-            return null;
-        }
-
-        return (
-            <div className={s.SaveAnswer}>
-                <TextField
-                    error={this.props.errorAnswer}
-                    id={this.props.id}
-                    key={this.props.index}
-                    placeholder="New answer"
-                    fullWidth
-                    defaultValue={this.props.answers[0].answer}
-                    onSubmit={this.props.changeCheck}
-                    onChange={this.props.onChangeAnswer}
-                    size="small"
-                    multiline={true}
-                    rows={1}
-                    rowsMax={3}
-                    variant="outlined"
-                />
-                {this.props.point ?
-                    <div>
-                        <InputBase
-                            className={s.point}
-                            id={this.props.id}
-                            key={this.props.index}
-                            inputProps={{'aria-label': 'Point'}}
-                            defaultValue={this.props.answers[0].points}
-                            onChange={this.props.changePoint}
-                        />
-                    </div> : ''}
-            </div>
-
-        );
+    if(props.answers[props.index][0]===undefined){
+        return null;
     }
-}
+    return (
+        <div className={s.SaveAnswer}>
+            <TextField
+                error={props.errorAnswer}
+                placeholder="New answer"
+                fullWidth
+                value={props.answers[props.index][0].answer}
+                onChange={(event) => props.onChangeAnswer(event, props.index, 0)}
+                size="small"
+                multiline
+                rows={1}
+                rowsMax={3}
+                variant="outlined"
+            />
+            {props.point ?
+                <div>
+                    <InputBase
+                        className={s.point}
+                        id={props.id}
+                        value={props.answers[0].points}
+                        onChange={(e) => props.changePoint(e.target.value, props.index, 0)}
+                    />
+                </div> : ''}
+        </div>
+
+    );
+};
 
 export default FillTheBlank;

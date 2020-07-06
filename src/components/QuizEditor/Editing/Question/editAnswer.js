@@ -5,15 +5,27 @@ import MultipleChoice from "./AnswerTypes/multipleChoice";
 const EditAnswer =(props)=> {
         return (
                 <div className={s.TextField}>
-                    {!props.isMultipleChoice ? <FillTheBlank
-                            {...props}
-                        /> : props.answers.map((val, index) =>
+                    {props.value.type !== 'MULTIPLE CHOICE' ?
+                        <FillTheBlank
+                       answers={props.answers}
+                       onChangeAnswer={props.onChangeAnswer}
+                       changePoint={props.changePoint}
+                       index={props.index}
+                       question_id={props.value._id}
+                       addNewAnswer={props.addNewAnswer}
+                       point={props.point}
+                       errorAnswer={props.errorAnswer}
+                        /> : props.answers[props.index].map((val, index) =>
                                 <MultipleChoice
-                                    id={index.toString()}
-                                    key={props.index_key[index]}
+                                    deleteAnswerOnClick={props.deleteAnswerOnClick}
+                                    onChangeAnswer={props.onChangeAnswer}
+                                    changePoint={props.changePoint}
+                                    index={props.index}
+                                    point={props.point}
+                                    id={index}
+                                    errorAnswer={props.errorAnswer}
+                                    key={index}
                                     val={val}
-                                    index={index}
-                                    {...props}
                                 />)
                     }
                 </div>
@@ -22,15 +34,3 @@ const EditAnswer =(props)=> {
 };
 export default EditAnswer;
 
-/* {this.props.answers === [] ? '555' : this.props.answers.map((val, index) =>
-                        <div key={this.props.index_key[index]} >
-                            <EditAnswer
-                                id={index.toString()}
-                                key={this.props.index_key[index]}
-                                val={val}
-                                index={index}
-                                isMultipleChoice={this.state.isMultipleChoice}
-                                {...this.props}
-                            />
-                        </div>
-                    )} */

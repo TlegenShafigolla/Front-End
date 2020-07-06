@@ -36,6 +36,7 @@ const InviteDialog = (props) => {
     };
     useEffect(() => {
         props.requestGroup()
+// eslint-disable-next-line
     }, [props.groups === []]);
 
     return (

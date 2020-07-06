@@ -5,50 +5,37 @@ import s from '../css/showAnswer.module.css'
 import Radio from "@material-ui/core/Radio";
 import {Checkbox} from "@material-ui/core";
 
-class ShowAnswer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            question_id: this.props.question_id,
-            multiple_choice: this.props.answerType === 'MULTIPLE CHOICE',
-            fill_the_blank: this.props.answerType === 'FILL THE BLANK',
-        };
-    }
+const ShowAnswer = (props) => {
+    return (
+        <>
+            <div className={s.FormControl}>
 
-    render() {
-        return (
-            <div>
-                <div className={s.FormControl}>
+                <FormControlLabel value="Type question"
+                                  control={
+                                      <Radio
+                                          checked={props.answerType === 'MULTIPLE CHOICE'}
+                                          disabled={true}
+                                      />} label='Multiple Choice'/>
+                <FormControlLabel value=""
+                                  control={
+                                      <Radio
+                                          checked={props.answerType === 'FILL THE BLANK'}
+                                          disabled={true}
+                                      />} label='Fill the blank '/>
 
-                    <FormControlLabel value="Type question"
-                                      control={
-                                          <Radio
-                                              checked={this.state.multiple_choice}
-                                              disabled={true}
-                                          />} label='Multiple Choice'/>
-                    <FormControlLabel value=""
-                                      control={
-                                          <Radio
-                                              checked={this.state.fill_the_blank}
-                                              disabled={true}
-                                          />} label='Fill the blank '/>
-
-                </div>
-                <div>
-                    {this.props.answers === null ? '' : this.props.answers.map((val,index) =>
-                        <div className={s.Answer} key={val._id+index.toString()}>
-                            <Typography variant="body1" noWrap>
-                                {val.answer}
-                            </Typography>
-                            {this.props.point ? <Typography variant="body1">{val.points} </Typography> :
-                                (this.state.multiple_choice ?
-                                    <Checkbox checked={val.points !== 0} disabled={true}/> : '')}
-                        </div>
-                    )}
-                </div>
             </div>
-        );
-    }
-}
-
+            <div>
+                {props.answers[props.index] === undefined ? '' : props.answers[props.index].map((val, index) =>
+                    <div className={s.Answer} key={val._id + index.toString()}>
+                        <Typography variant="body1" noWrap>
+                            {val.answer}
+                        </Typography>
+                        {props.point ? <Typography variant="body1">{val.points} </Typography> :
+                                <Checkbox checked={val.points !== 0} disabled={true}/>}
+                    </div>
+                )}
+            </div>
+        </>
+    );
+};
 export default ShowAnswer;

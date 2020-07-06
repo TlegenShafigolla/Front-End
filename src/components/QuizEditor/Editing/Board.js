@@ -1,7 +1,6 @@
 import React from "react";
 import s from './css/Board.module.css'
 import {Link} from 'react-scroll'
-import Paper from "@material-ui/core/Paper/Paper";
 
 const board = (props) => {
     return (

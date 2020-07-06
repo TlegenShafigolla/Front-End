@@ -1,4 +1,3 @@
-import React from "react";
 import {getProfile} from "../redux/Reselects/Auth-reselect";
 import Profile from "../components/Profile/Profile";
 import {connect} from "react-redux";
@@ -11,5 +10,5 @@ let mapStateToProps = (state) => {
         Profile: getProfile(state),
         Success:Success(state),
     }
-}
+};
 export default connect(mapStateToProps, {feedback})(Profile)

@@ -5,7 +5,7 @@ import Alert from "@material-ui/lab/Alert";
 const Alerts = (props) => {
     return (<Snackbar
             open={props.open}
-            autoHideDuration={600}
+            autoHideDuration={60}
             onClose={props.onClose}>
             <Alert variant={props.variant} severity={props.severity}>
                 {props.children}

@@ -1,7 +1,5 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
 import {Drawer, Typography} from "@material-ui/core";
-import {NavLink} from "react-router-dom";
 import AccountBoxSharpIcon from '@material-ui/icons/AccountBoxSharp';
 import InsertInvitationSharpIcon from '@material-ui/icons/InsertInvitation';
 import AssessmentSharpIcon from '@material-ui/icons/Assessment';
@@ -12,7 +10,7 @@ import GroupIcon from '@material-ui/icons/Group';
 import {Element} from "../../hoc/SideBar/SideBarElement";
 
 const SideBar = (props) => {
-    const firstLayer = '/admin/'
+    const firstLayer = '/admin/';
     const SideBar = [
         {Link: `${firstLayer}profile`, Name: 'Profile', icon: <AccountBoxSharpIcon/>},
         {Link: `${firstLayer}group`, Name: 'Groups', icon: <GroupIcon/>},
@@ -20,7 +18,7 @@ const SideBar = (props) => {
         {Link: `${firstLayer}quizzes`, Name: 'Quizzes', icon: <InsertInvitationSharpIcon/>},
         {Link: `${firstLayer}survey/editor`, Name: 'Survey Editor', icon: <AssessmentSharpIcon/>},
         {Link: `${firstLayer}surveys`, Name: 'Surveys', icon: <InsertInvitationSharpIcon/>},
-    ]
+    ];
     return (
         <Drawer
             open={props.open}
