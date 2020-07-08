@@ -1,29 +1,38 @@
 import React from "react";
-import {getReport} from "../../services/API/adminAPI/Quiz/reports";
 import s from "./Report.module.css";
 import ReportQuestion from "./ReportQuestion";
 import ReportCard from "./ReportCard";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import {Link} from "react-router-dom";
-import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 
 class Report extends React.Component {
     constructor(props) {
         super(props);
-        const {id} = this.props.match.params;
         this.state = {
-            tab: 0,
-            report_id: id,
-            report: null,
-            correctQuestions: null,
-        };
+            points: 0,
+            id: null,
+        }
     }
-
-
+    onChangeCheckbox =  (event) => {
+        let id = event.target.id
+        let points = Number(event.target.checked);
+        let session_id = this.props.report.session._id;
+        this.props.PutReport(id, points, session_id)
+    };
+    onChangeInputBase = (event) => {
+        this.setState({points: event.target.value});
+        this.setState({id: event.target.id});
+    };
+    onSubmitInput = () => {
+        let id = this.state.id;
+        let points = this.state.points;
+        let session_id = this.props.report.session._id;
+        this.props.PutReport(id, points, session_id)
+    };
     render() {
-        if (this.state.report === null) {
+        if (this.props.report === null) {
             return '';
         }
         return (
@@ -32,7 +41,7 @@ class Report extends React.Component {
                   justify="center"
             >
                 <div className={s.ArrowButton}>
-                    <Link to={`/admin/quizzes/${this.state.report.quiz._id}`}>
+                    <Link to={`/admin/quizzes/${this.props.report.quiz._id}`}>
                         <IconButton color="primary">
                             <ArrowBackIosIcon/>
                         </IconButton>
@@ -40,13 +49,14 @@ class Report extends React.Component {
                 </div>
                 <Grid item lg={6} md={6} sm={9} xs={12}>
                     <div className={s.Root}>
-                        <ReportCard report={this.state.report}/>
+                        <ReportCard report={this.props.report}/>
                     </div>
-                    {this.state.report.questions.map(val => <ReportQuestion val={val}
+                    {this.props.report.questions.map(val => <ReportQuestion val={val}
                                                                             key={val._id}
-                                                                            session={this.state.report.session}
-                                                                            newState={this.newState}
-                                                                            points={this.state.report.quiz.points}/>)}
+                                                                            onChangeCheckbox={this.onChangeCheckbox}
+                                                                            onSubmitInput={this.onSubmitInput}
+                                                                            onChangeInputBase={this.onChangeInputBase}
+                                                                            points={this.props.report.quiz.points}/>)}
 
                 </Grid>
 
@@ -56,11 +66,7 @@ class Report extends React.Component {
 
 
     componentDidMount() {
-        getReport(this.state.report_id).then(val => {
-            console.log(val);
-            this.setState({report: val});
-        })
-
+       this.props.RequestReport(this.props.match.params.id)
     }
 }
 

@@ -1,13 +1,14 @@
 import React from "react";
+// noinspection ES6CheckImport
 import {Route} from "react-router-dom";
-import Surveys from "./Surveys";
-import Survey from "./Survey";
+import ReportSurveyContainer from "../../containers/Reports/ReportSurveyContainer";
+import ReportSurveyPreviewContainer from "../../containers/Reports/ReportSurveyPreviewContainer";
 
-const SurveysRoute = (props) => {
+const SurveysRoute = () => {
     return (
         <div>
-            <Route exact path='/admin/surveys' component={Surveys}/>
-            <Route path='/admin/surveys/:id' component={Survey}/>
+            <Route exact path='/admin/surveys' render={()=><ReportSurveyPreviewContainer/>}/>
+            <Route path='/admin/surveys/:id' render={()=><ReportSurveyContainer/>}/>
         </div>
     )
 };

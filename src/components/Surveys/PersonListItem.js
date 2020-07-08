@@ -76,7 +76,7 @@ const PersonSurveyListItem = (props) => {
                 </Grid>
                 {props.session ?
                     <Grid item xs={12}>
-                        <NavLink to={`/admin/reports/${props.session._id}`}>See Report</NavLink>
+                        <NavLink to={`/admin/survey/reports/${props.session._id}`}>See Report</NavLink>
                     </Grid> : null}
             </Grid>
         </Paper>

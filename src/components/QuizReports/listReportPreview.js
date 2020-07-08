@@ -1,9 +1,8 @@
 import React from "react";
 import getReportList from "../../services/API/adminAPI/Quiz/reports";
 import ReportPreview from "./ReportPreview";
-import s from './ListReportPreview.module.css'
-import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from "@material-ui/core/Grid";
+import Preloader from "../common/Preloader";
 
 
 class ListReportPreview extends React.Component{
@@ -17,9 +16,7 @@ class ListReportPreview extends React.Component{
     render() {
         if(this.state.Reports === []){
             return (
-                <div className={s.CircularProgress}>
-                    <CircularProgress size={70}/>
-                </div>
+                <Preloader/>
             );
         }
         return(

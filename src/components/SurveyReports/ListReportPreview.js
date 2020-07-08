@@ -1,7 +1,6 @@
 import React from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import {getReports} from "../../services/API/adminAPI/Survey/reports";
-import ReportSurveyPreview from "./ReportPreview";
 import s from "../QuizReports/ListReportPreview.module.css";
 
 

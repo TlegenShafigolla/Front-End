@@ -51,7 +51,7 @@ export const Routes = () => {
             <Route path="/admin/quizzes" render={() => <QuizzesRoute/>}/>
             <Route path="/admin/surveys" render={() => <SurveysRoute/>}/>
             <Route path="/admin/reports" render={() => <ReportRoute/>}/>
-            <Route path='/admin/surveys/reports' render={() => <ReportSurveyRoute/>}/>
+            <Route path='/admin/survey/reports/' render={() => <ReportSurveyRoute/>}/>
         </div>
 
     );

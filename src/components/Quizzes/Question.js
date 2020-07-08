@@ -39,7 +39,7 @@ const Question = (props) => {
                                 </Typography>
                                 {props.points ? <Typography variant="body1">{val.points}</Typography> :
                                     (props.value.type === "MULTIPLE CHOICE" ?
-                                        <Checkbox checked={val.correct === 1} disabled={true}/> : '')}
+                                        <Checkbox checked={val.points >0} disabled={true}/> : '')}
                             </div>
                         )}
                     </div>

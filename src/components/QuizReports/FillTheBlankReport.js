@@ -1,10 +1,8 @@
 import React from "react";
 import s from "./ReportQuestion.module.css";
 import {Checkbox, InputBase, Typography} from "@material-ui/core";
-import Button from "@material-ui/core/Button";
 import CheckIcon from '@material-ui/icons/Check';
 import {green} from "@material-ui/core/colors";
-import red from "@material-ui/core/colors/red";
 import Paper from "@material-ui/core/Paper";
 
 const correct = green.A700;

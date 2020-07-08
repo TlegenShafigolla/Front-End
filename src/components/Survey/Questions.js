@@ -1,6 +1,5 @@
 import React from "react";
 import s from "./Questions.module.css";
-import Typography from "@material-ui/core/Typography";
 import Answers from "./Answers";
 import Divider from "@material-ui/core/Divider";
 

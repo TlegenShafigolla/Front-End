@@ -1,18 +1,14 @@
 import React from "react";
 import {Route} from "react-router-dom";
-import ListReportSurveyPreview from "./ListReportPreview";
-import Report from "./Report";
+import ReportPersonSurveyContainer from "../../containers/Reports/ReportPersonSurveyContainer";
 
 
-class ReportSurveyRoute extends React.Component {
-    render() {
-        return (
-            <div>
-                <Route exact path='/admin/surveys/reports' component={ListReportSurveyPreview}/>
-                <Route path='/admin/surveys/reports/:id' component={Report}/>
-            </div>
-        );
-    }
+const ReportSurveyRoute = () => {
+    return (
+        <div>
+            <Route  path='/admin/survey/reports/:id' render={() => <ReportPersonSurveyContainer/>}/>
+        </div>
+    );
 }
 
 export default ReportSurveyRoute;

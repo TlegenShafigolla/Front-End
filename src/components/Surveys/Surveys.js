@@ -3,25 +3,18 @@ import s from "./Surveys.module.css";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper/Paper";
 import {NavLink} from "react-router-dom";
-import getUsedSurvey from "../../services/API/adminAPI/Survey/usedSurveys";
 import Typography from "@material-ui/core/Typography";
 
 class Surveys extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            surveys: []
-        };
-    }
 
     componentDidMount() {
-        getUsedSurvey().then(json => {
-            console.log(json);
-            this.setState({surveys: json});
-        });
+        this.props.requestUsedSurveys()
     }
 
     render() {
+        if(this.props.surveys===undefined){
+            return null;
+        }
         return (
             <Grid container
                   direction="row"
@@ -37,7 +30,7 @@ class Surveys extends React.Component {
                           alignItems="flex-start"
                           spacing={1}
                           className={s.Body}>
-                        {this.state.surveys.map((val, index) =>
+                        {this.props.surveys.map((val, index) =>
                             <Grid key={index} item lg={3} md={3} sm={4} xs={12}>
                                 <SurveyCard survey_name={val.survey_name} _id={val._id}
                                             questions_count={val.questions_count}

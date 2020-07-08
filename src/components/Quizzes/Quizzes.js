@@ -2,26 +2,19 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import s from "./Quizzes.module.css";
-import getUsedQuiz from "../../services/API/adminAPI/Quiz/usedQuizzes";
 import {NavLink} from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 
 class Quizzes extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            quizzes: [],
-        };
-    }
 
     componentDidMount() {
-        getUsedQuiz().then(json => {
-            console.log(json);
-            this.setState({quizzes: json});
-        });
+        this.props.requestUsedQuiz()
     }
 
     render() {
+        if(this.props.quizzes===undefined){
+            return ''
+        }
         return (
             <Grid container
                   direction="row"
@@ -37,7 +30,7 @@ class Quizzes extends React.Component {
                           alignItems="flex-start"
                           spacing={1}
                           className={s.Body}>
-                        {this.state.quizzes.map((val, index) =>
+                        {this.props.quizzes.map((val, index) =>
                             <Grid key={index} item lg={3} md={3} sm={4} xs={12}>
                                 <QuizCard quiz_name={val.quiz_name}
                                           _id={val._id}
