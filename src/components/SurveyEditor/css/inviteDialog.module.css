@@ -22,7 +22,9 @@
 /*-----------------------------------------------------------Person----------------------------------------------------*/
 
 /*------------------------------------------------------Invite Dialog-------------------------------------------------*/
-
+.Invite{
+    padding: 10px;
+}
 .RadioButton {
     display: flex;
     justify-content: space-around;
@@ -58,4 +60,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+@media screen and (max-width: 600px){
+    .Invite{
+        padding: 4px;
+    }
 }

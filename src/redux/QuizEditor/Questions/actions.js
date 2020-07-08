@@ -38,7 +38,7 @@ export const requestAnswers = (id, index) => async (dispatch) => {
         dispatch(addNewAnswer(index, id, 1))
     }
 };
-export const saveAnswer = (answer, type, id, index, mode) => async (dispatch) => {
+export const saveAnswer = (answer, type, id, index,) => async (dispatch) => {
     dispatch(disableButton(true));
     let wrong = 0;
     let empty = 0;

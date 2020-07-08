@@ -1,13 +1,14 @@
 import React from "react";
+// noinspection ES6CheckImport
 import {Route} from "react-router-dom";
-import ListSurveyPreview from "./listSurveysPreview";
-import EditSurvey from "./editSurvey";
+import ListSurveyPreviewContainer from "../../containers/SurveyEditor/ListSurveyPreviewContainer";
+import SurveyEditContainer from "../../containers/SurveyEditor/SurveyEditContainer";
 
 const MySurveyRoute = () => {
     return (
         <div>
-            <Route exact path='/admin/survey/editor' component={ListSurveyPreview}/>
-            <Route path='/admin/survey/editor/edit/:id' component={EditSurvey} />
+            <Route exact path='/admin/survey/editor' render={()=><ListSurveyPreviewContainer/>}/>
+            <Route path='/admin/survey/editor/:id' render={()=><SurveyEditContainer/>} />
         </div>
     )
 };

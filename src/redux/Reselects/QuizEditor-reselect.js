@@ -24,24 +24,26 @@ export const getQuestions = (state) => {
     return state.QuizEditor.questions
 };
 
+
+
 export const getAnswers=(state)=>{
-    return state.Questions.answers
+    return state.QuizQuestions.answers
 };
 export const answerChanged=(state)=>{
-    return state.Questions.answerChanged
+    return state.QuizQuestions.answerChanged
 };
 export const answer=(state)=>{
-    return state.Questions.answer
+    return state.QuizQuestions.answer
 };
 export const point=(state)=>{
-    return state.Questions.points
+    return state.QuizQuestions.points
 };
 export const disabledButton=(state)=>{
-    return state.Questions.disabledButton
+    return state.QuizQuestions.disabledButton
 };
 export const errorDialog=(state)=>{
-    return state.Questions.errorDialog
+    return state.QuizQuestions.errorDialog
 };
 export const errorAnswer=(state)=>{
-    return state.Questions.error
+    return state.QuizQuestions.error
 };

@@ -1,11 +1,10 @@
 import React from "react";
 import {Field, reduxForm} from "redux-form";
-import {Button, Snackbar} from "@material-ui/core";
+import {Button,} from "@material-ui/core";
 import s from "../../css/SignUp.module.css";
 import {Link} from "react-router-dom";
 import {renderTextField} from "../common/TextField";
 import {required} from "../../utils/validators";
-import Alert from "@material-ui/lab/Alert";
 import Alerts from "../common/Alert";
 
 const reg = [
@@ -15,7 +14,7 @@ const reg = [
     {type: 'occupation', label: 'Occupation', name: 'occupation'},
     {type: 'password', label: 'Password', name: 'password'},
     {type: 'password', label: 'Confirm password', name: 'confirmPassword'},
-]
+];
 const RegistrationForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
@@ -39,5 +38,5 @@ const RegistrationForm = (props) => {
             <Alerts open={props.error!==undefined} variant="filled" children="Account with such email already exists" severity="error" />
         </form>
     )
-}
+};
 export default reduxForm({form: 'registration'})(RegistrationForm)

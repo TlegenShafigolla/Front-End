@@ -11,7 +11,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Preloader from "../../common/Preloader";
 import EditQuizInfo from "./Question/editQuizInfo";
-import QuestionContainer from "../../../containers/QuizEditor/QuestionContainer";
+import QuestionContainer from "../../../containers/QuizEditor/QuizQuestionContainer";
 
 class EditQuiz extends Component {
 
@@ -71,7 +71,7 @@ class EditQuiz extends Component {
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState.quizChanges !== this.state.quizChanges) {
+        if (this.state.quizChanges !== false) {
             this.props.PutQuiz(this.props.questions);
             this.setState({quizChanges: false});
         }
@@ -107,13 +107,13 @@ class EditQuiz extends Component {
             }
     };
     // eslint-disable-next-line
-    openPdfDialog = () => {
-        this.setState({generatePdfDialog: true});
-    };
-    // eslint-disable-next-line
-    closePdfDialog = () => {
-        this.setState({generatePdfDialog: false});
-    };
+    // openPdfDialog = () => {
+    //     this.setState({generatePdfDialog: true});
+    // };
+    // // eslint-disable-next-line
+    // closePdfDialog = () => {
+    //     this.setState({generatePdfDialog: false});
+    // };
 
     editDescription = () => {
         this.setState({editDescription: true});
@@ -159,8 +159,7 @@ class EditQuiz extends Component {
                                               onBlurQuizName={this.onBlurQuizName}
 
                                               editModeDescription={this.state.editDescription}
-                                              quiz_name={this.props.questions.quiz_name}
-                                              description={this.props.questions.description}/>
+                                            />
                                 <EditQuizSettings pointsChecked={this.pointsChecked}
                                                   points={this.props.questions.points}
                                                   lastedit={this.props.questions.last_edited_date}/>
@@ -179,7 +178,6 @@ class EditQuiz extends Component {
                                                     value={val}
                                                     questionsqw={this.props.questions.questions}
                                                     point={this.props.questions.points}
-                                                    deleteQuestions={this.deleteQuestions}
                                                 />)}
                                             {provided.placeholder}</div>)}</Droppable>
                             </DragDropContext>

@@ -1,5 +1,5 @@
-import {postInvitations} from "../../services/API/adminAPI/Quiz/invitations";
-import {getListGroup} from "../../services/API/adminAPI/Group/group";
+import {postInvitations} from "../../../services/API/adminAPI/Quiz/invitations";
+import {getListGroup} from "../../../services/API/adminAPI/Group/group";
 
 export const SET_LINK = 'QUIZ_INVITE/SET_LINK';
 export const GROUPS = "QUIZ_INVITE/GROUPS";
@@ -36,6 +36,7 @@ export const postInvite = (values, id,groups,group_id) => async (dispatch) => {
                 surname: values.surname,
                 email: values.email,
             };
+            break;
         }
         case 'group': {
             const group=groups.filter(id=>id._id!==0);
@@ -44,14 +45,18 @@ export const postInvite = (values, id,groups,group_id) => async (dispatch) => {
                 ...invitation,
                 group_id:group_id,
                 group: groupPerson,
-            }
+            };
+            break
         }
         case 'link': {
             invitation = {
                 ...invitation,
                 public: true,
             };
+            break;
         }
+        default:
+            return null;
     }
     let data = await postInvitations(invitation);
     dispatch(setLink(data.link));

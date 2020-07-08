@@ -1,9 +1,9 @@
-import React from "react";
-import {Field,} from "redux-form";
-import {renderTextField} from "../../../common/TextField";
+import {Field} from "redux-form";
 import {checkEmail, required} from "../../../../utils/validators";
+import {renderTextField} from "../../../common/TextField";
+import React from "react";
 
-const Person = () => {
+const   Person = () => {
     return (<>
         <Field
             margin="dense"
@@ -38,4 +38,3 @@ const Person = () => {
     </>)
 };
 export default Person;
-

@@ -1,40 +1,22 @@
 import React from "react";
-import s from "./editQuestion.module.css";
+import s from "../editQuestion.module.css";
 import TextField from "@material-ui/core/TextField/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabel";
 import Radio from "@material-ui/core/Radio/Radio";
 import IconButton from "@material-ui/core/IconButton";
-import AddIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import AddIcon from '@material-ui/icons/Add';
 import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditAnswer from "./editAnswer";
 import $ from "jquery";
 import Paper from "@material-ui/core/Paper";
+import {Draggable} from "react-beautiful-dnd";
 
 class EditQuestion extends React.Component {
     constructor(props) {
         super(props);
         document.addEventListener('mousedown', this.onClickOuterModal, false);
-        this.state = {
-            question_id: this.props.question_id,
-            order: this.props.value.order_id,
-            answerType: this.props.answerType,
-            isMultipleChoice: this.props.answerType === 'MULTIPLE CHOICE',
-        }
     }
-
-    multipleChoiceChecked = () => {
-        this.setState({isMultipleChoice: true});
-        this.setState({answerType: "MULTIPLE CHOICE"});
-        this.props.changeType("MULTIPLE CHOICE");
-    };
-
-    fillTheBlankChecked = () => {
-        this.setState({isMultipleChoice: false});
-        this.setState({answerType: "FILL THE BLANK"});
-        this.props.changeType("FILL THE BLANK");
-    };
-
     componentWillUnmount() {
         document.removeEventListener('mousedown', this.onClickOuterModal, false);
     }
@@ -50,7 +32,12 @@ class EditQuestion extends React.Component {
 
     render() {
         return (
-            <Paper square elevation={3} className={s.Survey} id={this.props.value.order_id}>
+            <Draggable draggableId={this.props.value._id} index={this.props.index}>
+                {provided => (
+            <Paper square elevation={3} {...provided.draggableProps}
+                   {...provided.dragHandleProps}
+                   ref={provided.innerRef}
+                   className={s.Survey} id={this.props.value.order_id}>
                 <div className={s.SurveyInfo}>
                     <div className={s.SurveyOrder}>{this.props.value.order_id}.</div>
                     <div className={s.SurveyField}>
@@ -60,7 +47,7 @@ class EditQuestion extends React.Component {
                             placeholder="Question"
                             fullWidth
                             size='small'
-                            defaultValue={this.props.question}
+                            defaultValue={this.props.value.question}
                             onChange={this.props.onChangeQuestion}
                             multiline={true}
                             rows={4}
@@ -74,21 +61,20 @@ class EditQuestion extends React.Component {
                     <FormControlLabel value="Type question"
                                       control={
                                           <Radio
-                                              checked={this.state.isMultipleChoice}
-                                              onChange={this.multipleChoiceChecked}
+                                              checked={this.props.value.type==='MULTIPLE CHOICE'}
+                                              onChange={()=>this.props.changeType(this.props.index,'MULTIPLE CHOICE')}
                                               color="primary"
                                           />} label='Multiple Choice'/>
                     <FormControlLabel value="Type question"
                                       control={
                                           <Radio
                                               color="primary"
-                                              onChange={this.fillTheBlankChecked}
-                                              checked={!this.state.isMultipleChoice}
+                                              onChange={()=>this.props.changeType(this.props.index,'FILL THE BLANK')}
+                                              checked={this.props.value.type==='FILL THE BLANK'}
                                           />} label='Fill the blank '/>
                 </div>
                 <div>
                     <EditAnswer
-                        isMultipleChoice={this.state.isMultipleChoice}
                         {...this.props}
                     />
                 </div>
@@ -96,16 +82,16 @@ class EditQuestion extends React.Component {
                     <Button color="primary" className={s.SaveButton} onClick={this.props.saveOnClick}>
                         Save
                     </Button>
-                    {this.state.isMultipleChoice ?
+                    {this.props.value.type === 'MULTIPLE CHOICE'?
                         <IconButton className={s.AddButton} color="primary"
-                                    onClick={() => this.props.addNewAnswer()}>
+                                    onClick={this.props.addNewAnswers}>
                             <AddIcon/>
                         </IconButton> : ''}
                     <IconButton aria-label="delete" onClick={this.props.deleteQuestionOnClick}>
                         <DeleteIcon/>
                     </IconButton>
                 </div>
-            </Paper>
+            </Paper>)}</Draggable>
         );
     }
 }

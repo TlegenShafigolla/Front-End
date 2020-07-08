@@ -6,7 +6,7 @@ import Preloader from "../../components/common/Preloader";
 import ListQuizPreviewPage from "../../components/QuizEditor/Preview/listQuizPreviewPage";
 import {addNewQuiz, deleteQuizzes,  requestQuiz} from "../../redux/QuizEditor/actions";
 import {disableButton,  getId, getQuiz, isFetching} from "../../redux/Reselects/QuizEditor-reselect";
-import {postInvite} from "../../redux/Invite/actions";
+import {postInvite} from "../../redux/QuizEditor/Invite/actions";
 import {getGroups, getPerson, getSelectGroup} from "../../redux/Reselects/Quiz_invite-reselect";
 
 const ListQuizPreview = (props) => {
@@ -31,9 +31,10 @@ const ListQuizPreview = (props) => {
 
     useEffect(() => {
         props.requestQuiz()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.quizzes === []]);
 
-    let addNewQuiz = async () => {
+    let addNewQuiz =  () => {
         if (props.disabledButton) {
             return null;
         }
@@ -49,7 +50,6 @@ const ListQuizPreview = (props) => {
         openDeleteQuiz(true)
     };
     let onClickDelete = (action, id) => {
-        debugger
         openDeleteQuiz(false);
         if (!action) {
             return;

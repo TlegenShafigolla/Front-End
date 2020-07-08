@@ -81,7 +81,7 @@ export const addQuestions = (order_id, id,) => async (dispatch) => {
     dispatch(disableButton(false))
 };
 export const PutQuiz=(quiz)=>async ()=>{
-    let data=await putQuiz(quiz);
+    await putQuiz(quiz);
 };
 export const saveQuestion = (id, question) => async (dispatch) => {
     dispatch(disableButton(true));

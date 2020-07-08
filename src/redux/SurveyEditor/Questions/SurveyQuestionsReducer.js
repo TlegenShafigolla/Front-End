@@ -2,12 +2,9 @@ import {
     ADD_NEW_ANSWER,
     CHANGE_ANSWER,
     CHANGE_ANSWER_FALSE,
-    CHANGE_POINT,
     DELETE_ANSWER,
     DELETE_ANSWER_SERVER,
     DISABLE_BUTTON,
-    ERROR,
-    OPEN_ERROR_DIALOG,
     SET_ANSWERS,
 } from "./actions";
 
@@ -15,10 +12,8 @@ let initialState = {
     answers: [],
     answerChanged: false,
     disabledButton: false,
-    error:false,
-    errorDialog:false,
 };
-const QuestionsReducer = (state = initialState, action) => {
+const SurveyQuestionsReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_ANSWERS: {
             let answer=[...state.answers];
@@ -26,18 +21,6 @@ const QuestionsReducer = (state = initialState, action) => {
                 return {
                     ...state,
                     answers: answer
-            }
-        }
-        case OPEN_ERROR_DIALOG:{
-            return {
-                ...state,
-                errorDialog:true,
-            }
-        }
-        case ERROR:{
-            return {
-                ...state,
-                error:true,
             }
         }
         case DISABLE_BUTTON: {
@@ -52,21 +35,9 @@ const QuestionsReducer = (state = initialState, action) => {
                 answerChanged: false
             }
         }
-        case CHANGE_POINT: {
-            return {
-                ...state,
-                errorDialog: false,
-                answerChanged: true,
-                points: state.answers[action.index][action.id] = {
-                    ...state.answers[action.index][action.id],
-                    points: Number(action.point)
-                },
-            }
-        }
         case CHANGE_ANSWER: {
             return {
                 ...state,
-                error: false,
                 answerChanged: true,
                 answer: state.answers[action.index][action.id] = {
                     ...state.answers[action.index][action.id],
@@ -109,4 +80,4 @@ const QuestionsReducer = (state = initialState, action) => {
             return state
     }
 };
-export default QuestionsReducer;
+export default SurveyQuestionsReducer;

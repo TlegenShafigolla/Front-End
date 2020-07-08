@@ -1,24 +1,27 @@
-import EditQuiz from "../../components/QuizEditor/Editing/editQuiz";
-import {
-    addQuestions,
-     editDescription, editQuizName, pointChecked,
-    PutQuestion, PutQuiz, questionsChanged,
-    requestQuestions
-} from "../../redux/QuizEditor/actions";
 import {connect} from "react-redux";
 import {compose} from "redux";
 // noinspection ES6CheckImport
 import {withRouter} from "react-router-dom";
+import EditSurvey from "../../components/SurveyEditor/Editing/editSurvey";
+import {
+    addQuestions,
+    editDescription,
+    editSurveyName,
+    PutQuestion,
+    PutSurvey, questionsChanged,
+    requestQuestions
+} from "../../redux/SurveyEditor/actions";
 import {
     disableButton,
     getAnswers,
     getQuestions,
     questionNumberChanged
-} from "../../redux/Reselects/QuizEditor-reselect";
+} from "../../redux/Reselects/SurveyEditor-reselect";
+
 
 let mapStateToProps = (state) => {
     return {
-        questions: getQuestions(state),
+        questions:getQuestions(state),
         disabledButton: disableButton(state),
         questionNumberChanged: questionNumberChanged(state),
         answers: getAnswers(state),
@@ -28,12 +31,11 @@ export default compose(
     connect(mapStateToProps, {
         requestQuestions,
         addQuestions,
+        editSurveyName,
         questionsChanged,
-        PutQuestion,
-        pointChecked,
-        PutQuiz,
         editDescription,
-        editQuizName
+        PutQuestion,
+        PutSurvey,
     }),
     withRouter
-)(EditQuiz)
+)(EditSurvey)

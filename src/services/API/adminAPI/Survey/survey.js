@@ -41,7 +41,7 @@ export function putSurvey(survey) {
         },
         body: JSON.stringify(survey),
     };
-    return fetch(`${api}/quiz`, requestOptions).then(res => {
+    return fetch(`${api}/survey`, requestOptions).then(res => {
         return res.json();
     })
 }

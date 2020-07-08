@@ -3,7 +3,7 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import InviteDialog from "../../components/QuizEditor/Editing/Invite/inviteDialog";
 import {getGroups, getLink, getPerson, getSelectGroup} from "../../redux/Reselects/Quiz_invite-reselect";
-import {checkPerson, requestGroup, setPerson} from "../../redux/Invite/actions";
+import {checkPerson, requestGroup, setPerson} from "../../redux/QuizEditor/Invite/actions";
 
 const selector = formValueSelector('invite');
 let mapStateToProps = (state) => {

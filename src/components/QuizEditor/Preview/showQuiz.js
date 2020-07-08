@@ -56,6 +56,6 @@ const ShowQuiz = (props) => {
             <Alerts variant="filled" severity="warning" open={props.openSnackbar} children=" No questions in the quiz"/>
         </Paper>
     );
-}
+};
 
 export default ShowQuiz;

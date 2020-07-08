@@ -40,7 +40,6 @@ const InviteDialog = (props) => {
     }, [props.groups === []]);
 
     return (
-        <div>
             <Dialog
                 fullWidth
                 open={props.openDialog}
@@ -55,7 +54,7 @@ const InviteDialog = (props) => {
                     </DialogActions>
                     <div className={s.Invite}>
                         <Field component={RadioButton} name='type'>
-                            1 <Radio name='person'/> <Radio name='group'/>
+                             <Radio name='person'/> <Radio name='group'/>
                         </Field>
                         {props.type === 'person' ?
                             <Person
@@ -91,7 +90,6 @@ const InviteDialog = (props) => {
                     </DialogActions>
                 </form>
             </Dialog>
-        </div>
     );
 };
 
