@@ -10,20 +10,22 @@ import SurveyEditorReducer from "./SurveyEditor/SurveyEditor-reducer";
 import SurveyInviteReducer from "./SurveyEditor/Invite/Invite-reducer";
 import SurveyQuestionsReducer from "./SurveyEditor/Questions/SurveyQuestionsReducer";
 import GroupReducer from "./Group/group-reducer";
+import GroupReportReducer from "./Reports/Group/groupReport-reducer";
 
 let reducers = combineReducers({
     Auth: AuthReducer,
     Profile: ProfileReducer,
     QuizEditor: QuizEditorReducer,
-    SurveyEditor:SurveyEditorReducer,
+    SurveyEditor: SurveyEditorReducer,
     QuizQuestions: QuizQuestionsReducer,
-    SurveyQuestions:SurveyQuestionsReducer,
+    SurveyQuestions: SurveyQuestionsReducer,
     QuizInvite: QuizInviteReducer,
     SurveyInvite: SurveyInviteReducer,
-    Groups:GroupReducer,
+    Groups: GroupReducer,
+    GroupReport: GroupReportReducer,
     form: formReducer,
 });
 // eslint-disable-next-line
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, composeEnhancers( applyMiddleware(thunkMiddleware)));
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
 export default store;

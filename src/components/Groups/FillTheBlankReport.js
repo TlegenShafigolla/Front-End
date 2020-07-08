@@ -8,9 +8,15 @@ import Paper from "@material-ui/core/Paper";
 const correct = green.A700;
 const FillTheBlankGroup = (props) => {
     let answers = props.val.answers[0].question_id;
-    let session = props.val.session[props.index].answers;
+    let session;
+    if (props.val.session !== undefined) {
+        session = props.val.session[props.index].answers;
+    }
+    else {
+        session=props.val.answers[0].question_id
+    }
     let sessions = null
-    for (let j in session) {
+    for (let j=0;j<session.length;j++) {
         if (session[j].question_id === answers) {
             sessions = {
                 ...session[j]

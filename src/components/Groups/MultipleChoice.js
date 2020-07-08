@@ -22,7 +22,7 @@ const MultipleChoice = props => {
             {session.map(val => <div className={s.Answer} key={val.email}>
                 <div className={s.Session}>{val.email}:</div>
                 <div>{val.answers.map(value => <div
-                    className={value.correct > 0 ? s.correctAnswer : s.answer}
+                    className={value.points > 0 ? s.correctAnswer : s.answer}
                     key={value.answer_id}>{value.answer}</div>)}</div>
             </div>)}
         </div>

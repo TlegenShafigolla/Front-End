@@ -6,11 +6,15 @@ import red from "@material-ui/core/colors/red";
 import Paper from "@material-ui/core/Paper";
 
 const MultipleChoiceGroupReport = (props) => {
-    console.log(props)
     const correct = green.A700;
     const wrong = red.A700;
     const answers = props.val.answers;
-    let sessions = props.val.session[props.index].answers;
+    let sessions
+    if (props.val.session !== undefined) {
+        sessions = props.val.session[props.index].answers;
+    } else {
+        sessions= props.val.answers
+    }
     let session = [...answers];
     for (let i = 0; i < answers.length; i++) {
         for (let j = 0; j < sessions.length; j++) {
@@ -40,7 +44,7 @@ const MultipleChoiceGroupReport = (props) => {
                             {val.answer}
                         </Typography>
                         <Checkbox
-                            style={(val.points > 0 ) ? {color: correct} : {color: wrong}}
+                            style={(val.points > 0) ? {color: correct} : {color: wrong}}
                             checked={val.session === 1}
                         />
                     </div>

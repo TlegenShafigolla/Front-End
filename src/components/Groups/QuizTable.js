@@ -33,6 +33,7 @@ class QuizTable extends React.Component {
     createData = (quiz, completed, invited_date, report) => {
         return {quiz, completed, invited_date, report};
     };
+    used_quiz;
 
     initializeRows = (invitations) => {
         const arr = [];

@@ -5,7 +5,13 @@ import Paper from "@material-ui/core/Paper";
 
 const MultipleChoiceGroupReport = (props) => {
     const answers = props.val.answers;
-    const sessions = props.report.sessions[props.index].answers;
+    let sessions;
+    if(props.report.sessions[props.index]!==undefined){
+        sessions = props.report.sessions[props.index].answers;
+    }
+    else {
+        sessions=props.val.answers
+    }
     let session = [];
     for (let i = 0; i < answers.length; i++) {
         for (let j = 0; j < sessions.length; j++) {

@@ -15,12 +15,12 @@ const FillTheBlankGroup = (props) => {
                 </div>
             </div>
 
-            {props.report.sessions[props.index].answers === undefined ? 'no answer' :
+            {props.report.sessions[props.index] === undefined ? '' :
                 <div className={s.Question}>
                     <div className={s.answers}>
                         <Typography
                             variant="body1">
-                            {props.report.sessions[props.index].answers[props.question_number].answer}
+                            {props.report.sessions[props.index]!==undefined?props.report.sessions[props.index].answers[props.question_number].answer:''}
                         </Typography>
                     </div>
                 </div>}

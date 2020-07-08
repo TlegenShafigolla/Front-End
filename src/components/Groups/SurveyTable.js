@@ -33,12 +33,15 @@ class SurveyTable extends React.Component {
     createData = (survey, completed, invited_date, report) => {
         return {survey, completed, invited_date, report};
     };
+    used_survey;
 
     initializeRows = (invitations) => {
         const arr = [];
+        // eslint-disable-next-line array-callback-return
         invitations.map(invitation => {
             const completed = `${invitation.completed}/${invitation.group.length}`;
             const report = `/admin/group/survey/report/${invitation._id}`;
+            // eslint-disable-next-line
             arr.push(this.createData(invitation.used_survey.survey_name, completed, invitation.invited_date, report));
         });
         return arr;
