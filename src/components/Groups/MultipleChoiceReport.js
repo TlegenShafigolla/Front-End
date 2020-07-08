@@ -6,6 +6,7 @@ import red from "@material-ui/core/colors/red";
 import Paper from "@material-ui/core/Paper";
 
 const MultipleChoiceGroupReport = (props) => {
+    console.log(props)
     const correct = green.A700;
     const wrong = red.A700;
     const answers = props.val.answers;
@@ -39,7 +40,7 @@ const MultipleChoiceGroupReport = (props) => {
                             {val.answer}
                         </Typography>
                         <Checkbox
-                            style={(val.point > 0 || val.correct > 0) ? {color: correct} : {color: wrong}}
+                            style={(val.points > 0 ) ? {color: correct} : {color: wrong}}
                             checked={val.session === 1}
                         />
                     </div>

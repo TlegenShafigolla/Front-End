@@ -1,6 +1,9 @@
 .Members {
     color: #a01818;
     font-size: 1em;
+    display: flex;
+    justify-content: center;
+
 }
 
 .email {
@@ -15,10 +18,12 @@
 }
 
 .MembersBoard {
+    margin-left: 10px;
     margin-top: 20px;
     padding: 10px;
     position: fixed;
     display: flex;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
 }

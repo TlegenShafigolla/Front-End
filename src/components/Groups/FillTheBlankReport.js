@@ -50,7 +50,8 @@ const FillTheBlankGroup = (props) => {
                                        onChange={props.onChangeInputBase}
                             />) : <Checkbox
                             style={{color: correct}}
-                            defaultChecked={props.val.session[props.index].correct === 1}
+
+                            defaultChecked={props.val.session[props.index].points > 0}
                                                         onChange={props.onChangeCheckbox}/>}
                     </div>
                 </div>}

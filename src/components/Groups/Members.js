@@ -6,7 +6,7 @@ const Members = (props) => {
     return (
         <div className={s.Members}  >
             {props.val.email}
-            <IconButton size='small' onClick={()=>props.onDeleteMember(props.val._id,props.path)}><HighlightOffIcon fontSize='small'/></IconButton>
+            <IconButton size='small' onClick={()=>props.onDeleteMember(props.val._id)}><HighlightOffIcon fontSize='small'/></IconButton>
         </div>
     )
 }

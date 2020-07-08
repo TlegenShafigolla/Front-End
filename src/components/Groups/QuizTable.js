@@ -36,7 +36,8 @@ class QuizTable extends React.Component {
 
     initializeRows = (invitations) => {
         const arr = [];
-        invitations.map(invitation => {
+        // eslint-disable-next-line array-callback-return
+        invitations.map((invitation) => {
             const completed = `${invitation.completed}/${invitation.group.length}`;
             const report = `/admin/group/quiz/report/${invitation._id}`;
             arr.push(this.createData(invitation.used_quiz.quiz_name, completed, invitation.invited_date, report));
