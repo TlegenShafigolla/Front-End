@@ -1,75 +1,56 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Button from "@material-ui/core/Button";
 import Group from "./Group";
-import s from './GroupPreview.module.css'
-import {createGroup, deleteGroup, getListGroup} from "../../services/API/adminAPI/Group/group";
 import Grid from "@material-ui/core/Grid";
+import Preloader from "../common/Preloader";
 
-class GroupsPreview extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            groups: [],
-            groupChanged: false,
+const GroupsPreview = (props) => {
+    const [id,setId]=useState(null)
+    useEffect(() => {
+        props.requestGroup()
+        // eslint-disable-next-line
+    }, [])
+
+    const deleteGroup = (group_id) => {
+        if(props.disableButton){
+            return null;
         }
-    }
-
-    componentDidMount() {
-        getListGroup().then(json => {
-            console.log(json);
-            this.setState({groups: json.groups})
-        })
-    }
-
-    deleteGroup = (group_id) => {
-        const groups = this.state.groups;
-        deleteGroup(group_id).then(json => {
-            console.log(json);
-            for (let i = 0; i < groups.length; i++) {
-                if (groups[i]._id === json._id) {
-                    groups.splice(i, 1);
-                }
-            }
-            this.setState({groups: groups})
-        })
+        props.deleteGroups(group_id)
     };
-    addNewGroup = () => {
-        let groups = this.state.groups;
-        let group = 'New Groups';
-        createGroup(group).then(val => {
-            groups.push(val);
-            this.props.history.push(`/admin/group/${val._id}`);
-            this.setState({groups: groups})
-        })
+    const addNewGroup = () => {
+        if(props.disableButton){
+            return null;
+        }
+        props.createNewGroup(setId)
     }
-    onClickGroup = (id) => {
-        this.props.history.push(`/admin/group/${id}`)
+    const onClickGroup = (id) => {
+        props.history.push(`/admin/group/${id}`)
     };
 
-
-    render() {
-        return (
-            <Grid
-                container
-                justify="center"
-                alignItems="flex-start">
-                <Grid item lg={6} md={8} sm={10} xs={12}>
-                    {this.state.groups.map(val => <Group onClickGroup={this.onClickGroup}
-                                                         deleteGroup={this.deleteGroup}
-                                                         key={val._id}
-                                                         val={val}/>)}
-                    <Button color='primary' size='medium'
-                            onClick={this.addNewGroup}>
-                        Create group
-                    </Button>
-                </Grid>
-
+    if (id !== null) {
+        props.history.push(`/admin/group/${id}`)
+    }
+    if(props.groups===null){
+      return <Preloader/>
+    }
+    return (
+        <Grid
+            container
+            justify="center"
+            alignItems="flex-start">
+            <Grid item lg={6} md={8} sm={10} xs={12}>
+                {props.groups.map(val => <Group onClickGroup={onClickGroup}
+                                                deleteGroup={deleteGroup}
+                                                key={val._id}
+                                                val={val}/>)}
+                <Button color='primary' size='medium'
+                        onClick={addNewGroup}>
+                    Create group
+                </Button>
             </Grid>
-        );
-    }
 
-
+        </Grid>
+    );
 }
-
 
 export default GroupsPreview;

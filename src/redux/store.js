@@ -9,6 +9,7 @@ import QuizInviteReducer from "./QuizEditor/Invite/Invite-reducer";
 import SurveyEditorReducer from "./SurveyEditor/SurveyEditor-reducer";
 import SurveyInviteReducer from "./SurveyEditor/Invite/Invite-reducer";
 import SurveyQuestionsReducer from "./SurveyEditor/Questions/SurveyQuestionsReducer";
+import GroupReducer from "./Group/group-reducer";
 
 let reducers = combineReducers({
     Auth: AuthReducer,
@@ -19,6 +20,7 @@ let reducers = combineReducers({
     SurveyQuestions:SurveyQuestionsReducer,
     QuizInvite: QuizInviteReducer,
     SurveyInvite: SurveyInviteReducer,
+    Groups:GroupReducer,
     form: formReducer,
 });
 // eslint-disable-next-line

@@ -1,4 +1,5 @@
 import React from 'react'
+// noinspection ES6CheckImport
 import {Route} from "react-router-dom";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import QuizEditor from "../components/QuizEditor/QuizEditor";
@@ -38,19 +39,19 @@ const styles = makeStyles(theme => ({
     },
 }));
 
-export const Routes = (props) => {
+export const Routes = () => {
     const classes = styles();
     return (
         <div className={classes.grow}>
-                <div className={classes.drawerHeader}/>
-                <Route path="/admin/profile" render={() => <ProfileContainer/>}/>
-                <Route path="/admin/quiz/editor" render={() => <QuizEditor/>}/>
-                <Route path="/admin/quizzes" render={() => <QuizzesRoute/>}/>
-                <Route path="/admin/reports" render={() => <ReportRoute/>}/>
-                <Route path="/admin/survey/editor" render={() => <MySurveyRoute/>}/>
-                <Route path="/admin/surveys" render={() => <SurveysRoute/>}/>
-                <Route path='/admin/group' component={GroupRoutes}/>
-                <Route path='/admin/surveys/reports' render={() => <ReportSurveyRoute/>}/>
+            <div className={classes.drawerHeader}/>
+            <Route path="/admin/profile" render={() => <ProfileContainer/>}/>
+            <Route path="/admin/survey/editor" render={() => <MySurveyRoute/>}/>
+            <Route path="/admin/quiz/editor" render={() => <QuizEditor/>}/>
+            <Route path='/admin/group' render={() => <GroupRoutes/>}/>
+            <Route path="/admin/quizzes" render={() => <QuizzesRoute/>}/>
+            <Route path="/admin/surveys" render={() => <SurveysRoute/>}/>
+            <Route path="/admin/reports" render={() => <ReportRoute/>}/>
+            <Route path='/admin/surveys/reports' render={() => <ReportSurveyRoute/>}/>
         </div>
 
     );

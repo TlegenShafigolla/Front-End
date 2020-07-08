@@ -3,7 +3,6 @@ import s from './GroupPreview.module.css'
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
-import {Page} from "@react-pdf/renderer";
 import Paper from "@material-ui/core/Paper";
 
 const Group = (props) => {
