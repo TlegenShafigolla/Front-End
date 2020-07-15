@@ -50,7 +50,7 @@ class EditGroup extends React.Component {
     }
 
     render() {
-        if (this.props.isFetching) {
+        if (this.props.isFetching&&this.props.members===null) {
             return <Preloader/>
         }
         return (
