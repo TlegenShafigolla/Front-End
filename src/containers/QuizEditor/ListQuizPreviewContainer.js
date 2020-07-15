@@ -15,7 +15,8 @@ const ListQuizPreview = (props) => {
     let [id, setId] = useState(null);
     let [noQuestionSnackbar, openNoQuestionSnackbar] = useState(false);
 
-    let onClickInvite = () => {
+    let onClickInvite = (reset) => {
+        reset()
         openInvite(false)
     };
 

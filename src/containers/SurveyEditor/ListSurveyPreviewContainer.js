@@ -53,7 +53,7 @@ const ListSurveyPreview = (props) => {
     };
     let onSubmit = (values) => {
         const group_id=props.groups[props.selectGroup]._id;
-        props.postInvite(values, id,props.group,group_id);
+        props.postInvite(values, id,props.group,group_id,openInvite);
     };
 
     let openDeleteDialog = () => {
@@ -74,7 +74,6 @@ const ListSurveyPreview = (props) => {
             openSnackbar={noQuestionSnackbar}
             onClickDelete={onClickDelete}
             onSubmit={onSubmit}
-            postInvite={props.postInvite}
             onClickInvite={inviteDialog}
             openDeleteDialog={openDeleteDialog}
             DeleteSurvey={DeleteSurvey}

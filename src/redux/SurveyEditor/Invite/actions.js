@@ -16,7 +16,7 @@ export const requestGroup = () => async (dispatch) => {
     dispatch(setGroups(data.groups));
     dispatch(setPerson(0))
 };
-export const postInvite = (value, id,groups,group_id) => async (dispatch) => {
+export const postInvite = (value, id,groups,group_id,invite) => async (dispatch) => {
     let Start = value.StartDate === null ? null : value.StartDate.replace('T', ' ');
     let End = value.EndDate === null ? null : value.EndDate.replace('T', ' ');
     let invitations = {
@@ -55,5 +55,6 @@ export const postInvite = (value, id,groups,group_id) => async (dispatch) => {
     }
     let val = await postInvitations(invitations);
     dispatch(setLink(val.link));
+    invite(false)
     console.log(val)
 };

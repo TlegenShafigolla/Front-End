@@ -37,11 +37,12 @@ const InviteDialog = (props) => {
     }, [props.groups === []]);
     return (
             <Dialog fullWidth
+                    onClose={props.onClose&&props.reset}
                     open={props.openDialog}
             >
                 <form  onSubmit={props.handleSubmit}>
                 <DialogActions>
-                    <IconButton size='small' onClick={props.onClose}
+                    <IconButton size='small' onClick={props.onClose&&props.reset}
                                 aria-label='delete'
                                 color='secondary'>
                         <CloseIcon fontSize='small' color='secondary'/>
