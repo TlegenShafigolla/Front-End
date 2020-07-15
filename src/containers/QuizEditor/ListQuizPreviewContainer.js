@@ -58,7 +58,7 @@ const ListQuizPreview = (props) => {
     };
     let onSubmit = (values) => {
         const group_id=props.groups[props.selectGroup]._id;
-        props.postInvite(values, id,props.group,group_id);
+        props.postInvite(values, id,props.group,group_id,openInvite);
     };
 
     if (props.isFetching) {
@@ -74,7 +74,6 @@ const ListQuizPreview = (props) => {
                              quizzes={props.quizzes}
                              onClickDelete={onClickDelete}
                              Invite={Invite}
-                             postInvite={props.postInvite}
                              openDeleteDialog={openDeleteDialog}
                              addNewQuiz={addNewQuiz} deleteQuiz={deleteQuiz}
                              DeleteQuiz={DeleteQuiz}

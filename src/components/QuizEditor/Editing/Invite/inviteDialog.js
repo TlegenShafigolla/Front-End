@@ -42,6 +42,7 @@ const InviteDialog = (props) => {
     return (
             <Dialog
                 fullWidth
+                onClose={props.onClose}
                 open={props.openDialog}
             >
                 <form onSubmit={props.handleSubmit}>

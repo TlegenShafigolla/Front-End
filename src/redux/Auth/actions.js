@@ -24,7 +24,7 @@ export const LogIn = (email, password) => async (dispatch) => {
     if (data.message === "Auth successful") {
         localStorage.setItem("access_token", data["access_token"]);
         localStorage.setItem("access_time", Date());
-        dispatch(requestProfile())
+         dispatch(requestProfile())
     } else {
         let action = stopSubmit("login", {_error: true});
         dispatch(action)

@@ -22,7 +22,8 @@ let LoginForm = (props) => {
                        error={props.error}
                        type='password' component={renderTextField}/>
             </div>
-            <Button variant='contained' type='submit' color='primary'>Continue</Button>
+            <Button variant='contained' type='submit' disabled={props.pristine || props.submitting}
+                    color='primary'>Continue</Button>
         </form>
     );
 }

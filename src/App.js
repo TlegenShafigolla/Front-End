@@ -12,6 +12,6 @@ class App extends Component {
   }
 }
 export default App
-export const api = "http://35.228.95.87:2000";
+export const api = "http://34.78.225.99:2000";
 //192.168.1.72
 //35.228.95.87
