@@ -3,16 +3,17 @@ import AdminHeader from "../components/AdminHeader/AdminHeader";
 import SideBar from "../components/SideBar/SideBar";
 import "../css/App.css";
 import {Routes} from "../function/Routes";
-import {Redirect} from "react-router-dom";
+import {Redirect, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {requestProfile, logout} from "../redux/Auth/actions";
 import Preloader from "../components/common/Preloader";
 import {getProfile, isLoggedIn} from "../redux/Reselects/Auth-reselect";
+import {compose} from "redux";
 
 const Admin = (props) => {
     let [isSideBar, openSideBar] = useState(false);
     useEffect(() => {
-        props.requestProfile()
+        props.requestProfile(null)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     let LogOut = () => {
@@ -27,8 +28,7 @@ const Admin = (props) => {
     if (props.isLoggedIn === null) {
         return <Preloader/>
     }
-
-    if (!props.isLoggedIn && localStorage.getItem('access_token')===null) {
+    if (!props.isLoggedIn ) {
         return <Redirect to="/login"/>;
     }
     return (
@@ -54,4 +54,4 @@ let mapStateToProps = (state) => {
         isLoggedIn: isLoggedIn(state)
     }
 }
-export default connect(mapStateToProps, {logout, requestProfile})(Admin);
+export default compose(connect(mapStateToProps, {logout, requestProfile}), withRouter)(Admin);

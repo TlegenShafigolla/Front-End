@@ -3,6 +3,7 @@ import {addMembers, deleteMember, getMembers} from "../../services/API/adminAPI/
 import {getGroupQuizzes} from "../../services/API/adminAPI/Group/quizzes";
 import {getGroupSurveys} from "../../services/API/adminAPI/Group/surveys";
 import {stopSubmit} from "redux-form";
+import {logout} from "../Auth/actions";
 
 export const SET_GROUP = "GROUPS/SET_GROUP"
 export const DELETE_GROUP = "GROUPS/DELETE_GROUP"
@@ -46,11 +47,17 @@ export const createNewGroup = (id) => async (dispatch) => {
 }
 export const requestGroup = () => async (dispatch) => {
     let data = await getListGroup()
+    if (data === "403") {
+        dispatch(logout())
+    }
     dispatch(setGroup(data.groups))
 }
 export const requestMembers = (id) => async (dispatch) => {
     dispatch(isFetching(true))
     let data = await getMembers(id)
+    if (data === "403") {
+        dispatch(logout())
+    }
     dispatch(setMembers(data.members))
     dispatch(setGroupName(data.group_name))
     dispatch(isFetching(false))
@@ -58,12 +65,18 @@ export const requestMembers = (id) => async (dispatch) => {
 export const requestGroupQuizzes = (id) => async (dispatch) => {
     dispatch(isFetching(true))
     let data = await getGroupQuizzes(id)
+    if (data === "403") {
+        dispatch(logout())
+    }
     dispatch(setQuizzes(data.invitations))
     dispatch(isFetching(false))
 }
 export const requestGroupSurveys = (id) => async (dispatch) => {
     dispatch(isFetching(true))
     let data = await getGroupSurveys(id)
+    if (data === "403") {
+        dispatch(logout())
+    }
     dispatch(setSurveys(data.invitations))
     dispatch(isFetching(false))
 }

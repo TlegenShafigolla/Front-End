@@ -6,10 +6,9 @@ import LoginForm from "./loginForm";
 
 const SignIn = (props) => {
     let onSubmit = (value) => {
-        props.LogIn(value.email, value.password)
+        props.LogIn(value.email, value.password,props.history.push)
     };
-
-    if (props.isLoggedIn || localStorage.getItem('access_token')) {
+    if (localStorage.getItem('access_token')) {
         return <Redirect to='/admin/profile'/>
     }
     return (
