@@ -7,6 +7,7 @@ export const IS_FETCHING = "QUIZ_EDITOR/IS_FETCHING";
 export const DISABLE_BUTTON = "QUIZ_EDITOR/DISABLE_BUTTON";
 export const PUSH_QUIZ = "QUIZ_EDITOR/PUSH_QUIZ";
 export const DELETE_QUIZ = "QUIZ_EDITOR/DELETE_QUIZ";
+export const CHANGE_POINTS = "QUIZ_EDITOR/CHANGE_POINTS";
 export const SET_QUESTIONS = "QUIZ_EDITOR/SET_QUESTIONS";
 export const ADD_QUESTION = "QUIZ_EDITOR/ADD_QUESTION";
 export const CHANGE_QUESTION_NAME = "QUIZ_EDITOR/CHANGE_QUESTION_NAME";
@@ -36,7 +37,8 @@ export const pointChecked=(data)=>({type:POINTS_CHECKED,data});
 export const questionsChanged = (data) => ({type: QUESTION_NUMBER_CHANGED, data});
 export const changeQuestion = (index, data) => ({type: CHANGE_QUESTION_NAME, index, data});
 export const changeTypes = (index, data) => ({type: CHANGE_TYPE, data, index});
-export const addNewQuiz = () => async (dispatch) => {
+export const changePoints = (point, index) => ({type: CHANGE_POINTS, index, point});
+export const addNewQuiz = (push) => async (dispatch) => {
     dispatch(disableButton(true));
     const newQuiz = {
         quiz_name: "Quiz name",
@@ -46,13 +48,14 @@ export const addNewQuiz = () => async (dispatch) => {
         points: null,
     };
     let data = await postQuiz(newQuiz);
-    dispatch(pushQuiz(data));
+    dispatch(pushQuiz(data.quiz));
+    push(`/admin/quiz/editor/${data.quiz._id}`)
     dispatch(disableButton(false))
 };
 export const deleteQuizzes = (id) => async (dispatch) => {
     dispatch(disableButton(true));
     let data = await deleteQuiz(id);
-    dispatch(popQuiz(data));
+    dispatch(popQuiz(data.quiz));
     dispatch(disableButton(false))
 };
 export const requestQuiz = () => async (dispatch) => {
@@ -73,7 +76,8 @@ export const addQuestions = (order_id, id,) => async (dispatch) => {
         quiz_id: id,
         image: null,
         question: " ",
-        type: "FILL THE BLANK"
+        type: "FILL THE BLANK",
+        points:1
     };
     let data = await postQuestions(id, [question]);
     // eslint-disable-next-line react-hooks/exhaustive-deps

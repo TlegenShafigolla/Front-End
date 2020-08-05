@@ -38,7 +38,7 @@ export const requestAnswers = (id, index) => async (dispatch) => {
         dispatch(addNewAnswer(index, id, 1))
     }
 };
-export const saveAnswer = (answer, type, id, index,) => async (dispatch) => {
+export const saveAnswer = (answer, type, id, index,mode) => async (dispatch) => {
     dispatch(disableButton(true));
     let wrong = 0;
     let empty = 0;
@@ -52,7 +52,7 @@ export const saveAnswer = (answer, type, id, index,) => async (dispatch) => {
     }
     let corrects = answer.length - wrong;
     if (empty === 0) {
-        if (type === 'MULTIPLE CHOICE' ? corrects > 0 && wrong > 0 : wrong === 0) {
+        if (type !== 'FILL THE BLANK' ? corrects > 0 && wrong > 0 : wrong === 0) {
             await Promise.all(answer.map(async value => {
                 if ('_id' in value) {
                     await putAnswers(id, value);
@@ -60,7 +60,7 @@ export const saveAnswer = (answer, type, id, index,) => async (dispatch) => {
                     await postAnswers(id, value);
                 }
             }))
-                .then(() => {
+                   .then(() => {
                     dispatch(answerChanged(false));
                     dispatch(requestAnswers(id, index));
                     dispatch(disableButton(false))

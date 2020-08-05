@@ -2,7 +2,7 @@ import {
     ADD_NEW_ANSWER,
     CHANGE_ANSWER,
     CHANGE_ANSWER_FALSE,
-    CHANGE_POINT,
+    CHANGE_POINT, CHANGE_POINTS,
     DELETE_ANSWER,
     DELETE_ANSWER_SERVER,
     DISABLE_BUTTON,
@@ -53,6 +53,7 @@ const QuizQuestionsReducer = (state = initialState, action) => {
             }
         }
         case CHANGE_POINT: {
+            console.log(action.point)
             return {
                 ...state,
                 errorDialog: false,

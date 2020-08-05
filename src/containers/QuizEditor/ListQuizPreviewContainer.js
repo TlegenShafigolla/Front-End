@@ -29,7 +29,6 @@ const ListQuizPreview = (props) => {
         }
     };
 
-
     useEffect(() => {
         props.requestQuiz()
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,17 +38,20 @@ const ListQuizPreview = (props) => {
         if (props.disabledButton) {
             return null;
         }
-        props.addNewQuiz()
+        props.addNewQuiz( props.history.push)
     };
+
     let deleteQuiz = (quiz_id) => {
         if (props.disabledButton) {
             return null;
         }
         props.deleteQuizzes(quiz_id)
     };
+
     let openDeleteDialog = () => {
         openDeleteQuiz(true)
     };
+
     let onClickDelete = (action, id) => {
         openDeleteQuiz(false);
         if (!action) {
@@ -57,6 +59,7 @@ const ListQuizPreview = (props) => {
         }
         deleteQuiz(id)
     };
+
     let onSubmit = (values) => {
         const group_id=props.groups[props.selectGroup]._id;
         props.postInvite(values, id,props.group,group_id,openInvite);
@@ -65,9 +68,7 @@ const ListQuizPreview = (props) => {
     if (props.isFetching) {
         return <Preloader/>
     }
-    if (props.id !== null) {
-        props.history.push(`/admin/quiz/editor/${props.id}`)
-    }
+
     return (
         <ListQuizPreviewPage onInvite={onClickInvite}
                              openSnackbar={noQuestionSnackbar}

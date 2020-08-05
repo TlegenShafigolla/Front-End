@@ -17,6 +17,17 @@ const Question = (props) => {
     const onChangePoint = (event, index, id) => {
         props.changePoint(event, index, id);
     };
+    const multipleChoice = (event, index, id) => {
+        if (event) {
+            for (let j = 0; j < id; j++) {
+                props.changePoint(0, index, j);
+            }
+            for (let j = id; j < props.answers[index].length; j++) {
+                props.changePoint(0, index, j);
+            }
+            props.changePoint(event, index, id);
+        }
+    };
     const onChangeAnswer = (event, index, id) => {
         props.changeAnswer(event.target.value, index, id)
     };
@@ -32,7 +43,7 @@ const Question = (props) => {
         for (let i = props.answers[index].length - 1; i >= 0; i--) {
             props.deleteAnswersOnclick(props.value._id, props.answers[index][i]._id, index, i);
         }
-        props.addNewAnswer(props.index, props.value._id, 1);
+        props.addNewAnswer(props.index, props.value._id, props.value.points);
 
     };
     const editOnClick = () => {
@@ -54,18 +65,13 @@ const Question = (props) => {
         if (props.disabledButton && props.disableButton) {
             return;
         }
-        if (props.answerChanged) {
+        if (props.answerChanged || props.questionChanged) {
             props.saveAnswer(props.answers[props.index], props.value.type, props.value._id, props.index, setMode);
-        }
-        if (props.questionChanged) {
             props.saveQuestion(props.value.quiz_id, props.questionsqw[props.index], setMode)
-        }
-        if (!props.questionChanged && !props.answerChanged) {
+        } else {
             setMode(false)
         }
     };
-
-
     const onChangeQuestion = (event) => {
         props.changeQuestion(props.index, event.target.value)
     };
@@ -74,12 +80,15 @@ const Question = (props) => {
         props.addNewAnswer(index, props.value._id);
 
     };
+    console.log(props)
     if (editMode) {
         return <> <EditQuestion
-            changePoint={onChangePoint}
+            onChangePoint={onChangePoint}
             deleteAnswerOnClick={deleteAnswerOnClick}
             onChangeAnswer={onChangeAnswer}
             addNewAnswers={addNewAnswers}
+            points={props.value.points}
+            multipleChoice={multipleChoice}
             onChangeQuestion={onChangeQuestion}
             saveOnClick={saveOnClick}
             changeType={changeType}

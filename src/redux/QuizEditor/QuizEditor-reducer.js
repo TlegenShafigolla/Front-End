@@ -1,5 +1,5 @@
 import {
-    ADD_QUESTION, CHANGE_QUESTION_NAME, CHANGE_TYPE, DELETE_QUESTION,
+    ADD_QUESTION, CHANGE_POINTS, CHANGE_QUESTION_NAME, CHANGE_TYPE, DELETE_QUESTION,
     DELETE_QUIZ,
     DISABLE_BUTTON, EDIT_DESCRIPTION, EDIT_QUIZ_NAME, ERROR_QUESTION, FALSE,
     IS_FETCHING, POINTS_CHECKED,
@@ -44,11 +44,22 @@ const QuizEditorReducer = (state = initialState, action) => {
                 errorQuestion: true
             }
         }
+        case CHANGE_POINTS:{
+            let question = [...state.questions.questions];
+            question[action.index].points = action.point;
+            return {
+                ...state,
+                questions: {
+                    ...state.questions,
+                    questions: question
+                }
+            }
+        }
         case PUSH_QUIZ: {
             return {
                 ...state,
                 id: action.data._id,
-                quizzes: [...state.quizzes, action.data],
+                quizzes: [...state.quizzes, action.data,],
             }
         }
         case IS_FETCHING: {

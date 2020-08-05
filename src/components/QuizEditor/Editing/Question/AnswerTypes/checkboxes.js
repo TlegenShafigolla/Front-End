@@ -5,12 +5,8 @@ import IconButton from "@material-ui/core/IconButton";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import Checkbox from "@material-ui/core/Checkbox";
 import React from "react";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
 
-const MultipleChoice = (props) => {
-    console.log(props)
+const Checkboxes = (props) => {
     return (
         <div className={s.SaveAnswer}>
             <div className={s.Answer}>
@@ -29,13 +25,11 @@ const MultipleChoice = (props) => {
                     />
                 </div>
                 <div>
-                        <FormControlLabel
-                            control={
-                                <Radio
-                                    onChange={(e) => props.multipleChoice(e.target.checked, props.index, props.id)}
-                                    checked={props.val.points>0}
-                                    color="primary"
-                                />} label=''/>
+                    <Checkbox
+                        color='primary'
+                        checked={props.val.points !== 0}
+                        onChange={(event) => props.onChangePoint(event.target.checked, props.index, props.id)}
+                    />
                 </div>
             </div>
             <div className={s.DeleteButton}>
@@ -50,4 +44,4 @@ const MultipleChoice = (props) => {
     );
 };
 
-export default MultipleChoice;
+export default Checkboxes;

@@ -13,7 +13,7 @@ import {
     getAnswers, getQuestions,
     point, questionChanged
 } from "../../redux/Reselects/QuizEditor-reselect";
-import {changeQuestion, changeTypes, deleteQuestion, saveQuestion} from "../../redux/QuizEditor/actions";
+import {changePoints, changeQuestion, changeTypes, deleteQuestion, saveQuestion} from "../../redux/QuizEditor/actions";
 import Question from "../../components/QuizEditor/Editing/Question/question";
 
 
@@ -35,6 +35,7 @@ let mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
     requestAnswers,
     changePoint,
+    changePoints,
     changeAnswer,
     deleteAnswersOnclick,
     addNewAnswer,

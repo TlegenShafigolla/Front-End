@@ -24,15 +24,6 @@ const FillTheBlank = (props) => {
                 rowsMax={3}
                 variant="outlined"
             />
-            {props.point ?
-                <div>
-                    <InputBase
-                        className={s.point}
-                        id={props.id}
-                        value={props.answers[0].points}
-                        onChange={(e) => props.changePoint(e.target.value, props.index, 0)}
-                    />
-                </div> : ''}
         </div>
 
     );

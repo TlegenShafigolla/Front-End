@@ -12,7 +12,11 @@ import Grid from "@material-ui/core/Grid";
 import Preloader from "../../common/Preloader";
 import EditQuizInfo from "./Question/editQuizInfo";
 import QuestionContainer from "../../../containers/QuizEditor/QuizQuestionContainer";
-
+import Button from "@material-ui/core/Button";
+import GeneratePdfDialog from "./generatePdfDialog";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
+import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
+import SendIcon from '@material-ui/icons/Send';
 class EditQuiz extends Component {
 
     state = {
@@ -107,13 +111,13 @@ class EditQuiz extends Component {
             }
     };
     // eslint-disable-next-line
-    // openPdfDialog = () => {
-    //     this.setState({generatePdfDialog: true});
-    // };
-    // // eslint-disable-next-line
-    // closePdfDialog = () => {
-    //     this.setState({generatePdfDialog: false});
-    // };
+    openPdfDialog = () => {
+        this.setState({generatePdfDialog: true});
+    };
+    // eslint-disable-next-line
+    closePdfDialog = () => {
+        this.setState({generatePdfDialog: false});
+    };
 
     editDescription = () => {
         this.setState({editDescription: true});
@@ -142,6 +146,15 @@ class EditQuiz extends Component {
                         </div>
                     </Grid>
                     <Grid item lg={6} md={6} sm={8} xs={12}>
+                        <ButtonGroup
+                            color="primary"
+                            fullWidth
+                            aria-label="vertical contained primary button group"
+                        >
+                            <Button onClick={this.openPdfDialog}><PictureAsPdfIcon/></Button>
+                            <Button><SendIcon/></Button>
+                            <Button>Three</Button>
+                        </ButtonGroup>
                         <Grid
                             container
                             direction="column"
@@ -197,17 +210,14 @@ class EditQuiz extends Component {
                             )}
                         </Paper>
                     </Grid>
-                    {/*<Button variant="outlined" color="primary" onClick={this.openPdfDialog}>*/}
-                    {/*    Export to PDF*/}
-                    {/*</Button>*/}
-                    {/*<GeneratePdfDialog*/}
-                    {/*    open={this.state.generatePdfDialog}*/}
-                    {/*    onClose={this.closePdfDialog}*/}
-                    {/*    quiz_name={this.state.quiz_name}*/}
-                    {/*    description={this.state.description}*/}
-                    {/*    questions={this.state.questions}*/}
-                    {/*    answers={this.state.answers}*/}
-                    {/*/>*/}
+                    <GeneratePdfDialog
+                        open={this.state.generatePdfDialog}
+                        onClose={this.closePdfDialog}
+                        quiz_name={this.props.questions.quiz_name}
+                        description={this.props.questions.description}
+                        questions={this.props.questions.questions}
+                        answers={this.props.answers}
+                    />
                 </Grid>
             </div>
         );
