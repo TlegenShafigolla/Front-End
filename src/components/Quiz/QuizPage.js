@@ -30,34 +30,41 @@ class QuizPage extends React.Component {
             maxPoint: null,
             time_limit: null,
             time_left: null,
-            time: null
+            time: null,
         }
     }
 
 
-    onChangeCheck = (event) => {
+    onChangeCheck = (event, questionId, answerId, max, id, index) => {
         let answers = this.state.answers;
         if (event.target.checked) {
             for (let i = 0; i < answers.length; i++) {
-                if (answers[i].question_id === Number(event.target.id)) {
-                    answers[i].answer_ids.push(Number(event.target.value));
-                    this.setState({answers: answers});
+                if (answers[i].question_id === questionId) {
+                    if (answers[i].answer_ids.length < max) {
+                        answers[i].answer_ids.push(answerId);
+                        this.setState({answers: answers});
+                    }
                     return;
                 }
             }
             let newQuestion = {
-                "question_id": event.target.id,
-                "answer_ids": [event.target.value]
+                "question_id": questionId,
+                "answer_ids": [answerId]
             };
             answers.push(newQuestion);
             this.setState({answers: answers});
         }
-
         if (!event.target.checked) {
+            let question = this.state.questions
+            question[index].answers[id] = {
+                ...question[index].answers[id],
+                check: 0
+            }
+            this.setState({questions: question})
             for (let i = 0; i < answers.length; i++) {
-                if (answers[i].question_id === Number(event.target.id)) {
+                if (answers[i].question_id === questionId) {
                     for (let j = 0; j < answers[i].answer_ids.length; j++) {
-                        if (answers[i].answer_ids[j] === Number(event.target.value)) {
+                        if (answers[i].answer_ids[j] === answerId) {
                             answers[i].answer_ids.splice(j, 1);
                         }
                     }
@@ -114,7 +121,6 @@ class QuizPage extends React.Component {
     componentDidMount() {
         let path = window.location.pathname.split('/');
         postTakeQuestion(localStorage.getItem(`session_id${path[2]}`)).then(json => {
-            console.log(json);
             if (json.time_limit !== null) {
                 this.setState({time_limit: json.time_limit * 60})
             }
@@ -185,13 +191,14 @@ class QuizPage extends React.Component {
                         alignItems="flex-start"
                         justify="flex-end">
                         <Grid
-                            direction="column"
+                            item
                             lg={8} md={8} sm={12} xs={12}>
                             {this.state.questions === undefined || this.state.questions === null ? ' ' :
                                 this.state.questions.map((val, index) =>
                                     <Question onChangeCheck={this.onChangeCheck}
                                               onChangeAnswer={this.onChangeAnswer}
                                               key={val._id.toString()}
+                                              answers={this.state.answers}
                                               index={index}
                                               value={val}/>
                                 )}
@@ -199,7 +206,6 @@ class QuizPage extends React.Component {
                         <Grid
                             direction="column"
                             alignItems="center"
-                            lg={2} md={2}
                             container
                             className={s.BoardGrid}>
                             {/*{this.state.questions === undefined || this.state.questions === null ? ' ' :*/}

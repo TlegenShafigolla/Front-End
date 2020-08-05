@@ -21,12 +21,12 @@ const ListQuizPreview = (props) => {
     };
 
     let inviteDialog = (count,id) => {
-        if (count === 0) {
-            openNoQuestionSnackbar(true)
-        } else {
+        // if (count === 0) {
+        //     openNoQuestionSnackbar(true)
+        // } else {
             setId(id);
             openInvite(!Invite)
-        }
+        // }
     };
 
     useEffect(() => {

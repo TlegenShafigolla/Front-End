@@ -53,7 +53,6 @@ const QuizQuestionsReducer = (state = initialState, action) => {
             }
         }
         case CHANGE_POINT: {
-            console.log(action.point)
             return {
                 ...state,
                 errorDialog: false,

@@ -19,10 +19,12 @@ const Question =(props)=>{
                 </div>
                 <Divider/>
                     <Answers
+                        answers={props.answers}
                         onChangeAnswer={props.onChangeAnswer}
                         key={props.value._id}
                         onChangeCheck={props.onChangeCheck}
                         value={props.value}
+                        index={props.index}
                     />
 
             </div>

@@ -7,7 +7,6 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 
 const MultipleChoice = (props) => {
-    console.log(props)
     return (
         <div className={s.SaveAnswer}>
             <div className={s.Answer}>
