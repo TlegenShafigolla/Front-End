@@ -43,9 +43,16 @@ const Question = (props) => {
         for (let i = props.answers[index].length - 1; i >= 0; i--) {
             props.deleteAnswersOnclick(props.value._id, props.answers[index][i]._id, index, i);
         }
-        props.addNewAnswer(props.index, props.value._id, props.value.points);
+        const point = props.value.type === 'FILL THE BLANK' ? props.value.points : 1
+        props.addNewAnswer(props.index, props.value._id, point);
 
     };
+    const onChangeQuestionPoints=(point,index)=>{
+        props.changePoints(point,index)
+        if(props.value.type==='FILL THE BLANK'){
+            props.changePoint(point, index, 0);
+        }
+    }
     const editOnClick = () => {
         setMode(true)
     };
@@ -80,12 +87,12 @@ const Question = (props) => {
         props.addNewAnswer(index, props.value._id);
 
     };
-    console.log(props)
     if (editMode) {
         return <> <EditQuestion
             onChangePoint={onChangePoint}
             deleteAnswerOnClick={deleteAnswerOnClick}
             onChangeAnswer={onChangeAnswer}
+            onChangeQuestionPoints={onChangeQuestionPoints}
             addNewAnswers={addNewAnswers}
             points={props.value.points}
             multipleChoice={multipleChoice}

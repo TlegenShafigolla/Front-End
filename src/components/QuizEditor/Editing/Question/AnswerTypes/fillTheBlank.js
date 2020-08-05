@@ -1,6 +1,5 @@
 import s from "../../css/editAnswer.module.css";
 import TextField from "@material-ui/core/TextField";
-import InputBase from "@material-ui/core/InputBase";
 import React from "react";
 
 const FillTheBlank = (props) => {

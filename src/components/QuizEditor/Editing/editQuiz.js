@@ -89,6 +89,11 @@ class EditQuiz extends Component {
     }
     pointsChecked = (event) => {
         this.props.pointChecked(event);
+        if(!event){
+            for(let i=0;i<this.props.questions.questions.length;i++){
+                this.props.changePoints(1,i)
+            }
+        }
         this.setState({quizChanges: true});
     };
 

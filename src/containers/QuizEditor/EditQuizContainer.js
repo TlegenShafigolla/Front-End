@@ -1,7 +1,7 @@
 import EditQuiz from "../../components/QuizEditor/Editing/editQuiz";
 import {
-    addQuestions,
-     editDescription, editQuizName, pointChecked,
+    addQuestions, changePoints,
+    editDescription, editQuizName, pointChecked,
     PutQuestion, PutQuiz, questionsChanged,
     requestQuestions
 } from "../../redux/QuizEditor/actions";
@@ -30,6 +30,7 @@ export default compose(
         addQuestions,
         questionsChanged,
         PutQuestion,
+        changePoints,
         pointChecked,
         PutQuiz,
         editDescription,

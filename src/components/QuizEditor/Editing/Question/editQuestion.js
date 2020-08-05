@@ -58,7 +58,6 @@ class EditQuestion extends React.Component {
     };
 
     render() {
-        console.log(this.props)
         return (
             <Draggable draggableId={this.props.value._id} index={this.props.index}>
                 {provided => (
@@ -105,7 +104,7 @@ class EditQuestion extends React.Component {
                                                       />} label='Checkboxes'/>
                                 {this.props.point ?
                                     <>  <InputBase
-                                        onChange={(e) => this.props.changePoints(e.target.value, this.props.index)}
+                                        onChange={(e) => this.props.onChangeQuestionPoints(e.target.value, this.props.index)}
                                         value={this.props.value.points}
                                     />points</> : null}
                             </div>
