@@ -188,8 +188,8 @@ class QuizPage extends React.Component {
                     <Grid
                         container
                         direction="row"
-                        alignItems="flex-start"
-                        justify="flex-end">
+                        justify='center'
+                       >
                         <Grid
                             item
                             lg={8} md={8} sm={12} xs={12}>

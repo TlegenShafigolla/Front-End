@@ -9,11 +9,13 @@ const Answers = (props) => {
     for (let i = 0; i < props.value.answers.length; i++) {
         for (let j = 0; j < props.answers.length; j++) {
             if (props.value.answers[i].question_id === props.answers[j].question_id) {
-                for (let k = 0; k < props.answers[j].answer_ids.length; k++) {
-                    if (props.value.answers[i]._id === props.answers[j].answer_ids[k]) {
-                        props.value.answers[i] = {
-                            ...props.value.answers[i],
-                            check: 1
+                if(props.answers[j].answer_ids!==undefined) {
+                    for (let k = 0; k < props.answers[j].answer_ids.length; k++) {
+                        if (props.value.answers[i]._id === props.answers[j].answer_ids[k]) {
+                            props.value.answers[i] = {
+                                ...props.value.answers[i],
+                                check: 1
+                            }
                         }
                     }
                 }

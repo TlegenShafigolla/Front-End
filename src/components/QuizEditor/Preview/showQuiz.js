@@ -14,7 +14,6 @@ import InviteDialogContainer from "../../../containers/QuizEditor/InviteDialogCo
 
 
 const ShowQuiz = (props) => {
-    console.log(props)
     return (
         <Paper square elevation={3} className={s.Root}>
             <div className={s.CardContent}>

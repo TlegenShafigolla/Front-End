@@ -15,6 +15,8 @@ import {
     getQuestions,
     questionNumberChanged
 } from "../../redux/Reselects/QuizEditor-reselect";
+import {getGroups, getPerson, getSelectGroup} from "../../redux/Reselects/Quiz_invite-reselect";
+import {postInvite} from "../../redux/QuizEditor/Invite/actions";
 
 let mapStateToProps = (state) => {
     return {
@@ -22,6 +24,9 @@ let mapStateToProps = (state) => {
         disabledButton: disableButton(state),
         questionNumberChanged: questionNumberChanged(state),
         answers: getAnswers(state),
+        groups:getGroups(state),
+        group:getPerson(state),
+        selectGroup:getSelectGroup(state),
     }
 };
 export default compose(
@@ -34,7 +39,8 @@ export default compose(
         pointChecked,
         PutQuiz,
         editDescription,
-        editQuizName
+        editQuizName,
+        postInvite
     }),
     withRouter
 )(EditQuiz)

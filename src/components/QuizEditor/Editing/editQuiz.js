@@ -17,6 +17,8 @@ import GeneratePdfDialog from "./generatePdfDialog";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 import SendIcon from '@material-ui/icons/Send';
+import InviteDialogContainer from "../../../containers/QuizEditor/InviteDialogContainer";
+
 class EditQuiz extends Component {
 
     state = {
@@ -25,9 +27,16 @@ class EditQuiz extends Component {
         quizNameDescriptionChange: false,
         editQuizName: false,
         generatePdfDialog: false,
+        openInvite: false
     };
-
-
+    onClickInvites = (reset) => {
+        reset()
+        this.setState({openInvite:false})
+    };
+    onSubmit = (values) => {
+        const group_id=this.props.groups[this.props.selectGroup]._id;
+        this.props.postInvite(values, this.props.match.params.id,this.props.group,group_id,null);
+    };
     addNewQuestions = () => {
         if (this.props.disabledButton) {
             return null
@@ -87,11 +96,12 @@ class EditQuiz extends Component {
             this.props.questionsChanged(false)
         }
     }
+
     pointsChecked = (event) => {
         this.props.pointChecked(event);
-        if(!event){
-            for(let i=0;i<this.props.questions.questions.length;i++){
-                this.props.changePoints(1,i)
+        if (!event) {
+            for (let i = 0; i < this.props.questions.questions.length; i++) {
+                this.props.changePoints(1, i)
             }
         }
         this.setState({quizChanges: true});
@@ -109,12 +119,17 @@ class EditQuiz extends Component {
         }
     };
     onBlurDescription = () => {
-            this.setState({editDescription: false});
-            if (this.state.quizNameDescriptionChange) {
-                this.setState({quizChanges: true});
-                this.setState({quizNameDescriptionChange: false});
-            }
+        this.setState({editDescription: false});
+        if (this.state.quizNameDescriptionChange) {
+            this.setState({quizChanges: true});
+            this.setState({quizNameDescriptionChange: false});
+        }
     };
+    onClickInvite = () => {
+        if (this.props.questions.questions_count !== 0) {
+            this.setState({openInvite: true})
+        }
+    }
     // eslint-disable-next-line
     openPdfDialog = () => {
         this.setState({generatePdfDialog: true});
@@ -157,8 +172,7 @@ class EditQuiz extends Component {
                             aria-label="vertical contained primary button group"
                         >
                             <Button onClick={this.openPdfDialog}><PictureAsPdfIcon/></Button>
-                            <Button><SendIcon/></Button>
-                            <Button>Three</Button>
+                            <Button onClick={this.onClickInvite}><SendIcon/></Button>
                         </ButtonGroup>
                         <Grid
                             container
@@ -177,7 +191,7 @@ class EditQuiz extends Component {
                                               onBlurQuizName={this.onBlurQuizName}
 
                                               editModeDescription={this.state.editDescription}
-                                            />
+                                />
                                 <EditQuizSettings pointsChecked={this.pointsChecked}
                                                   points={this.props.questions.points}
                                                   lastedit={this.props.questions.last_edited_date}/>
@@ -224,6 +238,8 @@ class EditQuiz extends Component {
                         answers={this.props.answers}
                     />
                 </Grid>
+                <InviteDialogContainer openDialog={this.state.openInvite} onClose={this.onClickInvites}
+                                       onSubmit={this.onSubmit}/>
             </div>
         );
     }
