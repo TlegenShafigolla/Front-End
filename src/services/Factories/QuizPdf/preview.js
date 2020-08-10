@@ -1,7 +1,6 @@
 import React from 'react';
 import {PDFViewer} from '@react-pdf/renderer';
 import QuizDocument from './QuizDocument';
-import s from "../../../components/QuizEditor/Editing/css/generatePdfDialog.module.css";
 
 const PDFpreview = (props) => {
     return (

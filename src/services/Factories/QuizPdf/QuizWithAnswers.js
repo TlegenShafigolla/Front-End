@@ -8,7 +8,7 @@ const QuizWithAnswers = (props) => (
         <Text style={styles.quiz_name}>{props.quiz_name}</Text>
         <Text style={styles.description}>{props.description}</Text>
         {props.questions.map((val,index) => {
-            return QuizQuestion(val, index, props.answers[val._id]);
+            return QuizQuestion(val, index, props.answers[index]);
         })}
         <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
             `${pageNumber} / ${totalPages}`
@@ -17,9 +17,9 @@ const QuizWithAnswers = (props) => (
 );
 
 const QuizQuestion = (val, index, answers) => (
-    <View>
+    <View key={index}>
         <Text style={styles.question}>{(index + 1) + ". " + val.question}</Text>
-        {val.type === "MULTIPLE CHOICE" ? answers.map((val, index) => {
+        {val.type !== "FILL THE BLANK" ? answers.map((val, index) => {
             return <Text key={val._id} style={styles.answer}>{getChar(index) + ") " + val.answer}</Text>
         }): <Text key={answers[0]._id} style={styles.answer}>{answers[0].answer}</Text>}
     </View>
