@@ -8,12 +8,12 @@ const ShowAnswer = (props) => {
     return (
         <>
             <div className={s.FormControl}>
-
                 <FormControlLabel value="Type question"
                                   control={
                                       <Radio
                                           checked={props.answerType === 'MULTIPLE CHOICE'}
-                                          disabled={true}
+                                          disabled
+                                          color="primary"
                                       />} label='Multiple Choice'/>
                 <FormControlLabel value=""
                                   control={
@@ -21,6 +21,12 @@ const ShowAnswer = (props) => {
                                           checked={props.answerType === 'FILL THE BLANK'}
                                           disabled={true}
                                       />} label='Fill the blank '/>
+                <FormControlLabel value="Type question"
+                                  control={
+                                      <Radio
+                                          checked={props.answerType === 'CHECKBOXES'}
+                                          disabled={true}
+                                      />} label='Checkboxes'/>
 
             </div>
             <div>

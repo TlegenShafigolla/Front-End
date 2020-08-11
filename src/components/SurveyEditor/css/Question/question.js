@@ -58,7 +58,6 @@ const Question = (props) => {
             props.deleteAnswersOnclick(props.value._id, props.answers[index][i]._id, index, i);
         }
     };
-// console.log(props)
     if (editMode) {
         return (
                             <EditQuestion

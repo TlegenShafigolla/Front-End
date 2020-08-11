@@ -1,16 +1,16 @@
-import s from "../multipleChoice.module.css";
-import TextField from "@material-ui/core/TextField";
-import IconButton from "@material-ui/core/IconButton";
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import React from "react";
+import TextField from "@material-ui/core/TextField/TextField";
+import IconButton from "@material-ui/core/IconButton";
+import s from "../multipleChoice.module.css";
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 
-const MultipleChoice = (props) => {
+
+const Checkboxes = (props) => {
     return (
         <div className={s.SaveAnswer}>
             <div className={s.Answer}>
                 <div className={s.Text}>
                     <TextField
-                        error={props.errorAnswer}
                         placeholder="New answer"
                         fullWidth
                         value={props.val.answer}
@@ -24,15 +24,13 @@ const MultipleChoice = (props) => {
                 </div>
             </div>
             <div className={s.DeleteButton}>
-                <IconButton className={s.DeleteButton}
-                            size='small' color='inherit'
-                            onClick={() => props.deleteAnswerOnClick(props.index, props.val._id, props.id)}>
+                <IconButton size='small' color='inherit'
+                            onClick={() => props.deleteAnswerOnClick(props.index, props.val._id,props.id)}>
                     <HighlightOffIcon color='error' fontSize='small'/>
                 </IconButton>
             </div>
         </div>
-
     );
 };
 
-export default MultipleChoice;
+export default Checkboxes;
